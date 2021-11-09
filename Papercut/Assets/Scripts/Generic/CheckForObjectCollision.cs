@@ -1,0 +1,18 @@
+using UnityEngine;
+
+public class CheckForObjectCollision : MonoBehaviour
+{
+    [SerializeField] protected LayerMask TargetLayerMask;
+    protected static bool CheckForObject(Collider2D collider2D, Vector2 direction, LayerMask passLayerMask, float rayMaxDist = Mathf.Infinity)
+    {
+        var bounds = collider2D.bounds;
+        var hit = Physics2D.BoxCast(
+            bounds.center,
+            bounds.size,
+            0f,
+            direction,
+            rayMaxDist,
+            passLayerMask);
+        return hit.collider != null;
+    }
+}
