@@ -33,6 +33,22 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MoveRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""9dd80c04-94e7-433a-9656-2f5c1d8339ca"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MoveLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""77489368-93cc-436f-8561-7a24ef951a0c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -101,6 +117,28 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""59508c4a-bcea-4efa-bfa0-b356f67289a5"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d2163e01-95df-40a4-95b9-2aab0438af7e"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -138,6 +176,8 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
         m_OnGround = asset.FindActionMap("OnGround", throwIfNotFound: true);
         m_OnGround_Move = m_OnGround.FindAction("Move", throwIfNotFound: true);
         m_OnGround_Jump = m_OnGround.FindAction("Jump", throwIfNotFound: true);
+        m_OnGround_MoveRight = m_OnGround.FindAction("MoveRight", throwIfNotFound: true);
+        m_OnGround_MoveLeft = m_OnGround.FindAction("MoveLeft", throwIfNotFound: true);
         // MenuRelated
         m_MenuRelated = asset.FindActionMap("MenuRelated", throwIfNotFound: true);
         m_MenuRelated_Escape = m_MenuRelated.FindAction("Escape", throwIfNotFound: true);
@@ -192,12 +232,16 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
     private IOnGroundActions m_OnGroundActionsCallbackInterface;
     private readonly InputAction m_OnGround_Move;
     private readonly InputAction m_OnGround_Jump;
+    private readonly InputAction m_OnGround_MoveRight;
+    private readonly InputAction m_OnGround_MoveLeft;
     public struct OnGroundActions
     {
         private @PlayerKeyMap m_Wrapper;
         public OnGroundActions(@PlayerKeyMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_OnGround_Move;
         public InputAction @Jump => m_Wrapper.m_OnGround_Jump;
+        public InputAction @MoveRight => m_Wrapper.m_OnGround_MoveRight;
+        public InputAction @MoveLeft => m_Wrapper.m_OnGround_MoveLeft;
         public InputActionMap Get() { return m_Wrapper.m_OnGround; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -213,6 +257,12 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnJump;
+                @MoveRight.started -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMoveRight;
+                @MoveRight.performed -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMoveRight;
+                @MoveRight.canceled -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMoveRight;
+                @MoveLeft.started -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMoveLeft;
+                @MoveLeft.performed -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMoveLeft;
+                @MoveLeft.canceled -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMoveLeft;
             }
             m_Wrapper.m_OnGroundActionsCallbackInterface = instance;
             if (instance != null)
@@ -223,6 +273,12 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @MoveRight.started += instance.OnMoveRight;
+                @MoveRight.performed += instance.OnMoveRight;
+                @MoveRight.canceled += instance.OnMoveRight;
+                @MoveLeft.started += instance.OnMoveLeft;
+                @MoveLeft.performed += instance.OnMoveLeft;
+                @MoveLeft.canceled += instance.OnMoveLeft;
             }
         }
     }
@@ -264,6 +320,8 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnMoveRight(InputAction.CallbackContext context);
+        void OnMoveLeft(InputAction.CallbackContext context);
     }
     public interface IMenuRelatedActions
     {

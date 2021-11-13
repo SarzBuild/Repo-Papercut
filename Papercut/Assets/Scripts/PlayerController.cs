@@ -1,11 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerController : PlayerControls
+public class PlayerController : MonoBehaviour
 {
     [Header("References")] 
     private Rigidbody2D _rigidbody2D;
     private Collider2D _collider2D;
+    public Transform HeadPos;
+    public Transform FeetPos;
+    private PlayerInputState _playerInputState;
 
     [Header("Physics")]
     public float WalkSpeed = 4f;
@@ -20,6 +23,7 @@ public class PlayerController : PlayerControls
     private bool _dashCoroutine;
     private Vector3 _rotationNeeded;
     private Vector3 _tempDashDirection;
+    private Vector3 _moveDirection;
 
     [Header("Layer Masks")]
     public LayerMask GroundLayerMask;
@@ -31,16 +35,18 @@ public class PlayerController : PlayerControls
 
      private void Start()
     {
-        LockPlayer = false;
         CurrentHealth = MaxHealth;
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _collider2D = GetComponent<Collider2D>();
+        _playerInputState = GetComponent<PlayerInputState>();
+        _playerInputState.LockPlayer = false;
     }
 
     private void Update()
     {
         HandleLife();
         //HandleDash();
+        HandleMovementDirectionInput();
     }
     private void FixedUpdate()
     {
@@ -51,25 +57,25 @@ public class PlayerController : PlayerControls
         DashMovement();
     }
 
+    private void HandleMovementDirectionInput() => _moveDirection = new Vector2(-_playerInputState.ListenLeftInput() + _playerInputState.ListenRightInput(),0f);
+    
     private void HandleMovement()
     {
-        var moveDirection = GetMoving();
-        moveDirection.Normalize();
-
-        var moveTowardsPosition = new Vector2(moveDirection.x * WalkSpeed, _jumpAndFallVelocity);
+        _moveDirection.Normalize();
+        var moveTowardsPosition = new Vector2(_moveDirection.x * WalkSpeed, _jumpAndFallVelocity);
         _rigidbody2D.velocity = moveTowardsPosition;
     }
 
     private void HandleJump()
     {
-        if (!GetJumpInput()) return;
+        if (_playerInputState.ListenJumpInput() is 0) return;
         if (!CheckIfGrounded()) return;
         if (!(_jumpAndFallVelocity < 0.1)) return;
         
         StartCoroutine(SetJumpSpeedCoroutine());
         _jumpAndFallVelocity += (WalkSpeed * JumpForce) * 0.2f;
     }
-    
+
     private IEnumerator SetJumpSpeedCoroutine()
     {
         _resetJumpCoroutine = true;
@@ -106,8 +112,8 @@ public class PlayerController : PlayerControls
         else if (CurrentHealth <= 0)
         {
             CurrentHealth = 0;
-            LockPlayer = true;
-            LockMouse = true;
+            _playerInputState.LockPlayer = true;
+            _playerInputState.LockMouse = true;
         }
     }
 
@@ -129,17 +135,10 @@ public class PlayerController : PlayerControls
     private IEnumerator Dash()
     {
         _dashCoroutine = true;
-        LockPlayer = true;
+        _playerInputState.LockPlayer = true;
         yield return new WaitForSeconds(0.5f);
-        LockPlayer = false;
+        _playerInputState.LockPlayer = false;
         _dashCoroutine = false;
-    }
-    
-    private void GetDamaged() => CurrentHealth -= 10;
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if ((EnemyLayerMask.value & (1 << other.gameObject.layer)) > 0) GetDamaged();
     }
 
     private bool CheckIfGrounded() => CollisionCheck(new Vector3(0, -0.5f, 0), 1f, 0.5f, GroundLayerMask);

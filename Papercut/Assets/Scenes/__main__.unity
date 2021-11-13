@@ -154,6 +154,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &464003758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 464003759}
+  m_Layer: 14
+  m_Name: Player Head Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &464003759
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464003758}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.999, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1306067053}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &854694947
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,7 +288,7 @@ Transform:
   m_GameObject: {fileID: 854694947}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 23.602, y: 1, z: 1}
+  m_LocalScale: {x: 80.836845, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -652,9 +682,10 @@ GameObject:
   - component: {fileID: 1306067050}
   - component: {fileID: 1306067049}
   - component: {fileID: 1306067055}
+  - component: {fileID: 1306067056}
   - component: {fileID: 1306067054}
   m_Layer: 14
-  m_Name: Capsule
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -757,7 +788,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 464003759}
+  - {fileID: 1407408014}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -773,8 +806,141 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a3c1233e485b94b817475a8847f85c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LockPlayer: 0
-  LockMouse: 0
+  _moveRightInputStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1306067056}
+        m_TargetAssemblyTypeName: PlayerInputState, Assembly-CSharp
+        m_MethodName: SetRightInputStarted
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _moveRightInputPerformed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1306067056}
+        m_TargetAssemblyTypeName: PlayerInputState, Assembly-CSharp
+        m_MethodName: SetRightInputPerformed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _moveRightInputCancelled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1306067056}
+        m_TargetAssemblyTypeName: PlayerInputState, Assembly-CSharp
+        m_MethodName: SetRightInputCancelled
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _moveLeftInputStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1306067056}
+        m_TargetAssemblyTypeName: PlayerInputState, Assembly-CSharp
+        m_MethodName: SetLeftInputStarted
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _moveLeftInputPerformed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1306067056}
+        m_TargetAssemblyTypeName: PlayerInputState, Assembly-CSharp
+        m_MethodName: SetLefInputPerformed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _moveLeftInputCancelled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1306067056}
+        m_TargetAssemblyTypeName: PlayerInputState, Assembly-CSharp
+        m_MethodName: SetLefInputCancelled
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _moveUpInputStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1306067056}
+        m_TargetAssemblyTypeName: PlayerInputState, Assembly-CSharp
+        m_MethodName: SetJumpInputStarted
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _moveUpInputPerformed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1306067056}
+        m_TargetAssemblyTypeName: PlayerInputState, Assembly-CSharp
+        m_MethodName: SetJumpInputPerformed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _moveUpInputCancelled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1306067056}
+        m_TargetAssemblyTypeName: PlayerInputState, Assembly-CSharp
+        m_MethodName: SetJumpInputCancelled
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1306067055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -787,8 +953,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d7dd95d5ab15e45b54160452c2a1f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LockPlayer: 0
-  LockMouse: 0
+  HeadPos: {fileID: 464003759}
+  FeetPos: {fileID: 1407408014}
   WalkSpeed: 6
   JumpingSpeed: 0
   DashSpeed: 0
@@ -803,6 +969,54 @@ MonoBehaviour:
     m_Bits: 0
   MaxHealth: 150
   CurrentHealth: 0
+--- !u!114 &1306067056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306067048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc02f1e8e7ca4b4a8131fd6b9ac64e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LockPlayer: 0
+  LockMouse: 0
+  _rightInputState: 0
+  _leftInputState: 0
+  _jumpInputState: 0
+  _downInputState: 0
+--- !u!1 &1407408013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1407408014}
+  m_Layer: 14
+  m_Name: Player Feet Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1407408014
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407408013}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.999, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1306067053}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1600227314
 GameObject:
   m_ObjectHideFlags: 0
@@ -1081,7 +1295,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.2705479, y: 1}
+    m_SensorSize: {x: 1.692207, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
