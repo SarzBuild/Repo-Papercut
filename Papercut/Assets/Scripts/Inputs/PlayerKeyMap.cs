@@ -19,14 +19,6 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
             ""id"": ""da357e44-0313-42f5-a6c6-5f57c1c3310c"",
             ""actions"": [
                 {
-                    ""name"": ""Move"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""c2776d7e-acf7-4bc7-b249-a1ee562bcc7a"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""d10b84df-c3e6-41da-981c-77b01ebbd102"",
@@ -49,64 +41,25 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MoveDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""f187b8c8-be6a-4d7c-8005-f74b191c5e46"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Slide"",
+                    ""type"": ""Button"",
+                    ""id"": ""666ab8b1-6b88-4cb5-b003-dc656b42f630"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": ""LeftRight"",
-                    ""id"": ""3fe66d64-a94a-4494-b869-5bd862f2dfd4"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""Up"",
-                    ""id"": ""b3e7f5b0-de9c-470f-8f86-42b69ebee133"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Down"",
-                    ""id"": ""41cad862-9e8e-420e-aa6f-3a7db15193f9"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Left"",
-                    ""id"": ""a4dcf807-c1a8-43dc-8fad-47efb2278e59"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Right"",
-                    ""id"": ""b848a0be-fb41-44a9-b17d-f287820db5ed"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
                 {
                     ""name"": """",
                     ""id"": ""054daa73-aaad-4872-be39-480c28ff2f29"",
@@ -137,6 +90,28 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MoveLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a1695889-2910-4cd2-baf3-3f1ce1a5b88a"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d6b37d0-794c-4553-ba5f-7f514b39b25f"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Slide"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -174,10 +149,11 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
 }");
         // OnGround
         m_OnGround = asset.FindActionMap("OnGround", throwIfNotFound: true);
-        m_OnGround_Move = m_OnGround.FindAction("Move", throwIfNotFound: true);
         m_OnGround_Jump = m_OnGround.FindAction("Jump", throwIfNotFound: true);
         m_OnGround_MoveRight = m_OnGround.FindAction("MoveRight", throwIfNotFound: true);
         m_OnGround_MoveLeft = m_OnGround.FindAction("MoveLeft", throwIfNotFound: true);
+        m_OnGround_MoveDown = m_OnGround.FindAction("MoveDown", throwIfNotFound: true);
+        m_OnGround_Slide = m_OnGround.FindAction("Slide", throwIfNotFound: true);
         // MenuRelated
         m_MenuRelated = asset.FindActionMap("MenuRelated", throwIfNotFound: true);
         m_MenuRelated_Escape = m_MenuRelated.FindAction("Escape", throwIfNotFound: true);
@@ -230,18 +206,20 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
     // OnGround
     private readonly InputActionMap m_OnGround;
     private IOnGroundActions m_OnGroundActionsCallbackInterface;
-    private readonly InputAction m_OnGround_Move;
     private readonly InputAction m_OnGround_Jump;
     private readonly InputAction m_OnGround_MoveRight;
     private readonly InputAction m_OnGround_MoveLeft;
+    private readonly InputAction m_OnGround_MoveDown;
+    private readonly InputAction m_OnGround_Slide;
     public struct OnGroundActions
     {
         private @PlayerKeyMap m_Wrapper;
         public OnGroundActions(@PlayerKeyMap wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_OnGround_Move;
         public InputAction @Jump => m_Wrapper.m_OnGround_Jump;
         public InputAction @MoveRight => m_Wrapper.m_OnGround_MoveRight;
         public InputAction @MoveLeft => m_Wrapper.m_OnGround_MoveLeft;
+        public InputAction @MoveDown => m_Wrapper.m_OnGround_MoveDown;
+        public InputAction @Slide => m_Wrapper.m_OnGround_Slide;
         public InputActionMap Get() { return m_Wrapper.m_OnGround; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -251,9 +229,6 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_OnGroundActionsCallbackInterface != null)
             {
-                @Move.started -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMove;
                 @Jump.started -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnJump;
@@ -263,13 +238,16 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
                 @MoveLeft.started -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMoveLeft;
                 @MoveLeft.performed -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMoveLeft;
                 @MoveLeft.canceled -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMoveLeft;
+                @MoveDown.started -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMoveDown;
+                @MoveDown.performed -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMoveDown;
+                @MoveDown.canceled -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMoveDown;
+                @Slide.started -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnSlide;
+                @Slide.performed -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnSlide;
+                @Slide.canceled -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnSlide;
             }
             m_Wrapper.m_OnGroundActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
@@ -279,6 +257,12 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
                 @MoveLeft.started += instance.OnMoveLeft;
                 @MoveLeft.performed += instance.OnMoveLeft;
                 @MoveLeft.canceled += instance.OnMoveLeft;
+                @MoveDown.started += instance.OnMoveDown;
+                @MoveDown.performed += instance.OnMoveDown;
+                @MoveDown.canceled += instance.OnMoveDown;
+                @Slide.started += instance.OnSlide;
+                @Slide.performed += instance.OnSlide;
+                @Slide.canceled += instance.OnSlide;
             }
         }
     }
@@ -318,10 +302,11 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
     public MenuRelatedActions @MenuRelated => new MenuRelatedActions(this);
     public interface IOnGroundActions
     {
-        void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnMoveRight(InputAction.CallbackContext context);
         void OnMoveLeft(InputAction.CallbackContext context);
+        void OnMoveDown(InputAction.CallbackContext context);
+        void OnSlide(InputAction.CallbackContext context);
     }
     public interface IMenuRelatedActions
     {

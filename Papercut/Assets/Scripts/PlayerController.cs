@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //TODO (JT) Add floaty air control
+    //TODO (JT) Add run and slide mechanics
+    
+    
     [Header("References")] 
     private Rigidbody2D _rigidbody2D;
     private Collider2D _collider2D;
@@ -25,6 +29,16 @@ public class PlayerController : MonoBehaviour
     private Vector3 _tempDashDirection;
     private Vector3 _moveDirection;
 
+    private float _rawInputValue;
+    private float _rv;
+    private float _lv;
+
+    private float _jumpTimer;
+
+    private bool _currentlyJumping;
+
+    [SerializeField] private float _airSensibility; 
+
     [Header("Layer Masks")]
     public LayerMask GroundLayerMask;
     public LayerMask EnemyLayerMask;
@@ -40,13 +54,16 @@ public class PlayerController : MonoBehaviour
         _collider2D = GetComponent<Collider2D>();
         _playerInputState = GetComponent<PlayerInputState>();
         _playerInputState.LockPlayer = false;
+        
     }
 
     private void Update()
     {
+        HandleInputValue();
         HandleLife();
         //HandleDash();
         HandleMovementDirectionInput();
+        HandleMovementInAir();
     }
     private void FixedUpdate()
     {
@@ -57,23 +74,79 @@ public class PlayerController : MonoBehaviour
         DashMovement();
     }
 
-    private void HandleMovementDirectionInput() => _moveDirection = new Vector2(-_playerInputState.ListenLeftInput() + _playerInputState.ListenRightInput(),0f);
+    private void HandleInputValue() =>  _rawInputValue = Mathf.Clamp(-_playerInputState.ListenLeftInput() + _playerInputState.ListenRightInput(),-1f,1f);
+
+    private void HandleMovementDirectionInput()
+    {
+        if (!CheckIfGrounded() || _resetJumpCoroutine) return;
+        ResetAirMovementVar();
+        _moveDirection = new Vector2(_rawInputValue,0f);
+    }
+
+    private void ResetAirMovementVar()
+    {
+        _rv = 0.25f;
+        _lv = 0.25f;
+    }
+
+    private float HandleRightAirMovement()
+    {
+        if (_rawInputValue == 1)
+        {
+            _rv = Mathf.Clamp01(_rv * 1.33f + _airSensibility * Time.deltaTime);
+            return _rv;
+        }
+        _rv = Mathf.Clamp01(Mathf.Abs(_rv) - _airSensibility * Time.fixedDeltaTime) * Mathf.Sign(_rv);
+        return _rv;
+        
+    }
+
+    private float HandleLeftAirMovement()
+    {
+        if (_rawInputValue == -1)
+        {
+            _lv = Mathf.Clamp01(_lv * 1.33f + _airSensibility * Time.deltaTime);
+            return -_lv;
+        }
+        _lv = Mathf.Clamp01(Mathf.Abs(_lv) - _airSensibility * Time.fixedDeltaTime) * Mathf.Sign(_lv);
+        return -_lv;
+    }
+
+    private void HandleMovementInAir()
+    {
+        if (CheckIfGrounded() || !_resetJumpCoroutine) return;
+        
+        _moveDirection = new Vector2(HandleRightAirMovement() + HandleLeftAirMovement(),0f);
+        
+    }
+    
     
     private void HandleMovement()
     {
-        _moveDirection.Normalize();
         var moveTowardsPosition = new Vector2(_moveDirection.x * WalkSpeed, _jumpAndFallVelocity);
         _rigidbody2D.velocity = moveTowardsPosition;
     }
 
     private void HandleJump()
     {
-        if (_playerInputState.ListenJumpInput() is 0) return;
-        if (!CheckIfGrounded()) return;
-        if (!(_jumpAndFallVelocity < 0.1)) return;
-        
+        if (_playerInputState.ListenJumpInput() is 0 || !CheckIfGrounded() || !(_jumpAndFallVelocity < 0.01) || _resetJumpCoroutine || _currentlyJumping) return;
+
         StartCoroutine(SetJumpSpeedCoroutine());
-        _jumpAndFallVelocity += (WalkSpeed * JumpForce) * 0.2f;
+        StartCoroutine(HandleJumping());
+    }
+
+    private IEnumerator HandleJumping()
+    {
+        _currentlyJumping = true;
+        while (_jumpTimer < 0.2f && _playerInputState.ListenJumpInput() == 2)
+        {
+            _jumpTimer += Time.fixedDeltaTime;
+            _jumpAndFallVelocity += (WalkSpeed * JumpForce) * 0.02f;
+            yield return null;
+        }
+        Debug.Log("Dope");
+        _jumpTimer = 0;
+        _currentlyJumping = false;
     }
 
     private IEnumerator SetJumpSpeedCoroutine()
@@ -87,7 +160,7 @@ public class PlayerController : MonoBehaviour
     private void DecreaseJumpSpeed()
     {
         if (!_resetJumpCoroutine) return;
-        if (JumpingSpeed > 1f) JumpingSpeed -= Time.fixedDeltaTime * 0.5f;
+        if (JumpingSpeed >= 1f) JumpingSpeed -= Time.fixedDeltaTime * 0.5f;
         else JumpingSpeed = 1f;
     }
 
