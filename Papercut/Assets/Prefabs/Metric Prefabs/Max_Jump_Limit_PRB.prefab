@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4915798258876773863}
   m_Layer: 0
-  m_Name: Max_Jump_Limit_PRP
+  m_Name: Max_Jump_Limit_PRB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
