@@ -13,26 +13,31 @@ MonoBehaviour:
   m_Name: newPlayerData
   m_EditorClassIdentifier: 
   description: 
-  WalkingSpeed: 6
+  WalkingSpeed: 10
   RunningSpeed: 8
-  DashingAcceleration: 35
-  CurrentSpeed: 6
+  CurrentSpeed: 10
   RawInputValue: 0
-  FacingDirection: -1
-  AntiBumpSlopeRatio: 6.5
-  SlopeLimit: 45
-  SlopeSlideSpeed: 2
-  JumpingSpeed: 1
-  Gravity: -9.8
-  JumpForce: 6
+  FacingDirection: 1
   GroundLayerMask:
     serializedVersion: 2
     m_Bits: 4096
+  _groundCheckRadius: 0.1
+  JumpingSpeed: 1
+  Gravity: -9.8
+  JumpForce: 6
   AirSensibility: 0.5
   JumpingForceShrink: 22.83
   JumpingSpeedLowThreshold: 1
   JumpingSpeedMaxThreshold: 1.5
   MinimumJumpHeightTime: 0.15
   MaximumJumpHeightTime: 0.3
+  JumpCoyoteTime: 0.2
+  JumpBufferTime: 0.2
+  _ceilingCheckRadius: 0.1
+  AntiBumpSlopeRatio: 4.2
+  SlopeLimit: 45
+  SlopeSlideSpeed: 2
+  DashingAcceleration: 35
+  _wallCheckDistance: 0
   LeanRight: {x: 0, y: 0, z: 5}
   LeanLeft: {x: 0, y: 0, z: 355}

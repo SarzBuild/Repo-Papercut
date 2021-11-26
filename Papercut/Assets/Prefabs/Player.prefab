@@ -288,6 +288,31 @@ MonoBehaviour:
   _jumpCoyoteTimeCounter: 0
   _jumpBufferCounter: 0
   _currentlyJumping: 0
+  jumpingAccelerationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -2.4603236
+      outSlope: -2.4603236
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.02389902
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.12827551
+      outSlope: -0.12827551
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.01775235
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jumpingAccelerationTimer: 0
   slideSpeed: 0
   _currentlyDashing: 0
   _dashTimer: 0
@@ -314,8 +339,10 @@ MonoBehaviour:
   _childAnimator: {fileID: 0}
   _playerData: {fileID: 11400000, guid: c76d30808b75fd648b6ea0246bbccdfd, type: 2}
   _groundCheck: {fileID: 1148226219595675166}
-  _wallCheck: {fileID: 8354781000413549741}
-  _ledgeCheck: {fileID: 0}
+  _rightWallCheck: {fileID: 0}
+  _leftWallCheck: {fileID: 0}
+  _rightLedgeCheck: {fileID: 0}
+  _leftLedgeCheck: {fileID: 0}
   _ceilingCheck: {fileID: 1148226219833261472}
 --- !u!1 &1148226218863710319
 GameObject:

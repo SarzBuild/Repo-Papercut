@@ -320,7 +320,7 @@ public class nPlayerController : MonoBehaviour
     private void SteepSlopeMovement()
     {
         Vector2 slopeDirection = Vector2.up - _slopeHit.normal * Vector2.Dot(Vector2.up, _slopeHit.normal);
-        slideSpeed += (_playerData.CurrentSpeed + _playerData.SlopeSlideSpeed) * Time.fixedDeltaTime;
+        slideSpeed += _playerData.SlopeSlideSpeed * Time.fixedDeltaTime;
         
         _moveDirection = slopeDirection * -slideSpeed;
         _moveDirection.y = _moveDirection.y - _slopeHit.point.y;
