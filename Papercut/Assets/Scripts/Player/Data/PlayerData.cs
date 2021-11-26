@@ -30,7 +30,9 @@ public class PlayerData : ScriptableObject
     [SerializeField] public float JumpingSpeedMaxThreshold = 1.5f;
     [SerializeField] public float MinimumJumpHeightTime = 0.15f;
     [SerializeField] public float MaximumJumpHeightTime = 0.3f;
-
+    [SerializeField] public float JumpCoyoteTime = 0.2f;
+    [SerializeField] public float JumpBufferTime = 0.2f;
+ 
     [Header("Character Leaning")]
     [SerializeField] public Vector3 LeanRight = new Vector3(0f, 0f, 5f);
     [SerializeField] public Vector3 LeanLeft = new Vector3(0f, 0f, 355f);

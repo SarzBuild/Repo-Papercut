@@ -17,6 +17,8 @@ public class nPlayerController : MonoBehaviour
     [SerializeField][HideInInspector] private float _rv;
     [SerializeField][HideInInspector] private float _jumpTimer;
     [SerializeField][HideInInspector][Range(0f,50f)] private float JumpAndFallVelocity;
+    [SerializeField][HideInInspector] private float _jumpCoyoteTimeCounter;
+    [SerializeField][HideInInspector] private float _jumpBufferCounter;
     
     
     [Header("Character Leaning")]
@@ -37,7 +39,7 @@ public class nPlayerController : MonoBehaviour
     [SerializeField] private Animator _childAnimator;
     [SerializeField] private PlayerData _playerData;
     private bool _currentlyJumping;
-    
+
 
     public AnimationCurve walkingAccelerationCurve;
     private float walkingAccelerationTimer;
@@ -136,15 +138,6 @@ public class nPlayerController : MonoBehaviour
             lastInputLeftValue = _playerInputState.ListenLeftInput();
         }
     }
-    
-    
-    
-
-    private IEnumerator StartCoroutineDash()
-    {
-
-        yield return new WaitUntil(() => _playerInputState.ListenRightInput() == 2 || _playerInputState.ListenLeftInput() == 2);
-    }
 
     private IEnumerator Dashing()
     {
@@ -229,16 +222,14 @@ public class nPlayerController : MonoBehaviour
 
     private void CheckIfCanJump()
     {
-        if (_canJump) return;
-        if(_currentlyJumping) return;
-        if (_playerInputState.ListenJumpInput() == 1) _canJump = true;
+        if (_playerInputState.ListenJumpInput() == 1) _jumpBufferCounter = _playerData.JumpBufferTime;
+        else _jumpBufferCounter -= Time.fixedDeltaTime;
     }
     
     private void HandleJump()
     {
-        if (!_canJump) return; 
-        if (!CheckGroundCollision()) return;
-        if (!(JumpAndFallVelocity < 0.1)) return;
+        if (!(_jumpBufferCounter > 0f)) return;
+        if (!JumpCoyoteTime()) return;
         if (_currentlyJumping) return;
         CurrentlyJumping = StartCoroutine(HandleJumping());
     }
@@ -255,10 +246,10 @@ public class nPlayerController : MonoBehaviour
             _jumpTimer += Time.fixedDeltaTime;
             JumpAndFallVelocity += ((_playerData.CurrentSpeed * _playerData.JumpForce) / _playerData.JumpingForceShrink); //* jumpingAccelerationCurve.Evaluate(jumpingAccelerationTimer); 
             Debug.Log("Jumping");
-            //yield return new WaitForFixedUpdate();
         }
+
+        _jumpCoyoteTimeCounter = 0f;
         _jumpTimer = 0;
-        _canJump = false;
         _currentlyJumping = false;
     }
     
@@ -317,8 +308,14 @@ public class nPlayerController : MonoBehaviour
         _moveDirection = slopeDirection * -slideSpeed;
         _moveDirection.y = _moveDirection.y - _slopeHit.point.y;
     }
-    
 
+    private bool JumpCoyoteTime()
+    {
+        if (CheckGroundCollision()) _jumpCoyoteTimeCounter = _playerData.JumpCoyoteTime;
+        else _jumpCoyoteTimeCounter -= Time.fixedDeltaTime;
+        return _jumpCoyoteTimeCounter > 0;
+    }
+    
     private bool CheckGroundCollision()
     {
         //TODO ADD COYOTE TIME
