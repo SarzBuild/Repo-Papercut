@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7208166154091980037}
   - component: {fileID: 5299461208142934889}
   - component: {fileID: 4367924198996388913}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: GrapplingAnchor_PRB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
