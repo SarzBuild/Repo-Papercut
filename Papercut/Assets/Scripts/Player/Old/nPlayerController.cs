@@ -22,6 +22,8 @@ public class nPlayerController : MonoBehaviour
     [SerializeField][HideInInspector] private float _jumpCoyoteTimeCounter;
     [SerializeField][HideInInspector] private float _jumpBufferCounter;
     [SerializeField][HideInInspector] private bool _currentlyJumping;
+    public AnimationCurve jumpingAccelerationCurve;
+    [SerializeField][HideInInspector] private float jumpingAccelerationTimer;
     
     [Header("Physics Related : Others")]
     [SerializeField][HideInInspector] private float slideSpeed;
@@ -79,6 +81,7 @@ public class nPlayerController : MonoBehaviour
         HandleRawInputValue();
         HandleJump();
         WalkingCurveAcceleratorSetter();
+        JumpingCurveAcceleratorSetter();
         if (OnSteepSlope())
         {
             SteepSlopeMovement();
@@ -167,7 +170,13 @@ public class nPlayerController : MonoBehaviour
         if (_playerInputState.ListenRightInput() == 1 || _playerInputState.ListenLeftInput() == 1 ) walkingAccelerationTimer = 0f;
         else if (_playerInputState.ListenRightInput() == 2 || _playerInputState.ListenLeftInput() == 2) walkingAccelerationTimer += Time.fixedDeltaTime;
     }
-
+    
+    private void JumpingCurveAcceleratorSetter()
+    {
+        if (_playerInputState.ListenJumpInput() == 1) jumpingAccelerationTimer = 0f;
+        else if (_playerInputState.ListenJumpInput() == 2) jumpingAccelerationTimer += Time.fixedDeltaTime;
+    }
+    
     private void CheckFlip(int inputValue)
     {
         if (inputValue == 0 || inputValue == _playerData.FacingDirection) return;
@@ -207,7 +216,6 @@ public class nPlayerController : MonoBehaviour
                 break;
         }
         
-
         CheckFlip((int)_playerData.RawInputValue);
         _rigidbody2D.velocity = GroundCollision ? new Vector2(_playerData.RawInputValue * _playerData.CurrentSpeed * walkingAccelerationCurve.Evaluate(walkingAccelerationTimer), _moveDirection.y + JumpAndFallVelocity) : new Vector2((HandleRightAirMovement() + HandleLeftAirMovement()) * _playerData.CurrentSpeed * _playerData.JumpingSpeed, JumpAndFallVelocity);
     }
@@ -239,13 +247,20 @@ public class nPlayerController : MonoBehaviour
 
     private IEnumerator HandleJumping()
     {
+        /*var jumpInputStartTime = Time.time;
+        //https://youtu.be/dOiOp3DLxZQ?t=2609
+        //TODO ADD DIFFERENT JUMP VALUE WITH TRACKING HOW MUCH TIME THE INPUT HAS BEEN PRESSED INSTEAD OF RELYING ON THE INPUT ITSELF
+        if(Time.time >= jumpInputStartTime + 0.2f)*/
+        
+        
+        JumpAndFallVelocity = 0f;
         _currentlyJumping = true;
         _playerData.JumpingSpeed = _playerData.JumpingSpeedMaxThreshold;
         while (_jumpTimer <= _playerData.MinimumJumpHeightTime && (_playerInputState.ListenJumpInput() == 2 || _playerInputState.ListenJumpInput() == 1) || _jumpTimer >= _playerData.MaximumJumpHeightTime)
         {
             yield return new WaitForFixedUpdate();
             _jumpTimer += Time.fixedDeltaTime;
-            JumpAndFallVelocity += ((_playerData.CurrentSpeed * _playerData.JumpForce) / _playerData.JumpingForceShrink); //* jumpingAccelerationCurve.Evaluate(jumpingAccelerationTimer); 
+            JumpAndFallVelocity += ((_playerData.CurrentSpeed * _playerData.JumpForce) / _playerData.JumpingForceShrink) * jumpingAccelerationCurve.Evaluate(jumpingAccelerationTimer);
             Debug.Log("Jumping");
         }
 
@@ -256,23 +271,23 @@ public class nPlayerController : MonoBehaviour
     
     private void HandleFall()
     {
-        if (CheckCeilingCollision())
+        if (CeilingCollision) ResetJumpVariables(); //RESET
+        if (!GroundCollision) JumpAndFallVelocity += (_playerData.Gravity * _playerData.WalkingSpeed/2f) * Time.deltaTime; //FALL
+        else if (GroundCollision && JumpAndFallVelocity <= 0f)
         {
-            ResetJumpVariablesAndCr();
+            ResetJumpVariables();
+            _moveDirection.y = -_playerData.AntiBumpSlopeRatio;
+            //LANDED
+            
         }
-        if (!GroundCollision)
-            JumpAndFallVelocity += (_playerData.Gravity * _playerData.WalkingSpeed/2f) * Time.deltaTime;
-        else if (GroundCollision)
+        else if (JumpAndFallVelocity <= 0.01f)
         {
-            if (JumpAndFallVelocity <= 0f)
-            {
-                ResetJumpVariablesAndCr();
-                _moveDirection.y = -_playerData.AntiBumpSlopeRatio;
-            }
+            _currentlyJumping = false;
+            //FALLING
         }
     }
 
-    private void ResetJumpVariablesAndCr()
+    private void ResetJumpVariables()
     {
         JumpAndFallVelocity = 0f;
         if (_currentlyJumping) return;
@@ -317,29 +332,13 @@ public class nPlayerController : MonoBehaviour
         else _jumpCoyoteTimeCounter -= Time.fixedDeltaTime;
         return _jumpCoyoteTimeCounter > 0;
     }
-    
-    //private bool CheckGroundCollision() => CollisionCheck(0f, Vector2.down, ExtraDistanceValue).collider != null;
-    private bool CheckCeilingCollision() => CollisionCheck(0f, Vector2.up, ExtraDistanceValue).collider != null;
-    private RaycastHit2D CollisionCheck(float angle, Vector2 direction, float extraDistance)
-    {
-        RaycastHit2D hit = Physics2D.BoxCast(
-            _collider2D.bounds.center, 
-            _collider2D.bounds.size / 1.5f, 
-            angle, 
-            direction,
-            extraDistance,
-            _playerData.GroundLayerMask
-        );
-        return hit;
-    }
 
-
-    private Collider2D CheckOverlap(Transform transform) => Physics2D.OverlapCircle(transform.position, _playerData._groundCheckRadius, _playerData.GroundLayerMask);
-
+    private RaycastHit2D CollisionCheck(float angle, Vector2 direction, float extraDistance) => Physics2D.BoxCast(_collider2D.bounds.center, _collider2D.bounds.size / 1.5f, angle, direction, extraDistance, _playerData.GroundLayerMask);
+    private Collider2D CheckOverlap(Transform transform, float radius) => Physics2D.OverlapCircle(transform.position, radius, _playerData.GroundLayerMask);
     private RaycastHit2D CheckRaycast(Transform transform, float facingDirection) => Physics2D.Raycast(transform.position, Vector2.right * facingDirection, _playerData._wallCheckDistance, _playerData.GroundLayerMask);
     
-    private bool CeilingCollision => CheckOverlap(_ceilingCheck);
-    private bool GroundCollision => CheckOverlap(_groundCheck);
+    private bool CeilingCollision => CheckOverlap(_ceilingCheck, _playerData._ceilingCheckRadius);
+    private bool GroundCollision => CheckOverlap(_groundCheck, _playerData._groundCheckRadius);
 
     private bool WallRightCollision => CheckRaycast(_rightWallCheck, _playerData.FacingDirection);
     private bool WallLeftCollision => CheckRaycast(_leftWallCheck, -_playerData.FacingDirection);

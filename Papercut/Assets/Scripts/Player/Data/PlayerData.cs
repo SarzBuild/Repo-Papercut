@@ -29,11 +29,12 @@ public class PlayerData : ScriptableObject
     [SerializeField] public float MaximumJumpHeightTime = 0.3f;
     [SerializeField] public float JumpCoyoteTime = 0.2f;
     [SerializeField] public float JumpBufferTime = 0.2f;
+    [SerializeField] public float _ceilingCheckRadius = 0.2f;
     
     [Header("Physics Related : Others")]
-    [SerializeField] public float AntiBumpSlopeRatio;
-    [SerializeField] public float SlopeLimit;
-    [SerializeField] public float SlopeSlideSpeed;
+    [SerializeField] public float AntiBumpSlopeRatio = 6.5f;
+    [SerializeField] public float SlopeLimit = 45f;
+    [SerializeField] public float SlopeSlideSpeed = 2f;
     [SerializeField] public float DashingAcceleration = 1.5f;
     [SerializeField] public float _wallCheckDistance;
     
