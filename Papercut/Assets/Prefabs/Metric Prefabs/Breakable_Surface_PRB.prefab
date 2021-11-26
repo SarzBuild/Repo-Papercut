@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5295639674163118216}
   - component: {fileID: 7546131187769261106}
   - component: {fileID: 3243116511811746144}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Breakable_Surface_PRB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
