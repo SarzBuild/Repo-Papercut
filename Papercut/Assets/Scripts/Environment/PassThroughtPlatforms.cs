@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PassThroughtPlatforms : CheckForObjectCollision
 {
+    //I'll remake that stuff here..
+    
     private Collider2D _collider2D;
     private PlayerController _playerController;
     [SerializeField] private LayerMask PlayerLayerMask;
@@ -33,7 +35,6 @@ public class PassThroughtPlatforms : CheckForObjectCollision
             return;
         }
         ReaddSelfCollision();
-        
     }
 
     private void RemoveSelfCollision()
