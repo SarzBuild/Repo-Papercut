@@ -344,5 +344,60 @@ public class nPlayerController : MonoBehaviour
     private bool WallLeftCollision => CheckRaycast(_leftWallCheck, -_playerData.FacingDirection);
     private bool LedgeRightCollision => CheckRaycast(_rightLedgeCheck, _playerData.FacingDirection);
     private bool LedgeLeftCollision => CheckRaycast(_leftLedgeCheck, -_playerData.FacingDirection);
+    
+    /*private void CheckForInteractionObject()
+    {
+        var successfulHit = false;
+        if (!(0 > Input.mousePosition.x || 0 > Input.mousePosition.y || Screen.width < Input.mousePosition.x ||
+              Screen.height < Input.mousePosition.y))
+        {
+            Vector2 ray = _playerControls.GetMousePos();
+            RaycastHit2D hit = Physics2D.Raycast(ray, Vector2.zero, Mathf.Infinity, InteractionLayerMask);
+            if (hit)
+            {
+                Interactable interactable = hit.collider.GetComponent<Interactable>();
+                if (interactable != null && (Interactable.InteractionType.CLICK == interactable.interactionType))
+                {
+                    HandleInteraction(interactable);
+                    InteractionText.text = interactable.GetDescription();
+                    var offset = new Vector2(0f, 1f);
+                    if ((Vector2)InteractionText.transform.position != (ray + offset))
+                    {
+                        InteractionText.transform.position = (ray + offset);
+                    }
+
+                    successfulHit = true;
+                }
+            }
+        }
+        if (!successfulHit)
+            InteractionText.text = "";
+    }
+
+    private void HandleInteraction(Interactable interactable)
+    {
+        switch (interactable.interactionType)
+        {
+            case Interactable.InteractionType.E:
+                if (true) //OVERLAP CIRCLE RAYCAST NEAR PLAYER TO CHECK IF POSSIBILITY TO INTERACT WITH STUFF
+                {
+                    //IF TRUE WE SHOW THEM THAT THEY CAN INTERACT WITH IT 
+                    if (_playerControls.GetInteraction())
+                    {
+                        interactable.Interact();
+                    }
+                        //IF SO THEY CALL INTERACT
+                }
+                break;
+            case Interactable.InteractionType.CLICK:
+                if (_playerControls.GetLeftClick())
+                {
+                    interactable.Interact();
+                }
+                break;
+        }
+    }*/
+
+    
 
 }
