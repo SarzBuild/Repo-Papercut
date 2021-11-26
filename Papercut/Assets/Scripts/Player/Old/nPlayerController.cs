@@ -9,6 +9,8 @@ public class nPlayerController : MonoBehaviour
     [Header("Physics Related : Walking")] 
     [SerializeField] [HideInInspector] private Vector2 _moveDirection;
     [SerializeField] [HideInInspector] private RaycastHit2D _slopeHit;
+    public AnimationCurve walkingAccelerationCurve;
+    [SerializeField][HideInInspector] private float walkingAccelerationTimer;
     
     [Header("Physics Related : Jumping")]
     //[SerializeField][HideInInspector] private float ExtraDistanceValue = 0.34f;
@@ -19,7 +21,17 @@ public class nPlayerController : MonoBehaviour
     [SerializeField][HideInInspector][Range(0f,50f)] private float JumpAndFallVelocity;
     [SerializeField][HideInInspector] private float _jumpCoyoteTimeCounter;
     [SerializeField][HideInInspector] private float _jumpBufferCounter;
+    [SerializeField][HideInInspector] private bool _currentlyJumping;
     
+    [Header("Physics Related : Others")]
+    [SerializeField][HideInInspector] private float slideSpeed;
+    [SerializeField][HideInInspector] private bool _currentlyDashing;
+    [SerializeField][HideInInspector] private float _dashTimer;
+    [SerializeField][HideInInspector] private float _lastClickTimeRightDash;
+    [SerializeField][HideInInspector] private float _lastClickTimeLeftDash;
+    [SerializeField][HideInInspector] private float _doubleClickTimer = 0.25f;
+    [SerializeField][HideInInspector] private int lastInputRightValue;
+    [SerializeField][HideInInspector] private int lastInputLeftValue;
     
     [Header("Character Leaning")]
     [SerializeField][HideInInspector]private Vector3 Center = Vector3.zero;
@@ -38,24 +50,13 @@ public class nPlayerController : MonoBehaviour
     [SerializeField] private PlayerInputState _playerInputState;
     [SerializeField] private Animator _childAnimator;
     [SerializeField] private PlayerData _playerData;
-    private bool _currentlyJumping;
-
-
-    public AnimationCurve walkingAccelerationCurve;
-    private float walkingAccelerationTimer;
-
-    public AnimationCurve jumpingAccelerationCurve;
-    private float jumpingAccelerationTimer;
-    private bool _canJump;
-    private float slideSpeed;
-    private bool _currentlyDashing;
-    private float _dashTimer;
-    private float _lastClickTimeRightDash;
-    private float _lastClickTimeLeftDash;
-    private float _doubleClickTimer = 0.25f;
-    private int lastInputRightValue;
-    private int lastInputLeftValue;
-
+    
+    [Header("Collisions")]
+    [SerializeField] private Transform _groundCheck;
+    [SerializeField] private Transform _wallCheck;
+    [SerializeField] private Transform _ledgeCheck;
+    [SerializeField] private Transform _ceilingCheck;
+    
     private void Awake()
     {
         _playerInputState = GetComponent<PlayerInputState>();
@@ -316,12 +317,7 @@ public class nPlayerController : MonoBehaviour
         return _jumpCoyoteTimeCounter > 0;
     }
     
-    private bool CheckGroundCollision()
-    {
-        //TODO ADD COYOTE TIME
-        return CollisionCheck(0f, Vector2.down, ExtraDistanceValue).collider != null;
-    }
-
+    private bool CheckGroundCollision() => CollisionCheck(0f, Vector2.down, ExtraDistanceValue).collider != null;
     private bool CheckCeilingCollision() => CollisionCheck(0f, Vector2.up, ExtraDistanceValue).collider != null;
     private RaycastHit2D CollisionCheck(float angle, Vector2 direction, float extraDistance)
     {

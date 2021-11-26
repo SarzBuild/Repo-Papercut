@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2299384acb6ba7348983e3a87d00d522, type: 3}
+  m_Name: newPlayerData
+  m_EditorClassIdentifier: 
+  description: 
+  WalkingSpeed: 6
+  RunningSpeed: 8
+  CurrentSpeed: 4
+  RawInputValue: 0
+  FacingDirection: 0
+  GroundLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _groundCheckRadius: 0
+  JumpingSpeed: 1
+  Gravity: -9.8
+  JumpForce: 15
+  AirSensibility: 0
+  JumpingForceShrink: 0.02
+  JumpingSpeedLowThreshold: 1
+  JumpingSpeedMaxThreshold: 1.5
+  MinimumJumpHeightTime: 0.15
+  MaximumJumpHeightTime: 0.3
+  JumpCoyoteTime: 0.2
+  JumpBufferTime: 0.2
+  AntiBumpSlopeRatio: 0
+  SlopeLimit: 0
+  SlopeSlideSpeed: 0
+  DashingAcceleration: 1.5
+  _wallCheckDistance: 0
+  LeanRight: {x: 0, y: 0, z: 5}
+  LeanLeft: {x: 0, y: 0, z: 355}
