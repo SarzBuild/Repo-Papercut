@@ -2,10 +2,28 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.ProBuilder.MeshOperations;
+
+enum PlayState
+{
+    IDLE,
+    WALK,
+    RUN,
+    DASH,
+    JUMP,
+    MIDAIR,
+    HARDLAND,
+    SOFTLAND,
+    ROLL,
+    WALLGRAB
+}
+
 
 public class nPlayerController : MonoBehaviour
 {
+    private PlayState _playerState;
+    
     [Header("Physics Related : Walking")] 
     [SerializeField] [HideInInspector] private Vector2 _moveDirection;
     [SerializeField] [HideInInspector] private RaycastHit2D _slopeHit;
@@ -28,7 +46,7 @@ public class nPlayerController : MonoBehaviour
     [Header("Physics Related : Others")]
     [SerializeField][HideInInspector] private float slideSpeed;
     [SerializeField][HideInInspector] private bool _currentlyDashing;
-    [SerializeField][HideInInspector] private float _dashTimer;
+    [SerializeField][HideInInspector] private float _dashTimer = 5f;
     [SerializeField][HideInInspector] private float _lastClickTimeRightDash;
     [SerializeField][HideInInspector] private float _lastClickTimeLeftDash;
     [SerializeField][HideInInspector] private float _doubleClickTimer = 0.25f;
@@ -61,7 +79,10 @@ public class nPlayerController : MonoBehaviour
     [SerializeField] private Transform _rightLedgeCheck;
     [SerializeField] private Transform _leftLedgeCheck;
     [SerializeField] private Transform _ceilingCheck;
-    
+    private Vector2 _tempDashDirection;
+    private int _dashCount;
+    private bool _resetDashCountRoutine;
+
     private void Awake()
     {
         _playerInputState = GetComponent<PlayerInputState>();
@@ -71,17 +92,20 @@ public class nPlayerController : MonoBehaviour
         _rotateTransform = transform.GetChild(0).transform.GetChild(0).GetComponent<Transform>();
         _childAnimator = transform.GetChild(0).GetComponent<Animator>();
         _playerData.FacingDirection = 1;
+        _dashCount = 1;
     }
 
     private void Update()
     {
         Debug.Log(_moveDirection.y);
         SetRigidbodyVelocityLimit();
-        CheckIfCanJump();
+        JumpBuffering();
         HandleRawInputValue();
-        HandleJump();
+        OnPossibleJump();
         WalkingCurveAcceleratorSetter();
         JumpingCurveAcceleratorSetter();
+        HandleDash();
+        DashTimer();
         if (OnSteepSlope())
         {
             SteepSlopeMovement();
@@ -95,8 +119,10 @@ public class nPlayerController : MonoBehaviour
         HandleMovement();
         HandleFall();
         DecreaseJumpSpeed();
+        DashMovement();
     }
 
+    #region Rigidbody Max Limit
     private void SetRigidbodyVelocityLimit()
     {
         if(_rigidbody2D.velocity.sqrMagnitude > 100f)
@@ -104,10 +130,14 @@ public class nPlayerController : MonoBehaviour
             _rigidbody2D.velocity *= 0.99f;
         }
     }
+    
 
+    #endregion
+
+    #region Dash & Run
     private void RunCheck()
     {
-        if (lastInputRightValue == 2)
+        /*if (lastInputRightValue == 2)
         {
             if (_playerInputState.ListenRightInput() == 1 && !_currentlyDashing)
             {
@@ -127,10 +157,10 @@ public class nPlayerController : MonoBehaviour
                 _lastClickTimeLeftDash = Time.time;
                 _lastClickTimeRightDash = 0.3f;
             }
-        }
+        }*/
         
 
-        switch (_currentlyDashing)
+        /*switch (_currentlyDashing)
         {
             case false when _playerInputState.ListenRunInput() == 2:
                 _playerData.CurrentSpeed = _playerData.RunningSpeed;
@@ -144,10 +174,54 @@ public class nPlayerController : MonoBehaviour
         {
             lastInputRightValue = _playerInputState.ListenRightInput();
             lastInputLeftValue = _playerInputState.ListenLeftInput();
+        }*/
+    }
+
+    private void HandleDash()
+    {
+        if(_playerInputState.ListenRunInput() != 2) return;
+        if (_dashCount < 1) return;
+        if(_currentlyDashing) return;
+        _tempDashDirection = new Vector2(_playerData.RawInputValue * _playerData.DashingAcceleration, 0.2f);
+        StartCoroutine(Dash());
+    }
+
+    private void DashMovement()
+    {
+        if(!_currentlyDashing) return;
+        _rigidbody2D.velocity = _tempDashDirection;
+    }
+
+    private IEnumerator Dash()
+    {
+        _currentlyDashing = true;
+        _dashCount = 0;
+        yield return new WaitForSeconds(0.1f);
+        JumpAndFallVelocity = 0f;
+        _currentlyDashing = false;
+    }
+
+    private void DashTimer()
+    {
+        if (_dashCount > 0) return;
+        if (_resetDashCountRoutine == false)
+        {
+            StartCoroutine(ResetDashCount());
         }
     }
 
-    private IEnumerator Dashing()
+    private IEnumerator ResetDashCount()
+    {
+        _resetDashCountRoutine = true;
+        yield return new WaitUntil(() => _currentlyDashing == false);
+        yield return new WaitForSeconds(2f);
+        _dashCount = 1;
+        _resetDashCountRoutine = false;
+    }
+    
+    
+
+    /*private IEnumerator Dashing()
     {
         float dashAccel;
         dashAccel = _playerData.DashingAcceleration;
@@ -162,54 +236,28 @@ public class nPlayerController : MonoBehaviour
         }
         _dashTimer = 0f;
         _currentlyDashing = false;
-    } 
+    } */
+    #endregion
 
-
+    #region Movement
+    
     private void WalkingCurveAcceleratorSetter()
     {
         if (_playerInputState.ListenRightInput() == 1 || _playerInputState.ListenLeftInput() == 1 ) walkingAccelerationTimer = 0f;
         else if (_playerInputState.ListenRightInput() == 2 || _playerInputState.ListenLeftInput() == 2) walkingAccelerationTimer += Time.fixedDeltaTime;
     }
-    
-    private void JumpingCurveAcceleratorSetter()
-    {
-        if (_playerInputState.ListenJumpInput() == 1) jumpingAccelerationTimer = 0f;
-        else if (_playerInputState.ListenJumpInput() == 2) jumpingAccelerationTimer += Time.fixedDeltaTime;
-    }
-    
-    private void CheckFlip(int inputValue)
-    {
-        if (inputValue == 0 || inputValue == _playerData.FacingDirection) return;
-        _playerData.FacingDirection *= -1;
-        _rotateTransform.Rotate(0.0f, 180.0f, 0.0f);
-    }
 
     private void HandleRawInputValue() =>  _playerData.RawInputValue = Mathf.Clamp(-_playerInputState.ListenLeftInput() + _playerInputState.ListenRightInput(),-1f,1f);
-    
-    private float HandleRightAirMovement()
-    {
-        if (_playerData.RawInputValue != 1) return _rv = ReduceAirMovement(_rv);
-        _lv = ReduceAirMovement(_lv);
-        return _rv = Mathf.Clamp01(_rv * 1.33f + _playerData.AirSensibility * Time.fixedDeltaTime);
-    }
-
-    private float HandleLeftAirMovement()
-    {
-        if (_playerData.RawInputValue != -1) return -(_lv = ReduceAirMovement(_lv));
-        _rv = ReduceAirMovement(_rv);
-        return -(_lv = Mathf.Clamp01(_lv * 1.33f + _playerData.AirSensibility * Time.fixedDeltaTime));
-    }
-    private float ReduceAirMovement(float value) => Mathf.Clamp01(Mathf.Abs(value) - _playerData.AirSensibility * Time.fixedDeltaTime) * Mathf.Sign(value);
 
     private void HandleMovement()
     {
         switch (_playerData.RawInputValue)
         {
             case -1f:
-                HandleLean(true, _playerData.LeanLeft);
+                HandleLean(_playerData.LeanLeft);
                 break;
             case 1f:
-                HandleLean(false, _playerData.LeanRight);
+                HandleLean(_playerData.LeanRight);
                 break;
             case 0f:
                 ResetLeanRotation();
@@ -217,10 +265,20 @@ public class nPlayerController : MonoBehaviour
         }
         
         CheckFlip((int)_playerData.RawInputValue);
-        _rigidbody2D.velocity = GroundCollision ? new Vector2(_playerData.RawInputValue * _playerData.CurrentSpeed * walkingAccelerationCurve.Evaluate(walkingAccelerationTimer), _moveDirection.y + JumpAndFallVelocity) : new Vector2((HandleRightAirMovement() + HandleLeftAirMovement()) * _playerData.CurrentSpeed * _playerData.JumpingSpeed, JumpAndFallVelocity);
+        _rigidbody2D.velocity = GroundCollision ? new Vector2(_playerData.RawInputValue * _playerData.CurrentSpeed * walkingAccelerationCurve.Evaluate(walkingAccelerationTimer), _moveDirection.y + JumpAndFallVelocity) : new Vector2((AirRightMovement() + AirLeftMovement()) * _playerData.CurrentSpeed * _playerData.JumpingSpeed, JumpAndFallVelocity);
+    }
+    #endregion
+
+    #region Visual Bonuses
+    
+    private void CheckFlip(int inputValue)
+    {
+        if (inputValue == 0 || inputValue == _playerData.FacingDirection) return;
+        _playerData.FacingDirection *= -1;
+        _rotateTransform.Rotate(0.0f, 180.0f, 0.0f);
     }
     
-    private void HandleLean(bool flipX, Vector3 lean)
+    private void HandleLean(Vector3 lean)
     {
         ResetLeanRotation();
         if (Vector3.Distance(_leanTransform.eulerAngles, lean) > 0.01f)
@@ -228,24 +286,56 @@ public class nPlayerController : MonoBehaviour
     }
 
     private void ResetLeanRotation() => _leanTransform.eulerAngles = Center;
+    
+    #endregion
+    
+    #region Jumping
+    
+    private float AirRightMovement()
+    {
+        if (_playerData.RawInputValue != 1) return _rv = ReduceAirMovement(_rv);
+        _lv = ReduceAirMovement(_lv);
+        return _rv = Mathf.Clamp01(_rv * 1.33f + _playerData.AirSensibility * Time.fixedDeltaTime);
+    }
 
-    private void CheckIfCanJump()
+    private float AirLeftMovement()
+    {
+        if (_playerData.RawInputValue != -1) return -(_lv = ReduceAirMovement(_lv));
+        _rv = ReduceAirMovement(_rv);
+        return -(_lv = Mathf.Clamp01(_lv * 1.33f + _playerData.AirSensibility * Time.fixedDeltaTime));
+    }
+    private float ReduceAirMovement(float value) => Mathf.Clamp01(Mathf.Abs(value) - _playerData.AirSensibility * Time.fixedDeltaTime) * Mathf.Sign(value);
+    
+    private void JumpingCurveAcceleratorSetter()
+    {
+        if (_playerInputState.ListenJumpInput() == 1) jumpingAccelerationTimer = 0f;
+        else if (_playerInputState.ListenJumpInput() == 2) jumpingAccelerationTimer += Time.fixedDeltaTime;
+    }
+    
+    private bool JumpCoyoteTime()
+    {
+        if (GroundCollision) _jumpCoyoteTimeCounter = _playerData.JumpCoyoteTime;
+        else _jumpCoyoteTimeCounter -= Time.fixedDeltaTime;
+        return _jumpCoyoteTimeCounter > 0;
+    }
+
+    private void JumpBuffering()
     {
         if (_playerInputState.ListenJumpInput() == 1) _jumpBufferCounter = _playerData.JumpBufferTime;
         else _jumpBufferCounter -= Time.fixedDeltaTime;
     }
     
-    private void HandleJump()
+    private void OnPossibleJump()
     {
         if (!(_jumpBufferCounter > 0f)) return;
         if (!JumpCoyoteTime()) return;
         if (_currentlyJumping) return;
-        CurrentlyJumping = StartCoroutine(HandleJumping());
+        CurrentlyJumping = StartCoroutine(JumpCoroutine());
     }
 
     private Coroutine CurrentlyJumping { get; set; }
 
-    private IEnumerator HandleJumping()
+    private IEnumerator JumpCoroutine()
     {
         /*var jumpInputStartTime = Time.time;
         //https://youtu.be/dOiOp3DLxZQ?t=2609
@@ -260,7 +350,7 @@ public class nPlayerController : MonoBehaviour
         {
             yield return new WaitForFixedUpdate();
             _jumpTimer += Time.fixedDeltaTime;
-            JumpAndFallVelocity += ((_playerData.CurrentSpeed * _playerData.JumpForce) / _playerData.JumpingForceShrink) * jumpingAccelerationCurve.Evaluate(jumpingAccelerationTimer);
+            JumpAndFallVelocity += _playerData.JumpForce * jumpingAccelerationCurve.Evaluate(jumpingAccelerationTimer);
             Debug.Log("Jumping");
         }
 
@@ -268,22 +358,32 @@ public class nPlayerController : MonoBehaviour
         _jumpTimer = 0;
         _currentlyJumping = false;
     }
-    
+    #endregion
+
+    #region InAir
     private void HandleFall()
     {
         if (CeilingCollision) ResetJumpVariables(); //RESET
-        if (!GroundCollision) JumpAndFallVelocity += (_playerData.Gravity * _playerData.WalkingSpeed/2f) * Time.deltaTime; //FALL
-        else if (GroundCollision && JumpAndFallVelocity <= 0f)
+        switch (GroundCollision)
         {
-            ResetJumpVariables();
-            _moveDirection.y = -_playerData.AntiBumpSlopeRatio;
-            //LANDED
-            
-        }
-        else if (JumpAndFallVelocity <= 0.01f)
-        {
-            _currentlyJumping = false;
-            //FALLING
+            case false:
+                JumpAndFallVelocity += (_playerData.Gravity * _playerData.WalkingSpeed/2f) * Time.deltaTime; //FALL ACCELERATION
+                break;
+            case true when JumpAndFallVelocity <= 0f:
+                ResetJumpVariables();
+                _moveDirection.y = -_playerData.AntiBumpSlopeRatio;
+                //LANDED
+                break;
+            default:
+            {
+                if (JumpAndFallVelocity <= 0.01f)
+                {
+                    _currentlyJumping = false;
+                    //FALLING
+                }
+
+                break;
+            }
         }
     }
 
@@ -300,7 +400,9 @@ public class nPlayerController : MonoBehaviour
         if (_playerData.JumpingSpeed > _playerData.JumpingSpeedLowThreshold) _playerData.JumpingSpeed -= Time.fixedDeltaTime * 0.5f;
         else _playerData.JumpingSpeed = _playerData.JumpingSpeedLowThreshold;
     }
+    #endregion
 
+    #region Slopes
     private bool OnSteepSlope()
     {
         if (!GroundCollision) return false;
@@ -325,14 +427,10 @@ public class nPlayerController : MonoBehaviour
         _moveDirection = slopeDirection * -slideSpeed;
         _moveDirection.y = _moveDirection.y - _slopeHit.point.y;
     }
+    #endregion
 
-    private bool JumpCoyoteTime()
-    {
-        if (GroundCollision) _jumpCoyoteTimeCounter = _playerData.JumpCoyoteTime;
-        else _jumpCoyoteTimeCounter -= Time.fixedDeltaTime;
-        return _jumpCoyoteTimeCounter > 0;
-    }
-
+    #region Checks
+    
     private RaycastHit2D CollisionCheck(float angle, Vector2 direction, float extraDistance) => Physics2D.BoxCast(_collider2D.bounds.center, _collider2D.bounds.size / 1.5f, angle, direction, extraDistance, _playerData.GroundLayerMask);
     private Collider2D CheckOverlap(Transform transform, float radius) => Physics2D.OverlapCircle(transform.position, radius, _playerData.GroundLayerMask);
     private RaycastHit2D CheckRaycast(Transform transform, float facingDirection) => Physics2D.Raycast(transform.position, Vector2.right * facingDirection, _playerData._wallCheckDistance, _playerData.GroundLayerMask);
@@ -344,6 +442,13 @@ public class nPlayerController : MonoBehaviour
     private bool WallLeftCollision => CheckRaycast(_leftWallCheck, -_playerData.FacingDirection);
     private bool LedgeRightCollision => CheckRaycast(_rightLedgeCheck, _playerData.FacingDirection);
     private bool LedgeLeftCollision => CheckRaycast(_leftLedgeCheck, -_playerData.FacingDirection);
+    
+    #endregion
+    
+    
+    
+    
+    
     
     /*private void CheckForInteractionObject()
     {

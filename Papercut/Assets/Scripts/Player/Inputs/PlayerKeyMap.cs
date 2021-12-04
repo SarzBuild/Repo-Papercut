@@ -166,7 +166,7 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""da0d85e4-a91e-4714-a6d2-71b1b07574f2"",
-                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
