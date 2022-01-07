@@ -216,6 +216,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - Coat: 0.03
     - Metallic: 0
     - Roughness: 0
     - _AORemapMax: 1
