@@ -23,57 +23,71 @@ enum PlayState
 public class nPlayerController : MonoBehaviour
 {
     private PlayState _playerState;
-    
-    [Header("Physics Related : Walking")] 
-    [SerializeField] [HideInInspector] private Vector2 _moveDirection;
+
+
+
+
+
+    [Header("Physics Related : Walking")] [SerializeField] [HideInInspector]
+    private Vector2 _moveDirection;
+
     [SerializeField] [HideInInspector] private RaycastHit2D _slopeHit;
     public AnimationCurve walkingAccelerationCurve;
-    [SerializeField][HideInInspector] private float walkingAccelerationTimer;
-    
+    [SerializeField] [HideInInspector] private float walkingAccelerationTimer;
+
     [Header("Physics Related : Jumping")]
     //[SerializeField][HideInInspector] private float ExtraDistanceValue = 0.34f;
-    [SerializeField][HideInInspector] private float ExtraDistanceValue = 0.40f;
-    [SerializeField][HideInInspector] private float _lv;
-    [SerializeField][HideInInspector] private float _rv;
-    [SerializeField][HideInInspector] private float _jumpTimer;
-    [SerializeField][HideInInspector][Range(0f,50f)] private float JumpAndFallVelocity;
-    [SerializeField][HideInInspector] private float _jumpCoyoteTimeCounter;
-    [SerializeField][HideInInspector] private float _jumpBufferCounter;
-    [SerializeField][HideInInspector] private bool _currentlyJumping;
-    public AnimationCurve jumpingAccelerationCurve;
-    [SerializeField][HideInInspector] private float jumpingAccelerationTimer;
-    
-    [Header("Physics Related : Others")]
-    [SerializeField][HideInInspector] private float slideSpeed;
-    [SerializeField][HideInInspector] private bool _currentlyDashing;
-    [SerializeField][HideInInspector] private float _dashTimer = 5f;
-    [SerializeField][HideInInspector] private float _lastClickTimeRightDash;
-    [SerializeField][HideInInspector] private float _lastClickTimeLeftDash;
-    [SerializeField][HideInInspector] private float _doubleClickTimer = 0.25f;
-    [SerializeField][HideInInspector] private int lastInputRightValue;
-    [SerializeField][HideInInspector] private int lastInputLeftValue;
-    [SerializeField] private LayerMask SlopeLayerMask;
-    
-    [Header("Character Leaning")]
-    [SerializeField][HideInInspector]private Vector3 Center = Vector3.zero;
+    [SerializeField]
+    [HideInInspector]
+    private float ExtraDistanceValue = 0.40f;
 
-    [Header("Interaction Related")]
-    [SerializeField] private LayerMask InteractionLayerMask;
+    [SerializeField] [HideInInspector] private float _lv;
+    [SerializeField] [HideInInspector] private float _rv;
+    [SerializeField] [HideInInspector] private float _jumpTimer;
+
+    [SerializeField] [HideInInspector] [Range(0f, 50f)]
+    private float JumpAndFallVelocity;
+
+    [SerializeField] [HideInInspector] private float _jumpCoyoteTimeCounter;
+    [SerializeField] [HideInInspector] private float _jumpBufferCounter;
+    [SerializeField] [HideInInspector] private bool _currentlyJumping;
+    public AnimationCurve jumpingAccelerationCurve;
+    [SerializeField] [HideInInspector] private float jumpingAccelerationTimer;
+
+    [Header("Physics Related : Others")] [SerializeField] [HideInInspector]
+    private float slideSpeed;
+
+    [SerializeField] [HideInInspector] private bool _currentlyDashing;
+    [SerializeField] [HideInInspector] private float _dashTimer = 5f;
+    [SerializeField] [HideInInspector] private float _lastClickTimeRightDash;
+    [SerializeField] [HideInInspector] private float _lastClickTimeLeftDash;
+    [SerializeField] [HideInInspector] private float _doubleClickTimer = 0.25f;
+    [SerializeField] [HideInInspector] private int lastInputRightValue;
+    [SerializeField] [HideInInspector] private int lastInputLeftValue;
+
+    [Header("Character Leaning")] [SerializeField] [HideInInspector]
+    private Vector3 Center = Vector3.zero;
+
+    [Header("Interaction Related")] [SerializeField]
+    private LayerMask InteractionLayerMask;
+
     [SerializeField] private TMPro.TextMeshProUGUI InteractionText;
     [SerializeField] private float _clickInteractionDistance;
     [SerializeField] private float _holdInteractionDistance;
 
-    [Header("Components")]
-    [SerializeField] private Collider2D _collider2D;
+    [Header("Components")] [SerializeField]
+    private Collider2D _collider2D;
+
     [SerializeField] private Rigidbody2D _rigidbody2D;
     [SerializeField] private Transform _leanTransform;
     [SerializeField] private Transform _rotateTransform;
     [SerializeField] private PlayerInputState _playerInputState;
     [SerializeField] private Animator _childAnimator;
     [SerializeField] private PlayerData _playerData;
-    
-    [Header("Collisions")]
-    [SerializeField] private Transform _groundCheck;
+
+    [Header("Collisions")] [SerializeField]
+    private Transform _groundCheck;
+
     [SerializeField] private Transform _rightWallCheck;
     [SerializeField] private Transform _leftWallCheck;
     [SerializeField] private Transform _rightLedgeCheck;
@@ -83,7 +97,9 @@ public class nPlayerController : MonoBehaviour
     private int _dashCount;
     private bool _resetDashCountRoutine;
 
-    private void Awake()
+
+
+    private void GetComponents()
     {
         _playerInputState = GetComponent<PlayerInputState>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -91,13 +107,22 @@ public class nPlayerController : MonoBehaviour
         _leanTransform = transform.GetChild(0).GetComponent<Transform>();
         _rotateTransform = transform.GetChild(0).transform.GetChild(0).GetComponent<Transform>();
         _childAnimator = transform.GetChild(0).GetComponent<Animator>();
+    }
+
+    private void SetInitialValues()
+    {
         _playerData.FacingDirection = 1;
         _dashCount = 1;
     }
 
+    private void Awake()
+    {
+        GetComponents();
+        SetInitialValues();
+    }
+
     private void Update()
     {
-        Debug.Log(_moveDirection.y);
         SetRigidbodyVelocityLimit();
         JumpBuffering();
         HandleRawInputValue();
@@ -110,7 +135,7 @@ public class nPlayerController : MonoBehaviour
         {
             SteepSlopeMovement();
         }
-        
+
     }
 
     private void FixedUpdate()
@@ -123,18 +148,20 @@ public class nPlayerController : MonoBehaviour
     }
 
     #region Rigidbody Max Limit
+
     private void SetRigidbodyVelocityLimit()
     {
-        if(_rigidbody2D.velocity.sqrMagnitude > 100f)
+        if (_rigidbody2D.velocity.sqrMagnitude > 100f)
         {
             _rigidbody2D.velocity *= 0.99f;
         }
     }
-    
+
 
     #endregion
 
     #region Dash & Run
+
     private void RunCheck()
     {
         /*if (lastInputRightValue == 2)
@@ -158,7 +185,7 @@ public class nPlayerController : MonoBehaviour
                 _lastClickTimeRightDash = 0.3f;
             }
         }*/
-        
+
 
         /*switch (_currentlyDashing)
         {
@@ -179,16 +206,16 @@ public class nPlayerController : MonoBehaviour
 
     private void HandleDash()
     {
-        if(_playerInputState.ListenRunInput() != 2) return;
+        if (_playerInputState.ListenRunInput() != 2) return;
         if (_dashCount < 1) return;
-        if(_currentlyDashing) return;
+        if (_currentlyDashing) return;
         _tempDashDirection = new Vector2(_playerData.RawInputValue * _playerData.DashingAcceleration, 0.2f);
         StartCoroutine(Dash());
     }
 
     private void DashMovement()
     {
-        if(!_currentlyDashing) return;
+        if (!_currentlyDashing) return;
         _rigidbody2D.velocity = _tempDashDirection;
     }
 
@@ -218,8 +245,8 @@ public class nPlayerController : MonoBehaviour
         _dashCount = 1;
         _resetDashCountRoutine = false;
     }
-    
-    
+
+
 
     /*private IEnumerator Dashing()
     {
@@ -237,58 +264,91 @@ public class nPlayerController : MonoBehaviour
         _dashTimer = 0f;
         _currentlyDashing = false;
     } */
+
     #endregion
 
     #region Movement
-    
+
     private void WalkingCurveAcceleratorSetter()
     {
-        if (_playerInputState.ListenRightInput() == 1 || _playerInputState.ListenLeftInput() == 1 ) walkingAccelerationTimer = 0f;
-        else if (_playerInputState.ListenRightInput() == 2 || _playerInputState.ListenLeftInput() == 2) walkingAccelerationTimer += Time.fixedDeltaTime;
+        if (_playerInputState.ListenRightInput() == 1 || _playerInputState.ListenLeftInput() == 1)
+            walkingAccelerationTimer = 0f;
+        else if (_playerInputState.ListenRightInput() == 2 || _playerInputState.ListenLeftInput() == 2)
+            walkingAccelerationTimer += Time.fixedDeltaTime;
     }
 
-    private void HandleRawInputValue() =>  _playerData.RawInputValue = Mathf.Clamp(-_playerInputState.ListenLeftInput() + _playerInputState.ListenRightInput(),-1f,1f);
+    private void HandleRawInputValue() => _playerData.RawInputValue =
+        Mathf.Clamp(-_playerInputState.ListenLeftInput() + _playerInputState.ListenRightInput(), -1f, 1f);
 
     private void HandleMovement()
     {
-        switch (_playerData.RawInputValue)
-        {
-            case -1f:
-                HandleLean(_playerData.LeanLeft);
-                break;
-            case 1f:
-                HandleLean(_playerData.LeanRight);
-                break;
-            case 0f:
-                ResetLeanRotation();
-                break;
-        }
         
-        CheckFlip((int)_playerData.RawInputValue);
         _rigidbody2D.velocity = GroundCollision ? new Vector2(_playerData.RawInputValue * _playerData.CurrentSpeed * walkingAccelerationCurve.Evaluate(walkingAccelerationTimer), _moveDirection.y + JumpAndFallVelocity) : new Vector2((AirRightMovement() + AirLeftMovement()) * _playerData.CurrentSpeed * _playerData.JumpingSpeed, JumpAndFallVelocity);
     }
+
     #endregion
 
-    #region Visual Bonuses
+    //#region Visual Bonuses
     
-    private void CheckFlip(int inputValue)
+    /*private void CheckFlip(int inputValue)
     {
-        if (inputValue == 0 || inputValue == _playerData.FacingDirection) return;
-        _playerData.FacingDirection *= -1;
-        _rotateTransform.Rotate(0.0f, 180.0f, 0.0f);
-    }
-    
-    private void HandleLean(Vector3 lean)
-    {
-        ResetLeanRotation();
-        if (Vector3.Distance(_leanTransform.eulerAngles, lean) > 0.01f)
-            _leanTransform.rotation = Quaternion.Euler(Vector3.Lerp(_leanTransform.rotation.eulerAngles, -lean, 4f));
-    }
+        if (_playerData.RawInputValue != 0)
+        {
+            var _currentHorizontalSpeed;
+            var _acceleration;
+            _currentHorizontalSpeed += _playerData.RawInputValue * _playerData.CurrentSpeed * Time
+            
+        }
+    }*/
 
-    private void ResetLeanRotation() => _leanTransform.eulerAngles = Center;
+    private void CalculateGravity()
+    {
+        
+    }
     
-    #endregion
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     #region Jumping
     
     private float AirRightMovement()
