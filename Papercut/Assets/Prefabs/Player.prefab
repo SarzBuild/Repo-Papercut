@@ -544,7 +544,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   _rigidbody2D: {fileID: 6262205277068168272}
-  _groundCheckRadius: 0
+  _groundCheckRadius: 0.1
   _wallCheckDistance: 0
   _facingDirection: 0
   _canSetVelocity: 0
