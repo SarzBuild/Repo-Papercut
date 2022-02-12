@@ -18,16 +18,17 @@ public class PlayerMoveState : PlayerGroundedState
         base.ExitState();
     }
 
-    /*public override void LogicUpdate()
+    public override void LogicUpdate()
     {
         base.LogicUpdate();
+        
         Player.CheckFlip((int)rawInputValue);
-        PlayerData.CurrentSpeed = PlayerData.WalkSpeed;
+        //PlayerData.CurrentSpeed = PlayerData.WalkSpeed;
         Player.SetVelocityX(rawInputValue * PlayerData.CurrentSpeed);
 
         if (IsExitingState) return;
         if(rawInputValue == 0) StateMachine.ChangeState(Player.IdleState);
-    }*/
+    }
 
     public override void PhysicsUpdate()
     {

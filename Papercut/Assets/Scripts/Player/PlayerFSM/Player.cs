@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class Player : AppliedPhysics
@@ -28,6 +29,8 @@ public class Player : AppliedPhysics
     #endregion
     
     [SerializeField] private PlayerData _playerData;
+
+    private StringBuilder _debugMessage = new StringBuilder(500);
 
     private void Awake()
     {
@@ -61,13 +64,24 @@ public class Player : AppliedPhysics
 
     private void Update()
     {
+        UpdateHitResults();
         ApplyVelocity();
         StateMachine.CurrentState.LogicUpdate();
+        LogDebug();
     }
 
     private void FixedUpdate()
     {
         StateMachine.CurrentState.PhysicsUpdate();
     }
-    
+
+    private void LogDebug()
+    {
+        _debugMessage.Clear();
+        _debugMessage.AppendFormat("State: {0}\nGrounded [{1}] | Ceiling [{2}] | WallFront [{3}] | WallBack [{4}] | LedgeHorizontal [{5}] | LedgeVertical [{6}]\n", 
+            StateMachine.CurrentState.StateName, 
+            Grounded, CeilingHit, WallFrontHit, WallBackHit, LedgeHorizontalHit, LedgeVerticalHit);
+        InputHandler.AppendDebugMessage(ref _debugMessage);
+        Debug.Log(_debugMessage.ToString());
+    }
 }

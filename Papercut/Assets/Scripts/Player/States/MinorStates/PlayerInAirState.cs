@@ -12,7 +12,7 @@ public class PlayerInAirState : PlayerState
     {
     }
 
-    /*public override void LogicUpdate()
+    public override void LogicUpdate()
     {
         base.LogicUpdate();
 
@@ -28,46 +28,74 @@ public class PlayerInAirState : PlayerState
     
     private void HandleStateChange()
     {
-        if(Player.Ground && rawInputValue < 0.01f && velocityY <= 100) StateMachine.ChangeState(Player.SoftLandingState);
-        else if(Player.Ground && rawInputValue < 0.01f) StateMachine.ChangeState(Player.HardLandingState);
-        else if(Player.InputHandler.ListenJumpInput() == 2) StateMachine.ChangeState(Player.JumpState);
+        if (Player.Grounded)
+        {
+            if (rawInputValue < 0.01f)
+            {
+                if (velocityY <= 100)
+                {
+                    StateMachine.ChangeState(Player.SoftLandingState);
+                }
+                else
+                {
+                    StateMachine.ChangeState(Player.HardLandingState);
+                }
+            }
+            else
+            {
+                StateMachine.ChangeState(Player.IdleState);
+            }
+        }
+        else if (Player.InputHandler.ListenJumpInput() == 2)
+        {
+            StateMachine.ChangeState(Player.JumpState);
+        }
         else
         {
             Player.CheckFlip((int)rawInputValue);
-            //Debug.Log(HandleMovementInAir());
-            Player.SetVelocityX(HandleMovementInAir() * PlayerData.CurrentSpeed);
+            float rightVelocity = GetRightAirVelocity();
+            float leftVelocity = GetLeftAirVelocity();
+            Player.SetVelocityX((rightVelocity + leftVelocity) * PlayerData.CurrentSpeed);
         }
     }
 
     private void HandleFall()
     {
-        if (!PlayerData.AffectedByGravity) return;
-        velocityY += PlayerData.Gravity * (PlayerData.WalkSpeed / 2) * Time.deltaTime;
+        if (PlayerData.Gravity == 0.0f)
+        {
+            return;
+        }
+
+        velocityY += PlayerData.Gravity * (PlayerData.WalkingSpeed / 2) * Time.deltaTime;
         Player.SetVelocityY(velocityY);
     }
-    
-    private float HandleRightAirMovement()
+
+    private float GetAirVelocityFromInput(int input)
     {
+        return Mathf.Clamp01(input * 1.33f + PlayerData.AirSensibility * Time.deltaTime);
+    }
+
+    private float GetRightAirVelocity()
+    {
+        int rightInput = Player.InputHandler.ListenRightInput();
+        return GetAirVelocityFromInput(rightInput);
+        /*
         if (rawInputValue == 1)
         {
-            PlayerData._rightInputValue = Mathf.Clamp01(PlayerData._rightInputValue * 1.33f + PlayerData._airSensibility * Time.deltaTime);
-            return PlayerData._rightInputValue;
         }
-        PlayerData._rightInputValue = Mathf.Clamp((Mathf.Abs(PlayerData._rightInputValue) - PlayerData._airSensibility * Time.fixedDeltaTime) * Mathf.Sign(PlayerData._rightInputValue), 0.1f, 1f);
-        return PlayerData._rightInputValue;
+
+        return Mathf.Clamp((Mathf.Abs(rightInput) - PlayerData.AirSensibility * Time.fixedDeltaTime) * Mathf.Sign(rightInput), 0.1f, 1f);*/
         
     }
 
-    private float HandleLeftAirMovement()
+    private float GetLeftAirVelocity()
     {
-        if (rawInputValue == -1)
+        int leftInput = Player.InputHandler.ListenLeftInput();
+        return GetAirVelocityFromInput(leftInput);
+       /* if (rawInputValue == -1)
         {
-            PlayerData._leftInputValue = Mathf.Clamp01(PlayerData._leftInputValue * 1.33f + PlayerData._airSensibility * Time.deltaTime);
-            return -PlayerData._leftInputValue;
+            return Mathf.Clamp01(leftInput * 1.33f + PlayerData.AirSensibility * Time.deltaTime);
         }
-        PlayerData._leftInputValue = Mathf.Clamp((Mathf.Abs(PlayerData._leftInputValue) -PlayerData. _airSensibility * Time.fixedDeltaTime) * Mathf.Sign(PlayerData._leftInputValue),0.1f,1f);
-        return -PlayerData._leftInputValue;
+        return Mathf.Clamp((Mathf.Abs(leftInput)) -PlayerData.AirSensibility * Time.fixedDeltaTime * Mathf.Sign(leftInput), 0.1f, 1f);*/
     }
-
-    private float HandleMovementInAir() => HandleRightAirMovement() + HandleLeftAirMovement();
-*/}
+}

@@ -29,10 +29,10 @@ public class PlayerGroundedState : PlayerState
         /*PlayerData._rightInputValue = PlayerData._inputRetainerJump;
         PlayerData._leftInputValue = PlayerData._inputRetainerJump;*/
 
-        Debug.Log("Hellooooooooo");
+        //Debug.Log("Hellooooooooo");
         
         if(Player.InputHandler.ListenJumpInput() == 2) StateMachine.ChangeState(Player.JumpState);
-        else if(!Player.Ground) StateMachine.ChangeState(Player.InAirState);
+        else if(!Player.Grounded) StateMachine.ChangeState(Player.InAirState);
     }
 
     public override void PhysicsUpdate()
