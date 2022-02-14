@@ -20,7 +20,7 @@ MonoBehaviour:
   FacingDirection: 0
   GroundLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
   _groundCheckRadius: 0
   JumpingSpeed: 1
   Gravity: -9.8
@@ -33,10 +33,14 @@ MonoBehaviour:
   MaximumJumpHeightTime: 0.3
   JumpCoyoteTime: 0.2
   JumpBufferTime: 0.2
+  _ceilingCheckRadius: 0.2
   AntiBumpSlopeRatio: 0
   SlopeLimit: 0
   SlopeSlideSpeed: 0
-  DashingAcceleration: 1.5
+  DashingAcceleration: 12
   _wallCheckDistance: 0
+  DashingTime: 0.15
+  MaximumDashCount: 1
+  DashCooldownTime: 2
   LeanRight: {x: 0, y: 0, z: 5}
   LeanLeft: {x: 0, y: 0, z: 355}

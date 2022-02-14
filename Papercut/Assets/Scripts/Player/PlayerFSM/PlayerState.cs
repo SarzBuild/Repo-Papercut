@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerState
+public class PlayerState 
 {
     protected Player Player;
     protected PlayerStateMachine StateMachine;
@@ -15,9 +15,7 @@ public class PlayerState
 
     public string StateName { get { return _stateName; } }
     private string _stateName;
-
-    protected float rawInputValue;
-
+    
     public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string stateName)
     {
         this.Player = player;
@@ -43,7 +41,7 @@ public class PlayerState
 
     public virtual void LogicUpdate()
     {
-        rawInputValue = Mathf.Clamp(-Player.InputHandler.ListenLeftInput() + Player.InputHandler.ListenRightInput(),-1f,1f);
+        PlayerData.RawInputValue = Mathf.Clamp(-Player.InputHandler.ListenLeftInput() + Player.InputHandler.ListenRightInput(),-1f,1f);
     }
 
     public virtual void PhysicsUpdate()

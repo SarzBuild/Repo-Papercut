@@ -28,6 +28,12 @@ public class AppliedPhysics : MonoBehaviour
         SetFinalVelocity();
     }
 
+    public void SetVelocityXWithYZero(float velocity)
+    {
+        _appliedVelocity = new Vector2(velocity, 0);
+        SetFinalVelocity();
+    }
+
     public void SetVelocity(float velocity, Vector2 angle, int direction)
     {
         angle.Normalize();

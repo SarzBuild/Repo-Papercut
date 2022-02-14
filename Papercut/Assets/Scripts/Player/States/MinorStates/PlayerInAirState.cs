@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerInAirState : PlayerState
 {
-    protected float downInputValue;
-    protected float upInputValue;
     protected float velocityY;
     
     public PlayerInAirState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string stateName) : base(player, stateMachine, playerData, stateName)
@@ -15,9 +13,14 @@ public class PlayerInAirState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-        HandleFall();
+        if(IsExitingState) return;
         HandleStateChange();
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+        HandleFall();
     }
 
     public override void ExitState()
@@ -28,9 +31,9 @@ public class PlayerInAirState : PlayerState
     
     private void HandleStateChange()
     {
-        if (Player.Grounded)
+        if (PlayerData.RawInputValue != 0)
         {
-            if (rawInputValue < 0.01f)
+            if (Player.Grounded)
             {
                 if (velocityY <= 100)
                 {
@@ -41,9 +44,9 @@ public class PlayerInAirState : PlayerState
                     StateMachine.ChangeState(Player.HardLandingState);
                 }
             }
-            else
+            else if (Player.InputHandler.ListenRunInput() == 2 && Player.CurrentDashCount >= 1)
             {
-                StateMachine.ChangeState(Player.IdleState);
+                StateMachine.ChangeState(Player.DashState);
             }
         }
         else if (Player.InputHandler.ListenJumpInput() == 2)
@@ -52,10 +55,8 @@ public class PlayerInAirState : PlayerState
         }
         else
         {
-            Player.CheckFlip((int)rawInputValue);
-            float rightVelocity = GetRightAirVelocity();
-            float leftVelocity = GetLeftAirVelocity();
-            Player.SetVelocityX((rightVelocity + leftVelocity) * PlayerData.CurrentSpeed);
+            Player.CheckFlip((int)PlayerData.RawInputValue);
+            Player.SetVelocityX(PlayerData.RawInputValue * PlayerData.WalkingSpeed);
         }
     }
 
@@ -66,36 +67,7 @@ public class PlayerInAirState : PlayerState
             return;
         }
 
-        velocityY += PlayerData.Gravity * (PlayerData.WalkingSpeed / 2) * Time.deltaTime;
+        velocityY += PlayerData.Gravity * Time.deltaTime;
         Player.SetVelocityY(velocityY);
-    }
-
-    private float GetAirVelocityFromInput(int input)
-    {
-        return Mathf.Clamp01(input * 1.33f + PlayerData.AirSensibility * Time.deltaTime);
-    }
-
-    private float GetRightAirVelocity()
-    {
-        int rightInput = Player.InputHandler.ListenRightInput();
-        return GetAirVelocityFromInput(rightInput);
-        /*
-        if (rawInputValue == 1)
-        {
-        }
-
-        return Mathf.Clamp((Mathf.Abs(rightInput) - PlayerData.AirSensibility * Time.fixedDeltaTime) * Mathf.Sign(rightInput), 0.1f, 1f);*/
-        
-    }
-
-    private float GetLeftAirVelocity()
-    {
-        int leftInput = Player.InputHandler.ListenLeftInput();
-        return GetAirVelocityFromInput(leftInput);
-       /* if (rawInputValue == -1)
-        {
-            return Mathf.Clamp01(leftInput * 1.33f + PlayerData.AirSensibility * Time.deltaTime);
-        }
-        return Mathf.Clamp((Mathf.Abs(leftInput)) -PlayerData.AirSensibility * Time.fixedDeltaTime * Mathf.Sign(leftInput), 0.1f, 1f);*/
     }
 }

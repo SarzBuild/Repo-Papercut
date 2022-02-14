@@ -19,7 +19,7 @@ public class PlayerData : ScriptableObject
 
     [Header("Physics Related : Jumping")]
     [SerializeField] public float JumpingSpeed = 1f;
-    [SerializeField] public float Gravity = -9.8f;
+    [SerializeField] public float Gravity = -29.4f;
     [SerializeField] public float JumpForce = 15f;
     [SerializeField] public float AirSensibility = 0.5f;
     [SerializeField] public float JumpingForceShrink = 20f;
@@ -37,8 +37,10 @@ public class PlayerData : ScriptableObject
     [SerializeField] public float SlopeSlideSpeed = 2f;
     [SerializeField] public float DashingAcceleration = 1.5f;
     [SerializeField] public float _wallCheckDistance;
-    
-    
+    [SerializeField] public float DashingTime = 0.1f;
+    [SerializeField] public int MaximumDashCount = 1;
+    [SerializeField] public float DashCooldownTime = 2f;
+
     [Header("Character Leaning")]
     [SerializeField] public Vector3 LeanRight = new Vector3(0f, 0f, 5f);
     [SerializeField] public Vector3 LeanLeft = new Vector3(0f, 0f, 355f);

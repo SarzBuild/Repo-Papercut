@@ -792,7 +792,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.9945726, y: 1}
+    m_SensorSize: {x: 1.9899846, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -1250,6 +1250,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 43368429003359864, guid: fd018425d2e6cb64681890150e6d0568, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6452ae6f69e6e1240bb3b1d0c53c3190, type: 2}
     - target: {fileID: 6262205277068168276, guid: fd018425d2e6cb64681890150e6d0568, type: 3}
       propertyPath: m_Name
       value: Player

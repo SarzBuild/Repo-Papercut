@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerJumpState : PlayerAbilitiesState
+public class PlayerJumpState : PlayerState
 {
     private int _jumpAmount;
     private float _jumpTimer;

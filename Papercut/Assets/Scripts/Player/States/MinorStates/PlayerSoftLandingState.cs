@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSoftLandingState : PlayerGroundedState
+public class PlayerSoftLandingState : PlayerState
 {
     public PlayerSoftLandingState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string stateName) : base(player, stateMachine, playerData, stateName)
     {
@@ -22,7 +22,7 @@ public class PlayerSoftLandingState : PlayerGroundedState
         base.LogicUpdate();
 
         if (IsExitingState) return;
-        if (rawInputValue != 0) StateMachine.ChangeState(Player.MoveState);
+        if (PlayerData.RawInputValue != 0) StateMachine.ChangeState(Player.MoveState);
         else if (IsAnimationFinished) StateMachine.ChangeState(Player.IdleState);
     }
 

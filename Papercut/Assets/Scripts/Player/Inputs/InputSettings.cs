@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -34,8 +35,9 @@ public class InputSettings : MonoBehaviour
     [SerializeField] private DashLeftInput _dashLeftInput;
 
     private PlayerKeyMap _playerKeyMap; //NEW PLAYER KEY MAP VAR
-    private void Awake() => _playerKeyMap = new PlayerKeyMap(); //INSTANTIATE THE NEW PLAYER KEY MAP VAR
-    
+
+    private void Awake() { _playerKeyMap = new PlayerKeyMap(); } //INSTANTIATE THE NEW PLAYER KEY MAP VAR
+
     private void OnEnable() //ENABLE ACCESS TO PLAYERKEYMAP VAR AND SUBSCRIBE TO EVENT LISTENING
     {
         _playerKeyMap.Enable();
@@ -75,14 +77,11 @@ public class InputSettings : MonoBehaviour
         _playerKeyMap.OnGround.Interaction.started += GetInteractionStarted;
         _playerKeyMap.OnGround.Interaction.performed += GetInteractionPerformed;
         _playerKeyMap.OnGround.Interaction.canceled += GetInteractionCanceled;
-        //DASH RIGHT INPUT
+        //DASH INPUT
         /*_playerKeyMap.OnGround.DashRight.started += GetDashRightStarted;
         _playerKeyMap.OnGround.DashRight.performed += GetDashRightPerformed;
-        _playerKeyMap.OnGround.MoveRight.canceled += GetDashRightCanceled;
-        //DASH LEFT INPUT
-        _playerKeyMap.OnGround.DashLeft.started += GetDashLeftStarted;
-        _playerKeyMap.OnGround.DashLeft.performed += GetDashLeftPerformed;
-        _playerKeyMap.OnGround.MoveLeft.canceled += GetDashLeftCanceled;*/
+        _playerKeyMap.OnGround.MoveRight.canceled += GetDashRightCanceled;*/
+        
     }
     
     private void OnDisable() //DISABLE ACCESS TO PLAYERKEYMAP VAR AND UNSUBSCRIBE TO EVENT LISTENING
@@ -127,11 +126,7 @@ public class InputSettings : MonoBehaviour
         //DASH RIGHT INPUT
         /*_playerKeyMap.OnGround.DashRight.started -= GetDashRightStarted;
         _playerKeyMap.OnGround.DashRight.performed -= GetDashRightPerformed;
-        _playerKeyMap.OnGround.MoveRight.canceled -= GetDashRightCanceled;
-        //DASH LEFT INPUT
-        _playerKeyMap.OnGround.DashLeft.started -= GetDashLeftStarted;
-        _playerKeyMap.OnGround.DashLeft.performed -= GetDashLeftPerformed;
-        _playerKeyMap.OnGround.MoveLeft.canceled -= GetDashLeftCanceled;*/
+        _playerKeyMap.OnGround.MoveRight.canceled -= GetDashRightCanceled;;*/
     }
 
     //GENERIC CONVERTER
@@ -178,11 +173,8 @@ public class InputSettings : MonoBehaviour
     private void GetInteractionStarted(InputAction.CallbackContext context) => _interactionInput.Invoke(FloatToInt(context));
     private void GetInteractionPerformed(InputAction.CallbackContext context) => _interactionInput.Invoke(FloatToInt(context) + 1);
     private void GetInteractionCanceled(InputAction.CallbackContext context) => _interactionInput.Invoke(FloatToInt(context));
-    //DASH RIGHT INPUT ACTION INVOKER
-    /*private void GetDashRightStarted(InputAction.CallbackContext context) => _dashRightInput.Invoke(FloatToInt(context));
-    private void GetDashRightPerformed(InputAction.CallbackContext context) => _dashRightInput.Invoke(FloatToInt(context) + 1);
-    private void GetDashRightCanceled(InputAction.CallbackContext context) => _dashRightInput.Invoke(FloatToInt(context));
-    //DASH LEFT INPUT ACTION INVOKER
+    
+    /*//DASH LEFT INPUT ACTION INVOKER
     private void GetDashLeftStarted(InputAction.CallbackContext context) => _dashLeftInput.Invoke(FloatToInt(context));
     private void GetDashLeftPerformed(InputAction.CallbackContext context) => _dashLeftInput.Invoke(FloatToInt(context) + 1);
     private void GetDashLeftCanceled(InputAction.CallbackContext context) => _dashLeftInput.Invoke(FloatToInt(context));*/

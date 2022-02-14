@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerIdleState : PlayerGroundedState
+public class PlayerIdleState : PlayerState
 {
     public PlayerIdleState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string stateName) : base(player, stateMachine, playerData, stateName)
     {
@@ -18,6 +18,27 @@ public class PlayerIdleState : PlayerGroundedState
     {
         base.LogicUpdate();
         if(IsExitingState) return;
-        if(rawInputValue != 0) StateMachine.ChangeState(Player.MoveState);
+        HandleStateChange();
     }
+    
+    private void HandleStateChange()
+    {
+        if (Player.Grounded)
+        {
+            if (PlayerData.RawInputValue != 0)
+            {
+                StateMachine.ChangeState(Player.MoveState);
+            }
+        }
+        else if (Player.InputHandler.ListenJumpInput() == 2)
+        {
+            StateMachine.ChangeState(Player.JumpState);
+        }
+        else
+        {
+            StateMachine.ChangeState(Player.InAirState);
+        }
+    }
+    
+    
 }

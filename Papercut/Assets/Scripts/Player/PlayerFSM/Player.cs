@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 using UnityEngine;
 
@@ -32,6 +33,10 @@ public class Player : AppliedPhysics
 
     private StringBuilder _debugMessage = new StringBuilder(500);
 
+    public int CurrentDashCount;
+    private float _dashTimerCooldown;
+    
+
     private void Awake()
     {
         Animator = GetComponent<Animator>();
@@ -39,7 +44,18 @@ public class Player : AppliedPhysics
         _rigidbody2D = GetComponentInParent<Rigidbody2D>();
         _facingDirection = 1;
         _canSetVelocity = true;
-        
+
+        InitializeStateMachine();
+    }
+
+    private void InitializeProperties()
+    {
+        CurrentDashCount = _playerData.MaximumDashCount;
+        _dashTimerCooldown = _playerData.DashCooldownTime;
+    }
+
+    private void InitializeStateMachine()
+    {
         StateMachine = new PlayerStateMachine();
 
         IdleState = new PlayerIdleState(this, StateMachine, _playerData, "idle");
@@ -54,11 +70,13 @@ public class Player : AppliedPhysics
         SlideState = new PlayerSlideState(this, StateMachine, _playerData, "slide");
         SoftLandingState = new PlayerSoftLandingState(this, StateMachine, _playerData,"softLand");
         WallGrabState = new PlayerWallGrabState(this, StateMachine, _playerData, "wallGrab");
-        WallJumpState = new PlayerWallJumpState(this, StateMachine, _playerData, "wallJump");
+        WallJumpState = new PlayerWallJumpState(this, StateMachine, _playerData, "wallJump"); 
     }
+    
 
     private void Start()
     {
+        InitializeProperties();
         StateMachine.Initialize(IdleState);
     }
 
@@ -66,14 +84,33 @@ public class Player : AppliedPhysics
     {
         UpdateHitResults();
         ApplyVelocity();
+        TimedIncreaseDashCount();
         StateMachine.CurrentState.LogicUpdate();
         LogDebug();
+        print(CurrentDashCount);
     }
 
     private void FixedUpdate()
     {
         StateMachine.CurrentState.PhysicsUpdate();
     }
+
+    private void TimedIncreaseDashCount()
+    {
+        if (CurrentDashCount < 0) return;
+        if (CurrentDashCount >= _playerData.MaximumDashCount) return;
+
+        _dashTimerCooldown -= Time.deltaTime;
+        if (_dashTimerCooldown < 0)
+        {
+            CurrentDashCount++;
+            _dashTimerCooldown = _playerData.DashCooldownTime;
+        }
+
+    }
+    
+    
+    
 
     private void LogDebug()
     {
