@@ -35,7 +35,8 @@ public class Player : AppliedPhysics
 
     public int CurrentDashCount;
     private float _dashTimerCooldown;
-    
+    private bool _collisionDown;
+
 
     private void Awake()
     {
@@ -85,9 +86,9 @@ public class Player : AppliedPhysics
         UpdateHitResults();
         ApplyVelocity();
         TimedIncreaseDashCount();
+        CalculateJumpBuffer();
         StateMachine.CurrentState.LogicUpdate();
         LogDebug();
-        print(CurrentDashCount);
     }
 
     private void FixedUpdate()
@@ -107,6 +108,20 @@ public class Player : AppliedPhysics
             _dashTimerCooldown = _playerData.DashCooldownTime;
         }
 
+    }
+
+    private void CalculateJumpBuffer()
+    {
+        _playerData.LandingThisFrame = false;
+        var groundedCheck = Grounded;
+        if (_playerData.CollisionDown && !groundedCheck) _playerData._timeLeftGrounded = Time.time; 
+        else if (!_playerData.CollisionDown && groundedCheck)
+        {
+            _playerData._coyoteUsable = true;
+            _playerData.LandingThisFrame = true;
+        }
+
+        _playerData.CollisionDown = groundedCheck;
     }
     
     

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerIdleState : PlayerState
 {
@@ -29,10 +30,10 @@ public class PlayerIdleState : PlayerState
             {
                 StateMachine.ChangeState(Player.MoveState);
             }
-        }
-        else if (Player.InputHandler.ListenJumpInput() == 2)
-        {
-            StateMachine.ChangeState(Player.JumpState);
+            else if (Input.GetKeyDown(KeyCode.Space))
+            {
+                StateMachine.ChangeState(Player.JumpState);
+            }
         }
         else
         {

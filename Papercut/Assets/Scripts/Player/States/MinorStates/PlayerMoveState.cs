@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMoveState : PlayerState
 {
@@ -32,7 +33,11 @@ public class PlayerMoveState : PlayerState
     
     private void HandleStateChange()
     {
-        if (Player.InputHandler.ListenJumpInput() == 2)
+        if (PlayerData._currentVerticalSpeed < 0)
+        {
+            StateMachine.ChangeState(Player.InAirState);
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             StateMachine.ChangeState(Player.JumpState);
         }
@@ -46,7 +51,6 @@ public class PlayerMoveState : PlayerState
             {
                 StateMachine.ChangeState(Player.IdleState);
             }
-            StateMachine.ChangeState(Player.InAirState);
         }
     }
     

@@ -23,7 +23,7 @@ public class PlayerHardLandingState : PlayerState
         
         if (IsExitingState) return;
         if (PlayerData.RawInputValue != 0) StateMachine.ChangeState(Player.MoveState);
-        else if (IsAnimationFinished) StateMachine.ChangeState(Player.IdleState);
+        else /*if (IsAnimationFinished)*/ StateMachine.ChangeState(Player.IdleState);
     }
 
     public override void PhysicsUpdate()
