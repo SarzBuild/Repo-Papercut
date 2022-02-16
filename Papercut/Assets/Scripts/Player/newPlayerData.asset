@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: newPlayerData
   m_EditorClassIdentifier: 
   description: 
-  WalkingSpeed: 6
+  WalkingSpeed: 10
   RunningSpeed: 8
-  CurrentSpeed: 4
+  CurrentSpeed: 10
   RawInputValue: 0
   FacingDirection: 0
   GroundLayerMask:
@@ -44,3 +44,19 @@ MonoBehaviour:
   DashCooldownTime: 2
   LeanRight: {x: 0, y: 0, z: 5}
   LeanLeft: {x: 0, y: 0, z: 355}
+  _fallClamp: -40
+  _minFallSpeed: 80
+  _maxFallSpeed: 120
+  _fallSpeed: 80
+  _jumpHeight: 30
+  _jumpApexThreshold: 10
+  _coyoteTimeThreshold: 0.1
+  _jumpBuffer: 0.1
+  _jumpEndEarlyGravityModifier: 3
+  _coyoteUsable: 1
+  _endedJumpEarly: 0
+  _lastJumpPressed: 0
+  _currentVerticalSpeed: 0
+  _timeLeftGrounded: 48.182484
+  LandingThisFrame: 0
+  CollisionDown: 1

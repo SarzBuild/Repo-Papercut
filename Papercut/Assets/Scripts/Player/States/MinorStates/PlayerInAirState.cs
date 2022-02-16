@@ -24,7 +24,7 @@ public class PlayerInAirState : PlayerState
     {
         base.PhysicsUpdate();
         HandleFall();
-        CalculateGravity();
+        //CalculateGravity();
         CalculateJumpApex();
     }
 
@@ -35,7 +35,11 @@ public class PlayerInAirState : PlayerState
     
     private void HandleStateChange()
     {
-        if (Player.Grounded)
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StateMachine.ChangeState(Player.JumpState);
+        }
+        else if (Player.Grounded)
         {
             if (PlayerData._currentVerticalSpeed <= 100)
             {
@@ -58,10 +62,6 @@ public class PlayerInAirState : PlayerState
                 Player.SetVelocityX(PlayerData.RawInputValue * PlayerData.WalkingSpeed);
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StateMachine.ChangeState(Player.JumpState);
-        }
     }
 
     private void HandleFall()
@@ -70,21 +70,7 @@ public class PlayerInAirState : PlayerState
     }
     
 
-    private void CalculateGravity()
-    {
-        if (PlayerData.CollisionDown)
-        {
-            if (PlayerData._currentVerticalSpeed < 0) PlayerData._currentVerticalSpeed = 0;
-        }
-        else
-        {
-            var fallSpeed = PlayerData._endedJumpEarly && PlayerData._currentVerticalSpeed > 0 ? PlayerData._fallSpeed * PlayerData._jumpEndEarlyGravityModifier : PlayerData._fallSpeed;
-            
-            PlayerData._currentVerticalSpeed -= fallSpeed * Time.fixedDeltaTime;
-            
-            if (PlayerData._currentVerticalSpeed < PlayerData._fallClamp) PlayerData._currentVerticalSpeed = PlayerData._fallClamp;
-        }
-    }
+    
 
     private void CalculateJumpApex()
     {

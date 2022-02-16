@@ -93,6 +93,7 @@ public class Player : AppliedPhysics
 
     private void FixedUpdate()
     {
+        CalculateGravity();
         StateMachine.CurrentState.PhysicsUpdate();
     }
 
@@ -124,7 +125,21 @@ public class Player : AppliedPhysics
         _playerData.CollisionDown = groundedCheck;
     }
     
-    
+    private void CalculateGravity()
+    {
+        if (_playerData.CollisionDown)
+        {
+            if (_playerData._currentVerticalSpeed < 0) _playerData._currentVerticalSpeed = 0;
+        }
+        else
+        {
+            var fallSpeed = _playerData._endedJumpEarly && _playerData._currentVerticalSpeed > 0 ? _playerData._fallSpeed * _playerData._jumpEndEarlyGravityModifier : _playerData._fallSpeed;
+            
+            _playerData._currentVerticalSpeed -= fallSpeed * Time.fixedDeltaTime;
+            
+            if (_playerData._currentVerticalSpeed < _playerData._fallClamp) _playerData._currentVerticalSpeed = _playerData._fallClamp;
+        }
+    }
     
 
     private void LogDebug()

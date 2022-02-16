@@ -33,13 +33,13 @@ public class PlayerMoveState : PlayerState
     
     private void HandleStateChange()
     {
-        if (PlayerData._currentVerticalSpeed < 0)
-        {
-            StateMachine.ChangeState(Player.InAirState);
-        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             StateMachine.ChangeState(Player.JumpState);
+        }
+        else if (PlayerData._currentVerticalSpeed < 0)
+        {
+            StateMachine.ChangeState(Player.InAirState);
         }
         else if (Player.InputHandler.ListenRunInput() == 2 && Player.CurrentDashCount >= 1)
         {
@@ -47,10 +47,32 @@ public class PlayerMoveState : PlayerState
         }
         else
         {
-            if (PlayerData.RawInputValue == 0)
+            if (Player._appliedVelocity == Vector2.zero)
             {
                 StateMachine.ChangeState(Player.IdleState);
             }
+        }
+    }
+
+    private void Movement()
+    {
+        if (PlayerData.RawInputValue != 0)
+        {
+            _currentHorizontalSpeed += Input.X * _acceleration * Time.deltaTime;
+            
+            _currentHorizontalSpeed = Mathf.Clamp(_currentHorizontalSpeed, -_moveClamp, _moveClamp);
+            
+            var apexBonus = Mathf.Sign(Input.X) * _apexBonus * _apexPoint;
+            _currentHorizontalSpeed += apexBonus * Time.deltaTime;
+        }
+        else
+        {
+            _currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, 0, _deAcceleration * Time.deltaTime);
+        }
+
+        if (_currentHorizontalSpeed > 0 && _collisionRight || _currentHorizontalSpeed < 0 && _collisionLeft)
+        {
+            _currentHorizontalSpeed = 0;
         }
     }
     
