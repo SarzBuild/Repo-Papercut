@@ -8,7 +8,7 @@ using UnityEngine;
 
 
 
-public class PlayerTest : MonoBehaviour
+/*public class PlayerTest : MonoBehaviour
 {
     public struct RayRange 
     {
@@ -210,4 +210,4 @@ public class PlayerTest : MonoBehaviour
 
     
     
-}
+}*/

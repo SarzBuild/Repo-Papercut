@@ -66,7 +66,7 @@ public class PlayerInAirState : PlayerState
         if (!PlayerData.CollisionDown)
         {
             PlayerData._apexPoint = Mathf.InverseLerp(PlayerData._jumpApexThreshold, 0, Mathf.Abs(PlayerData.Velocity.y));
-            PlayerData._fallSpeed = Mathf.Lerp(PlayerData._minFallSpeed, PlayerData._maxFallSpeed, PlayerData._apexPoint);
+            PlayerData.CurrentFallSpeed = Mathf.Lerp(PlayerData.MinimumFallSpeed, PlayerData.MaximumFallSpeed, PlayerData._apexPoint);
         }
         else
         {

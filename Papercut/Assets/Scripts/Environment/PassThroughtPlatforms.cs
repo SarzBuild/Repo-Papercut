@@ -5,7 +5,7 @@ public class PassThroughtPlatforms : CheckForObjectCollision
 {
     //I'll remake that stuff here..
     
-    private Collider2D _collider2D;
+    /*private Collider2D _collider2D;
     private PlayerController _playerController;
     [SerializeField] private LayerMask PlayerLayerMask;
     public float ExtraValue;
@@ -46,7 +46,6 @@ public class PassThroughtPlatforms : CheckForObjectCollision
     {
         _collider2D.enabled = false;
     }
-
     private IEnumerator PlayerPassThroughPlatformTimer()
     {
         _coroutineRunning = true;
@@ -59,5 +58,5 @@ public class PassThroughtPlatforms : CheckForObjectCollision
     private bool CheckIfPlayerPassed()
     {
         return transform.position.y > _playerController.HeadPos.position.y;
-    }
+    }*/
 }

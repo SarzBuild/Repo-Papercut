@@ -17,12 +17,12 @@ public class Player : AppliedPhysics
     public PlayerJumpState JumpState { get; private set; }
     public PlayerLedgeClimbState LedgeClimbState { get; private set; }
     public PlayerMoveState MoveState { get; private set; }
-    public PlayerRollState RollState { get; private set; }
     public PlayerRunningState RunningState { get; private set; }
     public PlayerSlideState SlideState { get; private set; }
     public PlayerSoftLandingState SoftLandingState { get; private set; }
     public PlayerWallGrabState WallGrabState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; }
+    
     #endregion
 
     #region Components
@@ -68,12 +68,12 @@ public class Player : AppliedPhysics
         InAirState = new PlayerInAirState(this, StateMachine, _playerData, "inAir");
         JumpState = new PlayerJumpState(this, StateMachine, _playerData, "jump");
         LedgeClimbState = new PlayerLedgeClimbState(this, StateMachine, _playerData, "ledgeClimb");
-        RollState = new PlayerRollState(this, StateMachine, _playerData, "roll");
         RunningState = new PlayerRunningState(this, StateMachine, _playerData, "running");
         SlideState = new PlayerSlideState(this, StateMachine, _playerData, "slide");
         SoftLandingState = new PlayerSoftLandingState(this, StateMachine, _playerData,"softLand");
         WallGrabState = new PlayerWallGrabState(this, StateMachine, _playerData, "wallGrab");
         WallJumpState = new PlayerWallJumpState(this, StateMachine, _playerData, "wallJump"); 
+        
     }
     
 
@@ -99,8 +99,9 @@ public class Player : AppliedPhysics
 
     private void FixedUpdate()
     {
-        _playerData.Velocity = ((Vector2)transform.position - _playerData._lastPosition) / Time.deltaTime;
-        _playerData._lastPosition = transform.position;
+        _playerData.Velocity = ((Vector2)transform.position - _playerData.LastPosition) / Time.deltaTime;
+        _playerData.LastPosition = transform.position;
+        
         StateMachine.CurrentState.PhysicsUpdate();
         CalculateGravity();
     }
@@ -145,11 +146,11 @@ public class Player : AppliedPhysics
     {
         if(!_playerData.CollisionDown)
         {
-            var fallSpeed = _playerData._endedJumpEarly && _playerData._currentVerticalSpeed > 0 ? _playerData._fallSpeed * _playerData._jumpEndEarlyGravityModifier : _playerData._fallSpeed;
+            var fallSpeed = _playerData._endedJumpEarly && _playerData._currentVerticalSpeed > 0 ? _playerData.CurrentFallSpeed * _playerData._jumpEndEarlyGravityModifier : _playerData.CurrentFallSpeed;
             
             _playerData._currentVerticalSpeed -= fallSpeed * Time.fixedDeltaTime;
             
-            if (_playerData._currentVerticalSpeed < _playerData._fallClamp) _playerData._currentVerticalSpeed = _playerData._fallClamp;
+            if (_playerData._currentVerticalSpeed < _playerData.FallClamped) _playerData._currentVerticalSpeed = _playerData.FallClamped;
         }
     }
 
@@ -157,16 +158,16 @@ public class Player : AppliedPhysics
     {
         if (_playerData.RawInputValue != 0)
         {
-            _playerData._currentHorizontalSpeed += _playerData.RawInputValue * _playerData._acceleration * Time.deltaTime;
+            _playerData._currentHorizontalSpeed += _playerData.RawInputValue * _playerData.Acceleration * Time.deltaTime;
             
-            _playerData._currentHorizontalSpeed = Mathf.Clamp(_playerData._currentHorizontalSpeed, -_playerData._moveClamp, _playerData._moveClamp);
+            _playerData._currentHorizontalSpeed = Mathf.Clamp(_playerData._currentHorizontalSpeed, -_playerData.MoveClamped, _playerData.MoveClamped);
             
-            var apexBonus = Mathf.Sign(_playerData.RawInputValue) * _playerData._apexBonus * _playerData._apexPoint;
+            var apexBonus = Mathf.Sign(_playerData.RawInputValue) * _playerData.JumpApexBonus * _playerData._apexPoint;
             _playerData._currentHorizontalSpeed += apexBonus * Time.deltaTime;
         }
         else
         {
-            _playerData._currentHorizontalSpeed = Mathf.MoveTowards(_playerData._currentHorizontalSpeed, 0, _playerData._deAcceleration * Time.deltaTime);
+            _playerData._currentHorizontalSpeed = Mathf.MoveTowards(_playerData._currentHorizontalSpeed, 0, _playerData.Deceleration * Time.deltaTime);
         }
     }
 

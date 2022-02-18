@@ -21,7 +21,7 @@ public class PlayerJumpState : PlayerState
     private bool CanUseCoyote => PlayerData._coyoteUsable && !PlayerData.CollisionDown && PlayerData._timeLeftGrounded + PlayerData._coyoteTimeThreshold > Time.time;
     private bool HasBufferedJump => PlayerData.CollisionDown && PlayerData._lastJumpPressed + PlayerData._jumpBuffer > Time.time;
     private bool CanJump => PlayerData.CurrentJumpCount > 0;
-    private bool TimeIsRight => TimeSinceLastJump + PlayerData.TimeBetweenDoubleJump > Time.time;
+    private bool TimeIsRight => TimeSinceLastJump + PlayerData.TimeBetweenDoubleJump < Time.time;
 
     private void CalculateJump()
     {

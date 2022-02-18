@@ -5,7 +5,7 @@ using UnityEngine.SocialPlatforms;
 
 public class PlayerController : AppliedPhysics
 {
-    //TODO (JT) Add floaty air control
+    /*//TODO (JT) Add floaty air control
     //TODO (JT) Add run and slide mechanics
     
     
@@ -164,7 +164,7 @@ public class PlayerController : AppliedPhysics
         _resetJumpCoroutine = false;
     }*/
     
-    private void DecreaseJumpSpeed()
+    /*private void DecreaseJumpSpeed()
     {
         if (!_resetJumpCoroutine) return;
         if (JumpingSpeed >= _jumpingSpeedLowThreshold) JumpingSpeed -= Time.fixedDeltaTime * 0.5f;

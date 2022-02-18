@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.ProBuilder.MeshOperations;
 
-enum PlayState
+/*enum PlayState
 {
     IDLE,
     WALK,
@@ -201,7 +201,7 @@ public class nPlayerController : MonoBehaviour
         {
             lastInputRightValue = _playerInputState.ListenRightInput();
             lastInputLeftValue = _playerInputState.ListenLeftInput();
-        }*/
+        }
     }
 
     private void HandleDash()
@@ -248,7 +248,7 @@ public class nPlayerController : MonoBehaviour
 
 
 
-    /*private IEnumerator Dashing()
+    private IEnumerator Dashing()
     {
         float dashAccel;
         dashAccel = _playerData.DashingAcceleration;
@@ -263,7 +263,7 @@ public class nPlayerController : MonoBehaviour
         }
         _dashTimer = 0f;
         _currentlyDashing = false;
-    } */
+    } 
 
     #endregion
 
@@ -290,7 +290,7 @@ public class nPlayerController : MonoBehaviour
 
     //#region Visual Bonuses
     
-    /*private void CheckFlip(int inputValue)
+    private void CheckFlip(int inputValue)
     {
         if (_playerData.RawInputValue != 0)
         {
@@ -299,7 +299,7 @@ public class nPlayerController : MonoBehaviour
             _currentHorizontalSpeed += _playerData.RawInputValue * _playerData.CurrentSpeed * Time
             
         }
-    }*/
+    }
 
     private void CalculateGravity()
     {
@@ -397,10 +397,10 @@ public class nPlayerController : MonoBehaviour
 
     private IEnumerator JumpCoroutine()
     {
-        /*var jumpInputStartTime = Time.time;
+        var jumpInputStartTime = Time.time;
         //https://youtu.be/dOiOp3DLxZQ?t=2609
         //TODO ADD DIFFERENT JUMP VALUE WITH TRACKING HOW MUCH TIME THE INPUT HAS BEEN PRESSED INSTEAD OF RELYING ON THE INPUT ITSELF
-        if(Time.time >= jumpInputStartTime + 0.2f)*/
+        if(Time.time >= jumpInputStartTime + 0.2f)
         
         
         JumpAndFallVelocity = 0f;
@@ -510,7 +510,7 @@ public class nPlayerController : MonoBehaviour
     
     
     
-    /*private void CheckForInteractionObject()
+    private void CheckForInteractionObject()
     {
         var successfulHit = false;
         if (!(0 > Input.mousePosition.x || 0 > Input.mousePosition.y || Screen.width < Input.mousePosition.x ||
@@ -561,8 +561,8 @@ public class nPlayerController : MonoBehaviour
                 }
                 break;
         }
-    }*/
+    }
 
     
 
-}
+}*/
