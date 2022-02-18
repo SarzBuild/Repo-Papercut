@@ -39,5 +39,8 @@ MonoBehaviour:
   SlopeSlideSpeed: 2
   DashingAcceleration: 35
   _wallCheckDistance: 0
+  DashingTime: 0.1
+  MaximumDashCount: 1
+  DashCooldownTime: 2
   LeanRight: {x: 0, y: 0, z: 5}
   LeanLeft: {x: 0, y: 0, z: 355}

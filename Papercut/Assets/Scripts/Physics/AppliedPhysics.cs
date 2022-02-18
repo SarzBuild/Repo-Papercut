@@ -28,6 +28,12 @@ public class AppliedPhysics : MonoBehaviour
         SetFinalVelocity();
     }
 
+    public void SetVelocityXWithYZero(float velocity)
+    {
+        _appliedVelocity = new Vector2(velocity, 0);
+        SetFinalVelocity();
+    }
+
     public void SetVelocity(float velocity, Vector2 angle, int direction)
     {
         angle.Normalize();
@@ -74,15 +80,38 @@ public class AppliedPhysics : MonoBehaviour
         _rigidbody2D.transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 
-    public bool Ceiling => Physics2D.OverlapCircle(_ceilingCheck.position, _groundCheckRadius, _groundLayerMask);
+    public void UpdateHitResults()
+    {
+        UpdateCeilingHit();
+        UpdateGrounded();
+        UpdateWallFrontHit();
+        UpdateWallBackHit();
+        UpdateLedgeHorizontalHit();
+        UpdateLedgeVerticalHit();
+    }
 
-    public bool Ground => Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayerMask);
+    // TODO Also cache the results of hit collider
+    public bool CeilingHit { get { return CeilingHitResult; } }
+    public Collider2D CeilingHitResult { get; private set; }
+    public void UpdateCeilingHit() { CeilingHitResult = Physics2D.OverlapCircle(_ceilingCheck.position, _groundCheckRadius, _groundLayerMask); }
 
-    public bool WallFront => Physics2D.Raycast(_wallCheck.position, Vector2.right * _facingDirection, _wallCheckDistance, _groundLayerMask);
+    public bool Grounded { get { return GroundedResult; } }
+    public Collider2D GroundedResult { get; private set; }
+    public void UpdateGrounded() { GroundedResult = Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayerMask); }
 
-    public bool LedgeHorizontal => Physics2D.Raycast(_ledgeCheckHorizontal.position, Vector2.right * _facingDirection, _wallCheckDistance, _groundLayerMask);
+    public bool WallFrontHit { get { return WallFrontHitResult; } }
+    public RaycastHit2D WallFrontHitResult { get; private set; }
+    public void UpdateWallFrontHit() { WallFrontHitResult = Physics2D.Raycast(_wallCheck.position, Vector2.right * _facingDirection, _wallCheckDistance, _groundLayerMask); }
 
-    public bool LedgeVertical => Physics2D.Raycast(_ledgeCheckVertical.position, Vector2.down, _wallCheckDistance, _groundLayerMask);
+    public bool WallBackHit { get { return WallBackHitResult; } }
+    public RaycastHit2D WallBackHitResult { get; private set; }
+    public void UpdateWallBackHit() { WallBackHitResult = Physics2D.Raycast(_wallCheck.position, Vector2.right * -_facingDirection, _wallCheckDistance, _groundLayerMask); }
 
-    public bool WallBack => Physics2D.Raycast(_wallCheck.position, Vector2.right * -_facingDirection, _wallCheckDistance, _groundLayerMask);
+    public bool LedgeHorizontalHit { get { return LedgeHorizontalHitResult; } }
+    public RaycastHit2D LedgeHorizontalHitResult { get; private set; }
+    public void UpdateLedgeHorizontalHit() { LedgeHorizontalHitResult = Physics2D.Raycast(_ledgeCheckHorizontal.position, Vector2.right * _facingDirection, _wallCheckDistance, _groundLayerMask); }
+
+    public bool LedgeVerticalHit { get; private set; }
+    public RaycastHit2D LedgeVerticleHitResult { get; private set; }
+    public void UpdateLedgeVerticalHit() { LedgeVerticalHit = Physics2D.Raycast(_ledgeCheckVertical.position, Vector2.down, _wallCheckDistance, _groundLayerMask); }
 }

@@ -1,3 +1,4 @@
+using System.Text;
 using UnityEngine;
 
 public class PlayerInputState : MonoBehaviour
@@ -48,6 +49,16 @@ public class PlayerInputState : MonoBehaviour
 
 
 
-
+    public void AppendDebugMessage(ref StringBuilder builder)
+    {
+        builder.AppendFormat("LockPlayer [{0}] LockMouse [{1}] | R [{2}] | L [{3}] | Jump [{4}] | Down [{5}] | Roll [{6}] | Run [{7}] | MouseR [{8}] | MouseL [{9}] | Interact [{10}] | DashR [{11}] | DashL [{12}]",
+            LockPlayer, LockMouse,
+            _rightInputState, _leftInputState,
+            _jumpInputState, _downInputState,
+            _rollInputState, _runInputState,
+            _rMouseInputState, _lMouseInputState,
+            _interactionInputState,
+            _DashRightInputState, _DashLeftInputState);
+    }
 
 }

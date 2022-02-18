@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoveState : PlayerGroundedState
+public class PlayerMoveState : PlayerState
 {
     public PlayerMoveState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string stateName) : base(player, stateMachine, playerData, stateName)
     {
@@ -18,20 +18,44 @@ public class PlayerMoveState : PlayerGroundedState
         base.ExitState();
     }
 
-    /*public override void LogicUpdate()
+    public override void LogicUpdate()
     {
         base.LogicUpdate();
-        Player.CheckFlip((int)rawInputValue);
-        PlayerData.CurrentSpeed = PlayerData.WalkSpeed;
-        Player.SetVelocityX(rawInputValue * PlayerData.CurrentSpeed);
+        
+        Player.CheckFlip((int)PlayerData.RawInputValue);
 
         if (IsExitingState) return;
-        if(rawInputValue == 0) StateMachine.ChangeState(Player.IdleState);
-    }*/
+        HandleStateChange();
+    }
+    
+    private void HandleStateChange()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StateMachine.ChangeState(Player.JumpState);
+        }
+        else if (PlayerData._currentVerticalSpeed < 0)
+        {
+            StateMachine.ChangeState(Player.InAirState);
+        }
+        else if (Player.InputHandler.ListenRunInput() == 2 && Player.CurrentDashCount >= 1)
+        {
+            StateMachine.ChangeState(Player.DashState);
+        }
+        else
+        {
+            if (Player._appliedVelocity == Vector2.zero)
+            {
+                StateMachine.ChangeState(Player.IdleState);
+            }
+        }
+    }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+        Player.MovementClampedAndApex();
+        Player.UpdateVelocity();
     }
 
     public override void DoChecks()

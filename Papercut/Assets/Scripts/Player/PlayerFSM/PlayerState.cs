@@ -12,11 +12,10 @@ public class PlayerState
     protected bool IsExitingState;
     
     protected float StartTime;
-    
+
+    public string StateName { get { return _stateName; } }
     private string _stateName;
-
-    protected float rawInputValue;
-
+    
     public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string stateName)
     {
         this.Player = player;
@@ -42,8 +41,7 @@ public class PlayerState
 
     public virtual void LogicUpdate()
     {
-        Debug.Log(_stateName);
-        rawInputValue = Mathf.Clamp(-Player.InputHandler.ListenLeftInput() + Player.InputHandler.ListenRightInput(),-1f,1f);
+        PlayerData.RawInputValue = Mathf.Clamp(-Player.InputHandler.ListenLeftInput() + Player.InputHandler.ListenRightInput(),-1f,1f);
     }
 
     public virtual void PhysicsUpdate()

@@ -4,70 +4,86 @@ using UnityEngine;
 
 public class PlayerInAirState : PlayerState
 {
-    protected float downInputValue;
-    protected float upInputValue;
-    protected float velocityY;
-    
     public PlayerInAirState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string stateName) : base(player, stateMachine, playerData, stateName)
     {
     }
 
-    /*public override void LogicUpdate()
+    public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-        HandleFall();
+        if(IsExitingState) return;
         HandleStateChange();
+        GravityLimiter();
+        CalculateJumpApex();
+
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+        Player.MovementClampedAndApex();
+        Player.UpdateVelocity();
     }
 
     public override void ExitState()
     {
         base.ExitState();
-        velocityY = 0f;
     }
     
     private void HandleStateChange()
     {
-        if(Player.Ground && rawInputValue < 0.01f && velocityY <= 100) StateMachine.ChangeState(Player.SoftLandingState);
-        else if(Player.Ground && rawInputValue < 0.01f) StateMachine.ChangeState(Player.HardLandingState);
-        else if(Player.InputHandler.ListenJumpInput() == 2) StateMachine.ChangeState(Player.JumpState);
-        else
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            Player.CheckFlip((int)rawInputValue);
-            //Debug.Log(HandleMovementInAir());
-            Player.SetVelocityX(HandleMovementInAir() * PlayerData.CurrentSpeed);
+            StateMachine.ChangeState(Player.JumpState);
         }
-    }
-
-    private void HandleFall()
-    {
-        if (!PlayerData.AffectedByGravity) return;
-        velocityY += PlayerData.Gravity * (PlayerData.WalkSpeed / 2) * Time.deltaTime;
-        Player.SetVelocityY(velocityY);
+        else if (Player.Grounded)
+        {
+            if (PlayerData._currentVerticalSpeed <= 100)
+            {
+                StateMachine.ChangeState(Player.SoftLandingState);
+            }
+            else
+            {
+                StateMachine.ChangeState(Player.HardLandingState);
+            }
+        }
+        else if (PlayerData.RawInputValue != 0)
+        {
+            if (Player.InputHandler.ListenRunInput() == 2 && Player.CurrentDashCount >= 1)
+            {
+                StateMachine.ChangeState(Player.DashState);
+            }
+            else
+            {
+                Player.CheckFlip((int)PlayerData.RawInputValue);
+                Player.SetVelocityX(PlayerData.RawInputValue * PlayerData.WalkingSpeed);
+            }
+        }
     }
     
-    private float HandleRightAirMovement()
+    private void CalculateJumpApex()
     {
-        if (rawInputValue == 1)
+        if (!PlayerData.CollisionDown)
         {
-            PlayerData._rightInputValue = Mathf.Clamp01(PlayerData._rightInputValue * 1.33f + PlayerData._airSensibility * Time.deltaTime);
-            return PlayerData._rightInputValue;
+            PlayerData._apexPoint = Mathf.InverseLerp(PlayerData._jumpApexThreshold, 0, Mathf.Abs(PlayerData.Velocity.y));
+            PlayerData.CurrentFallSpeed = Mathf.Lerp(PlayerData.MinimumFallSpeed, PlayerData.MaximumFallSpeed, PlayerData._apexPoint);
         }
-        PlayerData._rightInputValue = Mathf.Clamp((Mathf.Abs(PlayerData._rightInputValue) - PlayerData._airSensibility * Time.fixedDeltaTime) * Mathf.Sign(PlayerData._rightInputValue), 0.1f, 1f);
-        return PlayerData._rightInputValue;
-        
+        else
+        {
+            PlayerData._apexPoint = 0;
+        }
     }
-
-    private float HandleLeftAirMovement()
+    
+    private void GravityLimiter()
     {
-        if (rawInputValue == -1)
+        if (!PlayerData.CollisionDown && Input.GetKeyUp(KeyCode.Space) && !PlayerData._endedJumpEarly && Player._appliedVelocity.y > 0)
         {
-            PlayerData._leftInputValue = Mathf.Clamp01(PlayerData._leftInputValue * 1.33f + PlayerData._airSensibility * Time.deltaTime);
-            return -PlayerData._leftInputValue;
+            PlayerData._endedJumpEarly = true;
         }
-        PlayerData._leftInputValue = Mathf.Clamp((Mathf.Abs(PlayerData._leftInputValue) -PlayerData. _airSensibility * Time.fixedDeltaTime) * Mathf.Sign(PlayerData._leftInputValue),0.1f,1f);
-        return -PlayerData._leftInputValue;
-    }
 
-    private float HandleMovementInAir() => HandleRightAirMovement() + HandleLeftAirMovement();
-*/}
+        if (Player.CeilingHit)
+        {
+            if (PlayerData._currentVerticalSpeed > 0) PlayerData._currentVerticalSpeed = 0;
+        }
+    }
+}

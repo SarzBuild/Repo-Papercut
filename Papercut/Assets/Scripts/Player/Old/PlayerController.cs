@@ -5,7 +5,7 @@ using UnityEngine.SocialPlatforms;
 
 public class PlayerController : AppliedPhysics
 {
-    //TODO (JT) Add floaty air control
+    /*//TODO (JT) Add floaty air control
     //TODO (JT) Add run and slide mechanics
     
     
@@ -94,13 +94,13 @@ public class PlayerController : AppliedPhysics
 
     private void HandleMovementInputOnGround()
     {
-        if (!Ground || _resetJumpCoroutine) return;
+        if (!Grounded || _resetJumpCoroutine) return;
         movementX = _rawInputValue;
     }
     
     private void HandleMovementInputInAir()
     {
-        if (Ground || !_resetJumpCoroutine) return;
+        if (Grounded || !_resetJumpCoroutine) return;
         _moveDirection = new Vector2(HandleRightAirMovement() + HandleLeftAirMovement(),0f);
     }
     
@@ -137,7 +137,7 @@ public class PlayerController : AppliedPhysics
 
     private void HandleJump()
     {
-        if (!Ground || !(_jumpAndFallVelocity < 0.02)) return;
+        if (!Grounded || !(_jumpAndFallVelocity < 0.02)) return;
         //if(Ground) ResetAirMovementVar();
         //_resetJump = StartCoroutine(SetJumpSpeedCoroutine());
         _currentlyJump = StartCoroutine(HandleJumping());
@@ -164,7 +164,7 @@ public class PlayerController : AppliedPhysics
         _resetJumpCoroutine = false;
     }*/
     
-    private void DecreaseJumpSpeed()
+    /*private void DecreaseJumpSpeed()
     {
         if (!_resetJumpCoroutine) return;
         if (JumpingSpeed >= _jumpingSpeedLowThreshold) JumpingSpeed -= Time.fixedDeltaTime * 0.5f;
@@ -173,8 +173,8 @@ public class PlayerController : AppliedPhysics
 
     private void HandleFall()
     {
-        if(Ceiling) ResetJumpVariablesAndCoroutine();
-        switch (Ground)
+        if(CeilingHit) ResetJumpVariablesAndCoroutine();
+        switch (Grounded)
         {
             case false:
                 _jumpAndFallVelocity += (Gravity * WalkSpeed / 2) * Time.deltaTime;

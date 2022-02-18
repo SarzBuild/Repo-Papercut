@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHardLandingState : PlayerGroundedState
+public class PlayerHardLandingState : PlayerState
 {
     public PlayerHardLandingState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string stateName) : base(player, stateMachine, playerData, stateName)
     {
@@ -22,8 +22,8 @@ public class PlayerHardLandingState : PlayerGroundedState
         base.LogicUpdate();
         
         if (IsExitingState) return;
-        if (rawInputValue != 0) StateMachine.ChangeState(Player.MoveState);
-        else if (IsAnimationFinished) StateMachine.ChangeState(Player.IdleState);
+        if (PlayerData.RawInputValue != 0) StateMachine.ChangeState(Player.MoveState);
+        else /*if (IsAnimationFinished)*/ StateMachine.ChangeState(Player.IdleState);
     }
 
     public override void PhysicsUpdate()

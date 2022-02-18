@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSoftLandingState : PlayerGroundedState
+public class PlayerSoftLandingState : PlayerState
 {
     public PlayerSoftLandingState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string stateName) : base(player, stateMachine, playerData, stateName)
     {
@@ -10,6 +10,8 @@ public class PlayerSoftLandingState : PlayerGroundedState
     public override void EnterState()
     {
         base.EnterState();
+        if (Player._appliedVelocity != Vector2.zero) StateMachine.ChangeState(Player.MoveState);
+        else /*if (IsAnimationFinished)*/ StateMachine.ChangeState(Player.IdleState);
     }
 
     public override void ExitState()
@@ -20,10 +22,6 @@ public class PlayerSoftLandingState : PlayerGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-        if (IsExitingState) return;
-        if (rawInputValue != 0) StateMachine.ChangeState(Player.MoveState);
-        else if (IsAnimationFinished) StateMachine.ChangeState(Player.IdleState);
     }
 
     public override void PhysicsUpdate()

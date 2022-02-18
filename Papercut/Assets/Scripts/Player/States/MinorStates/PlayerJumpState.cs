@@ -2,57 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerJumpState : PlayerAbilitiesState
+public class PlayerJumpState : PlayerState
 {
-    private int _jumpAmount;
-    private float _jumpTimer;
+    public bool JumpingThisFrame;
+    public float TimeSinceLastJump;
+
     public PlayerJumpState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string stateName) : base(player, stateMachine, playerData, stateName)
     {
     }
-    /*public override void EnterState()
+    
+    public override void EnterState()
     {
         base.EnterState();
-        IsAbilityDone = true;
-        PlayerData.AffectedByGravity = false;
-        DecreaseJumpAmount();
-        SetJumpSpeed();
+        CalculateJump();
+        StateMachine.ChangeState(Player.InAirState);
+    }
+
+    private bool CanUseCoyote => PlayerData._coyoteUsable && !PlayerData.CollisionDown && PlayerData._timeLeftGrounded + PlayerData._coyoteTimeThreshold > Time.time;
+    private bool HasBufferedJump => PlayerData.CollisionDown && PlayerData._lastJumpPressed + PlayerData._jumpBuffer > Time.time;
+    private bool CanJump => PlayerData.CurrentJumpCount > 0;
+    private bool TimeIsRight => TimeSinceLastJump + PlayerData.TimeBetweenDoubleJump < Time.time;
+
+    private void CalculateJump()
+    {
+        if ((CanJump && TimeIsRight && !Player.Grounded) || CanUseCoyote || HasBufferedJump)
+        {
+            PlayerData._currentVerticalSpeed = PlayerData._jumpHeight;
+            Player.SetVelocityY(PlayerData._currentVerticalSpeed);
+            PlayerData._endedJumpEarly = false;
+            PlayerData._coyoteUsable = false;
+            PlayerData._timeLeftGrounded = float.MinValue;
+            PlayerData.CurrentJumpCount--;
+            JumpingThisFrame = true;
+            TimeSinceLastJump = Time.time;
+        }
+        else
+        {
+            JumpingThisFrame = false;
+        }
         
     }
-    public override void LogicUpdate()
-    {
-        base.LogicUpdate();
-        
-        HandleJump();
-        DecreaseJumpSpeed();
-    }
+}
 
-    public override void ExitState()
-    {
-        base.ExitState();
-        PlayerData.AffectedByGravity = true;
-        _jumpTimer = 0f;
-        PlayerData._jumpAndFallVelocity = 0f;
-    }
-
-    private void HandleJump()
-    {
-        if ((!(_jumpTimer < PlayerData._jumpingHeightMinimumLimit) || Player.InputHandler.ListenJumpInput() != 2) && !(_jumpTimer > PlayerData._jumpingHeightMaximumLimit)) return;
-        _jumpTimer += Time.fixedDeltaTime;
-        PlayerData._jumpAndFallVelocity += (PlayerData.CurrentSpeed * PlayerData.JumpForce) * PlayerData._jumpingForceDeminisher;
-        Player.SetVelocityY(PlayerData._jumpAndFallVelocity);
-    }
-
-    private void SetJumpSpeed() => PlayerData.JumpingSpeed = PlayerData._jumpingSpeedMaxThreshold;
-    
-    private void DecreaseJumpSpeed()
-    {
-        if (PlayerData.JumpingSpeed >= PlayerData._jumpingSpeedLowThreshold) PlayerData.JumpingSpeed -= Time.fixedDeltaTime * 0.5f;
-        else PlayerData.JumpingSpeed = PlayerData._jumpingSpeedLowThreshold;
-    }
-
-    public bool CanJump() => _jumpAmount > 0;
-
-    public void SetAmountOfJump() => _jumpAmount = PlayerData.JumpAmountTotal;
-    public void DecreaseJumpAmount() => _jumpAmount--;
-    
-*/}
+//TODO Fix Buffer jump with reseting the jump amount when the character buffers
