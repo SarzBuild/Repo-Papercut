@@ -1,13 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerInAirState : PlayerState
 {
-    protected float velocityY;
-    private float _apexPoint;
-    
     public PlayerInAirState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string stateName) : base(player, stateMachine, playerData, stateName)
     {
     }
@@ -18,14 +14,15 @@ public class PlayerInAirState : PlayerState
         if(IsExitingState) return;
         HandleStateChange();
         GravityLimiter();
+        CalculateJumpApex();
+
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        HandleFall();
-        //CalculateGravity();
-        CalculateJumpApex();
+        Player.MovementClampedAndApex();
+        Player.UpdateVelocity();
     }
 
     public override void ExitState()
@@ -63,25 +60,17 @@ public class PlayerInAirState : PlayerState
             }
         }
     }
-
-    private void HandleFall()
-    {
-        Player.SetVelocityY(PlayerData._currentVerticalSpeed);
-    }
     
-
-    
-
     private void CalculateJumpApex()
     {
         if (!PlayerData.CollisionDown)
         {
-            _apexPoint = Mathf.InverseLerp(PlayerData._jumpApexThreshold, 0, Mathf.Abs(Player._appliedVelocity.y));
-            PlayerData._fallSpeed = Mathf.Lerp(PlayerData._minFallSpeed, PlayerData._maxFallSpeed, _apexPoint);
+            PlayerData._apexPoint = Mathf.InverseLerp(PlayerData._jumpApexThreshold, 0, Mathf.Abs(PlayerData.Velocity.y));
+            PlayerData._fallSpeed = Mathf.Lerp(PlayerData._minFallSpeed, PlayerData._maxFallSpeed, PlayerData._apexPoint);
         }
         else
         {
-            _apexPoint = 0;
+            PlayerData._apexPoint = 0;
         }
     }
     

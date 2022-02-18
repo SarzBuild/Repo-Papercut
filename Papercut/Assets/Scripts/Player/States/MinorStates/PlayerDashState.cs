@@ -43,12 +43,6 @@ public class PlayerDashState : PlayerState
         if(!DashCondition) { HandleDashing(); }
     }
 
-    public override void DoChecks()
-    {
-        base.DoChecks();
-    }
-    
-    
     private void HandleStateChange()
     {
         if (!DashCondition) return;

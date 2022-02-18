@@ -46,11 +46,7 @@ public class PlayerData : ScriptableObject
     [SerializeField] public float DashCooldownTime = 2f;
 
     [Header("Character Leaning")]
-    [SerializeField] public Vector3 LeanRight = new Vector3(0f, 0f, 5f);
-    [SerializeField] public Vector3 LeanLeft = new Vector3(0f, 0f, 355f);
-    
 
-    
     [SerializeField] public float _fallClamp = -40f;
     [SerializeField] public float _minFallSpeed = 80f;
     [SerializeField] public float _maxFallSpeed = 120f;
@@ -63,16 +59,28 @@ public class PlayerData : ScriptableObject
     [SerializeField] public float _jumpEndEarlyGravityModifier = 3;
     public bool _coyoteUsable;
     public bool _endedJumpEarly = true;
-    //public float _apexPoint; 
+    public float _apexPoint; 
     public float _lastJumpPressed;
     
-    public float _currentVerticalSpeed;
+    public float _currentHorizontalSpeed, _currentVerticalSpeed;
     
     public float _timeLeftGrounded;
 
     public bool LandingThisFrame;
 
     public bool CollisionDown;
+    
+    [SerializeField] public float _acceleration = 90;
+    [SerializeField] public float _moveClamp = 13;
+    [SerializeField] public float _deAcceleration = 60f;
+    [SerializeField] public float _apexBonus = 2;
 
+    public Vector2 Velocity;
+    public Vector2 _lastPosition;
 
+    public bool CanJump;
+    public bool TimeIsRight;
+    public int MaximumJumpCount;
+    public int CurrentJumpCount;
+    public float TimeBetweenDoubleJump = 0.25f;
 }

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerMoveState : PlayerState
 {
@@ -24,8 +23,6 @@ public class PlayerMoveState : PlayerState
         base.LogicUpdate();
         
         Player.CheckFlip((int)PlayerData.RawInputValue);
-        //PlayerData.CurrentSpeed = PlayerData.WalkSpeed;
-        Player.SetVelocityX(PlayerData.RawInputValue * PlayerData.WalkingSpeed);
 
         if (IsExitingState) return;
         HandleStateChange();
@@ -54,32 +51,11 @@ public class PlayerMoveState : PlayerState
         }
     }
 
-    private void Movement()
-    {
-        if (PlayerData.RawInputValue != 0)
-        {
-            _currentHorizontalSpeed += Input.X * _acceleration * Time.deltaTime;
-            
-            _currentHorizontalSpeed = Mathf.Clamp(_currentHorizontalSpeed, -_moveClamp, _moveClamp);
-            
-            var apexBonus = Mathf.Sign(Input.X) * _apexBonus * _apexPoint;
-            _currentHorizontalSpeed += apexBonus * Time.deltaTime;
-        }
-        else
-        {
-            _currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, 0, _deAcceleration * Time.deltaTime);
-        }
-
-        if (_currentHorizontalSpeed > 0 && _collisionRight || _currentHorizontalSpeed < 0 && _collisionLeft)
-        {
-            _currentHorizontalSpeed = 0;
-        }
-    }
-    
-
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+        Player.MovementClampedAndApex();
+        Player.UpdateVelocity();
     }
 
     public override void DoChecks()

@@ -37,26 +37,37 @@ MonoBehaviour:
   AntiBumpSlopeRatio: 0
   SlopeLimit: 0
   SlopeSlideSpeed: 0
-  DashingAcceleration: 12
+  DashingAcceleration: 7
   _wallCheckDistance: 0
   DashingTime: 0.15
   MaximumDashCount: 1
   DashCooldownTime: 2
-  LeanRight: {x: 0, y: 0, z: 5}
-  LeanLeft: {x: 0, y: 0, z: 355}
   _fallClamp: -40
   _minFallSpeed: 80
   _maxFallSpeed: 120
-  _fallSpeed: 80
+  _fallSpeed: 84.92552
   _jumpHeight: 30
-  _jumpApexThreshold: 10
+  _jumpApexThreshold: 45.62
   _coyoteTimeThreshold: 0.1
   _jumpBuffer: 0.1
   _jumpEndEarlyGravityModifier: 3
-  _coyoteUsable: 1
+  _coyoteUsable: 0
   _endedJumpEarly: 0
-  _lastJumpPressed: 0
-  _currentVerticalSpeed: 0
-  _timeLeftGrounded: 48.182484
+  _apexPoint: 0.12313805
+  _lastJumpPressed: 34.028847
+  _currentHorizontalSpeed: 0
+  _currentVerticalSpeed: -40
+  _timeLeftGrounded: 24.92205
   LandingThisFrame: 0
-  CollisionDown: 1
+  CollisionDown: 0
+  _acceleration: 90
+  _moveClamp: 13
+  _deAcceleration: 60
+  _apexBonus: 115.23
+  Velocity: {x: 0, y: -40.00244}
+  _lastPosition: {x: -104.95241, y: -1217.8234}
+  CanJump: 0
+  TimeIsRight: 0
+  MaximumJumpCount: 2
+  CurrentJumpCount: 1
+  TimeBetweenDoubleJump: 0.5

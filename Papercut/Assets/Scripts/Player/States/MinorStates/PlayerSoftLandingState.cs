@@ -10,6 +10,8 @@ public class PlayerSoftLandingState : PlayerState
     public override void EnterState()
     {
         base.EnterState();
+        if (Player._appliedVelocity != Vector2.zero) StateMachine.ChangeState(Player.MoveState);
+        else /*if (IsAnimationFinished)*/ StateMachine.ChangeState(Player.IdleState);
     }
 
     public override void ExitState()
@@ -20,10 +22,6 @@ public class PlayerSoftLandingState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-        if (IsExitingState) return;
-        if (PlayerData.RawInputValue != 0) StateMachine.ChangeState(Player.MoveState);
-        else /*if (IsAnimationFinished)*/ StateMachine.ChangeState(Player.IdleState);
     }
 
     public override void PhysicsUpdate()
