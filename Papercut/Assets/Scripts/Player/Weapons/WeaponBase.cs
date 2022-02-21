@@ -1,8 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+/// <summary>
+/// Weapon base class. The idea is to create a derived weapon class for your type of weapon, ie a sword or a gun.
+/// By default, there are Settings scriptable object in <see cref="WeaponData"/> that this class taps into for functionality.
+/// Every weapon should have an "Owner", being the player. When the weapon is given to a player, it is owned by that player gameobject.
+/// This sets the weapon as a child of the Player owner gameobject in the transform heirarchy meaning it will follow the player around in the 'socket'
+/// of the <see cref="Player.WeaponHoldPosition"/> property.
+/// Firing is implemented functionally along with cooldowns and ammo, but the actual projectiles or 
+/// damage from the weapon is up to the derived class to implement. <see cref="FireImplementation"/>
+/// Callbacks for most events are present too. Animations/Sounds will trigger automatically if an Animator/SoundSource is present, but they're optional.
+/// Everything can be overridden by the derived class for extra functionality or to ignore the base functionality, so have fun messing with it.
+/// </summary>
 public abstract class WeaponBase : MonoBehaviour
 {
     public WeaponData Settings;
@@ -12,6 +21,8 @@ public abstract class WeaponBase : MonoBehaviour
     public float CurrentAmmo { get; private set; }
 
     public Player Owner { get; private set; }
+
+    public bool IsFiring { get; private set; }
 
     // The audio source may be on the weapon itself, else it will automatically look for it in the Player gameobject when equipped.
     private AudioSource m_AudioSource;
@@ -42,6 +53,8 @@ public abstract class WeaponBase : MonoBehaviour
         m_Animator = GetComponent<Animator>();
     }
 
+    // Setting the Owner is important for weapons because it informs them of the player information
+    // and will nest the gameObject under the Player's "handpos", in animation terms that's usually a 'socket'.
     public virtual void SetOwner(Player owner)
     {
         Assert.IsNotNull(owner, "SetOwner on weapon " + name + " is null.");
@@ -49,9 +62,15 @@ public abstract class WeaponBase : MonoBehaviour
         PostSetOwner();
     }
 
+    // After owner is set, configure some things like the transform's parent and the audio source if one isn't available on the weapon.
+    // Override this to do other stuff if you'd like.
     protected virtual void PostSetOwner()
     {
-        transform.SetParent(Owner?.WeaponHoldPosition);
+        if (Owner?.WeaponHoldPosition != null)
+        {
+            transform.SetParent(Owner.WeaponHoldPosition);
+        }
+
         if (m_AudioSource == null)
         {
             m_AudioSource = Owner.GetComponent<AudioSource>();
@@ -85,27 +104,52 @@ public abstract class WeaponBase : MonoBehaviour
 
         if (FireImplementation())
         {
+            IsFiring = true;
             if (Settings.UsesAmmo)
             {
                 CurrentAmmo -= Settings.AmmoPerFire;
             }
 
             m_LastFireTime = Time.time;
+            PlayFireAnimation();
             PlayFiredSound();
+            if (!m_FireAnimationOngoing)
+            {
+                IsFiring = false;
+            }
+
             return true;
         }
 
         return false;
     }
 
+    // Called presumably by an Animator's Animation Clip via the timeline editor on Unity.
+    // This only matters when WeaponData settings has been configured to wait for the animation.
+    public virtual void OnFireAnimationEnd()
+    {
+        m_FireAnimationOngoing = false;
+        IsFiring = false;
+    }
+
+    // Checks if the weapon can Fire() based on settings.
     public virtual bool CanFire()
     {
-        float nextFireTime = m_LastFireTime + Settings.CooldownSec;
+        // Time cooldown check first.
+        float nextFireTime = m_LastFireTime + Settings.FireCooldownSec;
         if (Time.time - nextFireTime > 0)
         {
+            // Ammo check (if present)
             if (!Settings.UsesAmmo || 
                 CurrentAmmo >= Settings.AmmoPerFire)
             {
+                // Animation check (if present)
+                if (Settings.FireWaitForAnimationToFinishEvent && m_FireAnimationOngoing)
+                {
+                    return false;
+                }
+
+                // Player states check (if present)
                 return CanFireInPlayerState();
             }
         }
@@ -137,6 +181,7 @@ public abstract class WeaponBase : MonoBehaviour
         }
     }
 
+    // Checks player state IDs to see if it can fire.
     private bool CanFireInPlayerState()
     {
         if (Owner?.StateMachine?.CurrentState == null)
@@ -152,6 +197,7 @@ public abstract class WeaponBase : MonoBehaviour
         return !Settings.StatesCannotFire.Contains(Owner.StateMachine.CurrentState.Id);
     }
 
+    // Callback event for when a weapon is Equipped but is being unequipped.
     public virtual void OnStoringWeapon()
     {
         PlayStoredAwaySound();
@@ -162,6 +208,7 @@ public abstract class WeaponBase : MonoBehaviour
         gameObject.SetActive(false); 
     }
 
+    // Callback event for when a weapon was not equipped but just became equipped.
     public virtual void OnEquippedWeapon()
     {
         gameObject.SetActive(true);
@@ -169,12 +216,14 @@ public abstract class WeaponBase : MonoBehaviour
         PlayEquipAnimation();
     }
 
+    // Callback event for when a weapon was added to WeaponsInventory, but may or may not become the equipped weapon.
     public virtual void OnAddedWeaponToInventory()
     {
         PlayAddedToInventorySound();
         gameObject.SetActive(false);
     }
 
+    // Callback event for when a weapon is no longer in the WeaponsInventory.
     public virtual void OnRemovedWeaponFromInventory()
     {
         PlayUnequipAnimation();
@@ -200,6 +249,7 @@ public abstract class WeaponBase : MonoBehaviour
         PlaySound(Settings.AddedToInventorySound, Settings.AddedToInventorySoundVolume);
     }
 
+    // Only plays sounds if sound is valid, audio source is valid, or if not muted.
     protected virtual void PlaySound(AudioClip sound, float volume = 1f)
     {
         if (sound != null && m_AudioSource != null && !MuteAudio)
@@ -222,5 +272,20 @@ public abstract class WeaponBase : MonoBehaviour
         m_Animator?.SetBool(m_EquippedAnimBool, true);
     }
 
+    protected static string m_FireAnimTrigger = "Fire";
+    protected virtual void PlayFireAnimation()
+    {
+        if (m_Animator)
+        {
+            m_Animator.SetTrigger(m_FireAnimTrigger);
+            m_FireAnimationOngoing = true;
+        }
+        else
+        {
+            Assert.IsFalse(Settings.FireWaitForAnimationToFinishEvent, "Animator is not present but settings say to wait for fire animation to end before cooldown can reset.");
+        }
+    }
+
     private float m_LastFireTime = 0f;
+    private bool m_FireAnimationOngoing = false;
 }
