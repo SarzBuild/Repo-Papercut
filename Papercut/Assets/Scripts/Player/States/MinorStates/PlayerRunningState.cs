@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerRunningState : PlayerState
 {
-    public PlayerRunningState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string stateName) : base(player, stateMachine, playerData, stateName)
+    public PlayerRunningState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData, PlayerStateId.Running)
     {
     }
     public override void EnterState()

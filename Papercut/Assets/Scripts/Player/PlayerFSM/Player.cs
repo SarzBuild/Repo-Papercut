@@ -8,6 +8,8 @@ using Vector2 = UnityEngine.Vector2;
 
 public class Player : AppliedPhysics
 {
+    public Transform WeaponHoldPosition;
+
     #region States
     public PlayerStateMachine StateMachine { get; private set; }
     public PlayerDashState DashState { get; private set; }
@@ -28,6 +30,7 @@ public class Player : AppliedPhysics
     #region Components
     public Animator Animator { get; private set; }
     public PlayerInputState InputHandler { get; private set; }
+    public WeaponInventory Weapons { get; private set; }
     #endregion
     
     [SerializeField] private PlayerData _playerData;
@@ -41,6 +44,7 @@ public class Player : AppliedPhysics
 
     private void Awake()
     {
+        Weapons = GetComponent<WeaponInventory>();
         Animator = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputState>();
         _rigidbody2D = GetComponentInParent<Rigidbody2D>();
@@ -61,18 +65,18 @@ public class Player : AppliedPhysics
     {
         StateMachine = new PlayerStateMachine();
 
-        IdleState = new PlayerIdleState(this, StateMachine, _playerData, "idle");
-        MoveState = new PlayerMoveState(this, StateMachine, _playerData, "move");
-        DashState = new PlayerDashState(this, StateMachine, _playerData, "dash");
-        HardLandingState = new PlayerHardLandingState(this, StateMachine, _playerData, "hardLand");
-        InAirState = new PlayerInAirState(this, StateMachine, _playerData, "inAir");
-        JumpState = new PlayerJumpState(this, StateMachine, _playerData, "jump");
-        LedgeClimbState = new PlayerLedgeClimbState(this, StateMachine, _playerData, "ledgeClimb");
-        RunningState = new PlayerRunningState(this, StateMachine, _playerData, "running");
-        SlideState = new PlayerSlideState(this, StateMachine, _playerData, "slide");
-        SoftLandingState = new PlayerSoftLandingState(this, StateMachine, _playerData,"softLand");
-        WallGrabState = new PlayerWallGrabState(this, StateMachine, _playerData, "wallGrab");
-        WallJumpState = new PlayerWallJumpState(this, StateMachine, _playerData, "wallJump"); 
+        IdleState = new PlayerIdleState(this, StateMachine, _playerData);
+        MoveState = new PlayerMoveState(this, StateMachine, _playerData);
+        DashState = new PlayerDashState(this, StateMachine, _playerData);
+        HardLandingState = new PlayerHardLandingState(this, StateMachine, _playerData);
+        InAirState = new PlayerInAirState(this, StateMachine, _playerData);
+        JumpState = new PlayerJumpState(this, StateMachine, _playerData);
+        LedgeClimbState = new PlayerLedgeClimbState(this, StateMachine, _playerData);
+        RunningState = new PlayerRunningState(this, StateMachine, _playerData);
+        SlideState = new PlayerSlideState(this, StateMachine, _playerData);
+        SoftLandingState = new PlayerSoftLandingState(this, StateMachine, _playerData);
+        WallGrabState = new PlayerWallGrabState(this, StateMachine, _playerData);
+        WallJumpState = new PlayerWallJumpState(this, StateMachine, _playerData); 
         
     }
     
@@ -92,9 +96,29 @@ public class Player : AppliedPhysics
         
         TimedIncreaseDashCount();
         CalculateJumpBuffer();
+
+        HandleWeapons();
         
+        //LogDebug();
+    }
+
+    private void HandleWeapons()
+    {
+        if (Weapons == null)
+        {
+            return;
+        }
+
+        if (Weapons.EquippedWeapon != null && InputHandler.ListenLMouseInput() > 0)
+        {
+            if (_playerData == null || _playerData.CanFireWeapon)
+            {
+                Weapons.EquippedWeapon.Fire();
+            }
+        }
         
-        LogDebug();
+        // todo switch weapons if input triggered
+        // todo reload a weapon if design wants that
     }
 
     private void FixedUpdate()
@@ -194,7 +218,6 @@ public class Player : AppliedPhysics
         }
     }
     
-
     private void LogDebug()
     {
         _debugMessage.Clear();

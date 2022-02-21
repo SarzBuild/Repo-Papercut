@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerWallJumpState : PlayerState
 {
-    public PlayerWallJumpState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string stateName) : base(player, stateMachine, playerData, stateName)
+    public PlayerWallJumpState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData, PlayerStateId.WallJump)
     {
     }
     public override void EnterState()

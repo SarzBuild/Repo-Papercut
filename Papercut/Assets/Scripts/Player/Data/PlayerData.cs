@@ -15,6 +15,7 @@ public class PlayerData : ScriptableObject
     [SerializeField] public float RunningSpeed = 8f;
     [SerializeField] public float CurrentSpeed = 4;
     [SerializeField] public float RawInputValue;
+    [SerializeField] public bool CanFireWeapon = true;
     
     [SerializeField] public float Acceleration = 90;
     [SerializeField] public float MoveClamped = 13;

@@ -7,7 +7,7 @@ public class PlayerJumpState : PlayerState
     public bool JumpingThisFrame;
     public float TimeSinceLastJump;
 
-    public PlayerJumpState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string stateName) : base(player, stateMachine, playerData, stateName)
+    public PlayerJumpState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData, PlayerStateId.Jump)
     {
     }
     

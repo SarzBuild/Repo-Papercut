@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerHardLandingState : PlayerState
 {
-    public PlayerHardLandingState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string stateName) : base(player, stateMachine, playerData, stateName)
+    public PlayerHardLandingState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData, PlayerStateId.HardLanding)
     {
     }
     public override void EnterState()

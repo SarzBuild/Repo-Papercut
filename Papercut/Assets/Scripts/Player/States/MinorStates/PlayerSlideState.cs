@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerSlideState : PlayerState
 {
-    public PlayerSlideState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string stateName) : base(player, stateMachine, playerData, stateName)
+    public PlayerSlideState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData, PlayerStateId.Slide)
     {
     }
     public override void EnterState()

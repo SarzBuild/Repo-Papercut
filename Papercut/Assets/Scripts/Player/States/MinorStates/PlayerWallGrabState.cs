@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerWallGrabState : PlayerState
 {
-    public PlayerWallGrabState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string stateName) : base(player, stateMachine, playerData, stateName)
+    public PlayerWallGrabState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData, PlayerStateId.WallGrab)
     {
     }
     public override void EnterState()
