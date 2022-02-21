@@ -99,6 +99,8 @@ public class Player : AppliedPhysics
 
         HandleWeapons();
         
+        TimerForWallGrabJumps();
+        
         //LogDebug();
     }
 
@@ -215,6 +217,21 @@ public class Player : AppliedPhysics
                 _playerData._currentVerticalSpeed = 0;
                 _playerData.CurrentJumpCount = _playerData.MaximumJumpCount;
             }
+        }
+    }
+    
+    float timer;
+    float threshold = 0.2f;
+    private void TimerForWallGrabJumps()
+    {
+        threshold = 0.2f;
+        if (!_playerData.WallJumping) return;
+        timer += Time.fixedDeltaTime;
+        
+        if (timer > threshold)
+        {
+            _playerData.WallJumping = false;
+            timer = 0;
         }
     }
     

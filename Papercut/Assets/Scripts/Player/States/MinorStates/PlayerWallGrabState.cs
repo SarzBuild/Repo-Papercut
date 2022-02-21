@@ -10,6 +10,9 @@ public class PlayerWallGrabState : PlayerState
     public override void EnterState()
     {
         base.EnterState();
+        Player.SetVelocityZero();
+        Player.FlipCharacterDirection();
+        PlayerData.CurrentJumpCount = 1;base.EnterState();
     }
 
     public override void ExitState()
@@ -20,6 +23,12 @@ public class PlayerWallGrabState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            PlayerData.WallJumping = true;
+            PlayerData._currentHorizontalSpeed = -PlayerData._currentHorizontalSpeed;
+            StateMachine.ChangeState(Player.JumpState);
+        }
     }
 
     public override void PhysicsUpdate()

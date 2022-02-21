@@ -13,9 +13,8 @@ public class PlayerInAirState : PlayerState
         base.LogicUpdate();
         if(IsExitingState) return;
         HandleStateChange();
-        GravityLimiter();
+        CalculateJumpEndEarly();
         CalculateJumpApex();
-
     }
 
     public override void PhysicsUpdate()
@@ -35,6 +34,10 @@ public class PlayerInAirState : PlayerState
         if (Input.GetKeyDown(KeyCode.Space))
         {
             StateMachine.ChangeState(Player.JumpState);
+        }
+        else if ((Player.WallFrontHit || Player.WallBackHit) && !PlayerData.WallJumping)
+        {
+            StateMachine.ChangeState(Player.WallGrabState);
         }
         else if (Player.Grounded)
         {
@@ -74,7 +77,7 @@ public class PlayerInAirState : PlayerState
         }
     }
     
-    private void GravityLimiter()
+    private void CalculateJumpEndEarly()
     {
         if (!PlayerData.CollisionDown && Input.GetKeyUp(KeyCode.Space) && !PlayerData._endedJumpEarly && Player._appliedVelocity.y > 0)
         {

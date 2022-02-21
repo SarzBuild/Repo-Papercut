@@ -74,7 +74,7 @@ public class AppliedPhysics : MonoBehaviour
         }
     }
 
-    private void FlipCharacterDirection()
+    public void FlipCharacterDirection()
     {
         _facingDirection *= -1;
         _rigidbody2D.transform.Rotate(0.0f, 180.0f, 0.0f);
