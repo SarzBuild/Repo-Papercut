@@ -10,19 +10,30 @@ public class WeaponData : ScriptableObject
     [TextArea] public string description;
 
     [Header("Settings")]
-    public float CooldownSec = 1f;
+    // Seconds allowed between Fire().
+    public float FireCooldownSec = 1f;
+
+    // If true, an animation event for needs to trigger OnFireAnimationEnd().
+    // It can be created on the animation timeline.
+    // If false, only AttackCooldownSec is used.
+    public bool FireWaitForAnimationToFinishEvent = false;
+
+    // Damage the weapon does to a target.
     public float Damage = 1f;
+
+    // If true, considers ammo ammounts before Fire() can occur.
     public bool UsesAmmo = false;
     public float DefaultAmmo = 0f;
     public float AmmoPerFire = 1f;
     public float MaxAmmo = 0f;
 
-    // If empty, any states can fire unless excluded in StatesCannotFire.
+    // If empty, any states can Fire() unless excluded in StatesCannotFire.
     public List<PlayerStateId> StatesCanFire = new List<PlayerStateId>();
 
     public List<PlayerStateId> StatesCannotFire = new List<PlayerStateId>();
 
     [Header("FX")]
+    // If sounds are empty, then they will not play.
     public AudioClip EquippedSound;
     public float EquippedSoundVolume = 1f;
     public AudioClip StoredAwaySound;

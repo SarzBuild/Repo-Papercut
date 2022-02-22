@@ -2,23 +2,11 @@ using UnityEngine;
 
 public class SwordWeapon : WeaponBase
 {
-    public Transform HiltPosition;
-
     protected override bool FireImplementation()
     {
         Debug.Log("Fired");
+        // TODO - this is where we do hit testing and additional FX, and deal damage to whatever is potentially hit.
+        // It can also be where you initialize the hitbox, but then wait for an event for collision trigger enter. Really depends on how you want it to functionally work.
         return true;
-    }
-
-    protected override void PostSetOwner()
-    {
-        base.PostSetOwner();
-        if (HiltPosition != null)
-        {
-            // The hilt is below the sword's origin.
-            // WeaponBase parents to the HandPosition of the Player, but that is the origin.
-            // To offset this, subtract the hilt local position.
-            transform.localPosition -= HiltPosition.localPosition;
-        }
     }
 }
