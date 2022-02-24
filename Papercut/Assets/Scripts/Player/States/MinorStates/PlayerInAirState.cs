@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerInAirState : PlayerState
@@ -28,20 +29,20 @@ public class PlayerInAirState : PlayerState
     {
         base.ExitState();
     }
-    
+
     private void HandleStateChange()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             StateMachine.ChangeState(Player.JumpState);
         }
-        else if ((Player.WallFrontHit || Player.WallBackHit) && !PlayerData.WallJumping)
+        else if (Player.CheckForLayerWall() && !PlayerData.CurrentlyWallJumping)
         {
             StateMachine.ChangeState(Player.WallGrabState);
         }
         else if (Player.Grounded)
         {
-            if (PlayerData._currentVerticalSpeed <= 100)
+            if (PlayerData.CurrentVerticalSpeed <= 100)
             {
                 StateMachine.ChangeState(Player.SoftLandingState);
             }
@@ -68,25 +69,25 @@ public class PlayerInAirState : PlayerState
     {
         if (!PlayerData.CollisionDown)
         {
-            PlayerData._apexPoint = Mathf.InverseLerp(PlayerData._jumpApexThreshold, 0, Mathf.Abs(PlayerData.Velocity.y));
-            PlayerData.CurrentFallSpeed = Mathf.Lerp(PlayerData.MinimumFallSpeed, PlayerData.MaximumFallSpeed, PlayerData._apexPoint);
+            PlayerData.ApexPoint = Mathf.InverseLerp(PlayerData.JumpApexThreshold, 0, Mathf.Abs(PlayerData.Velocity.y));
+            PlayerData.CurrentFallSpeed = Mathf.Lerp(PlayerData.MinimumFallSpeed, PlayerData.MaximumFallSpeed, PlayerData.ApexPoint);
         }
         else
         {
-            PlayerData._apexPoint = 0;
+            PlayerData.ApexPoint = 0;
         }
     }
     
     private void CalculateJumpEndEarly()
     {
-        if (!PlayerData.CollisionDown && Input.GetKeyUp(KeyCode.Space) && !PlayerData._endedJumpEarly && Player._appliedVelocity.y > 0)
+        if (!PlayerData.CollisionDown && Input.GetKeyUp(KeyCode.Space) && !PlayerData.EndedJumpEarly && Player._appliedVelocity.y > 0)
         {
-            PlayerData._endedJumpEarly = true;
+            PlayerData.EndedJumpEarly = true;
         }
 
         if (Player.CeilingHit)
         {
-            if (PlayerData._currentVerticalSpeed > 0) PlayerData._currentVerticalSpeed = 0;
+            if (PlayerData.CurrentVerticalSpeed > 0) PlayerData.CurrentVerticalSpeed = 0;
         }
     }
 }

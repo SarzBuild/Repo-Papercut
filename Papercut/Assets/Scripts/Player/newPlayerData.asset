@@ -12,62 +12,80 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2299384acb6ba7348983e3a87d00d522, type: 3}
   m_Name: newPlayerData
   m_EditorClassIdentifier: 
-  description: 
+  description: JT's Testing Player Data
+  RawInputValue: 0
+  Velocity: {x: 0, y: 0}
+  LastPosition: {x: -5.7683396, y: 2.2010133}
+  LastTimeJumpKeyWasPressed: 18.660583
+  CurrentHorizontalSpeed: 0
+  CurrentVerticalSpeed: 0
+  PlayerLandedThisFrame: 0
+  CollisionDown: 1
+  TimePlayerStoppedGrounded: -3.4028235e+38
   WalkingSpeed: 10
   RunningSpeed: 8
   CurrentSpeed: 10
-  RawInputValue: 0
-  FacingDirection: 0
-  GroundLayerMask:
-    serializedVersion: 2
-    m_Bits: 4096
-  _groundCheckRadius: 0
-  JumpingSpeed: 1
-  Gravity: -9.8
-  JumpForce: 15
-  AirSensibility: 0
-  JumpingForceShrink: 0.02
-  JumpingSpeedLowThreshold: 1
-  JumpingSpeedMaxThreshold: 1.5
-  MinimumJumpHeightTime: 0.15
-  MaximumJumpHeightTime: 0.3
-  JumpCoyoteTime: 0.2
-  JumpBufferTime: 0.2
-  _ceilingCheckRadius: 0.2
-  AntiBumpSlopeRatio: 0
-  SlopeLimit: 0
-  SlopeSlideSpeed: 0
+  Acceleration: 90
+  MoveClamped: 13
+  Deceleration: 60
+  FallClamped: -40
+  MinimumFallSpeed: 80
+  MaximumFallSpeed: 120
+  CurrentFallSpeed: 80
+  MaximumJumpCount: 2
+  CurrentJumpCount: 2
+  TimeBetweenDoubleJump: 0.05
+  JumpHeight: 30
+  CoyoteUsable: 1
+  CoyoteTimeThreshold: 0.1
+  JumpBuffer: 0.1
+  EndedJumpEarly: 1
+  EndedJumpEarlyGravityModifier: 3
+  ApexPoint: 0
+  JumpApexSpeedBonus: 2
+  JumpApexThreshold: 10
+  DashAbilityActive: 0
   DashingAcceleration: 7
-  _wallCheckDistance: 0
   DashingTime: 0.15
   MaximumDashCount: 1
   DashCooldownTime: 2
-  _fallClamp: -40
-  _minFallSpeed: 80
-  _maxFallSpeed: 120
-  _fallSpeed: 84.92552
-  _jumpHeight: 30
-  _jumpApexThreshold: 45.62
-  _coyoteTimeThreshold: 0.1
-  _jumpBuffer: 0.1
-  _jumpEndEarlyGravityModifier: 3
-  _coyoteUsable: 0
-  _endedJumpEarly: 0
-  _apexPoint: 0.12313805
-  _lastJumpPressed: 34.028847
-  _currentHorizontalSpeed: 0
-  _currentVerticalSpeed: -40
-  _timeLeftGrounded: 24.92205
-  LandingThisFrame: 0
-  CollisionDown: 0
-  _acceleration: 90
-  _moveClamp: 13
-  _deAcceleration: 60
-  _apexBonus: 115.23
-  Velocity: {x: 0, y: -40.00244}
-  _lastPosition: {x: -104.95241, y: -1217.8234}
-  CanJump: 0
-  TimeIsRight: 0
-  MaximumJumpCount: 2
-  CurrentJumpCount: 1
-  TimeBetweenDoubleJump: 0.5
+  CanFireWeapon: 1
+  WallJumpAbilityActive: 1
+  CurrentlyOnStickyWall: 0
+  CurrentlyWallJumping: 0
+  WallJumpingSpeed: 60
+  WallLayerMask:
+    serializedVersion: 2
+    m_Bits: 65536
+  CurveModifier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  MaxCurvaturePercent: 0.45
+  MinCurvaturePercent: 0.05
+  WallJumpCurrentAngle: 38.600002
+  DelayOfWallJump: 0.2
+  EndWallJumpYVelocity: 5
+  EndWallJumpXVelocity: 5
+  TimeBeforeSlippingStart: 1.5
+  SlippingVelocity: 5

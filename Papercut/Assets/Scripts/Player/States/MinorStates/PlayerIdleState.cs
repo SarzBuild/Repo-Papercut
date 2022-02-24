@@ -12,7 +12,7 @@ public class PlayerIdleState : PlayerState
     public override void EnterState()
     {
         base.EnterState();
-        Player.SetVelocityZero();
+        //Player.SetVelocityZero();
     }
     
     public override void LogicUpdate()

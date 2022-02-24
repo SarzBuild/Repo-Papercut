@@ -35,12 +35,11 @@ public class Player : AppliedPhysics
     
     [SerializeField] private PlayerData _playerData;
 
-    private StringBuilder _debugMessage = new StringBuilder(500);
+    private StringBuilder _debugMessage = new StringBuilder(600);
 
     public int CurrentDashCount;
     private float _dashTimerCooldown;
     private bool _collisionDown;
-
 
     private void Awake()
     {
@@ -92,6 +91,7 @@ public class Player : AppliedPhysics
         LastJumpPressed();
         StateMachine.CurrentState.LogicUpdate();
         UpdateHitResults();
+        UpdateStickyWallCollisions();
         SpeedResetOnCollisions();
         
         TimedIncreaseDashCount();
@@ -101,7 +101,7 @@ public class Player : AppliedPhysics
         
         TimerForWallGrabJumps();
         
-        //LogDebug();
+        LogDebug();
     }
 
     private void HandleWeapons()
@@ -126,21 +126,21 @@ public class Player : AppliedPhysics
     private void FixedUpdate()
     {
         _playerData.Velocity = ((Vector2)transform.position - _playerData.LastPosition) / Time.deltaTime;
-        _playerData.LastPosition = transform.position;
+        _playerData.LastPosition = transform.position; // Calculates the true velocity (distance/time)
         
         StateMachine.CurrentState.PhysicsUpdate();
         CalculateGravity();
     }
 
-    private void LastJumpPressed()
+    private void LastJumpPressed() //Updates last time space key was triggered.
     {
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            _playerData._lastJumpPressed = Time.time;
+            _playerData.LastTimeJumpKeyWasPressed = Time.time;
         }
     }
 
-    private void TimedIncreaseDashCount()
+    private void TimedIncreaseDashCount() //Dash reset cooldown, only active when the player is not dashing and has their dash count lower than the maximum amount.
     {
         if (CurrentDashCount < 0) return;
         if (CurrentDashCount >= _playerData.MaximumDashCount) return;
@@ -154,67 +154,70 @@ public class Player : AppliedPhysics
 
     }
 
-    private void CalculateJumpBuffer()
+    private void CalculateJumpBuffer() //Checks to see if the last frame is coherent with the current information and updates the collision of last frame 
     {
-        _playerData.LandingThisFrame = false;
+        _playerData.PlayerLandedThisFrame = false;
         var groundedCheck = Grounded;
-        if (_playerData.CollisionDown && !groundedCheck) _playerData._timeLeftGrounded = Time.time; 
+        if (_playerData.CollisionDown && !groundedCheck) _playerData.TimePlayerStoppedGrounded = Time.time; 
         else if (!_playerData.CollisionDown && groundedCheck)
         {
-            _playerData._coyoteUsable = true;
-            _playerData.LandingThisFrame = true;
+            _playerData.CoyoteUsable = true;
+            _playerData.PlayerLandedThisFrame = true;
         }
 
         _playerData.CollisionDown = groundedCheck;
     }
     
-    private void CalculateGravity()
+    private void CalculateGravity() //Always active, it calculates but does not set the gravity.
     {
-        if(!_playerData.CollisionDown)
+        if (StateMachine.CurrentState != WallGrabState)
         {
-            var fallSpeed = _playerData._endedJumpEarly && _playerData._currentVerticalSpeed > 0 ? _playerData.CurrentFallSpeed * _playerData._jumpEndEarlyGravityModifier : _playerData.CurrentFallSpeed;
+            if(!_playerData.CollisionDown)
+            {
+                var fallSpeed = _playerData.EndedJumpEarly && _playerData.CurrentVerticalSpeed > 0 ? _playerData.CurrentFallSpeed * _playerData.EndedJumpEarlyGravityModifier : _playerData.CurrentFallSpeed;
             
-            _playerData._currentVerticalSpeed -= fallSpeed * Time.fixedDeltaTime;
+                _playerData.CurrentVerticalSpeed -= fallSpeed * Time.fixedDeltaTime;
             
-            if (_playerData._currentVerticalSpeed < _playerData.FallClamped) _playerData._currentVerticalSpeed = _playerData.FallClamped;
+                if (_playerData.CurrentVerticalSpeed < _playerData.FallClamped) _playerData.CurrentVerticalSpeed = _playerData.FallClamped;
+            } 
         }
     }
 
-    public void MovementClampedAndApex()
+    public void MovementClampedAndApex() //Calculate acceleration and clamps it, if in the air, apply the apex bonus. Otherwise decreases speed.
     {
         if (_playerData.RawInputValue != 0)
         {
-            _playerData._currentHorizontalSpeed += _playerData.RawInputValue * _playerData.Acceleration * Time.deltaTime;
+            _playerData.CurrentHorizontalSpeed += _playerData.RawInputValue * _playerData.Acceleration * Time.deltaTime;
             
-            _playerData._currentHorizontalSpeed = Mathf.Clamp(_playerData._currentHorizontalSpeed, -_playerData.MoveClamped, _playerData.MoveClamped);
+            _playerData.CurrentHorizontalSpeed = Mathf.Clamp(_playerData.CurrentHorizontalSpeed, -_playerData.MoveClamped, _playerData.MoveClamped);
             
-            var apexBonus = Mathf.Sign(_playerData.RawInputValue) * _playerData.JumpApexBonus * _playerData._apexPoint;
-            _playerData._currentHorizontalSpeed += apexBonus * Time.deltaTime;
+            var apexBonus = Mathf.Sign(_playerData.RawInputValue) * _playerData.JumpApexSpeedBonus * _playerData.ApexPoint;
+            _playerData.CurrentHorizontalSpeed += apexBonus * Time.deltaTime;
         }
         else
         {
-            _playerData._currentHorizontalSpeed = Mathf.MoveTowards(_playerData._currentHorizontalSpeed, 0, _playerData.Deceleration * Time.deltaTime);
+            _playerData.CurrentHorizontalSpeed = Mathf.MoveTowards(_playerData.CurrentHorizontalSpeed, 0, _playerData.Deceleration * Time.fixedDeltaTime);
         }
     }
 
-    public void UpdateVelocity()
+    public void UpdateVelocity() //Set the velocity
     {
-        SetVelocityY(_playerData._currentVerticalSpeed);
-        SetVelocityX(_playerData._currentHorizontalSpeed);
+        SetVelocityY(_playerData.CurrentVerticalSpeed);
+        SetVelocityX(_playerData.CurrentHorizontalSpeed);
     }
 
     private void SpeedResetOnCollisions()
     {
-        if (_playerData._currentHorizontalSpeed > 0 && WallFrontHit || _playerData._currentHorizontalSpeed < 0 && WallBackHit)
+        if (_playerData.CurrentHorizontalSpeed > 0 && WallFrontHit || _playerData.CurrentHorizontalSpeed < 0 && WallBackHit)
         {
-            _playerData._currentHorizontalSpeed = 0;
+            _playerData.CurrentHorizontalSpeed = 0;
         }
         
         if (_playerData.CollisionDown)
         {
-            if (_playerData._currentVerticalSpeed < 0)
+            if (_playerData.CurrentVerticalSpeed < 0)
             {
-                _playerData._currentVerticalSpeed = 0;
+                _playerData.CurrentVerticalSpeed = 0;
                 _playerData.CurrentJumpCount = _playerData.MaximumJumpCount;
             }
         }
@@ -224,23 +227,61 @@ public class Player : AppliedPhysics
     float threshold = 0.2f;
     private void TimerForWallGrabJumps()
     {
-        threshold = 0.2f;
-        if (!_playerData.WallJumping) return;
+        threshold = 0.05f;
+        if (!_playerData.CurrentlyWallJumping) return;
         timer += Time.fixedDeltaTime;
         
         if (timer > threshold)
         {
-            _playerData.WallJumping = false;
+            _playerData.CurrentlyWallJumping = false;
             timer = 0;
         }
     }
     
+    public bool CheckForLayerWall()
+    {
+        if (WallBackHit)
+        {
+            for (int i = 0; i < WallBackHitResult.Length; i++)
+            {
+                if ((_playerData.WallLayerMask.value & (1 << WallBackHitResult[i].collider.gameObject.layer)) > 0)
+                    return true;
+            }
+        }
+        if (WallFrontHit)
+        {
+            for (int i = 0; i < WallFrontHitResult.Length; i++)
+            {
+                if ((_playerData.WallLayerMask.value & (1 << WallFrontHitResult[i].collider.gameObject.layer)) > 0)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    public void UpdateStickyWallCollisions()
+    {
+        UpdateStickyWallBackHit();
+        UpdateStickyWallFrontHit();
+    }
+    
+    public bool WallStickyFrontHit { get { return WallStickyFrontHitResult; } }
+    public RaycastHit2D WallStickyFrontHitResult { get; private set; }
+    public void UpdateStickyWallFrontHit() { WallStickyFrontHitResult = Physics2D.Raycast(_rightWallCheck.position, Vector2.right * -_facingDirection, _wallCheckDistance, _playerData.WallLayerMask); }
+
+    public bool WallStickyBackHit { get { return WallStickyBackHitResult; } }
+    public RaycastHit2D WallStickyBackHitResult { get; private set; }
+    public void UpdateStickyWallBackHit() { WallStickyBackHitResult = Physics2D.Raycast(_leftWallCheck.position, Vector2.right * -_facingDirection, _wallCheckDistance, _playerData.WallLayerMask); }
+    
+    
+    
+
     private void LogDebug()
     {
         _debugMessage.Clear();
-        _debugMessage.AppendFormat("State: {0}\nGrounded [{1}] | Ceiling [{2}] | WallFront [{3}] | WallBack [{4}] | LedgeHorizontal [{5}] | LedgeVertical [{6}]\n", 
+        _debugMessage.AppendFormat("State: {0}\nGrounded [{1}] | Ceiling [{2}] | WallFront [{3}] | WallBack [{4}]\n", 
             StateMachine.CurrentState.StateName, 
-            Grounded, CeilingHit, WallFrontHit, WallBackHit, LedgeHorizontalHit, LedgeVerticalHit);
+            Grounded, CeilingHit, WallFrontHit, WallBackHit);
         InputHandler.AppendDebugMessage(ref _debugMessage);
         Debug.Log(_debugMessage.ToString());
     }
