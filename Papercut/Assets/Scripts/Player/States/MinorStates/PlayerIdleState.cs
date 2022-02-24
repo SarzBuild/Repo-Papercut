@@ -5,14 +5,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerIdleState : PlayerState
 {
-    public PlayerIdleState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string stateName) : base(player, stateMachine, playerData, stateName)
+    public PlayerIdleState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData, PlayerStateId.Idle)
     {
     }
 
     public override void EnterState()
     {
         base.EnterState();
-        Player.SetVelocityZero();
+        //Player.SetVelocityZero();
     }
     
     public override void LogicUpdate()

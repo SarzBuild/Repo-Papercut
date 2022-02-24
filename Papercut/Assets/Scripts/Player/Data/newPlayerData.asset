@@ -12,35 +12,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2299384acb6ba7348983e3a87d00d522, type: 3}
   m_Name: newPlayerData
   m_EditorClassIdentifier: 
-  description: 
+  description: Old
+  RawInputValue: 0
+  Velocity: {x: 0, y: 0}
+  LastPosition: {x: 0, y: 0}
+  LastTimeJumpKeyWasPressed: 0
+  CurrentHorizontalSpeed: 0
+  CurrentVerticalSpeed: 0
+  PlayerLandedThisFrame: 0
+  CollisionDown: 0
+  TimePlayerStoppedGrounded: 0
   WalkingSpeed: 10
   RunningSpeed: 8
   CurrentSpeed: 10
-  RawInputValue: 0
-  FacingDirection: 1
-  GroundLayerMask:
-    serializedVersion: 2
-    m_Bits: 4096
-  _groundCheckRadius: 0.1
-  JumpingSpeed: 1
-  Gravity: -9.8
-  JumpForce: 6
-  AirSensibility: 0.5
-  JumpingForceShrink: 22.83
-  JumpingSpeedLowThreshold: 1
-  JumpingSpeedMaxThreshold: 1.5
-  MinimumJumpHeightTime: 0.15
-  MaximumJumpHeightTime: 0.3
-  JumpCoyoteTime: 0.2
-  JumpBufferTime: 0.2
-  _ceilingCheckRadius: 0.1
-  AntiBumpSlopeRatio: 4.2
-  SlopeLimit: 45
-  SlopeSlideSpeed: 2
+  Acceleration: 90
+  MoveClamped: 13
+  Deceleration: 60
+  FallClamped: -40
+  MinimumFallSpeed: 80
+  MaximumFallSpeed: 120
+  CurrentFallSpeed: 0
+  DoubleJumpAbilityActive: 0
+  MaximumJumpCount: 0
+  CurrentJumpCount: 0
+  TimeBetweenDoubleJump: 0.05
+  JumpHeight: 30
+  CoyoteUsable: 0
+  CoyoteTimeThreshold: 0.1
+  JumpBuffer: 0.1
+  EndedJumpEarly: 1
+  EndedJumpEarlyGravityModifier: 3
+  ApexPoint: 0
+  JumpApexSpeedBonus: 2
+  JumpApexThreshold: 10
+  DashAbilityActive: 0
   DashingAcceleration: 35
-  _wallCheckDistance: 0
   DashingTime: 0.1
   MaximumDashCount: 1
   DashCooldownTime: 2
-  LeanRight: {x: 0, y: 0, z: 5}
-  LeanLeft: {x: 0, y: 0, z: 355}
+  CanFireWeapon: 1
+  WallJumpAbilityActive: 0
+  CurrentlyWallJumping: 0
+  WallLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  WallJumpAngle: 0

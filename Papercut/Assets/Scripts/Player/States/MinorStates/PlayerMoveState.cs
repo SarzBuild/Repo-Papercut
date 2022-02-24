@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMoveState : PlayerState
 {
-    public PlayerMoveState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string stateName) : base(player, stateMachine, playerData, stateName)
+    public PlayerMoveState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData, PlayerStateId.Move)
     {
     }
 
@@ -34,7 +34,7 @@ public class PlayerMoveState : PlayerState
         {
             StateMachine.ChangeState(Player.JumpState);
         }
-        else if (PlayerData._currentVerticalSpeed < 0)
+        else if (PlayerData.CurrentVerticalSpeed < 0)
         {
             StateMachine.ChangeState(Player.InAirState);
         }

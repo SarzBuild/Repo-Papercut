@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerLedgeClimbState : PlayerState
 {
-    public PlayerLedgeClimbState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string stateName) : base(player, stateMachine, playerData, stateName)
+    public PlayerLedgeClimbState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData, PlayerStateId.LedgeClimb)
     {
     }
     public override void EnterState()

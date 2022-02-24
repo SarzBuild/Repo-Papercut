@@ -7,7 +7,7 @@ public class PlayerJumpState : PlayerState
     public bool JumpingThisFrame;
     public float TimeSinceLastJump;
 
-    public PlayerJumpState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string stateName) : base(player, stateMachine, playerData, stateName)
+    public PlayerJumpState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData, PlayerStateId.Jump)
     {
     }
     
@@ -18,8 +18,8 @@ public class PlayerJumpState : PlayerState
         StateMachine.ChangeState(Player.InAirState);
     }
 
-    private bool CanUseCoyote => PlayerData._coyoteUsable && !PlayerData.CollisionDown && PlayerData._timeLeftGrounded + PlayerData._coyoteTimeThreshold > Time.time;
-    private bool HasBufferedJump => PlayerData.CollisionDown && PlayerData._lastJumpPressed + PlayerData._jumpBuffer > Time.time;
+    private bool CanUseCoyote => PlayerData.CoyoteUsable && !PlayerData.CollisionDown && PlayerData.TimePlayerStoppedGrounded + PlayerData.CoyoteTimeThreshold > Time.time;
+    private bool HasBufferedJump => PlayerData.CollisionDown && PlayerData.LastTimeJumpKeyWasPressed + PlayerData.JumpBuffer > Time.time;
     private bool CanJump => PlayerData.CurrentJumpCount > 0;
     private bool TimeIsRight => TimeSinceLastJump + PlayerData.TimeBetweenDoubleJump < Time.time;
 
@@ -27,11 +27,11 @@ public class PlayerJumpState : PlayerState
     {
         if ((CanJump && TimeIsRight && !Player.Grounded) || CanUseCoyote || HasBufferedJump)
         {
-            PlayerData._currentVerticalSpeed = PlayerData._jumpHeight;
-            Player.SetVelocityY(PlayerData._currentVerticalSpeed);
-            PlayerData._endedJumpEarly = false;
-            PlayerData._coyoteUsable = false;
-            PlayerData._timeLeftGrounded = float.MinValue;
+            PlayerData.CurrentVerticalSpeed = PlayerData.JumpHeight;
+            Player.SetVelocityY(PlayerData.CurrentVerticalSpeed);
+            PlayerData.EndedJumpEarly = false;
+            PlayerData.CoyoteUsable = false;
+            PlayerData.TimePlayerStoppedGrounded = float.MinValue;
             PlayerData.CurrentJumpCount--;
             JumpingThisFrame = true;
             TimeSinceLastJump = Time.time;
