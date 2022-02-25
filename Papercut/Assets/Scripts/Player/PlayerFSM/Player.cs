@@ -24,6 +24,7 @@ public class Player : AppliedPhysics
     public PlayerSoftLandingState SoftLandingState { get; private set; }
     public PlayerWallGrabState WallGrabState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; }
+    public PlayerGrapplingState GrapplingState { get; private set; }
     
     #endregion
 
@@ -75,8 +76,8 @@ public class Player : AppliedPhysics
         SlideState = new PlayerSlideState(this, StateMachine, _playerData);
         SoftLandingState = new PlayerSoftLandingState(this, StateMachine, _playerData);
         WallGrabState = new PlayerWallGrabState(this, StateMachine, _playerData);
-        WallJumpState = new PlayerWallJumpState(this, StateMachine, _playerData); 
-        
+        WallJumpState = new PlayerWallJumpState(this, StateMachine, _playerData);
+        GrapplingState = new PlayerGrapplingState(this, StateMachine, _playerData);
     }
     
 
@@ -101,7 +102,7 @@ public class Player : AppliedPhysics
         
         TimerForWallGrabJumps();
         
-        LogDebug();
+        //LogDebug();
     }
 
     private void HandleWeapons()
@@ -111,7 +112,7 @@ public class Player : AppliedPhysics
             return;
         }
 
-        if (Weapons.EquippedWeapon != null && InputHandler.ListenLMouseInput() > 0)
+        if (Weapons.EquippedWeapon != null && InputHandler.ListenLMouseInput > 0)
         {
             if (_playerData == null || _playerData.CanFireWeapon)
             {
@@ -258,6 +259,13 @@ public class Player : AppliedPhysics
         }
         return false;
     }
+
+    /*public bool CheckIfRunning()
+    {
+        if(InputHandler.)
+    }*/
+    
+    
 
     public void UpdateStickyWallCollisions()
     {

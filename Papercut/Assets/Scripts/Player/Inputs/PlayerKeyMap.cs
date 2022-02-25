@@ -15,7 +15,7 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
     ""name"": ""PlayerKeyMapping"",
     ""maps"": [
         {
-            ""name"": ""OnGround"",
+            ""name"": ""Player"",
             ""id"": ""da357e44-0313-42f5-a6c6-5f57c1c3310c"",
             ""actions"": [
                 {
@@ -51,17 +51,9 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Roll"",
+                    ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""666ab8b1-6b88-4cb5-b003-dc656b42f630"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Run"",
-                    ""type"": ""Button"",
-                    ""id"": ""6c6f0e37-3683-4e37-a17e-ce352d9ff21e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -86,22 +78,6 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
                     ""name"": ""Interaction"",
                     ""type"": ""Button"",
                     ""id"": ""b35256c7-6f54-4a73-8205-f9ff12cf620c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""DashRight"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""c83b1ff2-dda1-46a8-ac6a-eba271d5f7bd"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""DashLeft"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""20b47940-16ff-4007-b949-91495db2110f"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -159,18 +135,7 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Roll"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""da0d85e4-a91e-4714-a6d2-71b1b07574f2"",
-                    ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Run"",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -206,47 +171,22 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
                     ""action"": ""Interaction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9300c89e-1f42-47bb-9a9f-2a503ecd0ead"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": ""MultiTap"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""DashRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""30f60459-4022-4652-ba36-c0b58567343b"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": ""MultiTap"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""DashLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
     ],
     ""controlSchemes"": []
 }");
-        // OnGround
-        m_OnGround = asset.FindActionMap("OnGround", throwIfNotFound: true);
-        m_OnGround_Jump = m_OnGround.FindAction("Jump", throwIfNotFound: true);
-        m_OnGround_MoveRight = m_OnGround.FindAction("MoveRight", throwIfNotFound: true);
-        m_OnGround_MoveLeft = m_OnGround.FindAction("MoveLeft", throwIfNotFound: true);
-        m_OnGround_MoveDown = m_OnGround.FindAction("MoveDown", throwIfNotFound: true);
-        m_OnGround_Roll = m_OnGround.FindAction("Roll", throwIfNotFound: true);
-        m_OnGround_Run = m_OnGround.FindAction("Run", throwIfNotFound: true);
-        m_OnGround_LMouse = m_OnGround.FindAction("LMouse", throwIfNotFound: true);
-        m_OnGround_RMouse = m_OnGround.FindAction("RMouse", throwIfNotFound: true);
-        m_OnGround_Interaction = m_OnGround.FindAction("Interaction", throwIfNotFound: true);
-        m_OnGround_DashRight = m_OnGround.FindAction("DashRight", throwIfNotFound: true);
-        m_OnGround_DashLeft = m_OnGround.FindAction("DashLeft", throwIfNotFound: true);
+        // Player
+        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_MoveRight = m_Player.FindAction("MoveRight", throwIfNotFound: true);
+        m_Player_MoveLeft = m_Player.FindAction("MoveLeft", throwIfNotFound: true);
+        m_Player_MoveDown = m_Player.FindAction("MoveDown", throwIfNotFound: true);
+        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_LMouse = m_Player.FindAction("LMouse", throwIfNotFound: true);
+        m_Player_RMouse = m_Player.FindAction("RMouse", throwIfNotFound: true);
+        m_Player_Interaction = m_Player.FindAction("Interaction", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -293,79 +233,64 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
         asset.Disable();
     }
 
-    // OnGround
-    private readonly InputActionMap m_OnGround;
-    private IOnGroundActions m_OnGroundActionsCallbackInterface;
-    private readonly InputAction m_OnGround_Jump;
-    private readonly InputAction m_OnGround_MoveRight;
-    private readonly InputAction m_OnGround_MoveLeft;
-    private readonly InputAction m_OnGround_MoveDown;
-    private readonly InputAction m_OnGround_Roll;
-    private readonly InputAction m_OnGround_Run;
-    private readonly InputAction m_OnGround_LMouse;
-    private readonly InputAction m_OnGround_RMouse;
-    private readonly InputAction m_OnGround_Interaction;
-    private readonly InputAction m_OnGround_DashRight;
-    private readonly InputAction m_OnGround_DashLeft;
-    public struct OnGroundActions
+    // Player
+    private readonly InputActionMap m_Player;
+    private IPlayerActions m_PlayerActionsCallbackInterface;
+    private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_MoveRight;
+    private readonly InputAction m_Player_MoveLeft;
+    private readonly InputAction m_Player_MoveDown;
+    private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_LMouse;
+    private readonly InputAction m_Player_RMouse;
+    private readonly InputAction m_Player_Interaction;
+    public struct PlayerActions
     {
         private @PlayerKeyMap m_Wrapper;
-        public OnGroundActions(@PlayerKeyMap wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Jump => m_Wrapper.m_OnGround_Jump;
-        public InputAction @MoveRight => m_Wrapper.m_OnGround_MoveRight;
-        public InputAction @MoveLeft => m_Wrapper.m_OnGround_MoveLeft;
-        public InputAction @MoveDown => m_Wrapper.m_OnGround_MoveDown;
-        public InputAction @Roll => m_Wrapper.m_OnGround_Roll;
-        public InputAction @Run => m_Wrapper.m_OnGround_Run;
-        public InputAction @LMouse => m_Wrapper.m_OnGround_LMouse;
-        public InputAction @RMouse => m_Wrapper.m_OnGround_RMouse;
-        public InputAction @Interaction => m_Wrapper.m_OnGround_Interaction;
-        public InputAction @DashRight => m_Wrapper.m_OnGround_DashRight;
-        public InputAction @DashLeft => m_Wrapper.m_OnGround_DashLeft;
-        public InputActionMap Get() { return m_Wrapper.m_OnGround; }
+        public PlayerActions(@PlayerKeyMap wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @MoveRight => m_Wrapper.m_Player_MoveRight;
+        public InputAction @MoveLeft => m_Wrapper.m_Player_MoveLeft;
+        public InputAction @MoveDown => m_Wrapper.m_Player_MoveDown;
+        public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @LMouse => m_Wrapper.m_Player_LMouse;
+        public InputAction @RMouse => m_Wrapper.m_Player_RMouse;
+        public InputAction @Interaction => m_Wrapper.m_Player_Interaction;
+        public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(OnGroundActions set) { return set.Get(); }
-        public void SetCallbacks(IOnGroundActions instance)
+        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerActions instance)
         {
-            if (m_Wrapper.m_OnGroundActionsCallbackInterface != null)
+            if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
             {
-                @Jump.started -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnJump;
-                @MoveRight.started -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMoveRight;
-                @MoveRight.performed -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMoveRight;
-                @MoveRight.canceled -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMoveRight;
-                @MoveLeft.started -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMoveLeft;
-                @MoveLeft.performed -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMoveLeft;
-                @MoveLeft.canceled -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMoveLeft;
-                @MoveDown.started -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMoveDown;
-                @MoveDown.performed -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMoveDown;
-                @MoveDown.canceled -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnMoveDown;
-                @Roll.started -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnRoll;
-                @Roll.performed -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnRoll;
-                @Roll.canceled -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnRoll;
-                @Run.started -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnRun;
-                @Run.performed -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnRun;
-                @Run.canceled -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnRun;
-                @LMouse.started -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnLMouse;
-                @LMouse.performed -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnLMouse;
-                @LMouse.canceled -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnLMouse;
-                @RMouse.started -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnRMouse;
-                @RMouse.performed -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnRMouse;
-                @RMouse.canceled -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnRMouse;
-                @Interaction.started -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnInteraction;
-                @Interaction.performed -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnInteraction;
-                @Interaction.canceled -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnInteraction;
-                @DashRight.started -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnDashRight;
-                @DashRight.performed -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnDashRight;
-                @DashRight.canceled -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnDashRight;
-                @DashLeft.started -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnDashLeft;
-                @DashLeft.performed -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnDashLeft;
-                @DashLeft.canceled -= m_Wrapper.m_OnGroundActionsCallbackInterface.OnDashLeft;
+                @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @MoveRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveRight;
+                @MoveRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveRight;
+                @MoveRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveRight;
+                @MoveLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveLeft;
+                @MoveLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveLeft;
+                @MoveLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveLeft;
+                @MoveDown.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveDown;
+                @MoveDown.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveDown;
+                @MoveDown.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveDown;
+                @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @LMouse.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLMouse;
+                @LMouse.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLMouse;
+                @LMouse.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLMouse;
+                @RMouse.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRMouse;
+                @RMouse.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRMouse;
+                @RMouse.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRMouse;
+                @Interaction.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteraction;
+                @Interaction.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteraction;
+                @Interaction.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteraction;
             }
-            m_Wrapper.m_OnGroundActionsCallbackInterface = instance;
+            m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Jump.started += instance.OnJump;
@@ -380,12 +305,9 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
                 @MoveDown.started += instance.OnMoveDown;
                 @MoveDown.performed += instance.OnMoveDown;
                 @MoveDown.canceled += instance.OnMoveDown;
-                @Roll.started += instance.OnRoll;
-                @Roll.performed += instance.OnRoll;
-                @Roll.canceled += instance.OnRoll;
-                @Run.started += instance.OnRun;
-                @Run.performed += instance.OnRun;
-                @Run.canceled += instance.OnRun;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
                 @LMouse.started += instance.OnLMouse;
                 @LMouse.performed += instance.OnLMouse;
                 @LMouse.canceled += instance.OnLMouse;
@@ -395,28 +317,19 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
                 @Interaction.started += instance.OnInteraction;
                 @Interaction.performed += instance.OnInteraction;
                 @Interaction.canceled += instance.OnInteraction;
-                @DashRight.started += instance.OnDashRight;
-                @DashRight.performed += instance.OnDashRight;
-                @DashRight.canceled += instance.OnDashRight;
-                @DashLeft.started += instance.OnDashLeft;
-                @DashLeft.performed += instance.OnDashLeft;
-                @DashLeft.canceled += instance.OnDashLeft;
             }
         }
     }
-    public OnGroundActions @OnGround => new OnGroundActions(this);
-    public interface IOnGroundActions
+    public PlayerActions @Player => new PlayerActions(this);
+    public interface IPlayerActions
     {
         void OnJump(InputAction.CallbackContext context);
         void OnMoveRight(InputAction.CallbackContext context);
         void OnMoveLeft(InputAction.CallbackContext context);
         void OnMoveDown(InputAction.CallbackContext context);
-        void OnRoll(InputAction.CallbackContext context);
-        void OnRun(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
         void OnLMouse(InputAction.CallbackContext context);
         void OnRMouse(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
-        void OnDashRight(InputAction.CallbackContext context);
-        void OnDashLeft(InputAction.CallbackContext context);
     }
 }
