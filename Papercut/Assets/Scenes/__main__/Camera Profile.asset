@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Camera Profile
   m_EditorClassIdentifier: 
   components:
-  - {fileID: 6984870215873348038}
---- !u!114 &6984870215873348038
+  - {fileID: 8944719380785295047}
+--- !u!114 &8944719380785295047
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}

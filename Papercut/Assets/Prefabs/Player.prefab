@@ -559,8 +559,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _groundCheck: {fileID: 6262205275808004397}
-  _rightWallCheck: {fileID: 0}
-  _leftWallCheck: {fileID: 0}
+  _leftWallCheck: {fileID: 8329194342448373007}
+  _rightWallCheck: {fileID: 3096970355005447070}
   _ceilingCheck: {fileID: 6262205275976348307}
   _groundLayerMask:
     serializedVersion: 2
@@ -587,19 +587,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc02f1e8e7ca4b4a8131fd6b9ac64e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LockPlayer: 0
-  LockMouse: 0
+  _mainCamera: {fileID: 0}
   _rightInputState: 0
   _leftInputState: 0
   _jumpInputState: 0
   _downInputState: 0
-  _rollInputState: 0
   _runInputState: 0
+  _dashInputState: 0
   _lMouseInputState: 0
   _rMouseInputState: 0
   _interactionInputState: 0
-  _DashRightInputState: 0
-  _DashLeftInputState: 0
 --- !u!95 &43368429003359864
 Animator:
   serializedVersion: 3

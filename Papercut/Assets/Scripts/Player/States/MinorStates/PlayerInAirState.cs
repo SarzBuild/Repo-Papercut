@@ -53,7 +53,7 @@ public class PlayerInAirState : PlayerState
         }
         else if (PlayerData.RawInputValue != 0)
         {
-            if (Player.InputHandler.ListenRunInput() == 2 && Player.CurrentDashCount >= 1)
+            if (Player.InputHandler.ListenDashInput == 2 && Player.CurrentDashCount >= 1)
             {
                 StateMachine.ChangeState(Player.DashState);
             }

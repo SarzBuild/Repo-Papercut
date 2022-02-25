@@ -41,7 +41,7 @@ public class PlayerWallJumpState : PlayerState
         var min = Mathf.InverseLerp(maxY,minY,_percentTimeCurve) * PlayerData.MinCurvaturePercent;
         var percentage = min + max;
 
-        PlayerData.WallJumpCurrentAngle = PlayerData.CurveModifier.Evaluate(percentage)*100;
+        PlayerData.WallJumpCurrentAngle = PlayerData.CurveSpeedModifier.Evaluate(percentage)*100;
         
         _angle = new Vector2((float)Mathf.Cos(PlayerData.WallJumpCurrentAngle * Mathf.PI / 180), (float)Mathf.Sin(PlayerData.WallJumpCurrentAngle * Mathf.PI / 180));
         
