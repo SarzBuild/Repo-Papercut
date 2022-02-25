@@ -27,7 +27,9 @@ public enum PlayerStateId
     [StateName("wallGrab")]
     WallGrab,
     [StateName("wallJump")]
-    WallJump
+    WallJump,
+    [StateName("grappling")]
+    Grappling
 }
 
 public class PlayerState
@@ -71,7 +73,7 @@ public class PlayerState
 
     public virtual void LogicUpdate()
     {
-        PlayerData.RawInputValue = Mathf.Clamp(-Player.InputHandler.ListenLeftInput() + Player.InputHandler.ListenRightInput(),-1f,1f);
+        PlayerData.RawInputValue = Mathf.Clamp(-Player.InputHandler.ListenLeftInput + Player.InputHandler.ListenRightInput,-1f,1f);
     }
 
     public virtual void PhysicsUpdate()

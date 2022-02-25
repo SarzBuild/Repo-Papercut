@@ -35,7 +35,7 @@ public class PlayerWallGrabState : PlayerState
             SetWallJumpBool();
             StateMachine.ChangeState(Player.WallJumpState);
         }
-        else if (Player.InputHandler.ListenDownInput() == 2 || !CheckForNotOnStickyWall())
+        else if (Player.InputHandler.ListenDownInput == 2 || !CheckForNotOnStickyWall())
         {
             SetWallJumpBool();
             if(Player.FacingDirection == 1) PlayerData.CurrentHorizontalSpeed = PlayerData.EndWallSlipXVelocity;

@@ -15,13 +15,13 @@ MonoBehaviour:
   description: JT's Testing Player Data
   RawInputValue: 0
   Velocity: {x: 0, y: 0}
-  LastPosition: {x: -5.7683396, y: 2.2010133}
-  LastTimeJumpKeyWasPressed: 18.660583
+  LastPosition: {x: -0.5405656, y: 2.2010133}
+  LastTimeJumpKeyWasPressed: 75.45199
   CurrentHorizontalSpeed: 0
   CurrentVerticalSpeed: 0
   PlayerLandedThisFrame: 0
   CollisionDown: 1
-  TimePlayerStoppedGrounded: -3.4028235e+38
+  TimePlayerStoppedGrounded: 75.46031
   WalkingSpeed: 10
   RunningSpeed: 8
   CurrentSpeed: 10
@@ -39,7 +39,7 @@ MonoBehaviour:
   CoyoteUsable: 1
   CoyoteTimeThreshold: 0.1
   JumpBuffer: 0.1
-  EndedJumpEarly: 1
+  EndedJumpEarly: 0
   EndedJumpEarlyGravityModifier: 3
   ApexPoint: 0
   JumpApexSpeedBonus: 2
@@ -57,7 +57,7 @@ MonoBehaviour:
   WallLayerMask:
     serializedVersion: 2
     m_Bits: 65536
-  CurveModifier:
+  CurveSpeedModifier:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -83,9 +83,11 @@ MonoBehaviour:
     m_RotationOrder: 4
   MaxCurvaturePercent: 0.45
   MinCurvaturePercent: 0.05
-  WallJumpCurrentAngle: 38.600002
+  WallJumpCurrentAngle: 25.80002
   DelayOfWallJump: 0.2
   EndWallJumpYVelocity: 5
   EndWallJumpXVelocity: 5
   TimeBeforeSlippingStart: 1.5
   SlippingVelocity: 5
+  EndWallSlipYVelocity: 0
+  EndWallSlipXVelocity: 3

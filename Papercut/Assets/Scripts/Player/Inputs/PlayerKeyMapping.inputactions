@@ -2,7 +2,7 @@
     "name": "PlayerKeyMapping",
     "maps": [
         {
-            "name": "OnGround",
+            "name": "Player",
             "id": "da357e44-0313-42f5-a6c6-5f57c1c3310c",
             "actions": [
                 {
@@ -38,17 +38,9 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Roll",
+                    "name": "Dash",
                     "type": "Button",
                     "id": "666ab8b1-6b88-4cb5-b003-dc656b42f630",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Run",
-                    "type": "Button",
-                    "id": "6c6f0e37-3683-4e37-a17e-ce352d9ff21e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -73,22 +65,6 @@
                     "name": "Interaction",
                     "type": "Button",
                     "id": "b35256c7-6f54-4a73-8205-f9ff12cf620c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "DashRight",
-                    "type": "PassThrough",
-                    "id": "c83b1ff2-dda1-46a8-ac6a-eba271d5f7bd",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "DashLeft",
-                    "type": "PassThrough",
-                    "id": "20b47940-16ff-4007-b949-91495db2110f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -146,18 +122,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Roll",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "da0d85e4-a91e-4714-a6d2-71b1b07574f2",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Run",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -191,28 +156,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interaction",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9300c89e-1f42-47bb-9a9f-2a503ecd0ead",
-                    "path": "<Keyboard>/d",
-                    "interactions": "MultiTap",
-                    "processors": "",
-                    "groups": "",
-                    "action": "DashRight",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "30f60459-4022-4652-ba36-c0b58567343b",
-                    "path": "<Keyboard>/a",
-                    "interactions": "MultiTap",
-                    "processors": "",
-                    "groups": "",
-                    "action": "DashLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

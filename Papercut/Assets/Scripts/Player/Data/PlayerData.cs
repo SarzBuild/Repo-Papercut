@@ -80,7 +80,7 @@ public class PlayerData : ScriptableObject
 
     [SerializeField] public LayerMask WallLayerMask;
 
-    [SerializeField] public AnimationCurve CurveModifier;
+    [SerializeField] public AnimationCurve CurveSpeedModifier;
     [SerializeField][Range(0,1)] public float MaxCurvaturePercent = 0.45f;
     [SerializeField][Range(0,1)] public float MinCurvaturePercent = 0.05f;
     [SerializeField][Range(0,90)] public float WallJumpCurrentAngle;
@@ -92,5 +92,9 @@ public class PlayerData : ScriptableObject
     [SerializeField] public float SlippingVelocity;
     [SerializeField] public float EndWallSlipYVelocity;
     [SerializeField] public float EndWallSlipXVelocity;
+    
+    /*[Header("Grappling")]
+    
+    /public SpringJoint2D*/
 
 }

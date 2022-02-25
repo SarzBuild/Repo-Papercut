@@ -38,7 +38,7 @@ public class PlayerMoveState : PlayerState
         {
             StateMachine.ChangeState(Player.InAirState);
         }
-        else if (Player.InputHandler.ListenRunInput() == 2 && Player.CurrentDashCount >= 1)
+        else if (Player.InputHandler.ListenDashInput == 2 && Player.CurrentDashCount >= 1)
         {
             StateMachine.ChangeState(Player.DashState);
         }
