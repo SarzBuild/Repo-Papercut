@@ -17,13 +17,13 @@ MonoBehaviour:
 '
   RawInputValue: 0
   Velocity: {x: 0, y: 0}
-  LastPosition: {x: -40.746895, y: 8.717053}
-  LastTimeJumpKeyWasPressed: 97.17891
+  LastPosition: {x: 10.15673, y: -18.225807}
+  LastTimeJumpKeyWasPressed: 8.389349
   CurrentHorizontalSpeed: 0
   CurrentVerticalSpeed: 0
   PlayerLandedThisFrame: 0
   CollisionDown: 1
-  TimePlayerStoppedGrounded: 0
+  TimePlayerStoppedGrounded: 8.406127
   WalkingSpeed: 25
   RunningSpeed: 15
   CurrentSpeed: 10
@@ -33,22 +33,22 @@ MonoBehaviour:
   FallClamped: -40
   MinimumFallSpeed: 80
   MaximumFallSpeed: 120
-  CurrentFallSpeed: 116.31424
+  CurrentFallSpeed: 80
   MaximumJumpCount: 2
   CurrentJumpCount: 2
-  TimeBetweenDoubleJump: 0.05
-  JumpHeight: 30
+  TimeBetweenDoubleJump: 0.03
+  JumpHeight: 25
   CoyoteUsable: 1
   CoyoteTimeThreshold: 0.1
   JumpBuffer: 0.1
-  EndedJumpEarly: 1
+  EndedJumpEarly: 0
   EndedJumpEarlyGravityModifier: 3
   ApexPoint: 0
   JumpApexSpeedBonus: 2
   JumpApexThreshold: 10
   DashAbilityActive: 0
-  DashingAcceleration: 7
-  DashingTime: 0.15
+  DashingAcceleration: 5
+  DashingTime: 0.05
   MaximumDashCount: 1
   DashCooldownTime: 2
   CanFireWeapon: 1
