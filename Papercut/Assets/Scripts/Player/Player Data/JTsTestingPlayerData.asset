@@ -15,13 +15,13 @@ MonoBehaviour:
   description: JT's Testing Player Data
   RawInputValue: 0
   Velocity: {x: 0, y: 0}
-  LastPosition: {x: -0.5405656, y: 2.2010133}
-  LastTimeJumpKeyWasPressed: 75.45199
+  LastPosition: {x: 6.7812076, y: 8.364281}
+  LastTimeJumpKeyWasPressed: 2.1630473
   CurrentHorizontalSpeed: 0
   CurrentVerticalSpeed: 0
   PlayerLandedThisFrame: 0
   CollisionDown: 1
-  TimePlayerStoppedGrounded: 75.46031
+  TimePlayerStoppedGrounded: 2.1824849
   WalkingSpeed: 10
   RunningSpeed: 8
   CurrentSpeed: 10
