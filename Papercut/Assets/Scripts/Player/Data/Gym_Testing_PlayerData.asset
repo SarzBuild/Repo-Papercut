@@ -17,15 +17,15 @@ MonoBehaviour:
 '
   RawInputValue: 0
   Velocity: {x: 0, y: 0}
-  LastPosition: {x: 10.15673, y: -18.225807}
-  LastTimeJumpKeyWasPressed: 8.389349
+  LastPosition: {x: -3.6410134, y: 2.2133806}
+  LastTimeJumpKeyWasPressed: 116.574554
   CurrentHorizontalSpeed: 0
   CurrentVerticalSpeed: 0
   PlayerLandedThisFrame: 0
   CollisionDown: 1
-  TimePlayerStoppedGrounded: 8.406127
+  TimePlayerStoppedGrounded: 111.44493
   WalkingSpeed: 25
-  RunningSpeed: 15
+  RunningSpeed: 35
   CurrentSpeed: 10
   Acceleration: 90
   MoveClamped: 13
@@ -35,7 +35,7 @@ MonoBehaviour:
   MaximumFallSpeed: 120
   CurrentFallSpeed: 80
   MaximumJumpCount: 2
-  CurrentJumpCount: 2
+  CurrentJumpCount: 1
   TimeBetweenDoubleJump: 0.03
   JumpHeight: 25
   CoyoteUsable: 1
@@ -85,7 +85,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   MaxCurvaturePercent: 0.45
   MinCurvaturePercent: 0.05
-  WallJumpCurrentAngle: 25.80002
+  WallJumpCurrentAngle: 13.000014
   DelayOfWallJump: 0.2
   EndWallJumpYVelocity: 5
   EndWallJumpXVelocity: 5
