@@ -1,34 +1,9 @@
 fileFormatVersion: 2
-guid: 3b8b9f0bbea33214f95f2463a804398e
+guid: 6b3353938a4eae14a92dd8649f0d5343
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: SADAO_MAT
-    second: {fileID: 2100000, guid: 1ad4b69393a9b944aa6d8e3ed0f55691, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Sadao_MDL_Roughness
-    second: {fileID: 2800000, guid: f7d2a6f938bfa6c41b1c830633fae54c, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Sadao_MDL_Sadao_MAT_BaseMap
-    second: {fileID: 2800000, guid: 15b0587a12b7ce547bbd26d4d876c280, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Sadao_MDL_Sadao_MAT_MaskMap
-    second: {fileID: 2800000, guid: d66a5b3b2b8d66448ac79146d8291034, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Sadao_MDL_Sadao_MAT_Normal
-    second: {fileID: 2800000, guid: fa378556cd047624e9f136ac79fb8c49, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -113,11 +88,11 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 2
+  animationType: 1
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
