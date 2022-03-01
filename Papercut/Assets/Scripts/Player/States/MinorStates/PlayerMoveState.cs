@@ -34,6 +34,10 @@ public class PlayerMoveState : PlayerState
         {
             StateMachine.ChangeState(Player.JumpState);
         }
+        else if (Player.InputHandler.ListenRMouseInput == 2)
+        {
+            StateMachine.ChangeState(Player.GrapplingState);
+        }
         else if (PlayerData.CurrentVerticalSpeed < 0)
         {
             StateMachine.ChangeState(Player.InAirState);

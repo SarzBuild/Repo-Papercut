@@ -72,6 +72,8 @@ public class PlayerData : ScriptableObject
     
     [SerializeField] public bool WallJumpAbilityActive;
 
+    [SerializeField] public int ResetNumberOfJumpOnWallGrab;
+
     [SerializeField] public bool CurrentlyOnStickyWall;
     
     [SerializeField] public bool CurrentlyWallJumping;
@@ -92,9 +94,25 @@ public class PlayerData : ScriptableObject
     [SerializeField] public float SlippingVelocity;
     [SerializeField] public float EndWallSlipYVelocity;
     [SerializeField] public float EndWallSlipXVelocity;
-    
-    /*[Header("Grappling")]
-    
-    /public SpringJoint2D*/
 
+    [Header("Grappling")] 
+    
+    [SerializeField]public LayerMask GrappleTargetableLayer;
+
+    [SerializeField]public AnimationCurve RopeAnimationCurve;
+
+    [SerializeField][Range(0.01f,4f)]public float StartWaveSize;
+
+    [SerializeField]public AnimationCurve RopeProgressionCurve;
+    
+    [SerializeField][Range(1,50)]public float RopeProgressionSpeed;
+
+    [SerializeField]public int RopePrecision;
+
+    [SerializeField]public float StraightenLineSpeed;
+
+    [SerializeField]public float PullingSpped;
+
+    [SerializeField]public float EndGrappleXVelocity;
+    [SerializeField]public float EndGrappleYVelocity;
 }

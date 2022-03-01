@@ -32,6 +32,7 @@ public class Player : AppliedPhysics
     public Animator Animator { get; private set; }
     public PlayerInputState InputHandler { get; private set; }
     public WeaponInventory Weapons { get; private set; }
+    public LineRenderer LineRenderer { get; private set; }
     #endregion
     
     [SerializeField] private PlayerData _playerData;
@@ -44,6 +45,7 @@ public class Player : AppliedPhysics
 
     private void Awake()
     {
+        LineRenderer = GetComponent<LineRenderer>();
         Weapons = GetComponent<WeaponInventory>();
         Animator = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputState>();
