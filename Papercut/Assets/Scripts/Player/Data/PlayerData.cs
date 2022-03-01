@@ -72,6 +72,8 @@ public class PlayerData : ScriptableObject
     
     [SerializeField] public bool WallJumpAbilityActive;
 
+    [SerializeField] public int ResetNumberOfJumpOnWallGrab;
+
     [SerializeField] public bool CurrentlyOnStickyWall;
     
     [SerializeField] public bool CurrentlyWallJumping;

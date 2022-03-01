@@ -19,7 +19,7 @@ public class PlayerWallGrabState : PlayerState
         _lastTimeEnterState = Time.time;
         Player.SetVelocityZero();
         Player.FlipCharacterDirection();
-        PlayerData.CurrentJumpCount = 1;
+        PlayerData.CurrentJumpCount = PlayerData.ResetNumberOfJumpOnWallGrab;
     }
 
     public override void ExitState()
