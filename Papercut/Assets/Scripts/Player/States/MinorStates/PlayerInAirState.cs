@@ -36,6 +36,10 @@ public class PlayerInAirState : PlayerState
         {
             StateMachine.ChangeState(Player.JumpState);
         }
+        else if (Player.InputHandler.ListenRMouseInput == 2)
+        {
+            StateMachine.ChangeState(Player.GrapplingState);
+        }
         else if (Player.CheckForLayerWall() && !PlayerData.CurrentlyWallJumping)
         {
             StateMachine.ChangeState(Player.WallGrabState);

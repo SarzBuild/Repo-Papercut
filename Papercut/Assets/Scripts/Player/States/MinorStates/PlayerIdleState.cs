@@ -24,6 +24,10 @@ public class PlayerIdleState : PlayerState
     
     private void HandleStateChange()
     {
+        if (Player.InputHandler.ListenRMouseInput == 2)
+        {
+            StateMachine.ChangeState(Player.GrapplingState);
+        }
         if (Player.Grounded)
         {
             if (PlayerData.RawInputValue != 0)
