@@ -17,13 +17,13 @@ MonoBehaviour:
 '
   RawInputValue: 0
   Velocity: {x: 0, y: 0}
-  LastPosition: {x: -3.6410134, y: 2.2133806}
-  LastTimeJumpKeyWasPressed: 116.574554
+  LastPosition: {x: 55.670685, y: -18.211658}
+  LastTimeJumpKeyWasPressed: 59.17936
   CurrentHorizontalSpeed: 0
   CurrentVerticalSpeed: 0
   PlayerLandedThisFrame: 0
   CollisionDown: 1
-  TimePlayerStoppedGrounded: 111.44493
+  TimePlayerStoppedGrounded: -3.4028235e+38
   WalkingSpeed: 25
   RunningSpeed: 35
   CurrentSpeed: 10
@@ -35,7 +35,7 @@ MonoBehaviour:
   MaximumFallSpeed: 120
   CurrentFallSpeed: 80
   MaximumJumpCount: 2
-  CurrentJumpCount: 1
+  CurrentJumpCount: 2
   TimeBetweenDoubleJump: 0.03
   JumpHeight: 25
   CoyoteUsable: 1
@@ -53,6 +53,7 @@ MonoBehaviour:
   DashCooldownTime: 2
   CanFireWeapon: 1
   WallJumpAbilityActive: 1
+  ResetNumberOfJumpOnWallGrab: 0
   CurrentlyOnStickyWall: 0
   CurrentlyWallJumping: 0
   WallJumpingSpeed: 60
@@ -85,7 +86,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   MaxCurvaturePercent: 0.45
   MinCurvaturePercent: 0.05
-  WallJumpCurrentAngle: 13.000014
+  WallJumpCurrentAngle: 31.400013
   DelayOfWallJump: 0.2
   EndWallJumpYVelocity: 5
   EndWallJumpXVelocity: 5
@@ -93,3 +94,25 @@ MonoBehaviour:
   SlippingVelocity: 5
   EndWallSlipYVelocity: 0
   EndWallSlipXVelocity: 3
+  GrappleTargetableLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  RopeAnimationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  StartWaveSize: 0
+  RopeProgressionCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  RopeProgressionSpeed: 0
+  RopePrecision: 0
+  StraightenLineSpeed: 0
+  PullingSpped: 0
+  EndGrappleXVelocity: 0
+  EndGrappleYVelocity: 0
