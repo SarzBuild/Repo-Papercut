@@ -115,7 +115,7 @@ public class PlayerGrapplingState : PlayerState
         {
             if ((PlayerData.GrappleTargetableLayer.value & (1 << hit.transform.gameObject.layer)) > 0) { _canGrapple = true; }
             else { _canGrapple = false; }
-                
+              
             _grapplePoint = hit.collider.ClosestPoint(hit.point);
             _grappleDistanceVector = _grapplePoint - _startPoint;
             ShootRope();
