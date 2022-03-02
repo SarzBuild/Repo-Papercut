@@ -17,46 +17,46 @@ MonoBehaviour:
 '
   RawInputValue: 0
   Velocity: {x: 0, y: 0}
-  LastPosition: {x: -35.888035, y: 7.533888}
-  LastTimeJumpKeyWasPressed: 49.03226
-  CurrentHorizontalSpeed: 0
-  CurrentVerticalSpeed: 0
+  LastPosition: {x: 44.87298, y: 29.125332}
+  LastTimeJumpKeyWasPressed: 17.440432
+  CurrentHorizontalSpeed: 16.899998
+  CurrentVerticalSpeed: -5.601921
   PlayerLandedThisFrame: 0
-  CollisionDown: 1
+  CollisionDown: 0
   TimePlayerStoppedGrounded: -3.4028235e+38
-  WalkingSpeed: 10
+  WalkingSpeed: 8
   RunningSpeed: 15
-  CurrentSpeed: 10
+  CurrentSpeed: 8
   Acceleration: 90
-  MoveClamped: 13
+  MoveClamped: 8
   Deceleration: 60
   FallClamped: -40
   MinimumFallSpeed: 80
   MaximumFallSpeed: 120
-  CurrentFallSpeed: 80
+  CurrentFallSpeed: 112.77382
   MaximumJumpCount: 2
   CurrentJumpCount: 2
   TimeBetweenDoubleJump: 0.03
-  JumpHeight: 25
-  CoyoteUsable: 1
+  JumpHeight: 19
+  CoyoteUsable: 0
   CoyoteTimeThreshold: 0.1
   JumpBuffer: 0.1
-  EndedJumpEarly: 0
+  EndedJumpEarly: 1
   EndedJumpEarlyGravityModifier: 3
-  ApexPoint: 0
+  ApexPoint: 0.8193455
   JumpApexSpeedBonus: 2
   JumpApexThreshold: 10
   DashAbilityActive: 0
-  DashingAcceleration: 5
-  DashingTime: 0.05
+  DashingAcceleration: 10
+  DashingTime: 0.08
   MaximumDashCount: 1
   DashCooldownTime: 2
   CanFireWeapon: 1
   WallJumpAbilityActive: 1
-  ResetNumberOfJumpOnWallGrab: 1
+  ResetNumberOfJumpOnWallGrab: 2
   CurrentlyOnStickyWall: 0
   CurrentlyWallJumping: 0
-  WallJumpingSpeed: 60
+  WallJumpingSpeed: 22.5
   WallLayerMask:
     serializedVersion: 2
     m_Bits: 65536
@@ -84,12 +84,12 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  MaxCurvaturePercent: 0.45
-  MinCurvaturePercent: 0.05
-  WallJumpCurrentAngle: 22.600018
+  MaxCurvaturePercent: 0.351
+  MinCurvaturePercent: 0.058
+  WallJumpCurrentAngle: 24.552011
   DelayOfWallJump: 0.2
-  EndWallJumpYVelocity: 5
-  EndWallJumpXVelocity: 5
+  EndWallJumpYVelocity: 3
+  EndWallJumpXVelocity: 20.5
   TimeBeforeSlippingStart: 1.5
   SlippingVelocity: 5
   EndWallSlipYVelocity: 0
