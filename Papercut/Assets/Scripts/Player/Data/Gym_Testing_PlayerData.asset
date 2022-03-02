@@ -17,8 +17,8 @@ MonoBehaviour:
 '
   RawInputValue: 0
   Velocity: {x: 0, y: 0}
-  LastPosition: {x: 55.670685, y: -18.211658}
-  LastTimeJumpKeyWasPressed: 59.17936
+  LastPosition: {x: 13.53273, y: 7.6218815}
+  LastTimeJumpKeyWasPressed: 56.351597
   CurrentHorizontalSpeed: 0
   CurrentVerticalSpeed: 0
   PlayerLandedThisFrame: 0
@@ -41,7 +41,7 @@ MonoBehaviour:
   CoyoteUsable: 1
   CoyoteTimeThreshold: 0.1
   JumpBuffer: 0.1
-  EndedJumpEarly: 0
+  EndedJumpEarly: 1
   EndedJumpEarlyGravityModifier: 3
   ApexPoint: 0
   JumpApexSpeedBonus: 2
@@ -96,23 +96,95 @@ MonoBehaviour:
   EndWallSlipXVelocity: 3
   GrappleTargetableLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   RopeAnimationCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.17083333
+      value: 0.04009434
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.3251479
+      value: -0.027234152
+      inSlope: 0.8091829
+      outSlope: 0.8091829
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.16648403
+    - serializedVersion: 3
+      time: 0.44505093
+      value: 0.05937183
+      inSlope: -0.13367322
+      outSlope: -0.13367322
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5876671
+      value: -0.023679055
+      inSlope: 0.02592839
+      outSlope: 0.02592839
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  StartWaveSize: 0
+  StartWaveSize: 2.06
   RopeProgressionCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  RopeProgressionSpeed: 0
-  RopePrecision: 0
-  StraightenLineSpeed: 0
-  PullingSpped: 0
-  EndGrappleXVelocity: 0
-  EndGrappleYVelocity: 0
+  RopeProgressionSpeed: 6.5
+  RopePrecision: 50
+  StraightenLineSpeed: 10
+  PullingSpped: 15
+  EndGrappleXVelocity: 2
+  EndGrappleYVelocity: 2
