@@ -15,13 +15,13 @@ MonoBehaviour:
   description: JT's Testing Player Data
   RawInputValue: 0
   Velocity: {x: 0, y: 0}
-  LastPosition: {x: -33.809498, y: 17.084345}
-  LastTimeJumpKeyWasPressed: 1.4327661
+  LastPosition: {x: -32.174507, y: 17.084345}
+  LastTimeJumpKeyWasPressed: 246.21613
   CurrentHorizontalSpeed: 0
   CurrentVerticalSpeed: 0
   PlayerLandedThisFrame: 0
   CollisionDown: 1
-  TimePlayerStoppedGrounded: 5.5041656
+  TimePlayerStoppedGrounded: 246.23982
   WalkingSpeed: 10
   RunningSpeed: 8
   CurrentSpeed: 10
@@ -51,6 +51,7 @@ MonoBehaviour:
   DashCooldownTime: 2
   CanFireWeapon: 1
   WallJumpAbilityActive: 1
+  ResetNumberOfJumpOnWallGrab: 2
   CurrentlyOnStickyWall: 0
   CurrentlyWallJumping: 0
   WallJumpingSpeed: 60
@@ -83,7 +84,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   MaxCurvaturePercent: 0.45
   MinCurvaturePercent: 0.05
-  WallJumpCurrentAngle: 33.00001
+  WallJumpCurrentAngle: 34.600006
   DelayOfWallJump: 0.2
   EndWallJumpYVelocity: 5
   EndWallJumpXVelocity: 5

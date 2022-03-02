@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
-using UnityEngine.ProBuilder;
 using Vector2 = UnityEngine.Vector2;
 
 public class PlayerGrapplingState : PlayerState
@@ -68,6 +67,8 @@ public class PlayerGrapplingState : PlayerState
         {
             StateMachine.ChangeState(Player.InAirState);
         }
+        
+        _startPoint = Player.transform.position;
         
         if (!_canStartRopeAnimation) {return;}
         DrawRope();
