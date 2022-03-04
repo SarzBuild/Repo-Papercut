@@ -510,7 +510,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22010298084981165, guid: 1cad223133e78a74b9c044b48e3ee151, type: 3}
       propertyPath: m_LocalScale.z
-      value: 6.368357
+      value: 3.8
       objectReference: {fileID: 0}
     - target: {fileID: 22010298084981165, guid: 1cad223133e78a74b9c044b48e3ee151, type: 3}
       propertyPath: m_LocalPosition.x
@@ -522,7 +522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22010298084981165, guid: 1cad223133e78a74b9c044b48e3ee151, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.22
       objectReference: {fileID: 0}
     - target: {fileID: 22010298084981165, guid: 1cad223133e78a74b9c044b48e3ee151, type: 3}
       propertyPath: m_LocalRotation.w
@@ -682,7 +682,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh75836
+  m_Name: pb_Mesh25010
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1758,7 +1758,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3703357167428904503, guid: 71f313ba0bc656f44be9f25d293f191a, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3703357167428904503, guid: 71f313ba0bc656f44be9f25d293f191a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2012,7 +2012,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7426489646541233251, guid: 590f90d490c0c3b44b40bd641ea0449c, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7426489646541233251, guid: 590f90d490c0c3b44b40bd641ea0449c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2367,7 +2367,7 @@ PrefabInstance:
       objectReference: {fileID: 1115858037}
     - target: {fileID: 8305043159366102501, guid: c607e4b3c1da50a409e52fd3289af8fa, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8305043159366102501, guid: c607e4b3c1da50a409e52fd3289af8fa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10540,7 +10540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6262205277068168286, guid: fd018425d2e6cb64681890150e6d0568, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6262205277068168286, guid: fd018425d2e6cb64681890150e6d0568, type: 3}
       propertyPath: m_LocalPosition.x
