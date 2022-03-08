@@ -33,8 +33,9 @@ public class Player : AppliedPhysics
     public PlayerInputState InputHandler { get; private set; }
     public WeaponInventory Weapons { get; private set; }
     public LineRenderer LineRenderer { get; private set; }
+    public HealthComponent HealthComponent { get; private set; }
     #endregion
-    
+
     [SerializeField] private PlayerData _playerData;
 
     private StringBuilder _debugMessage = new StringBuilder(600);
@@ -49,6 +50,7 @@ public class Player : AppliedPhysics
         Weapons = GetComponent<WeaponInventory>();
         Animator = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputState>();
+        HealthComponent = GetComponent<HealthComponent>();
         _rigidbody2D = GetComponentInParent<Rigidbody2D>();
         _facingDirection = 1;
         _canSetVelocity = true;
@@ -81,11 +83,17 @@ public class Player : AppliedPhysics
         WallJumpState = new PlayerWallJumpState(this, StateMachine, _playerData);
         GrapplingState = new PlayerGrapplingState(this, StateMachine, _playerData);
     }
-    
+
+    private void InitializeHealth()
+    {
+        HealthComponent.OnDeath += OnPlayerDeath;
+        // Other component events exist here too, tag on to trigger animation/sound/FX
+    }
 
     private void Start()
     {
         InitializeProperties();
+        InitializeHealth();
         StateMachine.Initialize(IdleState);
     }
 
@@ -294,5 +302,16 @@ public class Player : AppliedPhysics
             Grounded, CeilingHit, WallFrontHit, WallBackHit);
         InputHandler.AppendDebugMessage(ref _debugMessage);
         Debug.Log(_debugMessage.ToString());
+    }
+
+    private void OnPlayerDeath(HealthComponent component, GameObject killer)
+    {
+        if (killer != null)
+        {
+            Debug.Log(string.Format("Player killed by {0}", killer.name));
+        }
+
+        Debug.LogWarning("You died!");
+        Destroy(gameObject); // gameover
     }
 }
