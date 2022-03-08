@@ -17,13 +17,13 @@ MonoBehaviour:
 '
   RawInputValue: 0
   Velocity: {x: 0, y: 0}
-  LastPosition: {x: 14.74985, y: 7.5338874}
-  LastTimeJumpKeyWasPressed: 6.146577
-  CurrentHorizontalSpeed: 0
+  LastPosition: {x: 20.885904, y: 7.5338874}
+  LastTimeJumpKeyWasPressed: 122.96565
+  CurrentHorizontalSpeed: 0.0000011920929
   CurrentVerticalSpeed: 0
   PlayerLandedThisFrame: 0
   CollisionDown: 1
-  TimePlayerStoppedGrounded: -3.4028235e+38
+  TimePlayerStoppedGrounded: 138.68321
   WalkingSpeed: 8
   RunningSpeed: 15
   CurrentSpeed: 8
@@ -41,7 +41,7 @@ MonoBehaviour:
   CoyoteUsable: 1
   CoyoteTimeThreshold: 0.1
   JumpBuffer: 0.1
-  EndedJumpEarly: 1
+  EndedJumpEarly: 0
   EndedJumpEarlyGravityModifier: 3
   ApexPoint: 0
   JumpApexSpeedBonus: 2
@@ -86,7 +86,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   MaxCurvaturePercent: 0.351
   MinCurvaturePercent: 0.058
-  WallJumpCurrentAngle: 24.552011
+  WallJumpCurrentAngle: 14.590012
   DelayOfWallJump: 0.2
   EndWallJumpYVelocity: 3
   EndWallJumpXVelocity: 20.5
@@ -110,8 +110,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.17083333
-      value: 0.04009434
+      time: 0.085277304
+      value: 0.1930896
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -119,17 +119,17 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.3251479
-      value: -0.027234152
-      inSlope: 0.8091829
-      outSlope: 0.8091829
+      time: 0.18552527
+      value: -0.3102074
+      inSlope: 0.18672754
+      outSlope: 0.18672754
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.16648403
+      outWeight: 0.29812816
     - serializedVersion: 3
-      time: 0.44505093
-      value: 0.05937183
+      time: 0.2745187
+      value: 0.05632788
       inSlope: -0.13367322
       outSlope: -0.13367322
       tangentMode: 0
@@ -137,14 +137,41 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.5876671
-      value: -0.023679055
-      inSlope: 0.02592839
-      outSlope: 0.02592839
+      time: 0.36787438
+      value: -0.3754198
+      inSlope: 0.04907089
+      outSlope: 0.04907089
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.8810787
+    - serializedVersion: 3
+      time: 0.46033424
+      value: -0.0056447983
+      inSlope: -0.16670364
+      outSlope: -0.16670364
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.21571265
+    - serializedVersion: 3
+      time: 0.6150345
+      value: -0.4793098
+      inSlope: 0.18175769
+      outSlope: 0.18175769
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.31902373
+    - serializedVersion: 3
+      time: 0.7587555
+      value: 0.25484917
+      inSlope: -0.0053478056
+      outSlope: -0.0053478056
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.23584196
     - serializedVersion: 3
       time: 1
       value: 0
@@ -154,37 +181,37 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0
       outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
+    m_PreInfinity: 0
+    m_PostInfinity: 0
     m_RotationOrder: 4
-  StartWaveSize: 2.06
+  StartWaveSize: 2
   RopeProgressionCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  RopeProgressionSpeed: 6.5
-  RopePrecision: 75
-  StraightenLineSpeed: 5
+  RopeProgressionSpeed: 6.7
+  RopePrecision: 50
+  StraightenLineSpeed: 10
   PullingSpped: 15
   EndGrappleXVelocity: 2
   EndGrappleYVelocity: 2
