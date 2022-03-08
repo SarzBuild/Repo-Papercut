@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2299384acb6ba7348983e3a87d00d522, type: 3}
+  m_Name: Gym_Testing_PlayerData
+  m_EditorClassIdentifier: 
+  description: 'Brads Horizontal Movement Gym Data Tests
+
+'
+  RawInputValue: 0
+  Velocity: {x: 0, y: 0}
+  LastPosition: {x: -3.6410134, y: 2.2133806}
+  LastTimeJumpKeyWasPressed: 116.574554
+  CurrentHorizontalSpeed: 0
+  CurrentVerticalSpeed: 0
+  PlayerLandedThisFrame: 0
+  CollisionDown: 1
+  TimePlayerStoppedGrounded: 111.44493
+  WalkingSpeed: 25
+  RunningSpeed: 35
+  CurrentSpeed: 10
+  Acceleration: 90
+  MoveClamped: 13
+  Deceleration: 60
+  FallClamped: -40
+  MinimumFallSpeed: 80
+  MaximumFallSpeed: 120
+  CurrentFallSpeed: 80
+  MaximumJumpCount: 2
+  CurrentJumpCount: 1
+  TimeBetweenDoubleJump: 0.03
+  JumpHeight: 25
+  CoyoteUsable: 1
+  CoyoteTimeThreshold: 0.1
+  JumpBuffer: 0.1
+  EndedJumpEarly: 0
+  EndedJumpEarlyGravityModifier: 3
+  ApexPoint: 0
+  JumpApexSpeedBonus: 2
+  JumpApexThreshold: 10
+  DashAbilityActive: 0
+  DashingAcceleration: 5
+  DashingTime: 0.05
+  MaximumDashCount: 1
+  DashCooldownTime: 2
+  CanFireWeapon: 1
+  WallJumpAbilityActive: 1
+  CurrentlyOnStickyWall: 0
+  CurrentlyWallJumping: 0
+  WallJumpingSpeed: 60
+  WallLayerMask:
+    serializedVersion: 2
+    m_Bits: 65536
+  CurveSpeedModifier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  MaxCurvaturePercent: 0.45
+  MinCurvaturePercent: 0.05
+  WallJumpCurrentAngle: 13.000014
+  DelayOfWallJump: 0.2
+  EndWallJumpYVelocity: 5
+  EndWallJumpXVelocity: 5
+  TimeBeforeSlippingStart: 1.5
+  SlippingVelocity: 5
+  EndWallSlipYVelocity: 0
+  EndWallSlipXVelocity: 3

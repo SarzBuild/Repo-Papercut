@@ -1,0 +1,206 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2299384acb6ba7348983e3a87d00d522, type: 3}
+  m_Name: JTsTestingPlayerData
+  m_EditorClassIdentifier: 
+  description: JT's Testing Player Data
+  RawInputValue: 0
+  Velocity: {x: 0, y: 0}
+  LastPosition: {x: -32.174507, y: 17.084345}
+  LastTimeJumpKeyWasPressed: 246.21613
+  CurrentHorizontalSpeed: 0
+  CurrentVerticalSpeed: 0
+  PlayerLandedThisFrame: 0
+  CollisionDown: 1
+  TimePlayerStoppedGrounded: 246.23982
+  WalkingSpeed: 10
+  RunningSpeed: 8
+  CurrentSpeed: 10
+  Acceleration: 90
+  MoveClamped: 13
+  Deceleration: 60
+  FallClamped: -40
+  MinimumFallSpeed: 80
+  MaximumFallSpeed: 120
+  CurrentFallSpeed: 80
+  MaximumJumpCount: 2
+  CurrentJumpCount: 2
+  TimeBetweenDoubleJump: 0.05
+  JumpHeight: 30
+  CoyoteUsable: 1
+  CoyoteTimeThreshold: 0.1
+  JumpBuffer: 0.1
+  EndedJumpEarly: 0
+  EndedJumpEarlyGravityModifier: 3
+  ApexPoint: 0
+  JumpApexSpeedBonus: 2
+  JumpApexThreshold: 10
+  DashAbilityActive: 0
+  DashingAcceleration: 7
+  DashingTime: 0.15
+  MaximumDashCount: 1
+  DashCooldownTime: 2
+  CanFireWeapon: 1
+  WallJumpAbilityActive: 1
+  ResetNumberOfJumpOnWallGrab: 2
+  CurrentlyOnStickyWall: 0
+  CurrentlyWallJumping: 0
+  WallJumpingSpeed: 60
+  WallLayerMask:
+    serializedVersion: 2
+    m_Bits: 65536
+  CurveSpeedModifier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  MaxCurvaturePercent: 0.45
+  MinCurvaturePercent: 0.05
+  WallJumpCurrentAngle: 34.600006
+  DelayOfWallJump: 0.2
+  EndWallJumpYVelocity: 5
+  EndWallJumpXVelocity: 5
+  TimeBeforeSlippingStart: 1.5
+  SlippingVelocity: 5
+  EndWallSlipYVelocity: 0
+  EndWallSlipXVelocity: 3
+  GrappleTargetableLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  RopeAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2.8240383
+      outSlope: 2.8240383
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.16294374
+      value: 0.46015936
+      inSlope: -9.38172
+      outSlope: -9.38172
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.18472809
+      value: -0.010109782
+      inSlope: -10.164953
+      outSlope: -10.164953
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4373704
+      value: 0.30760574
+      inSlope: -6.497817
+      outSlope: -6.497817
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.45569566
+      value: 0.04641193
+      inSlope: -11.441555
+      outSlope: -11.441555
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.31905335
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7661516
+      value: 0.30246586
+      inSlope: -1.1907374
+      outSlope: -1.1907374
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9143588
+      value: -0.17272225
+      inSlope: -0.59471476
+      outSlope: -0.59471476
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 2.0168126
+      outSlope: 2.0168126
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  StartWaveSize: 2
+  RopeProgressionCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  RopeProgressionSpeed: 6.7
+  RopePrecision: 50
+  StraightenLineSpeed: 10
+  PullingSpped: 15
+  EndGrappleXVelocity: 2
+  EndGrappleYVelocity: 2

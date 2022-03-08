@@ -12,16 +12,16 @@ TagManager:
   - Water
   - UI
   - 
-  - 
+  - Breakable
   - PostProcessing
   - Not in Reflection
-  - 
-  - 
+  - Grappling
+  - Sticky
   - Ground
   - Enemy
   - Player
-  - Slope
-  - 
+  - MoveableWall
+  - JumpableWall
   - 
   - 
   - 

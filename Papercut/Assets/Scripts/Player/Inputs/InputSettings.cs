@@ -9,13 +9,11 @@ using UnityEngine.InputSystem;
 [Serializable] public class MoveLeftInput : UnityEvent<int>{}
 [Serializable] public class MoveUpInput : UnityEvent<int>{}
 [Serializable] public class MoveDownInput : UnityEvent<int>{}
-[Serializable] public class MoveRollInput : UnityEvent<int>{}
 [Serializable] public class RunInput : UnityEvent<int>{}
 [Serializable] public class LMouseInput : UnityEvent<int>{}
 [Serializable] public class RMouseInput : UnityEvent<int>{}
 [Serializable] public class InteractionInput : UnityEvent<int>{}
-[Serializable] public class DashRightInput : UnityEvent<int>{}
-[Serializable] public class DashLeftInput : UnityEvent<int>{}
+[Serializable] public class DashInput : UnityEvent<int>{}
 
 public class InputSettings : MonoBehaviour
 {
@@ -26,13 +24,11 @@ public class InputSettings : MonoBehaviour
     [SerializeField] private MoveLeftInput _moveLeftInput;
     [SerializeField] private MoveUpInput _moveUpInput;
     [SerializeField] private MoveDownInput _moveDownInput;
-    [SerializeField] private MoveRollInput _moveRollInput;
     [SerializeField] private RunInput _runInput;
     [SerializeField] private LMouseInput _lMouseInput;
     [SerializeField] private RMouseInput _rMouseInput;
     [SerializeField] private InteractionInput _interactionInput;
-    [SerializeField] private DashRightInput _dashRightInput;
-    [SerializeField] private DashLeftInput _dashLeftInput;
+    [SerializeField] private DashInput _dashInput;
 
     private PlayerKeyMap _playerKeyMap; //NEW PLAYER KEY MAP VAR
 
@@ -42,45 +38,37 @@ public class InputSettings : MonoBehaviour
     {
         _playerKeyMap.Enable();
         //RIGHT INPUT
-        _playerKeyMap.OnGround.MoveRight.started += GetMovingRightStarted;
-        _playerKeyMap.OnGround.MoveRight.performed += GetMovingRightPerformed;
-        _playerKeyMap.OnGround.MoveRight.canceled += GetMovingRightCancelled;
+        _playerKeyMap.Player.MoveRight.started += GetMovingRightStarted;
+        _playerKeyMap.Player.MoveRight.performed += GetMovingRightPerformed;
+        _playerKeyMap.Player.MoveRight.canceled += GetMovingRightCancelled;
         //LEFT INPUT
-        _playerKeyMap.OnGround.MoveLeft.started += GetMovingLeftStarted;
-        _playerKeyMap.OnGround.MoveLeft.performed += GetMovingLeftPerformed;
-        _playerKeyMap.OnGround.MoveLeft.canceled += GetMovingLeftCancelled;
+        _playerKeyMap.Player.MoveLeft.started += GetMovingLeftStarted;
+        _playerKeyMap.Player.MoveLeft.performed += GetMovingLeftPerformed;
+        _playerKeyMap.Player.MoveLeft.canceled += GetMovingLeftCancelled;
         //UP INPUT
-        _playerKeyMap.OnGround.Jump.started += GetMovingUpStarted;
-        _playerKeyMap.OnGround.Jump.performed += GetMovingUpPerformed;
-        _playerKeyMap.OnGround.Jump.canceled += GetMovingUpCancelled;
+        _playerKeyMap.Player.Jump.started += GetMovingUpStarted;
+        _playerKeyMap.Player.Jump.performed += GetMovingUpPerformed;
+        _playerKeyMap.Player.Jump.canceled += GetMovingUpCancelled;
         //DOWN INPUT
-        _playerKeyMap.OnGround.MoveDown.started += GetMovingDownStarted;
-        _playerKeyMap.OnGround.MoveDown.performed += GetMovingDownPerformed;
-        _playerKeyMap.OnGround.MoveDown.canceled += GetMovingDownCancelled;
-        //ROLL INPUT
-        _playerKeyMap.OnGround.Roll.started += GetRollStarted;
-        _playerKeyMap.OnGround.Roll.performed += GetRollPerformed;
-        _playerKeyMap.OnGround.Roll.canceled += GetRollCancelled;
-        //RUN INPUT
-        _playerKeyMap.OnGround.Run.started += GetRunStarted;
-        _playerKeyMap.OnGround.Run.performed += GetRunPerformed;
-        _playerKeyMap.OnGround.Run.canceled += GetRunCancelled;
+        _playerKeyMap.Player.MoveDown.started += GetMovingDownStarted;
+        _playerKeyMap.Player.MoveDown.performed += GetMovingDownPerformed;
+        _playerKeyMap.Player.MoveDown.canceled += GetMovingDownCancelled;
         //LEFT MOUSE INPUT
-        _playerKeyMap.OnGround.LMouse.started += GetLMouseStarted;
-        _playerKeyMap.OnGround.LMouse.performed += GetLMousePerformed;
-        _playerKeyMap.OnGround.LMouse.canceled += GetLMouseCanceled;
+        _playerKeyMap.Player.LMouse.started += GetLMouseStarted;
+        _playerKeyMap.Player.LMouse.performed += GetLMousePerformed;
+        _playerKeyMap.Player.LMouse.canceled += GetLMouseCanceled;
         //RIGHT MOUSE INPUT
-        _playerKeyMap.OnGround.RMouse.started += GetRMouseStarted;
-        _playerKeyMap.OnGround.RMouse.performed += GetRMousePerformed;
-        _playerKeyMap.OnGround.RMouse.canceled += GetRMouseCanceled;
+        _playerKeyMap.Player.RMouse.started += GetRMouseStarted;
+        _playerKeyMap.Player.RMouse.performed += GetRMousePerformed;
+        _playerKeyMap.Player.RMouse.canceled += GetRMouseCanceled;
         //INTERACTION INPUT
-        _playerKeyMap.OnGround.Interaction.started += GetInteractionStarted;
-        _playerKeyMap.OnGround.Interaction.performed += GetInteractionPerformed;
-        _playerKeyMap.OnGround.Interaction.canceled += GetInteractionCanceled;
+        _playerKeyMap.Player.Interaction.started += GetInteractionStarted;
+        _playerKeyMap.Player.Interaction.performed += GetInteractionPerformed;
+        _playerKeyMap.Player.Interaction.canceled += GetInteractionCanceled;
         //DASH INPUT
-        /*_playerKeyMap.OnGround.DashRight.started += GetDashRightStarted;
-        _playerKeyMap.OnGround.DashRight.performed += GetDashRightPerformed;
-        _playerKeyMap.OnGround.MoveRight.canceled += GetDashRightCanceled;*/
+        _playerKeyMap.Player.Dash.started += GetDashStarted;
+        _playerKeyMap.Player.Dash.performed += GetDashPerformed;
+        _playerKeyMap.Player.Dash.canceled += GetDashCanceled;
         
     }
     
@@ -88,45 +76,37 @@ public class InputSettings : MonoBehaviour
     {
         _playerKeyMap.Disable();
         //RIGHT INPUT
-        _playerKeyMap.OnGround.MoveRight.started -= GetMovingRightStarted;
-        _playerKeyMap.OnGround.MoveRight.performed -= GetMovingRightPerformed;
-        _playerKeyMap.OnGround.MoveRight.canceled -= GetMovingRightCancelled;
+        _playerKeyMap.Player.MoveRight.started -= GetMovingRightStarted;
+        _playerKeyMap.Player.MoveRight.performed -= GetMovingRightPerformed;
+        _playerKeyMap.Player.MoveRight.canceled -= GetMovingRightCancelled;
         //LEFT INPUT
-        _playerKeyMap.OnGround.MoveLeft.started -= GetMovingLeftStarted;
-        _playerKeyMap.OnGround.MoveLeft.performed -= GetMovingLeftPerformed;
-        _playerKeyMap.OnGround.MoveLeft.canceled -= GetMovingLeftCancelled;
+        _playerKeyMap.Player.MoveLeft.started -= GetMovingLeftStarted;
+        _playerKeyMap.Player.MoveLeft.performed -= GetMovingLeftPerformed;
+        _playerKeyMap.Player.MoveLeft.canceled -= GetMovingLeftCancelled;
         //UP INPUT
-        _playerKeyMap.OnGround.Jump.started -= GetMovingUpStarted;
-        _playerKeyMap.OnGround.Jump.performed -= GetMovingUpPerformed;
-        _playerKeyMap.OnGround.Jump.canceled -= GetMovingUpCancelled;
+        _playerKeyMap.Player.Jump.started -= GetMovingUpStarted;
+        _playerKeyMap.Player.Jump.performed -= GetMovingUpPerformed;
+        _playerKeyMap.Player.Jump.canceled -= GetMovingUpCancelled;
         //DOWN INPUT
-        _playerKeyMap.OnGround.MoveDown.started -= GetMovingDownStarted;
-        _playerKeyMap.OnGround.MoveDown.performed -= GetMovingDownPerformed;
-        _playerKeyMap.OnGround.MoveDown.canceled -= GetMovingDownCancelled;
-        //ROLL INPUT
-        _playerKeyMap.OnGround.Roll.started -= GetRollStarted;
-        _playerKeyMap.OnGround.Roll.performed -= GetRollPerformed;
-        _playerKeyMap.OnGround.Roll.canceled -= GetRollCancelled;
-        //RUN INPUT
-        _playerKeyMap.OnGround.Run.started -= GetRunStarted;
-        _playerKeyMap.OnGround.Run.performed -= GetRunPerformed;
-        _playerKeyMap.OnGround.Run.canceled -= GetRunCancelled;
+        _playerKeyMap.Player.MoveDown.started -= GetMovingDownStarted;
+        _playerKeyMap.Player.MoveDown.performed -= GetMovingDownPerformed;
+        _playerKeyMap.Player.MoveDown.canceled -= GetMovingDownCancelled; 
         //LEFT MOUSE INPUT
-        _playerKeyMap.OnGround.LMouse.started -= GetLMouseStarted;
-        _playerKeyMap.OnGround.LMouse.performed -= GetLMousePerformed;
-        _playerKeyMap.OnGround.LMouse.canceled -= GetLMouseCanceled;
+        _playerKeyMap.Player.LMouse.started -= GetLMouseStarted;
+        _playerKeyMap.Player.LMouse.performed -= GetLMousePerformed;
+        _playerKeyMap.Player.LMouse.canceled -= GetLMouseCanceled;
         //RIGHT MOUSE INPUT
-        _playerKeyMap.OnGround.RMouse.started -= GetRMouseStarted;
-        _playerKeyMap.OnGround.RMouse.performed -= GetRMousePerformed;
-        _playerKeyMap.OnGround.RMouse.canceled -= GetRMouseCanceled;
+        _playerKeyMap.Player.RMouse.started -= GetRMouseStarted;
+        _playerKeyMap.Player.RMouse.performed -= GetRMousePerformed;
+        _playerKeyMap.Player.RMouse.canceled -= GetRMouseCanceled;
         //INTERACTION INPUT
-        _playerKeyMap.OnGround.Interaction.started -= GetInteractionStarted;
-        _playerKeyMap.OnGround.Interaction.performed -= GetInteractionPerformed;
-        _playerKeyMap.OnGround.Interaction.canceled -= GetInteractionCanceled;
+        _playerKeyMap.Player.Interaction.started -= GetInteractionStarted;
+        _playerKeyMap.Player.Interaction.performed -= GetInteractionPerformed;
+        _playerKeyMap.Player.Interaction.canceled -= GetInteractionCanceled;
         //DASH RIGHT INPUT
-        /*_playerKeyMap.OnGround.DashRight.started -= GetDashRightStarted;
-        _playerKeyMap.OnGround.DashRight.performed -= GetDashRightPerformed;
-        _playerKeyMap.OnGround.MoveRight.canceled -= GetDashRightCanceled;;*/
+        _playerKeyMap.Player.Dash.started -= GetDashStarted;
+        _playerKeyMap.Player.Dash.performed -= GetDashPerformed;
+        _playerKeyMap.Player.Dash.canceled -= GetDashCanceled;
     }
 
     //GENERIC CONVERTER
@@ -151,31 +131,25 @@ public class InputSettings : MonoBehaviour
     private void GetMovingDownStarted(InputAction.CallbackContext context) => _moveDownInput.Invoke(FloatToInt(context));
     private void GetMovingDownPerformed(InputAction.CallbackContext context) => _moveDownInput.Invoke(FloatToInt(context) + 1);
     private void GetMovingDownCancelled(InputAction.CallbackContext context) => _moveDownInput.Invoke(FloatToInt(context));
-
-    //ROLL INPUT ACTION INVOKER
-    private void GetRollStarted(InputAction.CallbackContext context) => _moveRollInput.Invoke(FloatToInt(context));
-    private void GetRollPerformed(InputAction.CallbackContext context) => _moveRollInput.Invoke(FloatToInt(context) + 1);
-    private void GetRollCancelled(InputAction.CallbackContext context) => _moveRollInput.Invoke(FloatToInt(context));
     
-    //RUN INPUT ACTION INVOKER
-    private void GetRunStarted(InputAction.CallbackContext context) => _runInput.Invoke(FloatToInt(context));
-    private void GetRunPerformed(InputAction.CallbackContext context) => _runInput.Invoke(FloatToInt(context) + 1);
-    private void GetRunCancelled(InputAction.CallbackContext context) => _runInput.Invoke(FloatToInt(context));
     //LEFT MOUSE INPUT ACTION INVOKER
     private void GetLMouseStarted(InputAction.CallbackContext context) => _lMouseInput.Invoke(FloatToInt(context));
     private void GetLMousePerformed(InputAction.CallbackContext context) => _lMouseInput.Invoke(FloatToInt(context) + 1);
     private void GetLMouseCanceled(InputAction.CallbackContext context) => _lMouseInput.Invoke(FloatToInt(context));
+    
     //RIGHT MOUSE INPUT ACTION INVOKER
     private void GetRMouseStarted(InputAction.CallbackContext context) => _rMouseInput.Invoke(FloatToInt(context));
     private void GetRMousePerformed(InputAction.CallbackContext context) => _rMouseInput.Invoke(FloatToInt(context) + 1);
     private void GetRMouseCanceled(InputAction.CallbackContext context) => _rMouseInput.Invoke(FloatToInt(context));
+    
     //INTERACTION INPUT ACTION INVOKER
     private void GetInteractionStarted(InputAction.CallbackContext context) => _interactionInput.Invoke(FloatToInt(context));
     private void GetInteractionPerformed(InputAction.CallbackContext context) => _interactionInput.Invoke(FloatToInt(context) + 1);
     private void GetInteractionCanceled(InputAction.CallbackContext context) => _interactionInput.Invoke(FloatToInt(context));
     
-    /*//DASH LEFT INPUT ACTION INVOKER
-    private void GetDashLeftStarted(InputAction.CallbackContext context) => _dashLeftInput.Invoke(FloatToInt(context));
-    private void GetDashLeftPerformed(InputAction.CallbackContext context) => _dashLeftInput.Invoke(FloatToInt(context) + 1);
-    private void GetDashLeftCanceled(InputAction.CallbackContext context) => _dashLeftInput.Invoke(FloatToInt(context));*/
+    //DASH LEFT INPUT ACTION INVOKER
+    private void GetDashStarted(InputAction.CallbackContext context) => _dashInput.Invoke(FloatToInt(context));
+    private void GetDashPerformed(InputAction.CallbackContext context) => _dashInput.Invoke(FloatToInt(context) + 1);
+    private void GetDashCanceled(InputAction.CallbackContext context) => _dashInput.Invoke(FloatToInt(context));
+    
 }

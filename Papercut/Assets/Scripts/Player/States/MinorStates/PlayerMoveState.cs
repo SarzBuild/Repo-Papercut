@@ -34,11 +34,15 @@ public class PlayerMoveState : PlayerState
         {
             StateMachine.ChangeState(Player.JumpState);
         }
-        else if (PlayerData._currentVerticalSpeed < 0)
+        else if (Player.InputHandler.ListenRMouseInput == 2)
+        {
+            StateMachine.ChangeState(Player.GrapplingState);
+        }
+        else if (PlayerData.CurrentVerticalSpeed < 0)
         {
             StateMachine.ChangeState(Player.InAirState);
         }
-        else if (Player.InputHandler.ListenRunInput() == 2 && Player.CurrentDashCount >= 1)
+        else if (Player.InputHandler.ListenDashInput == 2 && Player.CurrentDashCount >= 1)
         {
             StateMachine.ChangeState(Player.DashState);
         }

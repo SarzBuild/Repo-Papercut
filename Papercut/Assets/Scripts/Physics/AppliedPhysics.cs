@@ -3,19 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class AppliedPhysics : MonoBehaviour
 {
     [SerializeField] private Transform _groundCheck;
-    [SerializeField] private Transform _wallCheck;
-    [SerializeField] private Transform _ledgeCheckHorizontal;
-    [SerializeField] private Transform _ledgeCheckVertical;
+    [SerializeField] private protected Transform _leftWallCheck;
+    [SerializeField] private protected Transform _rightWallCheck;
     [SerializeField] private Transform _ceilingCheck;
-    [SerializeField] private LayerMask _groundLayerMask;
+    [SerializeField] public LayerMask _groundLayerMask;
     [SerializeField] private protected Rigidbody2D _rigidbody2D;
 
     [SerializeField] private protected float _groundCheckRadius;
     [SerializeField] private protected float _wallCheckDistance;
     [SerializeField] private protected int _facingDirection;
+    public int FacingDirection { get { return _facingDirection; } }
     [SerializeField] private protected bool _canSetVelocity;
     [SerializeField] public Vector2 _appliedVelocity;
     [SerializeField] private Vector2 _currentVelocity;
@@ -74,7 +75,7 @@ public class AppliedPhysics : MonoBehaviour
         }
     }
 
-    private void FlipCharacterDirection()
+    public void FlipCharacterDirection()
     {
         _facingDirection *= -1;
         _rigidbody2D.transform.Rotate(0.0f, 180.0f, 0.0f);
@@ -86,8 +87,6 @@ public class AppliedPhysics : MonoBehaviour
         UpdateGrounded();
         UpdateWallFrontHit();
         UpdateWallBackHit();
-        UpdateLedgeHorizontalHit();
-        UpdateLedgeVerticalHit();
     }
 
     // TODO Also cache the results of hit collider
@@ -99,19 +98,12 @@ public class AppliedPhysics : MonoBehaviour
     public Collider2D GroundedResult { get; private set; }
     public void UpdateGrounded() { GroundedResult = Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayerMask); }
 
-    public bool WallFrontHit { get { return WallFrontHitResult; } }
-    public RaycastHit2D WallFrontHitResult { get; private set; }
-    public void UpdateWallFrontHit() { WallFrontHitResult = Physics2D.Raycast(_wallCheck.position, Vector2.right * _facingDirection, _wallCheckDistance, _groundLayerMask); }
+    public bool WallFrontHit { get { return WallFrontHitResult.Length > 0; } }
+    public RaycastHit2D[] WallFrontHitResult { get; private set; }
+    public void UpdateWallFrontHit() { WallFrontHitResult = Physics2D.RaycastAll(_leftWallCheck.position, Vector2.right * _facingDirection, _wallCheckDistance, _groundLayerMask); }
 
-    public bool WallBackHit { get { return WallBackHitResult; } }
-    public RaycastHit2D WallBackHitResult { get; private set; }
-    public void UpdateWallBackHit() { WallBackHitResult = Physics2D.Raycast(_wallCheck.position, Vector2.right * -_facingDirection, _wallCheckDistance, _groundLayerMask); }
-
-    public bool LedgeHorizontalHit { get { return LedgeHorizontalHitResult; } }
-    public RaycastHit2D LedgeHorizontalHitResult { get; private set; }
-    public void UpdateLedgeHorizontalHit() { LedgeHorizontalHitResult = Physics2D.Raycast(_ledgeCheckHorizontal.position, Vector2.right * _facingDirection, _wallCheckDistance, _groundLayerMask); }
-
-    public bool LedgeVerticalHit { get; private set; }
-    public RaycastHit2D LedgeVerticleHitResult { get; private set; }
-    public void UpdateLedgeVerticalHit() { LedgeVerticalHit = Physics2D.Raycast(_ledgeCheckVertical.position, Vector2.down, _wallCheckDistance, _groundLayerMask); }
+    public bool WallBackHit { get { return WallBackHitResult.Length > 0; } }
+    public RaycastHit2D[] WallBackHitResult { get; private set; }
+    public void UpdateWallBackHit() { WallBackHitResult = Physics2D.RaycastAll(_rightWallCheck.position, Vector2.right * -_facingDirection, _wallCheckDistance); }
+    
 }

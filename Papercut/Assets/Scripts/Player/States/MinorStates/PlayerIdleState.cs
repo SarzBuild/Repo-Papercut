@@ -12,7 +12,7 @@ public class PlayerIdleState : PlayerState
     public override void EnterState()
     {
         base.EnterState();
-        Player.SetVelocityZero();
+        //Player.SetVelocityZero();
     }
     
     public override void LogicUpdate()
@@ -24,6 +24,10 @@ public class PlayerIdleState : PlayerState
     
     private void HandleStateChange()
     {
+        if (Player.InputHandler.ListenRMouseInput == 2)
+        {
+            StateMachine.ChangeState(Player.GrapplingState);
+        }
         if (Player.Grounded)
         {
             if (PlayerData.RawInputValue != 0)
