@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b605c1e960841394b9dffa477cd360f0, type: 3}
-  m_Name: PlayerHealthData
+  m_Name: GuardianHealth_Data
   m_EditorClassIdentifier: 
   description: 
   MaxHealth: 100
   DefaultHealth: 100
-  DefaultPipSplits: 4
+  DefaultPipSplits: 3
   CanDie: 1
   CanTakeDamage: 1
-  Regen: 0
+  Regen: 2
   SecondsToRegen: 5
   SecondsAfterNoDamageToRegen: 5

@@ -15,13 +15,17 @@ MonoBehaviour:
   description: JT's Testing Player Data
   RawInputValue: 0
   Velocity: {x: 0, y: 0}
-  LastPosition: {x: -32.174507, y: 17.084345}
-  LastTimeJumpKeyWasPressed: 246.21613
+  LastPosition: {x: -30.850029, y: 17.084345}
+  LastTimeJumpKeyWasPressed: 12.717077
   CurrentHorizontalSpeed: 0
   CurrentVerticalSpeed: 0
   PlayerLandedThisFrame: 0
   CollisionDown: 1
-  TimePlayerStoppedGrounded: 246.23982
+  TimePlayerStoppedGrounded: 12.742567
+  PlayerLayerMask:
+    serializedVersion: 2
+    m_Bits: 16384
+  KnockbackSpeed: 5
   WalkingSpeed: 10
   RunningSpeed: 8
   CurrentSpeed: 10
@@ -84,7 +88,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   MaxCurvaturePercent: 0.45
   MinCurvaturePercent: 0.05
-  WallJumpCurrentAngle: 34.600006
+  WallJumpCurrentAngle: 33.00001
   DelayOfWallJump: 0.2
   EndWallJumpYVelocity: 5
   EndWallJumpXVelocity: 5

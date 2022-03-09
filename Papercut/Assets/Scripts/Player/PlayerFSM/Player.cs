@@ -87,7 +87,13 @@ public class Player : AppliedPhysics
     private void InitializeHealth()
     {
         HealthComponent.OnDeath += OnPlayerDeath;
+        //HealthComponent.OnDamageTaken += Knockback;
         // Other component events exist here too, tag on to trigger animation/sound/FX
+    }
+    
+    private void OnDisable()
+    {
+        HealthComponent.OnDeath -= OnPlayerDeath;
     }
 
     private void Start()
@@ -270,13 +276,6 @@ public class Player : AppliedPhysics
         return false;
     }
 
-    /*public bool CheckIfRunning()
-    {
-        if(InputHandler.)
-    }*/
-    
-    
-
     public void UpdateStickyWallCollisions()
     {
         UpdateStickyWallBackHit();
@@ -290,9 +289,6 @@ public class Player : AppliedPhysics
     public bool WallStickyBackHit { get { return WallStickyBackHitResult; } }
     public RaycastHit2D WallStickyBackHitResult { get; private set; }
     public void UpdateStickyWallBackHit() { WallStickyBackHitResult = Physics2D.Raycast(_leftWallCheck.position, Vector2.right * -_facingDirection, _wallCheckDistance, _playerData.WallLayerMask); }
-    
-    
-    
 
     private void LogDebug()
     {
@@ -313,5 +309,13 @@ public class Player : AppliedPhysics
 
         Debug.LogWarning("You died!");
         Destroy(gameObject); // gameover
+    }
+
+    private void Knockback(HealthComponent component, float value)
+    {
+        var direction = (transform.position - component.transform.position);
+        var directionX = Mathf.Sign(direction.x);
+        Debug.Log(transform.position + " " + component.transform.position);
+        SetVelocityX(directionX * _playerData.KnockbackSpeed);
     }
 }

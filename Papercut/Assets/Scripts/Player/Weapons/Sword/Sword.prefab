@@ -144,6 +144,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Settings: {fileID: 11400000, guid: f22993b44a5325b408d06ee9ed6859e9, type: 2}
   m_MuteAudio: 0
+  GroundLayerMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  PlayerLayerMask:
+    serializedVersion: 2
+    m_Bits: 16384
 --- !u!95 &3471871779313101731
 Animator:
   serializedVersion: 3

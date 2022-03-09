@@ -2,15 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AbstractEnemyBase : AppliedPhysics
+public abstract class EnemyBase : AppliedPhysics
 {
-    private Node _topNode;
-
-    protected virtual void ConstructBehaviorTree()
-    {
-        
-    }
-
+    [SerializeField] protected Transform Player;
+    protected abstract void ConstructBehaviorTree();
+    
     protected virtual void OnDamaged()
     {
         
