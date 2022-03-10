@@ -193,7 +193,7 @@ TrailRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b93ce4e95b221604088641fcfb9a528c, type: 2}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -303,10 +303,10 @@ MonoBehaviour:
   _groundCheckRadius: 0.1
   _wallCheckDistance: 0.1
   _facingDirection: 0
-  _canSetVelocity: 0
+  _canSetVelocity: 1
   _appliedVelocity: {x: 0, y: 0}
   _currentVelocity: {x: 0, y: 0}
-  WeaponHoldPosition: {fileID: 0}
+  WeaponHoldPosition: {fileID: 1149188745198589076}
   _playerData: {fileID: 11400000, guid: 0ca9419354e518b408804f4c2b40bb26, type: 2}
   CurrentDashCount: 0
 --- !u!114 &1651818500472766122
@@ -480,7 +480,7 @@ LineRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: -2853218753171140493, guid: b47e2c51981e8af43af62db73024228f, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
