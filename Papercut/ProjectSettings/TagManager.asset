@@ -22,7 +22,7 @@ TagManager:
   - Player
   - MoveableWall
   - JumpableWall
-  - 
+  - Bullet
   - 
   - 
   - 

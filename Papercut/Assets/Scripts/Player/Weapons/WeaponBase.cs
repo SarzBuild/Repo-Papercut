@@ -69,6 +69,7 @@ public abstract class WeaponBase : MonoBehaviour
         if (Owner?.WeaponHoldPosition != null)
         {
             transform.SetParent(Owner.WeaponHoldPosition);
+            transform.localPosition = Vector3.zero; // Resets the position of the object to 0 for consistency 
         }
 
         if (m_AudioSource == null)

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: SwordSettings
   m_EditorClassIdentifier: 
   description: 
-  CooldownSec: 1
-  Damage: 1
+  FireCooldownSec: 1
+  FireWaitForAnimationToFinishEvent: 1
+  Damage: 10
   UsesAmmo: 0
   DefaultAmmo: 0
   AmmoPerFire: 1

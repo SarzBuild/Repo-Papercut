@@ -9,8 +9,24 @@ using Vector2 = UnityEngine.Vector2;
 public class Player : AppliedPhysics
 {
     public Transform WeaponHoldPosition;
-
+    private static Player _instance;
+    public static Player Instance {
+        get
+        {
+            if (_instance != null) return _instance;
+            
+            var singleton = FindObjectOfType<Player>();
+            if (singleton != null) return _instance;
+            
+            var go = new GameObject();
+            _instance = go.AddComponent<Player>();
+            return _instance;
+        }
+    }
+    
+    
     #region States
+
     public PlayerStateMachine StateMachine { get; private set; }
     public PlayerDashState DashState { get; private set; }
     public PlayerHardLandingState HardLandingState { get; private set; }
@@ -25,16 +41,20 @@ public class Player : AppliedPhysics
     public PlayerWallGrabState WallGrabState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; }
     public PlayerGrapplingState GrapplingState { get; private set; }
-    
+
     #endregion
 
     #region Components
+
     public Animator Animator { get; private set; }
     public PlayerInputState InputHandler { get; private set; }
     public WeaponInventory Weapons { get; private set; }
     public LineRenderer LineRenderer { get; private set; }
+    public HealthComponent HealthComponent { get; private set; }
+    public SkinnedMeshRenderer Renderer { get; private set; }
+
     #endregion
-    
+
     [SerializeField] private PlayerData _playerData;
 
     private StringBuilder _debugMessage = new StringBuilder(600);
@@ -42,14 +62,22 @@ public class Player : AppliedPhysics
     public int CurrentDashCount;
     private float _dashTimerCooldown;
     private bool _collisionDown;
+    private float _lastHitTime;
+    private Color _baseColor;
 
     private void Awake()
     {
+        if (_instance != null && _instance != this) Destroy(gameObject);
+        else _instance = this;
+        
         LineRenderer = GetComponent<LineRenderer>();
         Weapons = GetComponent<WeaponInventory>();
         Animator = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputState>();
+        HealthComponent = GetComponent<HealthComponent>();
         _rigidbody2D = GetComponentInParent<Rigidbody2D>();
+        Renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        _baseColor = Renderer.material.GetColor("_BaseColor");
         _facingDirection = 1;
         _canSetVelocity = true;
 
@@ -81,11 +109,25 @@ public class Player : AppliedPhysics
         WallJumpState = new PlayerWallJumpState(this, StateMachine, _playerData);
         GrapplingState = new PlayerGrapplingState(this, StateMachine, _playerData);
     }
+
+    private void InitializeHealth()
+    {
+        HealthComponent.OnDeath += OnPlayerDeath;
+        //HealthComponent.OnDamageTaken += Knockback;
+        HealthComponent.OnDamageTaken += BlinkRed;
+        // Other component events exist here too, tag on to trigger animation/sound/FX
+    }
     
+    private void OnDisable()
+    {
+        HealthComponent.OnDeath -= OnPlayerDeath;
+        HealthComponent.OnDamageTaken -= BlinkRed;
+    }
 
     private void Start()
     {
         InitializeProperties();
+        InitializeHealth();
         StateMachine.Initialize(IdleState);
     }
 
@@ -103,7 +145,9 @@ public class Player : AppliedPhysics
         HandleWeapons();
         
         TimerForWallGrabJumps();
-        
+
+        ResetColor();
+
         //LogDebug();
     }
 
@@ -262,13 +306,6 @@ public class Player : AppliedPhysics
         return false;
     }
 
-    /*public bool CheckIfRunning()
-    {
-        if(InputHandler.)
-    }*/
-    
-    
-
     public void UpdateStickyWallCollisions()
     {
         UpdateStickyWallBackHit();
@@ -282,9 +319,6 @@ public class Player : AppliedPhysics
     public bool WallStickyBackHit { get { return WallStickyBackHitResult; } }
     public RaycastHit2D WallStickyBackHitResult { get; private set; }
     public void UpdateStickyWallBackHit() { WallStickyBackHitResult = Physics2D.Raycast(_leftWallCheck.position, Vector2.right * -_facingDirection, _wallCheckDistance, _playerData.WallLayerMask); }
-    
-    
-    
 
     private void LogDebug()
     {
@@ -294,5 +328,39 @@ public class Player : AppliedPhysics
             Grounded, CeilingHit, WallFrontHit, WallBackHit);
         InputHandler.AppendDebugMessage(ref _debugMessage);
         Debug.Log(_debugMessage.ToString());
+    }
+
+    private void OnPlayerDeath(HealthComponent component, GameObject killer)
+    {
+        if (killer != null)
+        {
+            Debug.Log(string.Format("Player killed by {0}", killer.name));
+        }
+
+        Debug.LogWarning("You died!");
+        Destroy(gameObject); // gameover
+    }
+
+    private void Knockback(HealthComponent component, float value)
+    {
+        var direction = (transform.position - component.transform.position);
+        var directionX = Mathf.Sign(direction.x);
+        Debug.Log(transform.position + " " + component.transform.position);
+        SetVelocityX(directionX * _playerData.KnockbackSpeed);
+    }
+
+    private void BlinkRed(HealthComponent component, float value)
+    {
+        Renderer.material.SetColor("_BaseColor", Color.red);
+        _lastHitTime = Time.time;
+    }
+
+    private void ResetColor()
+    {
+        var nextFireTime = _lastHitTime + 0.1f;
+        if (Time.time - nextFireTime > 0)
+        {
+            Renderer.material.SetColor("_BaseColor", _baseColor);
+        }
     }
 }

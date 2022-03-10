@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15be026286bbafa40b609a19eb3a2b88, type: 3}
+  m_Name: Guardian_Data
+  m_EditorClassIdentifier: 
+  IdleTime: 5
+  PatrolTime: 5
+  CurrentVerticalSpeed: 0
+  CurrentHorizontalSpeed: 0
+  FallClamped: -40
+  CurrentFallSpeed: 12
+  ChaseRange: 8
+  AttackRange: 1.3
+  MoveClamped: 8
+  Deceleration: 15
+  Acceleration: 10
+  PatrolMoveClamped: 3
+  IdlingState: 0
+  KnockbackSpeed: 2

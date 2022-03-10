@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
-using UnityEngine.ProBuilder;
 using Vector2 = UnityEngine.Vector2;
 
 public class PlayerGrapplingState : PlayerState
@@ -69,6 +68,8 @@ public class PlayerGrapplingState : PlayerState
             StateMachine.ChangeState(Player.InAirState);
         }
         
+        _startPoint = Player.transform.position;
+        
         if (!_canStartRopeAnimation) {return;}
         DrawRope();
         _moveTime += Time.fixedDeltaTime;
@@ -93,8 +94,7 @@ public class PlayerGrapplingState : PlayerState
 
             if(Mathf.Abs(direction.x) > 0.5) { _velocityX = Mathf.Clamp(_velocityX + Mathf.Sign(direction.x) * PlayerData.PullingSpped * Time.fixedDeltaTime, -PlayerData.PullingSpped, PlayerData.PullingSpped); }
             else { _velocityX = Mathf.Sign(direction.x); }
-
-            if(Mathf.Abs(direction.y) < 0.5) { _velocityX = 0; }
+            
             
             if (Mathf.Abs(distance) > 1) { _velocityY = Mathf.Clamp(_velocityY + Mathf.Sign(direction.y) * PlayerData.PullingSpped * Time.fixedDeltaTime, -PlayerData.PullingSpped, PlayerData.PullingSpped); }
             else { _velocityY = 0; }
@@ -109,16 +109,24 @@ public class PlayerGrapplingState : PlayerState
     {
         ray = Player.InputHandler.GetMousePos - Player.transform.position;
         Player.CheckFlip((int)Mathf.Sign(ray.x));
+        
+        
+        var hits = Physics2D.RaycastAll(_startPoint, ray.normalized, Vector2.Distance(Player.InputHandler.GetMousePos,Player.transform.position));
 
-        var hit = Physics2D.Raycast(_startPoint, ray.normalized, Vector2.Distance(Player.InputHandler.GetMousePos,Player.transform.position));
-        if (hit)
+        if (hits.Length > 1) //Automatically hits the player therefor we nullify it by adding a default number of 1
         {
-            if ((PlayerData.GrappleTargetableLayer.value & (1 << hit.transform.gameObject.layer)) > 0) { _canGrapple = true; }
-            else { _canGrapple = false; }
-              
-            _grapplePoint = hit.collider.ClosestPoint(hit.point);
-            _grappleDistanceVector = _grapplePoint - _startPoint;
-            ShootRope();
+            foreach (var hit in hits)
+            {
+                if (hit.transform.gameObject.layer != PlayerData.PlayerLayerMask)
+                {
+                    if ((PlayerData.GrappleTargetableLayer.value & (1 << hit.transform.gameObject.layer)) > 0) { _canGrapple = true; }
+                    else { _canGrapple = false; }
+                
+                    _grapplePoint = hit.collider.ClosestPoint(hit.point);
+                    _grappleDistanceVector = _grapplePoint - _startPoint;
+                    ShootRope();
+                }
+            }
         }
         else
         {

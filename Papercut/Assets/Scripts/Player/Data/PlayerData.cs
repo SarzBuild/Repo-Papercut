@@ -20,6 +20,10 @@ public class PlayerData : ScriptableObject
     public bool CollisionDown;
     
     public float TimePlayerStoppedGrounded;
+
+    public LayerMask PlayerLayerMask;
+
+    public float KnockbackSpeed;
     
     [Header("On Ground")] 
     
