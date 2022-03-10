@@ -4,5 +4,53 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: 8fe7dfe0a94807843aa65bf4cf578c72
+  - enabled: 1
+    path: Assets/Scenes/Settings.unity
+    guid: 64582aa2f1b492f48853802089eb227c
+  - enabled: 1
+    path: Assets/Scenes/Level_Rooms/Room_001.unity
+    guid: 7b5ffb2c3b695004f9b46caa106e5806
+  - enabled: 1
+    path: Assets/Scenes/Level_Rooms/Room_002.unity
+    guid: 1c6db30d11602a4469feb1998663c170
+  - enabled: 1
+    path: Assets/Scenes/Level_Rooms/Room_003.unity
+    guid: df97ba1e8c0335842ab323879b0b72fd
+  - enabled: 1
+    path: Assets/Scenes/Level_Rooms/Room_004.unity
+    guid: 335fff3afb3dc11469cb1650f8bfc877
+  - enabled: 1
+    path: Assets/Scenes/Level_Rooms/Room_005.unity
+    guid: 9e5c7af922d4a3f48aa257efcba55511
+  - enabled: 1
+    path: Assets/Scenes/Level_Rooms/Room_006.unity
+    guid: 9bd642d70be492a438437c686a9fa9d9
+  - enabled: 1
+    path: Assets/Scenes/Level_Rooms/Room_007.unity
+    guid: aed4c46406426c143af9e25897cb270d
+  - enabled: 1
+    path: Assets/Scenes/Level_Rooms/Room_008.unity
+    guid: c879f36b2f7e01b46afba3f2e42ed846
+  - enabled: 1
+    path: Assets/Scenes/Level_Rooms/Room_009.unity
+    guid: eb4e4adeaa6b4bc4abc826b761c60f66
+  - enabled: 1
+    path: Assets/Scenes/Level_Rooms/RoomTriggers.unity
+    guid: f870756845d7ef2498266542e07f7be9
+  - enabled: 1
+    path: Assets/Scenes/Gyms/Combat Gym.unity
+    guid: f4657d27c46601040b367271b346132f
+  - enabled: 1
+    path: Assets/Scenes/Gyms/Grappling Hook Gym.unity
+    guid: 0c680f168d7d20d4d80ebbdc0f59e2ac
+  - enabled: 1
+    path: Assets/Scenes/Gyms/Jumping Gym.unity
+    guid: 725e79df4ad693f409d845c28cf8d61c
+  - enabled: 1
+    path: Assets/Scenes/Gyms/Walk & Run & Dash Gym.unity
+    guid: 7feee0c17f09d24408be0c5b8be52d1d
   m_configObjects: {}

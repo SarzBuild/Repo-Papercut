@@ -24,7 +24,6 @@ public class Player : AppliedPhysics
         }
     }
     
-    
     #region States
 
     public PlayerStateMachine StateMachine { get; private set; }
@@ -77,7 +76,7 @@ public class Player : AppliedPhysics
         HealthComponent = GetComponent<HealthComponent>();
         _rigidbody2D = GetComponentInParent<Rigidbody2D>();
         Renderer = GetComponentInChildren<SkinnedMeshRenderer>();
-        _baseColor = Renderer.material.GetColor("_BaseColor");
+        _baseColor = Renderer.material.GetColor("_BASE_COLOR");
         _facingDirection = 1;
         _canSetVelocity = true;
 
@@ -351,7 +350,7 @@ public class Player : AppliedPhysics
 
     private void BlinkRed(HealthComponent component, float value)
     {
-        Renderer.material.SetColor("_BaseColor", Color.red);
+        Renderer.material.SetColor("_BASE_COLOR", Color.red);
         _lastHitTime = Time.time;
     }
 
@@ -360,7 +359,7 @@ public class Player : AppliedPhysics
         var nextFireTime = _lastHitTime + 0.1f;
         if (Time.time - nextFireTime > 0)
         {
-            Renderer.material.SetColor("_BaseColor", _baseColor);
+            Renderer.material.SetColor("_BASE_COLOR", _baseColor);
         }
     }
 }
