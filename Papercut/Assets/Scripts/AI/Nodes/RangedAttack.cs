@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RangedAttack : Node
@@ -19,10 +20,18 @@ public class RangedAttack : Node
 
     public override NodeState Evaluate()
     {
+        SetCurrentNode();
         var aimDirection = (_target.position - _ai.transform.position).normalized;
         _weapon.Fire();
+
         var angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-        _ai.transform.eulerAngles = new Vector3(0, angle, 0);
+        _ai.transform.eulerAngles = new Vector3(0, 0, angle);
         return NodeState.RUNNING;
     }
+
+    private void SetCurrentNode()
+    {
+        _enemyData.CurrentNode = this;
+    }
+    
 }

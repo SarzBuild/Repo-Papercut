@@ -1,12 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GuardianEnemyBrain : EnemyBase
+public class SpawnerEnemyBrain : EnemyBase
 {
     public EnemyData EnemyData;
-    public GuardianWeapon GuardianWeapon;
+    //public SpiderlingWeapon SpiderlingWeapon;
+    public SpawnerWeapon SpawnerWeapon;
     public HealthComponent HealthComponent;
 
     private EnemyData _tempEnemyData;
@@ -14,7 +14,7 @@ public class GuardianEnemyBrain : EnemyBase
     
     public SkinnedMeshRenderer Renderer { get; private set; }
     private Color _baseColor;
-
+    
     private float _lastHitTime;
     #region Nodes
 
@@ -38,18 +38,21 @@ public class GuardianEnemyBrain : EnemyBase
 
         HealthComponent.OnDamageTaken += OnDamaged;
         HealthComponent.OnDeath += OnDeath;
-        
-        Renderer = GetComponentInChildren<SkinnedMeshRenderer>();
-        _baseColor = Renderer.material.GetColor("_BaseColor");
 
         ConstructBehaviorTree();
+    }
+
+    private void Start()
+    {
+        Renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        _baseColor = Renderer.material.GetColor("_BaseColor");
     }
 
     private void InitializeData()
     {
         _tempEnemyData = ScriptableObject.CreateInstance<EnemyData>();
         _tempHealthData = ScriptableObject.CreateInstance<HealthData>();
-        GuardianWeapon.Settings = ScriptableObject.CreateInstance<WeaponData>();
+        SpawnerWeapon.Settings = ScriptableObject.CreateInstance<WeaponData>();
         
         
         //CTOR for variables
@@ -86,7 +89,7 @@ public class GuardianEnemyBrain : EnemyBase
         Debug.Log(_tempEnemyData.CurrentNode);
 
         CheckForCollisions();
-        
+
         ResetColor();
     }
 
@@ -95,8 +98,7 @@ public class GuardianEnemyBrain : EnemyBase
         CalculateGravity();
         SetVelocities();
     }
-
-
+    
     protected override void ConstructBehaviorTree()
     {
         //Initialize Child Nodes from left to right
@@ -106,7 +108,7 @@ public class GuardianEnemyBrain : EnemyBase
         ChasePlayer = new ChasePlayer(Player, this,_tempEnemyData);
         ChaseRange = new Range(Player, this,_tempEnemyData.ChaseRange);
 
-        Attack = new Attack(Player,this,_tempEnemyData,GuardianWeapon);
+        Attack = new Attack(Player,this,_tempEnemyData,SpawnerWeapon);
         AttackRange = new Range(Player,this,_tempEnemyData.AttackRange);
         
         //Initialize Parent Nodes from left to right
@@ -187,5 +189,3 @@ public class GuardianEnemyBrain : EnemyBase
         }
     }
 }
-
-

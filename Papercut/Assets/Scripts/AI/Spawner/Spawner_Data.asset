@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15be026286bbafa40b609a19eb3a2b88, type: 3}
-  m_Name: Guardian_Data
+  m_Name: Spawner_Data
   m_EditorClassIdentifier: 
   IdleTime: 5
   PatrolTime: 5

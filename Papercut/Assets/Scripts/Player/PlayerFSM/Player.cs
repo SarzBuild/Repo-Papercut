@@ -11,6 +11,7 @@ public class Player : AppliedPhysics
     public Transform WeaponHoldPosition;
 
     #region States
+
     public PlayerStateMachine StateMachine { get; private set; }
     public PlayerDashState DashState { get; private set; }
     public PlayerHardLandingState HardLandingState { get; private set; }
@@ -25,15 +26,18 @@ public class Player : AppliedPhysics
     public PlayerWallGrabState WallGrabState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; }
     public PlayerGrapplingState GrapplingState { get; private set; }
-    
+
     #endregion
 
     #region Components
+
     public Animator Animator { get; private set; }
     public PlayerInputState InputHandler { get; private set; }
     public WeaponInventory Weapons { get; private set; }
     public LineRenderer LineRenderer { get; private set; }
     public HealthComponent HealthComponent { get; private set; }
+    public SkinnedMeshRenderer Renderer { get; private set; }
+
     #endregion
 
     [SerializeField] private PlayerData _playerData;
@@ -43,6 +47,8 @@ public class Player : AppliedPhysics
     public int CurrentDashCount;
     private float _dashTimerCooldown;
     private bool _collisionDown;
+    private float _lastHitTime;
+    private Color _baseColor;
 
     private void Awake()
     {
@@ -52,6 +58,8 @@ public class Player : AppliedPhysics
         InputHandler = GetComponent<PlayerInputState>();
         HealthComponent = GetComponent<HealthComponent>();
         _rigidbody2D = GetComponentInParent<Rigidbody2D>();
+        Renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        _baseColor = Renderer.material.GetColor("_BaseColor");
         _facingDirection = 1;
         _canSetVelocity = true;
 
@@ -88,12 +96,14 @@ public class Player : AppliedPhysics
     {
         HealthComponent.OnDeath += OnPlayerDeath;
         //HealthComponent.OnDamageTaken += Knockback;
+        HealthComponent.OnDamageTaken += BlinkRed;
         // Other component events exist here too, tag on to trigger animation/sound/FX
     }
     
     private void OnDisable()
     {
         HealthComponent.OnDeath -= OnPlayerDeath;
+        HealthComponent.OnDamageTaken -= BlinkRed;
     }
 
     private void Start()
@@ -117,7 +127,9 @@ public class Player : AppliedPhysics
         HandleWeapons();
         
         TimerForWallGrabJumps();
-        
+
+        ResetColor();
+
         //LogDebug();
     }
 
@@ -317,5 +329,20 @@ public class Player : AppliedPhysics
         var directionX = Mathf.Sign(direction.x);
         Debug.Log(transform.position + " " + component.transform.position);
         SetVelocityX(directionX * _playerData.KnockbackSpeed);
+    }
+
+    private void BlinkRed(HealthComponent component, float value)
+    {
+        Renderer.material.SetColor("_BaseColor", Color.red);
+        _lastHitTime = Time.time;
+    }
+
+    private void ResetColor()
+    {
+        var nextFireTime = _lastHitTime + 0.1f;
+        if (Time.time - nextFireTime > 0)
+        {
+            Renderer.material.SetColor("_BaseColor", _baseColor);
+        }
     }
 }

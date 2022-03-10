@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpiderlingWeapon : WeaponBase
+public class SpawnerWeapon : WeaponBase
 {
     public LayerMask PlayerLayerMask;
-    public float range = 1f;
     protected override bool FireImplementation()
     {
-        var hit = Physics2D.BoxCast(transform.position,new Vector2(1,1),0f,transform.right,range,PlayerLayerMask);
+        var hit = Physics2D.BoxCast(transform.position,new Vector2(1,1),0f,transform.right,1,PlayerLayerMask);
         if (hit)
         {
             HealthComponent healthComponent = hit.collider.GetComponent<HealthComponent>();

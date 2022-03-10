@@ -9,6 +9,13 @@ public class SpiderlingEnemyBrain : EnemyBase
     public SpiderlingWeapon SpiderlingWeapon;
     public HealthComponent HealthComponent;
 
+    private EnemyData _tempEnemyData;
+    private HealthData _tempHealthData;
+    
+    public SkinnedMeshRenderer Renderer { get; private set; }
+    private Color _baseColor;
+    
+    private float _lastHitTime;
     #region Nodes
 
     public ChasePlayer ChasePlayer { get; private set; }
@@ -27,10 +34,40 @@ public class SpiderlingEnemyBrain : EnemyBase
 
     private void Awake()
     {
+        InitializeData();
+
         HealthComponent.OnDamageTaken += OnDamaged;
         HealthComponent.OnDeath += OnDeath;
 
         ConstructBehaviorTree();
+    }
+
+    private void Start()
+    {
+        Renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        _baseColor = Renderer.material.GetColor("_BaseColor");
+    }
+
+    private void InitializeData()
+    {
+        _tempEnemyData = ScriptableObject.CreateInstance<EnemyData>();
+        _tempHealthData = ScriptableObject.CreateInstance<HealthData>();
+        SpiderlingWeapon.Settings = ScriptableObject.CreateInstance<WeaponData>();
+        
+        
+        //CTOR for variables
+        _tempEnemyData.IdleTime = EnemyData.IdleTime;
+        _tempEnemyData.PatrolTime = EnemyData.PatrolTime;
+        _tempEnemyData.FallClamped = EnemyData.FallClamped;
+        _tempEnemyData.CurrentFallSpeed = EnemyData.CurrentFallSpeed;
+        _tempEnemyData.ChaseRange = EnemyData.ChaseRange;
+        _tempEnemyData.AttackRange = EnemyData.AttackRange;
+        _tempEnemyData.MoveClamped = EnemyData.MoveClamped;
+        _tempEnemyData.Deceleration = EnemyData.Deceleration;
+        _tempEnemyData.Acceleration = EnemyData.Acceleration;
+        _tempEnemyData.PatrolMoveClamped = EnemyData.PatrolMoveClamped;
+        _tempEnemyData.IdlingState = EnemyData.IdlingState;
+        _tempEnemyData.KnockbackSpeed = EnemyData.KnockbackSpeed;
     }
 
     private void OnDisable()
@@ -49,9 +86,11 @@ public class SpiderlingEnemyBrain : EnemyBase
         }
 
         UpdateHitResults();
-        Debug.Log(EnemyData.CurrentNode);
+        Debug.Log(_tempEnemyData.CurrentNode);
 
         CheckForCollisions();
+
+        ResetColor();
     }
 
     private void FixedUpdate()
@@ -59,19 +98,18 @@ public class SpiderlingEnemyBrain : EnemyBase
         CalculateGravity();
         SetVelocities();
     }
-
-
+    
     protected override void ConstructBehaviorTree()
     {
         //Initialize Child Nodes from left to right
-        Idle = new Idle(this,EnemyData);
-        Patrol = new Patrol(this,EnemyData);
+        Idle = new Idle(this,_tempEnemyData);
+        Patrol = new Patrol(this,_tempEnemyData);
 
-        ChasePlayer = new ChasePlayer(Player, this,EnemyData);
-        ChaseRange = new Range(Player, this,EnemyData.ChaseRange);
+        ChasePlayer = new ChasePlayer(Player, this,_tempEnemyData);
+        ChaseRange = new Range(Player, this,_tempEnemyData.ChaseRange);
 
-        Attack = new Attack(Player,this,EnemyData,SpiderlingWeapon);
-        AttackRange = new Range(Player,this,EnemyData.AttackRange);
+        Attack = new Attack(Player,this,_tempEnemyData,SpiderlingWeapon);
+        AttackRange = new Range(Player,this,_tempEnemyData.AttackRange);
         
         //Initialize Parent Nodes from left to right
         Selector idleSelector = new Selector(new List<Node>() { Idle, Patrol });
@@ -86,13 +124,14 @@ public class SpiderlingEnemyBrain : EnemyBase
     {
         base.OnDamaged();
         Knockback();
+        BlinkRed();
     }
 
     protected override void Knockback()
     {
         var direction = (Player.transform.position - transform.position);
         var directionX = Mathf.Sign(direction.x);
-        EnemyData.CurrentHorizontalSpeed = directionX * EnemyData.KnockbackSpeed;
+        _tempEnemyData.CurrentHorizontalSpeed = directionX * _tempEnemyData.KnockbackSpeed;
     }
 
     protected void OnDeath(HealthComponent arg1, GameObject killer)
@@ -110,11 +149,11 @@ public class SpiderlingEnemyBrain : EnemyBase
     {
         if(!Grounded)
         {
-            var fallSpeed = EnemyData.CurrentFallSpeed;
+            var fallSpeed = _tempEnemyData.CurrentFallSpeed;
             
-            EnemyData.CurrentVerticalSpeed -= fallSpeed * Time.fixedDeltaTime;
+            _tempEnemyData.CurrentVerticalSpeed -= fallSpeed * Time.fixedDeltaTime;
 
-            if (EnemyData.CurrentVerticalSpeed < EnemyData.FallClamped) EnemyData.CurrentVerticalSpeed = EnemyData.FallClamped;
+            if (_tempEnemyData.CurrentVerticalSpeed < _tempEnemyData.FallClamped) _tempEnemyData.CurrentVerticalSpeed = _tempEnemyData.FallClamped;
         } 
     }
 
@@ -122,17 +161,31 @@ public class SpiderlingEnemyBrain : EnemyBase
     {
         if (Grounded)
         {
-            if (EnemyData.CurrentVerticalSpeed < 0)
+            if (_tempEnemyData.CurrentVerticalSpeed < 0)
             {
-                EnemyData.CurrentVerticalSpeed = 0;
+                _tempEnemyData.CurrentVerticalSpeed = 0;
             }
         }
     }
 
     private void SetVelocities()
     {
-        SetVelocityX(EnemyData.CurrentHorizontalSpeed);
-        SetVelocityY(EnemyData.CurrentVerticalSpeed);
+        SetVelocityX(_tempEnemyData.CurrentHorizontalSpeed);
+        SetVelocityY(_tempEnemyData.CurrentVerticalSpeed);
     }
     
+    private void BlinkRed()
+    {
+        Renderer.material.SetColor("_BaseColor", Color.red);
+        _lastHitTime = Time.time;
+    }
+
+    private void ResetColor()
+    {
+        var nextFireTime = _lastHitTime + 0.1f;
+        if (Time.time - nextFireTime > 0)
+        {
+            Renderer.material.SetColor("_BaseColor", _baseColor);
+        }
+    }
 }

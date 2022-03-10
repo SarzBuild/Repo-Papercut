@@ -6,18 +6,25 @@ public class ResetRotation : Node
 {
     private readonly EnemyBase _ai;
     private readonly Transform _transformToGoTo;
+    private EnemyData _enemyData;
     
-    public ResetRotation(EnemyBase ai, Transform transform)
+    public ResetRotation(EnemyBase ai, EnemyData enemyData, Transform transform)
     {
         _ai = ai;
+        _enemyData = enemyData;
         _transformToGoTo = transform;
     }
     
     public override NodeState Evaluate()
     {
         var angle = Mathf.Atan2(_transformToGoTo.position.y, _transformToGoTo.position.x) * Mathf.Rad2Deg;
-        _ai.transform.eulerAngles = new Vector2(0, angle);
-        
+        _ai.transform.eulerAngles = new Vector3(0,0, angle);
+        SetCurrentNode();
         return NodeState.RUNNING;
+    }
+
+    private void SetCurrentNode()
+    {
+        _enemyData.CurrentNode = this;
     }
 }
