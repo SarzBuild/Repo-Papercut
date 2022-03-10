@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SpiderlingHealth_Data
   m_EditorClassIdentifier: 
   description: 
-  MaxHealth: 100
-  DefaultHealth: 100
+  MaxHealth: 10
+  DefaultHealth: 10
   DefaultPipSplits: 3
   CanDie: 1
   CanTakeDamage: 1

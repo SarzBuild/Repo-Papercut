@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SpawnerWeapon_Data
   m_EditorClassIdentifier: 
   description: 
-  FireCooldownSec: 1
-  FireWaitForAnimationToFinishEvent: 0
+  FireCooldownSec: 10
+  FireWaitForAnimationToFinishEvent: 1
   Damage: 1
   UsesAmmo: 0
   DefaultAmmo: 0
