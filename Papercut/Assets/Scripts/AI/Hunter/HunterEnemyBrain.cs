@@ -30,19 +30,6 @@ public class HunterEnemyBrain : EnemyBase
     private Node _topNode;
     
     #endregion
-
-    private void Awake()
-    {
-        InitializeData();
-        
-        HealthComponent.OnDamageTaken += OnDamaged;
-        HealthComponent.OnDeath += OnDeath;
-        
-        Renderer = GetComponentInChildren<SkinnedMeshRenderer>();
-        _baseColor = Renderer.material.GetColor("_BaseColor");
-        
-        ConstructBehaviorTree();
-    }
     
     private void OnDisable()
     {
@@ -52,8 +39,19 @@ public class HunterEnemyBrain : EnemyBase
 
     private void Start()
     {
+        PlayerTransform = Player.Instance.transform;
+        
+        InitializeData();
+        
+        HealthComponent.OnDamageTaken += OnDamaged;
+        HealthComponent.OnDeath += OnDeath;
+
         _baseTransfrom = transform;
+        
         ConstructBehaviorTree();
+        
+        Renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        _baseColor = Renderer.material.GetColor("_BaseColor");
     }
     
     private void InitializeData()
@@ -98,8 +96,8 @@ public class HunterEnemyBrain : EnemyBase
     {
         //Initialize Child Nodes from left to right
 
-        Attack = new RangedAttack(Player, this, _tempEnemyData,HunterWeapon);
-        AttackRange = new Range(Player, this, _tempEnemyData.AttackRange);
+        Attack = new RangedAttack(PlayerTransform, this, _tempEnemyData,HunterWeapon);
+        AttackRange = new Range(PlayerTransform, this, _tempEnemyData.AttackRange);
         ResetRotation = new ResetRotation(this, _tempEnemyData, _baseTransfrom);
         
         //Initialize Parent Nodes from left to right

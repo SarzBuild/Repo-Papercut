@@ -5,7 +5,6 @@ using UnityEngine;
 public class SpawnerEnemyBrain : EnemyBase
 {
     public EnemyData EnemyData;
-    //public SpiderlingWeapon SpiderlingWeapon;
     public SpawnerWeapon SpawnerWeapon;
     public HealthComponent HealthComponent;
 
@@ -18,11 +17,13 @@ public class SpawnerEnemyBrain : EnemyBase
     private float _lastHitTime;
     #region Nodes
 
-    public ChasePlayer ChasePlayer { get; private set; }
+    //public ChasePlayer ChasePlayer { get; private set; }
     public Patrol Patrol { get; private set; }
     public Idle Idle { get; private set; }
     
-    public Range ChaseRange { get; private set; }
+    public Range FleeRange { get; private set; }
+    
+    public Flee Flee { get; private set; }
     
     public Attack Attack { get; private set; }
     
@@ -31,19 +32,18 @@ public class SpawnerEnemyBrain : EnemyBase
     private Node _topNode;
     
     #endregion
+    
 
-    private void Awake()
+    private void Start()
     {
+        PlayerTransform = Player.Instance.transform;
         InitializeData();
 
         HealthComponent.OnDamageTaken += OnDamaged;
         HealthComponent.OnDeath += OnDeath;
 
         ConstructBehaviorTree();
-    }
-
-    private void Start()
-    {
+        
         Renderer = GetComponentInChildren<SkinnedMeshRenderer>();
         _baseColor = Renderer.material.GetColor("_BaseColor");
     }
@@ -86,7 +86,6 @@ public class SpawnerEnemyBrain : EnemyBase
         }
 
         UpdateHitResults();
-        Debug.Log(_tempEnemyData.CurrentNode);
 
         CheckForCollisions();
 
@@ -104,20 +103,20 @@ public class SpawnerEnemyBrain : EnemyBase
         //Initialize Child Nodes from left to right
         Idle = new Idle(this,_tempEnemyData);
         Patrol = new Patrol(this,_tempEnemyData);
-
-        ChasePlayer = new ChasePlayer(Player, this,_tempEnemyData);
-        ChaseRange = new Range(Player, this,_tempEnemyData.ChaseRange);
-
-        Attack = new Attack(Player,this,_tempEnemyData,SpawnerWeapon);
-        AttackRange = new Range(Player,this,_tempEnemyData.AttackRange);
         
+        Attack = new Attack(PlayerTransform,this,_tempEnemyData,SpawnerWeapon);
+        AttackRange = new Range(PlayerTransform,this,_tempEnemyData.AttackRange);
+
+        FleeRange = new Range(PlayerTransform,this,_tempEnemyData.ChaseRange);
+        Flee = new Flee(PlayerTransform, this, _tempEnemyData);
+
         //Initialize Parent Nodes from left to right
         Selector idleSelector = new Selector(new List<Node>() { Idle, Patrol });
-        Sequence chaseSequence = new Sequence(new List<Node>() { ChaseRange, ChasePlayer });
         Sequence attackSequence = new Sequence(new List<Node>() { AttackRange, Attack });
+        Sequence fleeSequence = new Sequence(new List<Node>() { FleeRange,Flee });
         
         //Initialize Root Node
-        _topNode = new Selector(new List<Node>(){attackSequence,chaseSequence,idleSelector});
+        _topNode = new Selector(new List<Node>(){fleeSequence,attackSequence,idleSelector});
     }
 
     protected void OnDamaged(HealthComponent arg1, float arg2)
@@ -129,7 +128,7 @@ public class SpawnerEnemyBrain : EnemyBase
 
     protected override void Knockback()
     {
-        var direction = (Player.transform.position - transform.position);
+        var direction = (PlayerTransform.position - transform.position);
         var directionX = Mathf.Sign(direction.x);
         _tempEnemyData.CurrentHorizontalSpeed = directionX * _tempEnemyData.KnockbackSpeed;
     }

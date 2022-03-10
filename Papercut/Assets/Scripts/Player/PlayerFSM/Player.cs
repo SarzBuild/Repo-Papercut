@@ -9,7 +9,22 @@ using Vector2 = UnityEngine.Vector2;
 public class Player : AppliedPhysics
 {
     public Transform WeaponHoldPosition;
-
+    private static Player _instance;
+    public static Player Instance {
+        get
+        {
+            if (_instance != null) return _instance;
+            
+            var singleton = FindObjectOfType<Player>();
+            if (singleton != null) return _instance;
+            
+            var go = new GameObject();
+            _instance = go.AddComponent<Player>();
+            return _instance;
+        }
+    }
+    
+    
     #region States
 
     public PlayerStateMachine StateMachine { get; private set; }
@@ -52,6 +67,9 @@ public class Player : AppliedPhysics
 
     private void Awake()
     {
+        if (_instance != null && _instance != this) Destroy(gameObject);
+        else _instance = this;
+        
         LineRenderer = GetComponent<LineRenderer>();
         Weapons = GetComponent<WeaponInventory>();
         Animator = GetComponent<Animator>();

@@ -18,9 +18,9 @@ MonoBehaviour:
   CurrentHorizontalSpeed: 0
   FallClamped: -40
   CurrentFallSpeed: 12
-  ChaseRange: 8
-  AttackRange: 1.3
-  MoveClamped: 8
+  ChaseRange: 6
+  AttackRange: 12
+  MoveClamped: 5
   Deceleration: 15
   Acceleration: 10
   PatrolMoveClamped: 3

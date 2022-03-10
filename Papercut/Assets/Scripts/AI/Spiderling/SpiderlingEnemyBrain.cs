@@ -32,18 +32,17 @@ public class SpiderlingEnemyBrain : EnemyBase
     
     #endregion
 
-    private void Awake()
+    private void Start()
     {
+        PlayerTransform = Player.Instance.transform;
+        
         InitializeData();
 
         HealthComponent.OnDamageTaken += OnDamaged;
         HealthComponent.OnDeath += OnDeath;
 
         ConstructBehaviorTree();
-    }
 
-    private void Start()
-    {
         Renderer = GetComponentInChildren<SkinnedMeshRenderer>();
         _baseColor = Renderer.material.GetColor("_BaseColor");
     }
@@ -86,7 +85,7 @@ public class SpiderlingEnemyBrain : EnemyBase
         }
 
         UpdateHitResults();
-        Debug.Log(_tempEnemyData.CurrentNode);
+        //Debug.Log(string.Format("{0} is in {1} state", name, _tempEnemyData.CurrentNode));
 
         CheckForCollisions();
 
@@ -105,11 +104,11 @@ public class SpiderlingEnemyBrain : EnemyBase
         Idle = new Idle(this,_tempEnemyData);
         Patrol = new Patrol(this,_tempEnemyData);
 
-        ChasePlayer = new ChasePlayer(Player, this,_tempEnemyData);
-        ChaseRange = new Range(Player, this,_tempEnemyData.ChaseRange);
+        ChasePlayer = new ChasePlayer(PlayerTransform, this,_tempEnemyData);
+        ChaseRange = new Range(PlayerTransform, this,_tempEnemyData.ChaseRange);
 
-        Attack = new Attack(Player,this,_tempEnemyData,SpiderlingWeapon);
-        AttackRange = new Range(Player,this,_tempEnemyData.AttackRange);
+        Attack = new Attack(PlayerTransform,this,_tempEnemyData,SpiderlingWeapon);
+        AttackRange = new Range(PlayerTransform,this,_tempEnemyData.AttackRange);
         
         //Initialize Parent Nodes from left to right
         Selector idleSelector = new Selector(new List<Node>() { Idle, Patrol });
@@ -129,7 +128,7 @@ public class SpiderlingEnemyBrain : EnemyBase
 
     protected override void Knockback()
     {
-        var direction = (Player.transform.position - transform.position);
+        var direction = (PlayerTransform.position - transform.position);
         var directionX = Mathf.Sign(direction.x);
         _tempEnemyData.CurrentHorizontalSpeed = directionX * _tempEnemyData.KnockbackSpeed;
     }

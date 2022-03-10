@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class EnemyBase : AppliedPhysics
 {
-    [SerializeField] protected Transform Player;
+    [SerializeField] protected Transform PlayerTransform;
     protected abstract void ConstructBehaviorTree();
     
     protected virtual void OnDamaged()
