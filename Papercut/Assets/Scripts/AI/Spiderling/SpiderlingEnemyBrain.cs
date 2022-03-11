@@ -11,6 +11,8 @@ public class SpiderlingEnemyBrain : EnemyBase
 
     private EnemyData _tempEnemyData;
     private HealthData _tempHealthData;
+
+    private Animator _animator;
     
     public SkinnedMeshRenderer Renderer { get; private set; }
     private Color _baseColor;
@@ -34,6 +36,7 @@ public class SpiderlingEnemyBrain : EnemyBase
 
     private void Start()
     {
+        _animator = GetComponentInChildren<Animator>();
         PlayerTransform = Player.Instance.transform;
         
         InitializeData();
@@ -76,8 +79,8 @@ public class SpiderlingEnemyBrain : EnemyBase
     }
 
     private void Update()
-    
     {
+        HandleAnimations();
         _topNode.Evaluate();
         if (_topNode.NodeState == NodeState.FAILURE)
         {
@@ -187,4 +190,18 @@ public class SpiderlingEnemyBrain : EnemyBase
             Renderer.material.SetColor("_BaseColor", _baseColor);
         }
     }
+
+    private void HandleAnimations()
+    {
+        if (_tempEnemyData.CurrentNode == Patrol || _tempEnemyData.CurrentNode == ChasePlayer)
+        {
+            _animator.SetBool("walk", true);
+        }
+        else
+        {
+            _animator.SetBool("walk",false);
+        }
+    }
+    
+    
 }

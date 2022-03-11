@@ -148,7 +148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 545839464}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 581, y: -112, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 914218616}
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1639378859}
-  loadRange: 60
+  loadRange: 160
 --- !u!1 &562190441
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,6 +593,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1453958796, guid: fd018425d2e6cb64681890150e6d0568, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -2853218753171140493, guid: b47e2c51981e8af43af62db73024228f, type: 3}
     - target: {fileID: 1651818500472766122, guid: fd018425d2e6cb64681890150e6d0568, type: 3}
       propertyPath: _mainCamera
       value: 
@@ -605,6 +609,10 @@ PrefabInstance:
       propertyPath: WeaponHoldPosition
       value: 
       objectReference: {fileID: 1639378858}
+    - target: {fileID: 6262205277068168274, guid: fd018425d2e6cb64681890150e6d0568, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 6262205277068168276, guid: fd018425d2e6cb64681890150e6d0568, type: 3}
       propertyPath: m_Name
       value: Player

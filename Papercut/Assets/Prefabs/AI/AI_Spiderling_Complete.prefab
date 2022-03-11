@@ -1,5 +1,24 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!95 &224158822
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1428377856718930486}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d7a4463b1c5593c46a5a1259d612e5fe, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1908096423980661481
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,7 +137,7 @@ MonoBehaviour:
   _canSetVelocity: 1
   _appliedVelocity: {x: 0, y: 0}
   _currentVelocity: {x: 0, y: 0}
-  Player: {fileID: 0}
+  PlayerTransform: {fileID: 0}
   EnemyData: {fileID: 11400000, guid: 14bf582ef08e2af4fa66e7037b3369d4, type: 2}
   SpiderlingWeapon: {fileID: 490716067602854440}
   HealthComponent: {fileID: 2462025630161841257}
@@ -344,8 +363,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spiderling_CHAR
       objectReference: {fileID: 0}
+    - target: {fileID: 2223639932434330405, guid: 22842aff12898cd4a923d3cb366b5d1f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223639932434330405, guid: 22842aff12898cd4a923d3cb366b5d1f, type: 3}
+      propertyPath: m_Animations.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223639932434330405, guid: 22842aff12898cd4a923d3cb366b5d1f, type: 3}
+      propertyPath: m_Animations.Array.data[0]
+      value: 
+      objectReference: {fileID: 2667949614841947897, guid: 03d3d361d6bd5724894a67c3a3bc74cf, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22842aff12898cd4a923d3cb366b5d1f, type: 3}
+--- !u!1 &1428377856718930486 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 22842aff12898cd4a923d3cb366b5d1f, type: 3}
+  m_PrefabInstance: {fileID: 2239405870159576935}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1772534494896871564 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 22842aff12898cd4a923d3cb366b5d1f, type: 3}
