@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: SSSPaperProfile
   m_EditorClassIdentifier: 
   profile:
-    scatteringDistance: {r: 3.047901, g: 3.047901, b: 3.047901, a: 1}
+    scatteringDistance: {r: 1.6535938, g: 1.6535938, b: 1.6535938, a: 1}
     transmissionTint: {r: 1, g: 1, b: 1, a: 1}
     texturingMode: 0
-    transmissionMode: 1
+    transmissionMode: 0
     thicknessRemap: {x: 0, y: 5}
     worldScale: 1
     ior: 1.4
