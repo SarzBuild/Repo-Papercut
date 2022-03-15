@@ -54,6 +54,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Gyms/Walk & Run & Dash Gym.unity
     guid: 7feee0c17f09d24408be0c5b8be52d1d
   - enabled: 1
-    path: Assets/Scenes/LookDev/LookDevScene.unity
+    path: Assets/Scenes/LookDev/LookDevTestScene.unity
     guid: b511bbfda02a1864796b4607b5c9f09e
   m_configObjects: {}
