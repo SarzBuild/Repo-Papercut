@@ -13,8 +13,7 @@ public class SwordWeapon : WeaponBase
             {
                 if (hit.transform.gameObject.layer != GenericManager.GroundLayerMask && hit.transform.gameObject.layer != GenericManager.PlayerLayerMask)
                 {
-                    HealthComponent healthComponent = hit.GetComponent<HealthComponent>();
-                    Debug.Log(healthComponent);
+                    var healthComponent = hit.GetComponent<HealthComponent>();
                     if (healthComponent != null)
                     {
                         healthComponent.DealDamage(Settings.Damage);
