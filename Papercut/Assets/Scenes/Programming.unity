@@ -604,6 +604,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a230ff98da7e1ca4fbf931e37317634d, type: 3}
+--- !u!1 &1618559111
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1618559113}
+  - component: {fileID: 1618559112}
+  m_Layer: 0
+  m_Name: Checkpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1618559112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618559111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09124b1edbd7f4d44939a8614f91100d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 2.5
+  CheckpointManager: {fileID: 0}
+--- !u!4 &1618559113
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618559111}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -28.232836, y: 21.217022, z: -775.1132}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1660749738 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6262205277068168286, guid: fd018425d2e6cb64681890150e6d0568, type: 3}
@@ -1640,6 +1685,14 @@ PrefabInstance:
       propertyPath: BackgroundImage
       value: 
       objectReference: {fileID: 1011257233}
+    - target: {fileID: 563350375, guid: 590f90d490c0c3b44b40bd641ea0449c, type: 3}
+      propertyPath: Checkpoints.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 563350375, guid: 590f90d490c0c3b44b40bd641ea0449c, type: 3}
+      propertyPath: Checkpoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1618559112}
     - target: {fileID: 7426489646541233250, guid: 590f90d490c0c3b44b40bd641ea0449c, type: 3}
       propertyPath: _runInput.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

@@ -68,6 +68,11 @@ public class PlayerGrapplingState : PlayerState
         {
             StateMachine.ChangeState(Player.InAirState);
         }
+
+        if (!_canGrapple && !_activeVelocity && Player.InputHandler.ListenJumpInput == 2)
+        {
+            StateMachine.ChangeState(Player.JumpState);
+        }
         
         _startPoint = Player.transform.position;
 
@@ -87,6 +92,7 @@ public class PlayerGrapplingState : PlayerState
         {
             Player.UpdateVelocity();
             Player.MovementClampedAndApex();
+            Player.CheckFlip((int)PlayerData.RawInputValue);
         }
     }
 
