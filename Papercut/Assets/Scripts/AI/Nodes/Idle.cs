@@ -7,7 +7,8 @@ public class Idle : Node
     private readonly EnemyBase _ai;
     private EnemyData _enemyData;
     private float _timer;
-
+    private float _randomness = Random.Range(0f, 2f);
+    
     public Idle(EnemyBase aI, EnemyData enemyData)
     {
         _ai = aI;
@@ -21,7 +22,7 @@ public class Idle : Node
             SetCurrentNode();
             _timer += Time.fixedDeltaTime;
 
-            if (_timer >= _enemyData.IdleTime)
+            if (_timer >= _enemyData.IdleTime + _randomness)
             {
                 _timer = 0;
                 _enemyData.IdlingState = 1;

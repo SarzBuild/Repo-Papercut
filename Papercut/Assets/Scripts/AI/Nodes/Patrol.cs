@@ -10,7 +10,7 @@ public class Patrol : Node
     private float _timer;
     private Vector2 _direction;
     private int _side = 1;
-    
+    private float _randomness = Random.Range(0f, 2f);
     public Patrol(EnemyBase aI, EnemyData enemyData)
     {
         _ai = aI;
@@ -24,7 +24,7 @@ public class Patrol : Node
             SetCurrentNode();
             _timer += Time.fixedDeltaTime;
 
-            if (_timer >= _enemyData.PatrolTime)
+            if (_timer >= _enemyData.PatrolTime + _randomness)
             {
                 _timer = 0;
                 _side = -_side;

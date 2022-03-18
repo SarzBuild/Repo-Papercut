@@ -206,7 +206,6 @@ public class SpiderlingEnemyBrain : EnemyBase
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(transform.position, _tempEnemyData.ChaseRange);
-
+        Gizmos.DrawWireSphere(transform.position, EnemyData.ChaseRange);
     }
 }

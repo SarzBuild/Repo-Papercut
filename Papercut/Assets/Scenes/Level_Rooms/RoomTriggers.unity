@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1896.1328, g: 3062.5312, b: 9563.586, a: 1}
+  m_IndirectSpecularColor: {r: 1899.958, g: 3066.9316, b: 9579.969, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1161,6 +1161,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 563350370, guid: 590f90d490c0c3b44b40bd641ea0449c, type: 3}
+      propertyPath: Abilities.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 563350373, guid: 590f90d490c0c3b44b40bd641ea0449c, type: 3}
       propertyPath: RestartUI
       value: 
@@ -1177,6 +1181,10 @@ PrefabInstance:
       propertyPath: BackgroundImage
       value: 
       objectReference: {fileID: 51878922}
+    - target: {fileID: 563350375, guid: 590f90d490c0c3b44b40bd641ea0449c, type: 3}
+      propertyPath: Checkpoints.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7426489646541233250, guid: 590f90d490c0c3b44b40bd641ea0449c, type: 3}
       propertyPath: _runInput.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
