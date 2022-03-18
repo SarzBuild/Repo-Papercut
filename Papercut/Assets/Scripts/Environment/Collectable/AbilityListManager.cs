@@ -19,7 +19,7 @@ public class AbilityListManager : MonoBehaviour
     {
         if (Abilities.Count < 1)
         {
-            Debug.LogError(string.Format("{0} list is empty!",Abilities));   
+            Debug.LogError(string.Format("{0} list has {1} elements!",this,Abilities.Count));   
             return;
         }
         

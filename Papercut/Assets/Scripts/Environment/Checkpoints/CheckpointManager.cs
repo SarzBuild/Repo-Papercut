@@ -13,7 +13,7 @@ public class CheckpointManager : MonoBehaviour
     {
         if (Checkpoints.Count < 1)
         {
-            Debug.LogError(string.Format("{0} list is empty!",Checkpoints));   
+            Debug.LogError(string.Format("{0} list has {1} elements!",this,Checkpoints.Count));   
             return;
         }
         
