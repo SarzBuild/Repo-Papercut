@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class SwordWeapon : WeaponBase
 {
+    public float range = 1f;
     protected override bool FireImplementation()
     {
-        var hits = Physics2D.OverlapCircleAll(transform.position, 1f);
+        var hits = Physics2D.OverlapCircleAll(transform.position, range);
 
         if (hits.Length > 1)
         {
@@ -30,6 +31,6 @@ public class SwordWeapon : WeaponBase
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position,1f);
+        Gizmos.DrawWireSphere(transform.position,range);
     }
 }

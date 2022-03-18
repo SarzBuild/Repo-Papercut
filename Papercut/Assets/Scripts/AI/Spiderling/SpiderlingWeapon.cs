@@ -22,4 +22,10 @@ public class SpiderlingWeapon : WeaponBase
         // It can also be where you initialize the hitbox, but then wait for an event for collision trigger enter. Really depends on how you want it to functionally work.
         return true;
     }
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position,range);
+    }
 }

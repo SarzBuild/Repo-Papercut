@@ -202,6 +202,11 @@ public class SpiderlingEnemyBrain : EnemyBase
             _animator.SetBool("walk",false);
         }
     }
-    
-    
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(transform.position, _tempEnemyData.ChaseRange);
+
+    }
 }
