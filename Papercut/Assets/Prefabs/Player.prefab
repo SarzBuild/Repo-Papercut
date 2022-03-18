@@ -307,7 +307,8 @@ MonoBehaviour:
   _appliedVelocity: {x: 0, y: 0}
   _currentVelocity: {x: 0, y: 0}
   WeaponHoldPosition: {fileID: 1149188745198589076}
-  _playerData: {fileID: 11400000, guid: 0ca9419354e518b408804f4c2b40bb26, type: 2}
+  SimplePlayerUI: {fileID: 0}
+  PlayerData: {fileID: 11400000, guid: 0ca9419354e518b408804f4c2b40bb26, type: 2}
   CurrentDashCount: 0
 --- !u!114 &1651818500472766122
 MonoBehaviour:

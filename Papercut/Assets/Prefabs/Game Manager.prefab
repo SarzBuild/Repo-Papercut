@@ -195,7 +195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd97f7e2963c21c4585aba2703202ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Abilities: []
+  Abilities:
+  - {fileID: 0}
   AbilityGainedBeforeNextCheckpoint: []
 --- !u!114 &563350372
 MonoBehaviour:
@@ -254,4 +255,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LastCheckpointReached: {x: 0, y: 2}
   AbilityListManager: {fileID: 563350370}
-  Checkpoints: []
+  Checkpoints:
+  - {fileID: 0}
