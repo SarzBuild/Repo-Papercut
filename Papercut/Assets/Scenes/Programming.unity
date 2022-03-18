@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.05336386, g: 0.06777692, b: 0.11477107, a: 1}
+  m_IndirectSpecularColor: {r: 0.053401023, g: 0.067724854, b: 0.11420822, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1227,6 +1227,20 @@ PrefabInstance:
     - target: {fileID: 692299841526311872, guid: 8e9515608a9c5d34e9e8acfd3dd6f072, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1324827801378510562, guid: 8e9515608a9c5d34e9e8acfd3dd6f072, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3000083422953979870, guid: 8e9515608a9c5d34e9e8acfd3dd6f072, type: 3}
+      propertyPath: m_text
+      value: Quit to main menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3136029614803260403, guid: 8e9515608a9c5d34e9e8acfd3dd6f072, type: 3}
+      propertyPath: m_text
+      value: 'Restart at last checkpoint
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 4902183480006883752, guid: 8e9515608a9c5d34e9e8acfd3dd6f072, type: 3}
       propertyPath: m_Name

@@ -16,6 +16,14 @@ public class Checkpoint : MonoBehaviour
         }
     }*/
 
+    private void Start()
+    {
+        if (CheckpointManager == null)
+        {
+            Debug.LogError(string.Format("You need to add {0} to the checkpoint manager list in Game Manager",this.name));
+        }
+    }
+
     private void FixedUpdate()
     {
         var colliderArray = Physics2D.OverlapCircleAll(transform.position, radius);

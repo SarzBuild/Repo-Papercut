@@ -14,7 +14,8 @@ public class SimplePlayerUI : MonoBehaviour
     public GameObject BackgroundImage;
     private Image _backgroundImage;
     public GameObject RestartUI;
-    
+
+    private bool _coroutineRunning;
     
     private void Awake()
     {
@@ -30,6 +31,8 @@ public class SimplePlayerUI : MonoBehaviour
     private void Update()
     {
         UpdateHealthAmount();
+        if (!RestartUI.activeSelf && Input.GetKeyDown(KeyCode.Escape)) { EnableDeathMenu(); }
+        else if (RestartUI.activeSelf && Input.GetKeyDown(KeyCode.Escape) && PlayerHealth.CurrentHealth > 0) { DisableDeathMenu(); }
     }
 
     private void UpdateHealthAmount()
@@ -44,11 +47,13 @@ public class SimplePlayerUI : MonoBehaviour
     {
         RestartUI.SetActive(true);
         GenericManager.FadeIn(_backgroundImage,0.25f,true);
+        Time.timeScale = 0f;
     }
 
     public void DisableDeathMenu()
     {
         GenericManager.FadeOut(_backgroundImage,0.25f,true);
         RestartUI.SetActive(false);
+        Time.timeScale = 1f;
     }
 }

@@ -36,7 +36,7 @@ public class PlayerInAirState : PlayerState
         {
             StateMachine.ChangeState(Player.JumpState);
         }
-        else if (Player.InputHandler.ListenRMouseInput == 2)
+        else if (Player.InputHandler.ListenRMouseInput == 1)
         {
             StateMachine.ChangeState(Player.GrapplingState);
         }
