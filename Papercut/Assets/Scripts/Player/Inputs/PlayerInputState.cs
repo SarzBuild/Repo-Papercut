@@ -60,4 +60,14 @@ public class PlayerInputState : MonoBehaviour
             _interactionInputState);
     }
 
+    public void LockPlayerInputs(bool value)
+    {
+        LockPlayer = value;
+    }
+
+    public void LockMouseInputs(bool value)
+    {
+        LockMouse = value;
+    }
+
 }

@@ -21,16 +21,17 @@ public class PlayerGrapplingState : PlayerState
     private bool _canGrapple;
     private float _ropeFallAcceleration;
     private bool _activeVelocity;
-    private Vector2 ray;
+    private Vector2 _ray;
     private float _ropeFallVelocity;
     private float _velocityX, _velocityY;
 
     public override void EnterState()
     {
+        if (!PlayerData.GrapplingAbilityActive) { StateMachine.ChangeState(StateMachine.LastState); }
         base.EnterState();
         Initialize();
         SetGrapplePoint();
-        Player.SetVelocityZero();
+        //Player.SetVelocityZero();
     }
 
     private void Initialize()
@@ -69,11 +70,24 @@ public class PlayerGrapplingState : PlayerState
         }
         
         _startPoint = Player.transform.position;
+
+        if (_canStartRopeAnimation)
+        {
+            DrawRope();
+            _moveTime += Time.fixedDeltaTime;
+            CalculateVelocity();
+        }
         
-        if (!_canStartRopeAnimation) {return;}
-        DrawRope();
-        _moveTime += Time.fixedDeltaTime;
-        CalculateVelocity();
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+        if (!_canGrapple && !_activeVelocity)
+        {
+            Player.UpdateVelocity();
+            Player.MovementClampedAndApex();
+        }
     }
 
     private void ApplyVelocityWhenExitingState() //Sets the velocity of the normal states 
@@ -107,11 +121,11 @@ public class PlayerGrapplingState : PlayerState
 
     private void SetGrapplePoint() //Check to set a grapple point, if the pointer is behind a wall, it'll target the wall
     {
-        ray = Player.InputHandler.GetMousePos - Player.transform.position;
-        Player.CheckFlip((int)Mathf.Sign(ray.x));
+        _ray = Player.InputHandler.GetMousePos - Player.transform.position;
+        Player.CheckFlip((int)Mathf.Sign(_ray.x));
         
         
-        var hits = Physics2D.RaycastAll(_startPoint, ray.normalized, Vector2.Distance(Player.InputHandler.GetMousePos,Player.transform.position));
+        var hits = Physics2D.RaycastAll(_startPoint, _ray.normalized, Vector2.Distance(Player.InputHandler.GetMousePos,Player.transform.position));
 
         if (hits.Length > 1) //Automatically hits the player therefor we nullify it by adding a default number of 1
         {
@@ -183,7 +197,7 @@ public class PlayerGrapplingState : PlayerState
         Collider2D hitGrappleTarget = Physics2D.OverlapCircle(_grapplePoint, 0.1f, PlayerData.GrappleTargetableLayer);
         if (hitGround == null && hitGrappleTarget == null)
         {
-            if (ray.x > 0) {_ropeFallVelocity = 0.1f;}
+            if (_ray.x > 0) {_ropeFallVelocity = 0.1f;}
             else {_ropeFallVelocity = -0.1f;}
 
             _ropeFallAcceleration += Time.fixedDeltaTime;

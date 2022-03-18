@@ -10,6 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7426489646541233251}
   - component: {fileID: 7426489646541233250}
+  - component: {fileID: 563350370}
+  - component: {fileID: 563350372}
+  - component: {fileID: 563350373}
+  - component: {fileID: 563350374}
+  - component: {fileID: 563350375}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -178,3 +183,75 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &563350370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7426489646541233277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd97f7e2963c21c4585aba2703202ebe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Abilities: []
+  AbilityGainedBeforeNextCheckpoint: []
+--- !u!114 &563350372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7426489646541233277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 662c11e7da5c3a24ca70fba47f15f89e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &563350373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7426489646541233277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edb2132c10184d54492a5df1afb01f3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerHealth: {fileID: 0}
+  HealthImage: {fileID: 0}
+  BackgroundImage: {fileID: 0}
+  RestartUI: {fileID: 0}
+--- !u!114 &563350374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7426489646541233277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4074a946231985428cdb61105874ecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CheckpointManager: {fileID: 563350375}
+  SimplePlayerUI: {fileID: 563350373}
+  AbilityListManager: {fileID: 563350370}
+--- !u!114 &563350375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7426489646541233277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f5b012cb4fb90841b5eabded88d1267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LastCheckpointReached: {x: 0, y: 2}
+  AbilityListManager: {fileID: 563350370}
+  Checkpoints: []

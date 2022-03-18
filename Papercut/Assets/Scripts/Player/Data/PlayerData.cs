@@ -101,6 +101,8 @@ public class PlayerData : ScriptableObject
 
     [Header("Grappling")] 
     
+    [SerializeField] public bool GrapplingAbilityActive;
+    
     [SerializeField]public LayerMask GrappleTargetableLayer;
 
     [SerializeField]public AnimationCurve RopeAnimationCurve;

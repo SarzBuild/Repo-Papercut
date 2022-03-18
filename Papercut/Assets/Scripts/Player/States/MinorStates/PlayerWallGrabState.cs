@@ -13,7 +13,6 @@ public class PlayerWallGrabState : PlayerState
     
     public override void EnterState()
     {
-        if (!PlayerData.WallJumpAbilityActive) StateMachine.ChangeState(StateMachine.LastState);
         _layerStickyWall = LayerMask.NameToLayer("JumpableWall");
         base.EnterState();
         _lastTimeEnterState = Time.time;
@@ -30,7 +29,7 @@ public class PlayerWallGrabState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && PlayerData.WallJumpAbilityActive)
         {
             SetWallJumpBool();
             StateMachine.ChangeState(Player.WallJumpState);

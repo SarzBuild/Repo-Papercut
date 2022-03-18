@@ -224,6 +224,11 @@ public class HealthComponent : MonoBehaviour
         RefreshCurrentPips();
     }
 
+    public void ResetDeath()
+    {
+        IsDead = false;
+    }
+
     private void ResetRegen()
     {
         m_RegenTargetHealth = 0.0f;

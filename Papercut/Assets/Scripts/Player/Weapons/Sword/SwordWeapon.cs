@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class SwordWeapon : WeaponBase
 {
-    public LayerMask GroundLayerMask;
-    public LayerMask PlayerLayerMask;
-
     protected override bool FireImplementation()
     {
         var hits = Physics2D.OverlapCircleAll(transform.position, 1f);
@@ -14,9 +11,10 @@ public class SwordWeapon : WeaponBase
         {
             foreach (var hit in hits)
             {
-                if ((1 << hit.transform.gameObject.layer) != GroundLayerMask && (1 << hit.transform.gameObject.layer) != PlayerLayerMask)
+                if (hit.transform.gameObject.layer != GenericManager.GroundLayerMask && hit.transform.gameObject.layer != GenericManager.PlayerLayerMask)
                 {
                     HealthComponent healthComponent = hit.GetComponent<HealthComponent>();
+                    Debug.Log(healthComponent);
                     if (healthComponent != null)
                     {
                         healthComponent.DealDamage(Settings.Damage);

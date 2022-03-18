@@ -51,10 +51,11 @@ public class Player : AppliedPhysics
     public LineRenderer LineRenderer { get; private set; }
     public HealthComponent HealthComponent { get; private set; }
     public SkinnedMeshRenderer Renderer { get; private set; }
-
+    public SimplePlayerUI SimplePlayerUI;
+    public PlayerData PlayerData;
+    
     #endregion
-
-    [SerializeField] private PlayerData _playerData;
+    
 
     private StringBuilder _debugMessage = new StringBuilder(600);
 
@@ -85,28 +86,30 @@ public class Player : AppliedPhysics
 
     private void InitializeProperties()
     {
-        CurrentDashCount = _playerData.MaximumDashCount;
-        _dashTimerCooldown = _playerData.DashCooldownTime;
-        _playerData.CurrentJumpCount = _playerData.MaximumJumpCount;
+        CurrentDashCount = PlayerData.MaximumDashCount;
+        _dashTimerCooldown = PlayerData.DashCooldownTime;
+        PlayerData.CurrentJumpCount = PlayerData.MaximumJumpCount;
+        PlayerData.GrapplingAbilityActive = false;
+        PlayerData.WallJumpAbilityActive = false;
     }
 
     private void InitializeStateMachine()
     {
         StateMachine = new PlayerStateMachine();
 
-        IdleState = new PlayerIdleState(this, StateMachine, _playerData);
-        MoveState = new PlayerMoveState(this, StateMachine, _playerData);
-        DashState = new PlayerDashState(this, StateMachine, _playerData);
-        HardLandingState = new PlayerHardLandingState(this, StateMachine, _playerData);
-        InAirState = new PlayerInAirState(this, StateMachine, _playerData);
-        JumpState = new PlayerJumpState(this, StateMachine, _playerData);
-        LedgeClimbState = new PlayerLedgeClimbState(this, StateMachine, _playerData);
-        RunningState = new PlayerRunningState(this, StateMachine, _playerData);
-        SlideState = new PlayerSlideState(this, StateMachine, _playerData);
-        SoftLandingState = new PlayerSoftLandingState(this, StateMachine, _playerData);
-        WallGrabState = new PlayerWallGrabState(this, StateMachine, _playerData);
-        WallJumpState = new PlayerWallJumpState(this, StateMachine, _playerData);
-        GrapplingState = new PlayerGrapplingState(this, StateMachine, _playerData);
+        IdleState = new PlayerIdleState(this, StateMachine, PlayerData);
+        MoveState = new PlayerMoveState(this, StateMachine, PlayerData);
+        DashState = new PlayerDashState(this, StateMachine, PlayerData);
+        HardLandingState = new PlayerHardLandingState(this, StateMachine, PlayerData);
+        InAirState = new PlayerInAirState(this, StateMachine, PlayerData);
+        JumpState = new PlayerJumpState(this, StateMachine, PlayerData);
+        LedgeClimbState = new PlayerLedgeClimbState(this, StateMachine, PlayerData);
+        RunningState = new PlayerRunningState(this, StateMachine, PlayerData);
+        SlideState = new PlayerSlideState(this, StateMachine, PlayerData);
+        SoftLandingState = new PlayerSoftLandingState(this, StateMachine, PlayerData);
+        WallGrabState = new PlayerWallGrabState(this, StateMachine, PlayerData);
+        WallJumpState = new PlayerWallJumpState(this, StateMachine, PlayerData);
+        GrapplingState = new PlayerGrapplingState(this, StateMachine, PlayerData);
     }
 
     private void InitializeHealth()
@@ -159,7 +162,7 @@ public class Player : AppliedPhysics
 
         if (Weapons.EquippedWeapon != null && InputHandler.ListenLMouseInput > 0)
         {
-            if (_playerData == null || _playerData.CanFireWeapon)
+            if (PlayerData == null || PlayerData.CanFireWeapon)
             {
                 Weapons.EquippedWeapon.Fire();
             }
@@ -171,8 +174,8 @@ public class Player : AppliedPhysics
 
     private void FixedUpdate()
     {
-        _playerData.Velocity = ((Vector2)transform.position - _playerData.LastPosition) / Time.deltaTime;
-        _playerData.LastPosition = transform.position; // Calculates the true velocity (distance/time)
+        PlayerData.Velocity = ((Vector2)transform.position - PlayerData.LastPosition) / Time.deltaTime;
+        PlayerData.LastPosition = transform.position; // Calculates the true velocity (distance/time)
         
         StateMachine.CurrentState.PhysicsUpdate();
         CalculateGravity();
@@ -182,89 +185,89 @@ public class Player : AppliedPhysics
     {
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            _playerData.LastTimeJumpKeyWasPressed = Time.time;
+            PlayerData.LastTimeJumpKeyWasPressed = Time.time;
         }
     }
 
     private void TimedIncreaseDashCount() //Dash reset cooldown, only active when the player is not dashing and has their dash count lower than the maximum amount.
     {
         if (CurrentDashCount < 0) return;
-        if (CurrentDashCount >= _playerData.MaximumDashCount) return;
+        if (CurrentDashCount >= PlayerData.MaximumDashCount) return;
 
         _dashTimerCooldown -= Time.deltaTime;
         if (_dashTimerCooldown < 0)
         {
             CurrentDashCount++;
-            _dashTimerCooldown = _playerData.DashCooldownTime;
+            _dashTimerCooldown = PlayerData.DashCooldownTime;
         }
 
     }
 
     private void CalculateJumpBuffer() //Checks to see if the last frame is coherent with the current information and updates the collision of last frame 
     {
-        _playerData.PlayerLandedThisFrame = false;
+        PlayerData.PlayerLandedThisFrame = false;
         var groundedCheck = Grounded;
-        if (_playerData.CollisionDown && !groundedCheck) _playerData.TimePlayerStoppedGrounded = Time.time; 
-        else if (!_playerData.CollisionDown && groundedCheck)
+        if (PlayerData.CollisionDown && !groundedCheck) PlayerData.TimePlayerStoppedGrounded = Time.time; 
+        else if (!PlayerData.CollisionDown && groundedCheck)
         {
-            _playerData.CoyoteUsable = true;
-            _playerData.PlayerLandedThisFrame = true;
+            PlayerData.CoyoteUsable = true;
+            PlayerData.PlayerLandedThisFrame = true;
         }
 
-        _playerData.CollisionDown = groundedCheck;
+        PlayerData.CollisionDown = groundedCheck;
     }
     
     private void CalculateGravity() //Always active, it calculates but does not set the gravity.
     {
         if (StateMachine.CurrentState != WallGrabState)
         {
-            if(!_playerData.CollisionDown)
+            if(!PlayerData.CollisionDown)
             {
-                var fallSpeed = _playerData.EndedJumpEarly && _playerData.CurrentVerticalSpeed > 0 ? _playerData.CurrentFallSpeed * _playerData.EndedJumpEarlyGravityModifier : _playerData.CurrentFallSpeed;
+                var fallSpeed = PlayerData.EndedJumpEarly && PlayerData.CurrentVerticalSpeed > 0 ? PlayerData.CurrentFallSpeed * PlayerData.EndedJumpEarlyGravityModifier : PlayerData.CurrentFallSpeed;
             
-                _playerData.CurrentVerticalSpeed -= fallSpeed * Time.fixedDeltaTime;
+                PlayerData.CurrentVerticalSpeed -= fallSpeed * Time.fixedDeltaTime;
             
-                if (_playerData.CurrentVerticalSpeed < _playerData.FallClamped) _playerData.CurrentVerticalSpeed = _playerData.FallClamped;
+                if (PlayerData.CurrentVerticalSpeed < PlayerData.FallClamped) PlayerData.CurrentVerticalSpeed = PlayerData.FallClamped;
             } 
         }
     }
 
     public void MovementClampedAndApex() //Calculate acceleration and clamps it, if in the air, apply the apex bonus. Otherwise decreases speed.
     {
-        if (_playerData.RawInputValue != 0)
+        if (PlayerData.RawInputValue != 0)
         {
-            _playerData.CurrentHorizontalSpeed += _playerData.RawInputValue * _playerData.Acceleration * Time.deltaTime;
+            PlayerData.CurrentHorizontalSpeed += PlayerData.RawInputValue * PlayerData.Acceleration * Time.deltaTime;
             
-            _playerData.CurrentHorizontalSpeed = Mathf.Clamp(_playerData.CurrentHorizontalSpeed, -_playerData.MoveClamped, _playerData.MoveClamped);
+            PlayerData.CurrentHorizontalSpeed = Mathf.Clamp(PlayerData.CurrentHorizontalSpeed, -PlayerData.MoveClamped, PlayerData.MoveClamped);
             
-            var apexBonus = Mathf.Sign(_playerData.RawInputValue) * _playerData.JumpApexSpeedBonus * _playerData.ApexPoint;
-            _playerData.CurrentHorizontalSpeed += apexBonus * Time.deltaTime;
+            var apexBonus = Mathf.Sign(PlayerData.RawInputValue) * PlayerData.JumpApexSpeedBonus * PlayerData.ApexPoint;
+            PlayerData.CurrentHorizontalSpeed += apexBonus * Time.deltaTime;
         }
         else
         {
-            _playerData.CurrentHorizontalSpeed = Mathf.MoveTowards(_playerData.CurrentHorizontalSpeed, 0, _playerData.Deceleration * Time.fixedDeltaTime);
+            PlayerData.CurrentHorizontalSpeed = Mathf.MoveTowards(PlayerData.CurrentHorizontalSpeed, 0, PlayerData.Deceleration * Time.fixedDeltaTime);
         }
     }
 
     public void UpdateVelocity() //Set the velocity
     {
-        SetVelocityY(_playerData.CurrentVerticalSpeed);
-        SetVelocityX(_playerData.CurrentHorizontalSpeed);
+        SetVelocityY(PlayerData.CurrentVerticalSpeed);
+        SetVelocityX(PlayerData.CurrentHorizontalSpeed);
     }
 
     private void SpeedResetOnCollisions()
     {
-        if (_playerData.CurrentHorizontalSpeed > 0 && WallFrontHit || _playerData.CurrentHorizontalSpeed < 0 && WallBackHit)
+        if (PlayerData.CurrentHorizontalSpeed > 0 && WallFrontHit || PlayerData.CurrentHorizontalSpeed < 0 && WallBackHit)
         {
-            _playerData.CurrentHorizontalSpeed = 0;
+            PlayerData.CurrentHorizontalSpeed = 0;
         }
         
-        if (_playerData.CollisionDown)
+        if (PlayerData.CollisionDown)
         {
-            if (_playerData.CurrentVerticalSpeed < 0)
+            if (PlayerData.CurrentVerticalSpeed < 0)
             {
-                _playerData.CurrentVerticalSpeed = 0;
-                _playerData.CurrentJumpCount = _playerData.MaximumJumpCount;
+                PlayerData.CurrentVerticalSpeed = 0;
+                PlayerData.CurrentJumpCount = PlayerData.MaximumJumpCount;
             }
         }
     }
@@ -274,12 +277,12 @@ public class Player : AppliedPhysics
     private void TimerForWallGrabJumps()
     {
         threshold = 0.05f;
-        if (!_playerData.CurrentlyWallJumping) return;
+        if (!PlayerData.CurrentlyWallJumping) return;
         timer += Time.fixedDeltaTime;
         
         if (timer > threshold)
         {
-            _playerData.CurrentlyWallJumping = false;
+            PlayerData.CurrentlyWallJumping = false;
             timer = 0;
         }
     }
@@ -290,7 +293,7 @@ public class Player : AppliedPhysics
         {
             for (int i = 0; i < WallBackHitResult.Length; i++)
             {
-                if ((_playerData.WallLayerMask.value & (1 << WallBackHitResult[i].collider.gameObject.layer)) > 0)
+                if ((PlayerData.WallLayerMask.value & (1 << WallBackHitResult[i].collider.gameObject.layer)) > 0)
                     return true;
             }
         }
@@ -298,7 +301,7 @@ public class Player : AppliedPhysics
         {
             for (int i = 0; i < WallFrontHitResult.Length; i++)
             {
-                if ((_playerData.WallLayerMask.value & (1 << WallFrontHitResult[i].collider.gameObject.layer)) > 0)
+                if ((PlayerData.WallLayerMask.value & (1 << WallFrontHitResult[i].collider.gameObject.layer)) > 0)
                     return true;
             }
         }
@@ -313,11 +316,11 @@ public class Player : AppliedPhysics
     
     public bool WallStickyFrontHit { get { return WallStickyFrontHitResult; } }
     public RaycastHit2D WallStickyFrontHitResult { get; private set; }
-    public void UpdateStickyWallFrontHit() { WallStickyFrontHitResult = Physics2D.Raycast(_rightWallCheck.position, Vector2.right * -_facingDirection, _wallCheckDistance, _playerData.WallLayerMask); }
+    public void UpdateStickyWallFrontHit() { WallStickyFrontHitResult = Physics2D.Raycast(_rightWallCheck.position, Vector2.right * -_facingDirection, _wallCheckDistance, PlayerData.WallLayerMask); }
 
     public bool WallStickyBackHit { get { return WallStickyBackHitResult; } }
     public RaycastHit2D WallStickyBackHitResult { get; private set; }
-    public void UpdateStickyWallBackHit() { WallStickyBackHitResult = Physics2D.Raycast(_leftWallCheck.position, Vector2.right * -_facingDirection, _wallCheckDistance, _playerData.WallLayerMask); }
+    public void UpdateStickyWallBackHit() { WallStickyBackHitResult = Physics2D.Raycast(_leftWallCheck.position, Vector2.right * -_facingDirection, _wallCheckDistance, PlayerData.WallLayerMask); }
 
     private void LogDebug()
     {
@@ -335,9 +338,14 @@ public class Player : AppliedPhysics
         {
             Debug.Log(string.Format("Player killed by {0}", killer.name));
         }
-
+        
+        InputHandler.LockMouseInputs(true);
+        InputHandler.LockPlayerInputs(true);
+        SimplePlayerUI.EnableDeathMenu();
+        Time.timeScale = 0;
         Debug.LogWarning("You died!");
-        Destroy(gameObject); // gameover
+        
+        //Play Death animation
     }
 
     private void Knockback(HealthComponent component, float value)
@@ -345,7 +353,7 @@ public class Player : AppliedPhysics
         var direction = (transform.position - component.transform.position);
         var directionX = Mathf.Sign(direction.x);
         Debug.Log(transform.position + " " + component.transform.position);
-        SetVelocityX(directionX * _playerData.KnockbackSpeed);
+        SetVelocityX(directionX * PlayerData.KnockbackSpeed);
     }
 
     private void BlinkRed(HealthComponent component, float value)

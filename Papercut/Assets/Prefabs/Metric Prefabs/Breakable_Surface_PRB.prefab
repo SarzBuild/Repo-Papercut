@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 5295639674163118216}
   - component: {fileID: 7546131187769261106}
   - component: {fileID: 3243116511811746144}
+  - component: {fileID: 7708260691387161632}
+  - component: {fileID: 8791131481543702542}
   m_Layer: 7
   m_Name: Breakable_Surface_PRB
   m_TagString: Untagged
@@ -109,3 +111,29 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &7708260691387161632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288094734599923846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c260fba9b96d90479a537bc65f10c37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Settings: {fileID: 11400000, guid: b594ac0631e46274492a367a7f1800c8, type: 2}
+--- !u!114 &8791131481543702542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288094734599923846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5382516cfe5afe84fa91437e4a33e578, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthComponent: {fileID: 7708260691387161632}

@@ -23,7 +23,7 @@ TagManager:
   - MoveableWall
   - JumpableWall
   - Bullet
-  - 
+  - TriggerZone
   - 
   - 
   - 
