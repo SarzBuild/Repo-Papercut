@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.032837436, g: 0.05792635, b: 0.19091362, a: 1}
+  m_IndirectSpecularColor: {r: 0.032757156, g: 0.057820845, b: 0.19053802, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -511,7 +511,7 @@ MonoBehaviour:
   taaMotionVectorRejection: 0
   taaAntiHistoryRinging: 0
   physicalParameters:
-    m_Iso: 15000
+    m_Iso: 20000
     m_ShutterSpeed: 0.016666668
     m_Aperture: 4
     m_BladeCount: 5
