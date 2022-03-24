@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GenericManager : MonoBehaviour
@@ -40,5 +41,9 @@ public class GenericManager : MonoBehaviour
         fixedColor.a = 1;
         target.color = fixedColor;
     }
-    
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }
