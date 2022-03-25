@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 2089010118677328359}
   - component: {fileID: 1651818500472766122}
   - component: {fileID: 43368429003359864}
+  - component: {fileID: 9028793286506368648}
   - component: {fileID: 5599345137199256639}
   - component: {fileID: 2536785393490052659}
   - component: {fileID: 1453958796}
@@ -350,6 +351,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!111 &9028793286506368648
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6262205277068168276}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 4348485665485846014, guid: 3d6515bfa0cff81469916bcc4b52f2a2, type: 3}
+  m_Animations:
+  - {fileID: 0}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &5599345137199256639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -719,6 +736,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainC_CHAR
       objectReference: {fileID: 0}
+    - target: {fileID: 2223639932434330405, guid: 6b3353938a4eae14a92dd8649f0d5343, type: 3}
+      propertyPath: m_Animation
+      value: 
+      objectReference: {fileID: -3100369314251171874, guid: 886bb384cbaac4a429c11b94a9a83363, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b3353938a4eae14a92dd8649f0d5343, type: 3}
 --- !u!4 &1654577834962837948 stripped
