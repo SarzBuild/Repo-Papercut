@@ -41,19 +41,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level_Rooms/RoomTriggers.unity
     guid: f870756845d7ef2498266542e07f7be9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Gyms/Combat Gym.unity
     guid: f4657d27c46601040b367271b346132f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Gyms/Grappling Hook Gym.unity
     guid: 0c680f168d7d20d4d80ebbdc0f59e2ac
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Gyms/Jumping Gym.unity
     guid: 725e79df4ad693f409d845c28cf8d61c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Gyms/Walk & Run & Dash Gym.unity
     guid: 7feee0c17f09d24408be0c5b8be52d1d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LookDev/LookDevTestScene.unity
     guid: b511bbfda02a1864796b4607b5c9f09e
   m_configObjects: {}

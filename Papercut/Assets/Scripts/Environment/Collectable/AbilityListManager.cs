@@ -15,7 +15,7 @@ public class AbilityListManager : MonoBehaviour
     public List<AbilityPickup> AbilityGainedBeforeNextCheckpoint = new List<AbilityPickup>();
     private Player _player;
 
-    private void OnEnable()
+    private void Start()
     {
         if (Abilities.Count < 1)
         {
