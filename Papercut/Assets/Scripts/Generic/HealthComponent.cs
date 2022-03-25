@@ -14,7 +14,7 @@ public class HealthComponent : MonoBehaviour
 
     public float CurrentPips { get; private set; } = 0.0f;
 
-    public bool IsDead { get; private set; } = false;
+    public bool IsDead { get; set; } = false;
 
     public bool IsRegeneratingHealth { get; private set; } = false;
 
