@@ -367,7 +367,7 @@ public class Player : AppliedPhysics
         var nextFireTime = _lastHitTime + 0.1f;
         if (Time.time - nextFireTime > 0)
         {
-            Renderer.material.SetColor("_BaseColorp", _baseColor);
+            Renderer.material.SetColor("_BaseColor", _baseColor);
         }
     }
 }
