@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.04065627, g: 0.061522514, b: 0.13232446, a: 1}
+  m_IndirectSpecularColor: {r: 0.043373078, g: 0.07056677, b: 0.1740576, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -346,6 +346,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09124b1edbd7f4d44939a8614f91100d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &227930113 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 563350373, guid: 590f90d490c0c3b44b40bd641ea0449c, type: 3}
+  m_PrefabInstance: {fileID: 1941683804}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edb2132c10184d54492a5df1afb01f3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &248626726
@@ -6881,6 +6892,10 @@ PrefabInstance:
       propertyPath: _mainCamera
       value: 
       objectReference: {fileID: 2139699821}
+    - target: {fileID: 2089010118677328359, guid: fd018425d2e6cb64681890150e6d0568, type: 3}
+      propertyPath: SimplePlayerUI
+      value: 
+      objectReference: {fileID: 227930113}
     - target: {fileID: 2089010118677328359, guid: fd018425d2e6cb64681890150e6d0568, type: 3}
       propertyPath: _canSetVelocity
       value: 1
