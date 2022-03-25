@@ -191,7 +191,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh57348
+  m_Name: pb_Mesh29790
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -622,12 +622,15 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 27.767395, y: 0.15169525}
-      - {x: -2.140808, y: 3.3746872}
+    - - {x: 26.142517, y: 4.543274}
+      - {x: 0.13381958, y: 8.938301}
+      - {x: -16.008759, y: 6.589882}
       - {x: -27.79358, y: 0.017456055}
       - {x: -32.15727, y: -8.462782}
       - {x: -31.064974, y: -8.465353}
       - {x: -26.908691, y: -0.46136475}
+      - {x: -15.524475, y: 5.578018}
+      - {x: 18.789581, y: 3.670807}
       - {x: 26.849487, y: -0.42177582}
       - {x: 31.09916, y: -8.461458}
       - {x: 32.122475, y: -8.478098}
@@ -1802,7 +1805,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh57392
+  m_Name: pb_Mesh29834
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2152,7 +2155,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 74.3725, y: 5.3901634}
+  m_Offset: {x: 77.28752, y: 6.738365}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2163,7 +2166,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 9.89502, y: 0.92339325}
+  m_Size: {x: 15.725067, y: 3.6197968}
   m_EdgeRadius: 0
 --- !u!33 &854227296
 MeshFilter:
@@ -6809,7 +6812,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 71.02298, y: -2.1321487}
+  m_Offset: {x: 74.22951, y: -3.3710365}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6820,7 +6823,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 16.594055, y: 0.9972992}
+  m_Size: {x: 23.00711, y: 3.4750748}
   m_EdgeRadius: 0
 --- !u!61 &854227303
 BoxCollider2D:
@@ -8690,7 +8693,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh57462
+  m_Name: pb_Mesh29904
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8966,10 +8969,6 @@ PrefabInstance:
     - target: {fileID: 22010298084981165, guid: 49b372ac63d82cf4aa62e936741717b3, type: 3}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 22010298084981165, guid: 49b372ac63d82cf4aa62e936741717b3, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 22010298084981165, guid: 49b372ac63d82cf4aa62e936741717b3, type: 3}
       propertyPath: m_LocalPosition.x
