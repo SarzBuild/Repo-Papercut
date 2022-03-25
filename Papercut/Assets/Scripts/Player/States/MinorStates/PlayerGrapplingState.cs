@@ -58,6 +58,7 @@ public class PlayerGrapplingState : PlayerState
         _activeVelocity = false;
         _velocityX = 0f;
         _velocityY = 0f;
+        PlayerData.CurrentJumpCount = PlayerData.MaximumJumpCount;
     }
 
     public override void LogicUpdate()
