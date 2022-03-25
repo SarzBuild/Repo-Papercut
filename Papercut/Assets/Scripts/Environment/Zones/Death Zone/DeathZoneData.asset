@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: DeathZoneData
   m_EditorClassIdentifier: 
   description: 
-  FireCooldownSec: 2
+  FireCooldownSec: 0
   FireWaitForAnimationToFinishEvent: 0
-  Damage: 5
+  Damage: 200
   UsesAmmo: 0
   DefaultAmmo: 0
   AmmoPerFire: 1
