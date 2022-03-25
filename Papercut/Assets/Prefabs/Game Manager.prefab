@@ -113,7 +113,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerInputState, Assembly-CSharp
-        m_MethodName: SetRunInput
+        m_MethodName: 
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -197,6 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Abilities:
   - {fileID: 0}
+  - {fileID: 0}
   AbilityGainedBeforeNextCheckpoint: []
 --- !u!114 &563350372
 MonoBehaviour:
@@ -256,4 +257,5 @@ MonoBehaviour:
   LastCheckpointReached: {x: 0, y: 2}
   AbilityListManager: {fileID: 563350370}
   Checkpoints:
+  - {fileID: 0}
   - {fileID: 0}

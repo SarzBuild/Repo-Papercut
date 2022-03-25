@@ -18,8 +18,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Level_Rooms/Room_002.unity
     guid: 1c6db30d11602a4469feb1998663c170
   - enabled: 1
-    path: Assets/Scenes/Level_Rooms/Room_003_Old.unity
-    guid: df97ba1e8c0335842ab323879b0b72fd
+    path: Assets/Scenes/Level_Rooms/Room_003.unity
+    guid: a63a48675d3e99f41bf1933c0b0226b8
   - enabled: 1
     path: Assets/Scenes/Level_Rooms/Room_004.unity
     guid: 335fff3afb3dc11469cb1650f8bfc877
