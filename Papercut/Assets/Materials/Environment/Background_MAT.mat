@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3637016873696034546
+--- !u!114 &-8156294158693182474
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,15 +20,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ground02_MAT
-  m_Shader: {fileID: -6465566751694194690, guid: c3b4ac2663386484f800e4dbad8ef3ad, type: 3}
-  m_ShaderKeywords: _DEPTHOFFSET_ON _DISABLE_SSR_TRANSPARENT
+  m_Name: Background_MAT
+  m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
+  m_ShaderKeywords: _DISABLE_SSR_TRANSPARENT _NORMALMAP_TANGENT_SPACE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2225
-  stringTagMap:
-    MotionVector: User
+  stringTagMap: {}
   disabledShaderPasses:
   - TransparentDepthPrepass
   - TransparentDepthPostpass
@@ -38,54 +37,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Albedo01:
-        m_Texture: {fileID: 2800000, guid: 89f31efc1fa358545b7ca40c7fac3f2f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Albedo02:
-        m_Texture: {fileID: 2800000, guid: f0afe031264bd064f9ba07d90d37cc1b, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Albedo_Background:
-        m_Texture: {fileID: 2800000, guid: 89f31efc1fa358545b7ca40c7fac3f2f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Albedo_L:
-        m_Texture: {fileID: 2800000, guid: f968454f0f36ac84dbc9150ce8f1d587, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Albedo_Pattern:
-        m_Texture: {fileID: 2800000, guid: f968454f0f36ac84dbc9150ce8f1d587, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Albedo_TXT:
-        m_Texture: {fileID: 2800000, guid: f0afe031264bd064f9ba07d90d37cc1b, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Albedo_W:
-        m_Texture: {fileID: 2800000, guid: 89f31efc1fa358545b7ca40c7fac3f2f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - MapNormal:
-        m_Texture: {fileID: 2800000, guid: 7ebd4a3eb3c3e254e9e8aeba70eaae32, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - NeutralNormal:
-        m_Texture: {fileID: 2800000, guid: fc0195696d087274c983fa2765b11613, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Normal_L:
-        m_Texture: {fileID: 2800000, guid: fc0195696d087274c983fa2765b11613, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Normal_TXT:
-        m_Texture: {fileID: 2800000, guid: fc0195696d087274c983fa2765b11613, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Normal_W:
-        m_Texture: {fileID: 2800000, guid: dd2d5f4d40fc57d46af08957a2dff9db, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -142,58 +93,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _ParallaxOcclusionMapping_50c071d8f28c48cf96a8c25f9748574c_Heightmap_2:
-        m_Texture: {fileID: 2800000, guid: 5f09353de2edc6c4d9be451462044b73, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_28bf737abaf84ba09450d1c18fdeda75_Texture_1:
-        m_Texture: {fileID: 2800000, guid: fc0195696d087274c983fa2765b11613, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_4454b41a0385433dbfef2a760dbb7abb_Texture_1:
-        m_Texture: {fileID: 2800000, guid: f7a047e80614797448711f97a7cd5dc5, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_57ad7a64adff47738c82a1ff033b0b72_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 9dd9c9d77deb2094ca2f9403c2ecf78d, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_62144e05f0704021ab22218c596c64de_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 5f09353de2edc6c4d9be451462044b73, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_62605229a5af4f99b89b7ea183e858de_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 9dd9c9d77deb2094ca2f9403c2ecf78d, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_63ee32fafd494a7192dc2ebee29a3db7_Texture_1:
-        m_Texture: {fileID: 2800000, guid: fc0195696d087274c983fa2765b11613, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_957c2e92c6834ba28897bdaa0946bb47_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 89f31efc1fa358545b7ca40c7fac3f2f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_a9f2344a1f6546a5b1c869269ca90354_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 5f09353de2edc6c4d9be451462044b73, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_abb99c1270da45a88dd3feef4c251ff2_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 5f09353de2edc6c4d9be451462044b73, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_b0a31b4750a84081af824ac55de202b1_Texture_1:
-        m_Texture: {fileID: 2800000, guid: f7a047e80614797448711f97a7cd5dc5, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_e387651528bb44b29837a276eb0a32da_Texture_1:
-        m_Texture: {fileID: 2800000, guid: f7a047e80614797448711f97a7cd5dc5, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_f6873b0ea0014bbbb9ad30be74d3184b_Texture_1:
-        m_Texture: {fileID: 2800000, guid: fc0195696d087274c983fa2765b11613, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _SpecularColorMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -232,19 +131,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Coat: 0
-    - Metallic: 0
-    - NormalStrength: 1
-    - PatternInverse: 1
-    - Pos01_Clamp: 100
-    - Pos01_Multiply: 0.01
-    - Pos01_Transition: -40
-    - Pos02_Clamp: 100
-    - Pos02_Multiply: 0.01
-    - Pos02_Transition: -200
-    - Roughness: 0.36
-    - TransitionX_Pos01: -40
-    - TransitionX_Pos02: -90
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
@@ -265,7 +151,7 @@ Material:
     - _CullMode: 2
     - _CullModeForward: 2
     - _Cutoff: 0.5
-    - _DepthOffsetEnable: 1
+    - _DepthOffsetEnable: 0
     - _DetailAlbedoScale: 1
     - _DetailNormalScale: 1
     - _DetailSmoothnessScale: 1
@@ -315,8 +201,6 @@ Material:
     - _ReceivesSSR: 1
     - _ReceivesSSRTransparent: 0
     - _RefractionModel: 0
-    - _RenderQueueType: 1
-    - _RequireSplitLighting: 0
     - _Smoothness: 0.5
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
@@ -326,12 +210,10 @@ Material:
     - _SrcBlend: 1
     - _StencilRef: 0
     - _StencilRefDepth: 8
-    - _StencilRefDistortionVec: 4
     - _StencilRefGBuffer: 10
     - _StencilRefMV: 40
     - _StencilWriteMask: 6
     - _StencilWriteMaskDepth: 8
-    - _StencilWriteMaskDistortionVec: 4
     - _StencilWriteMaskGBuffer: 14
     - _StencilWriteMaskMV: 40
     - _SubsurfaceMask: 1
@@ -358,22 +240,6 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - BG_Tint01: {r: 1, g: 1, b: 1, a: 0}
-    - BG_Tint02: {r: 0.17777678, g: 0.6090594, b: 0.8018868, a: 0}
-    - BG_Tint03: {r: 1, g: 0.5613208, b: 0.5613208, a: 1}
-    - NormalStrength: {r: 1, g: 1, b: 1, a: 0}
-    - P_Tint01: {r: 1, g: 1, b: 1, a: 1}
-    - P_Tint02: {r: 0.3254717, g: 1, b: 0.7524818, a: 0}
-    - P_Tint03: {r: 1, g: 0, b: 0, a: 0}
-    - PatternTint: {r: 1, g: 1, b: 1, a: 0}
-    - Scale: {r: 1, g: 1, b: 1, a: 0}
-    - Scale_Pattern: {r: 0.1, g: 0.1, b: 0.1, a: 0}
-    - Scale_WA: {r: 0.1, g: 0.1, b: 0.1, a: 0}
-    - Scale_WN: {r: 1, g: 1, b: 1, a: 0}
-    - Tint: {r: 1, g: 1, b: 1, a: 1}
-    - Tint01: {r: 1, g: 1, b: 1, a: 0}
-    - Tint02: {r: 0, g: 0, b: 0, a: 0}
-    - Tint03: {r: 1, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
