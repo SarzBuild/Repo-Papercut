@@ -46,8 +46,16 @@ Material:
         m_Texture: {fileID: 2800000, guid: f0afe031264bd064f9ba07d90d37cc1b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - Albedo_Background:
+        m_Texture: {fileID: 2800000, guid: 89f31efc1fa358545b7ca40c7fac3f2f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Albedo_L:
-        m_Texture: {fileID: 2800000, guid: f0afe031264bd064f9ba07d90d37cc1b, type: 3}
+        m_Texture: {fileID: 2800000, guid: f968454f0f36ac84dbc9150ce8f1d587, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Albedo_Pattern:
+        m_Texture: {fileID: 2800000, guid: f968454f0f36ac84dbc9150ce8f1d587, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Albedo_TXT:
@@ -56,6 +64,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     - Albedo_W:
         m_Texture: {fileID: 2800000, guid: 89f31efc1fa358545b7ca40c7fac3f2f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - MapNormal:
+        m_Texture: {fileID: 2800000, guid: 7ebd4a3eb3c3e254e9e8aeba70eaae32, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - NeutralNormal:
+        m_Texture: {fileID: 2800000, guid: fc0195696d087274c983fa2765b11613, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Normal_L:
@@ -67,7 +83,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Normal_W:
-        m_Texture: {fileID: 2800000, guid: 7ebd4a3eb3c3e254e9e8aeba70eaae32, type: 3}
+        m_Texture: {fileID: 2800000, guid: dd2d5f4d40fc57d46af08957a2dff9db, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
@@ -216,9 +232,19 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Coat: 0.03
+    - Coat: 0
     - Metallic: 0
-    - Roughness: 0
+    - NormalStrength: 1
+    - PatternInverse: 1
+    - Pos01_Clamp: 100
+    - Pos01_Multiply: 0.01
+    - Pos01_Transition: -40
+    - Pos02_Clamp: 100
+    - Pos02_Multiply: 0.01
+    - Pos02_Transition: -200
+    - Roughness: 0.36
+    - TransitionX_Pos01: -40
+    - TransitionX_Pos02: -90
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
@@ -332,10 +358,16 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
+    - NormalStrength: {r: 1, g: 1, b: 1, a: 0}
+    - PatternTint: {r: 1, g: 1, b: 1, a: 0}
     - Scale: {r: 1, g: 1, b: 1, a: 0}
-    - Scale_WA: {r: 1, g: 1, b: 1, a: 0}
-    - Scale_WN: {r: 3, g: 3, b: 3, a: 0}
-    - Tint: {r: 0, g: 0, b: 0, a: 1}
+    - Scale_Pattern: {r: 0.1, g: 0.1, b: 0.1, a: 0}
+    - Scale_WA: {r: 0.1, g: 0.1, b: 0.1, a: 0}
+    - Scale_WN: {r: 1, g: 1, b: 1, a: 0}
+    - Tint: {r: 1, g: 1, b: 1, a: 1}
+    - Tint01: {r: 1, g: 1, b: 1, a: 0}
+    - Tint02: {r: 0, g: 0, b: 0, a: 0}
+    - Tint03: {r: 1, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
