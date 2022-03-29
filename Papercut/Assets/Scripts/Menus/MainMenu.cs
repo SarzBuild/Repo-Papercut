@@ -24,9 +24,7 @@ public class MainMenu : MonoBehaviour
     public Image VolumeHandleImage;
 
     public Text ControlsText;
-    Color ControlsTextStartColour;
     public Text BackText;
-    Color BackTextStartColour;
     public Text StartText;
     public Text QuitText;
     public Text OptionsText;
@@ -36,15 +34,11 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {              
-        OptionsButton.transform.position = new Vector3(560f, 2000f, 0);
+        OptionsButton.transform.position = new Vector3(660f, 2000f, 0);
         StartButton.transform.position = new Vector3(960f, 2000f, 0);
-        QuitButton.transform.position = new Vector3(1360f, 2000f, 0);
-        BackTextStartColour = BackText.color;
-        ControlsTextStartColour = ControlsText.color;
-        BackTextStartColour.a = 0f;
-        ControlsTextStartColour.a = 0f;
-        BackText.color = BackTextStartColour;
-        ControlsText.color = ControlsTextStartColour;
+        QuitButton.transform.position = new Vector3(1260f, 2000f, 0);
+        BackText.color = Color.clear;
+        ControlsText.color = Color.clear;
         VolumeObject.SetActive(false);
 
         OptionsButton.transform.DOMoveY(640f, 1f);
@@ -81,9 +75,9 @@ public class MainMenu : MonoBehaviour
         else if(CurrentMenuState == MenuState.ControlsState)
         {
             CurrentMenuState = MenuState.OptionsState;
-            OptionsButton.transform.DOMoveX(560f, 0.5f);
-            StartButton.transform.DOMoveX(960f, 0.5f);
-            QuitButton.transform.DOMoveX(1360f, 0.5f);
+            OptionsButton.transform.DOMoveX(660f, 0.2f);
+            StartButton.transform.DOMoveX(960f, 0.2f);
+            QuitButton.transform.DOMoveX(1260f, 0.2f);
         }
     }
 
@@ -101,25 +95,25 @@ public class MainMenu : MonoBehaviour
     private void OnControlsButtons()
     {
         CurrentMenuState = MenuState.ControlsState;
-        OptionsButton.transform.DOMoveX(100f, 0.5f);
-        StartButton.transform.DOMoveX(300f, 0.5f);
-        QuitButton.transform.DOMoveX(500f, 0.5f);
+        OptionsButton.transform.DOMoveX(100f, 0.2f);
+        StartButton.transform.DOMoveX(200f, 0.2f);
+        QuitButton.transform.DOMoveX(300f, 0.2f);
     }
 
     private void ImageFlip()
     {
         if(CurrentMenuState == MenuState.OptionsState)
         {
-            OptionsImage.transform.DORotate(new Vector3(0, 180, 0), 0.5f);
-            StartImage.transform.DORotate(new Vector3(0, 180, 0), 0.5f);
-            QuitImage.transform.DORotate(new Vector3(0, 180, 0), 0.5f).OnComplete(TextAppear);
+            OptionsImage.transform.DORotate(new Vector3(0, 180, -90), 0.5f);
+            StartImage.transform.DORotate(new Vector3(0, 180, -90), 0.5f);
+            QuitImage.transform.DORotate(new Vector3(0, 180, -90), 0.5f).OnComplete(TextAppear);
         }
         else if(CurrentMenuState == MenuState.MainState)
         {
             VolumeObject.SetActive(false);
-            OptionsImage.transform.DORotate(new Vector3(0, 0, 0), 0.5f);
-            StartImage.transform.DORotate(new Vector3(0, 0, 0), 0.5f);
-            QuitImage.transform.DORotate(new Vector3(0, 0, 0), 0.5f).OnComplete(TextAppear);
+            OptionsImage.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
+            StartImage.transform.DORotate(new Vector3(0, 0, -90), 0.5f);
+            QuitImage.transform.DORotate(new Vector3(0, 0, -90), 0.5f).OnComplete(TextAppear);
         }
     }
 
