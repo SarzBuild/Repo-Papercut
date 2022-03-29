@@ -80,7 +80,7 @@ public class Player : AppliedPhysics
         _baseColor = Renderer.material.GetColor("_BaseColor");
         _facingDirection = 1;
         _canSetVelocity = true;
-
+        HealthComponent.IsDead = false;
         InitializeStateMachine();
     }
 

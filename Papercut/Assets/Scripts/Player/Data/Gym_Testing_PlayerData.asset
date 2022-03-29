@@ -17,12 +17,12 @@ MonoBehaviour:
 '
   RawInputValue: 0
   Velocity: {x: 0, y: 0}
-  LastPosition: {x: 190.89247, y: -43.546646}
-  LastTimeJumpKeyWasPressed: 891.4764
+  LastPosition: {x: 290.4483, y: -45.959846}
+  LastTimeJumpKeyWasPressed: 117.52751
   CurrentHorizontalSpeed: 0
-  CurrentVerticalSpeed: 0
+  CurrentVerticalSpeed: -40
   PlayerLandedThisFrame: 0
-  CollisionDown: 1
+  CollisionDown: 0
   TimePlayerStoppedGrounded: -3.4028235e+38
   PlayerLayerMask:
     serializedVersion: 2
@@ -37,17 +37,17 @@ MonoBehaviour:
   FallClamped: -40
   MinimumFallSpeed: 80
   MaximumFallSpeed: 120
-  CurrentFallSpeed: 80
+  CurrentFallSpeed: 120
   MaximumJumpCount: 2
-  CurrentJumpCount: 2
-  TimeBetweenDoubleJump: 0.03
+  CurrentJumpCount: 0
+  TimeBetweenDoubleJump: 0.01
   JumpHeight: 19
-  CoyoteUsable: 1
+  CoyoteUsable: 0
   CoyoteTimeThreshold: 0.1
   JumpBuffer: 0.1
-  EndedJumpEarly: 0
+  EndedJumpEarly: 1
   EndedJumpEarlyGravityModifier: 3
-  ApexPoint: 0
+  ApexPoint: 1
   JumpApexSpeedBonus: 2
   JumpApexThreshold: 10
   DashAbilityActive: 0
@@ -56,7 +56,7 @@ MonoBehaviour:
   MaximumDashCount: 1
   DashCooldownTime: 0.5
   CanFireWeapon: 1
-  WallJumpAbilityActive: 0
+  WallJumpAbilityActive: 1
   ResetNumberOfJumpOnWallGrab: 2
   CurrentlyOnStickyWall: 0
   CurrentlyWallJumping: 0
@@ -90,7 +90,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   MaxCurvaturePercent: 0.351
   MinCurvaturePercent: 0.058
-  WallJumpCurrentAngle: 21.036015
+  WallJumpCurrentAngle: 16.348013
   DelayOfWallJump: 0.2
   EndWallJumpYVelocity: 3
   EndWallJumpXVelocity: 20.5

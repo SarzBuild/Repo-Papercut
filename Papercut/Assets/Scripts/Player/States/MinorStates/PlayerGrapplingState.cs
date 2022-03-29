@@ -101,6 +101,7 @@ public class PlayerGrapplingState : PlayerState
         if (!_activeVelocity) {return;}
         PlayerData.CurrentHorizontalSpeed = PlayerData.EndGrappleXVelocity * _velocityX;
         PlayerData.CurrentVerticalSpeed = PlayerData.EndGrappleYVelocity * _velocityY;
+        PlayerData.CurrentJumpCount = PlayerData.MaximumJumpCount;
     }
 
     private void CalculateVelocity() //Calculates the velocity
