@@ -6,11 +6,10 @@ public class HunterWeapon : WeaponBase
 {
     public GameObject BulletPrefab;
     public float BulletSpeed;
-    public Transform ShootingPoint;
 
     protected override bool FireImplementation()
     {
-        var instantiatedObject = Instantiate(BulletPrefab, ShootingPoint.position, ShootingPoint.rotation).GetComponent<Bullet>();
+        var instantiatedObject = Instantiate(BulletPrefab, transform.position, transform.rotation).GetComponent<Bullet>();
         instantiatedObject.Speed = BulletSpeed;
         instantiatedObject.DamageToDeal = (int)Settings.Damage;
         

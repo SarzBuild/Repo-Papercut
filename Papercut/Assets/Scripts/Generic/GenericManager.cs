@@ -46,9 +46,4 @@ public class GenericManager : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
-
-    public void Quit()
-    {
-        Application.Quit();
-    }
 }
