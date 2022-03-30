@@ -26,7 +26,7 @@ public class Attack : Node
         return NodeState.RUNNING;
     }
 
-    public void SetCurrentNode()
+    private void SetCurrentNode()
     {
         _enemyData.CurrentNode = this;
     }

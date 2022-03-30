@@ -5,9 +5,12 @@ using UnityEngine;
 public class SpiderlingWeapon : WeaponBase
 {
     public LayerMask PlayerLayerMask;
+    public Transform AttackPoint;
     public float range = 1f;
     protected override bool FireImplementation()
     {
+        
+        
         var hit = Physics2D.BoxCast(transform.position,new Vector2(1,1),0f,transform.right,range,PlayerLayerMask);
         if (hit)
         {
@@ -27,5 +30,6 @@ public class SpiderlingWeapon : WeaponBase
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position,range);
+        Gizmos.DrawWireCube(transform.position,new Vector2(1,1));
     }
 }
