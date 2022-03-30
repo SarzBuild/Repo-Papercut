@@ -6029,6 +6029,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ability Pickups
       objectReference: {fileID: 0}
+    - target: {fileID: 2458100909681740485, guid: fd16c84dfb928624f9647a8011e483c4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 394.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2458100909681740485, guid: fd16c84dfb928624f9647a8011e483c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -104.9
+      objectReference: {fileID: 0}
     - target: {fileID: 6370640011370042625, guid: fd16c84dfb928624f9647a8011e483c4, type: 3}
       propertyPath: m_IsTrigger
       value: 1

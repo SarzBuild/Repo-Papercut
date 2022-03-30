@@ -8641,7 +8641,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 44.238117, y: -22.67316}
+  m_Offset: {x: 57.05054, y: -26.509829}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -8652,7 +8652,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 72.10415, y: 1.1047363}
+  m_Size: {x: 97.729, y: 1.1639671}
   m_EdgeRadius: 0
 --- !u!61 &1166084773
 BoxCollider2D:
@@ -8771,7 +8771,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 14.96749, y: -15.281683}
+  m_Offset: {x: 15.069757, y: -17.192007}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -8782,7 +8782,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 14.998297, y: 0.9846802}
+  m_Size: {x: 15.202831, y: 4.805332}
   m_EdgeRadius: 0
 --- !u!61 &1166084778
 BoxCollider2D:
@@ -8823,7 +8823,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 53.769947, y: -15.274339}
+  m_Offset: {x: 67.04068, y: -17.1876}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -8834,7 +8834,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 51.191124, y: 1.0159473}
+  m_Size: {x: 78.00537, y: 4.8424683}
   m_EdgeRadius: 0
 --- !u!61 &1166084780
 BoxCollider2D:
@@ -8936,7 +8936,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 7.990011, y: -19.008148}
+  m_Offset: {x: 7.990011, y: -20.683538}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -8947,7 +8947,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9800186, y: 8.243706}
+  m_Size: {x: 0.9800186, y: 11.594486}
   m_EdgeRadius: 0
 --- !u!61 &1166084784
 BoxCollider2D:
