@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: fb637189e87650a48998ea1556fa588e
+guid: 1659cb278b362e741aacfb0ecdd40e2c
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable:
   - first:
-      74: -6979672219643456964
-    second: Sword horizontal
+      74: 4348485665485846014
+    second: Death
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -91,11 +91,11 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 1
+  animationType: 2
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
