@@ -72,7 +72,7 @@ public class Player : AppliedPhysics
         
         LineRenderer = GetComponent<LineRenderer>();
         Weapons = GetComponent<WeaponInventory>();
-        Animator = GetComponent<Animator>();
+        Animator = GetComponentInChildren<Animator>();
         InputHandler = GetComponent<PlayerInputState>();
         HealthComponent = GetComponent<HealthComponent>();
         _rigidbody2D = GetComponentInParent<Rigidbody2D>();

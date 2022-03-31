@@ -5010,6 +5010,25 @@ Transform:
   m_Father: {fileID: 6262205277068168286}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1919839408
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143130040718703366}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6452ae6f69e6e1240bb3b1d0c53c3190, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5563105916290987363
 GameObject:
   m_ObjectHideFlags: 0
@@ -10064,8 +10083,6 @@ GameObject:
   - component: {fileID: 6262205277068168274}
   - component: {fileID: 2089010118677328359}
   - component: {fileID: 1651818500472766122}
-  - component: {fileID: 43368429003359864}
-  - component: {fileID: 9028793286506368648}
   - component: {fileID: 5599345137199256639}
   - component: {fileID: 2536785393490052659}
   - component: {fileID: 1453958796}
@@ -10295,42 +10312,6 @@ MonoBehaviour:
   _lMouseInputState: 0
   _rMouseInputState: 0
   _interactionInputState: 0
---- !u!95 &43368429003359864
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6262205277068168276}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6452ae6f69e6e1240bb3b1d0c53c3190, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!111 &9028793286506368648
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6262205277068168276}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 4348485665485846014, guid: 3d6515bfa0cff81469916bcc4b52f2a2, type: 3}
-  m_Animations:
-  - {fileID: 0}
-  - {fileID: 4348485665485846014, guid: 3d6515bfa0cff81469916bcc4b52f2a2, type: 3}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &5599345137199256639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10606,13 +10587,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8154703752372805803}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -0.37695193, w: 0.9262328}
+  m_LocalPosition: {x: 0, y: 0, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1059987378496383148}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -44.29}
 --- !u!1 &8933757928454778122
 GameObject:
   m_ObjectHideFlags: 0
@@ -10836,6 +10817,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainC_CHAR
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6b3353938a4eae14a92dd8649f0d5343, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 1423963738820354877, guid: 6b3353938a4eae14a92dd8649f0d5343, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -0.25987306
@@ -10969,5 +10954,10 @@ PrefabInstance:
 --- !u!4 &1654577834962837948 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6b3353938a4eae14a92dd8649f0d5343, type: 3}
+  m_PrefabInstance: {fileID: 1260027935332271703}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2143130040718703366 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6b3353938a4eae14a92dd8649f0d5343, type: 3}
   m_PrefabInstance: {fileID: 1260027935332271703}
   m_PrefabAsset: {fileID: 0}
