@@ -10573,6 +10573,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1149188745198589076}
+  - component: {fileID: 525106632}
   m_Layer: 14
   m_Name: Weapon Pos
   m_TagString: Untagged
@@ -10588,12 +10589,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8154703752372805803}
   m_LocalRotation: {x: 0, y: 0, z: -0.37695193, w: 0.9262328}
-  m_LocalPosition: {x: 0, y: 0, z: -0.5}
+  m_LocalPosition: {x: -0.021, y: 0, z: -0.542}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1059987378496383148}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -44.29}
+--- !u!114 &525106632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8154703752372805803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87a753e93430d5a47ab1315b24f6c82c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 3473174016070435644}
+  RX: 0
+  RY: 0
+  RZ: 0
+  RW: 0
 --- !u!1 &8933757928454778122
 GameObject:
   m_ObjectHideFlags: 0
@@ -10951,6 +10969,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b3353938a4eae14a92dd8649f0d5343, type: 3}
+--- !u!4 &3473174016070435644 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2400337128450049387, guid: 6b3353938a4eae14a92dd8649f0d5343, type: 3}
+  m_PrefabInstance: {fileID: 1260027935332271703}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1654577834962837948 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6b3353938a4eae14a92dd8649f0d5343, type: 3}
