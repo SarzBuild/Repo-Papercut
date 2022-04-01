@@ -35,7 +35,8 @@ public class MainMenu : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {              
+    {
+        Time.timeScale = 1;
         OptionsButton.transform.position = new Vector3(560f, 2000f, 0);
         StartButton.transform.position = new Vector3(960f, 2000f, 0);
         QuitButton.transform.position = new Vector3(1360f, 2000f, 0);
