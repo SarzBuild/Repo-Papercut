@@ -145,13 +145,14 @@ public class Player : AppliedPhysics
         CalculateJumpBuffer();
 
         HandleWeapons();
-        
+
         TimerForWallGrabJumps();
 
         ResetColor();
 
         //LogDebug();
     }
+
 
     private void HandleWeapons()
     {
@@ -338,15 +339,21 @@ public class Player : AppliedPhysics
         {
             Debug.Log(string.Format("Player killed by {0}", killer.name));
         }
+        Animator.SetBool(StateMachine.CurrentState.StateName,false);
+        Animator.SetTrigger("dead");
         
         InputHandler.LockMouseInputs(true);
         InputHandler.LockPlayerInputs(true);
+        
+        
         SimplePlayerUI.EnableDeathMenu();
         Time.timeScale = 0;
         Debug.LogWarning("You died!");
         
         //Play Death animation
     }
+    
+    
 
     private void Knockback(HealthComponent component, float value)
     {

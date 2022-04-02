@@ -5022,7 +5022,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 6452ae6f69e6e1240bb3b1d0c53c3190, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -10608,6 +10608,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 3473174016070435644}
+  Target2: {fileID: 6262205277068168286}
   RX: 0
   RY: 0
   RZ: 0

@@ -33,7 +33,7 @@ public abstract class WeaponBase : MonoBehaviour
     private uint m_MuteAudioStacks = 0;
     private bool m_PreviousMuteAudioState;
 
-    public void Awake()
+    public void Start()
     {
         if (Settings == null)
         {
@@ -273,6 +273,9 @@ public abstract class WeaponBase : MonoBehaviour
         m_Animator?.SetBool(m_EquippedAnimBool, true);
     }
 
+
+    protected static string _sword_anim_1 = "sword1";
+    protected static string _sword_anim_2 = "sword2";
     protected static string m_FireAnimTrigger = "Fire";
     protected virtual void PlayFireAnimation()
     {

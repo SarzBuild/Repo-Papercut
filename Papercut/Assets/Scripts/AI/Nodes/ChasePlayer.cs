@@ -19,11 +19,13 @@ public class ChasePlayer : Node
     public override NodeState Evaluate()
     {
         SetCurrentNode();
-        _direction = (_ai.transform.position - _player.position).normalized;
+        _enemyData.LastKnowPlayerLocation = _player.transform.position;
+        
+        _direction = (_ai.transform.position - _enemyData.LastKnowPlayerLocation).normalized;
             
         _ai.CheckFlip(-(int)Mathf.Sign(_direction.x));
 
-        var distance = Vector2.Distance(_player.position, _ai.transform.position);
+        var distance = Vector2.Distance(_enemyData.LastKnowPlayerLocation, _ai.transform.position);
         if (distance > _enemyData.AttackRange)
         {
             _enemyData.CurrentHorizontalSpeed += -_direction.x * _enemyData.Acceleration * Time.deltaTime;

@@ -5,6 +5,7 @@ using UnityEngine;
 public class MatchPosition : MonoBehaviour
 {
     public Transform Target;
+    public Transform Target2;
     public float RX;
     public float RY;
     public float RZ;
@@ -12,6 +13,7 @@ public class MatchPosition : MonoBehaviour
     private void LateUpdate()
     {
         transform.position = Target.position;
-        //transform.rotation = new Quaternion(Target.rotation.x + RX,Target.rotation.y + RY,Target.rotation.z + RZ,Target.rotation.w + RW);
+        /*transform.GetChild(0).rotation = Target2.rotation;
+        transform.rotation = Target.rotation;*/
     }
 }

@@ -32,6 +32,8 @@ public class RestartManager : MonoBehaviour
         _player.InputHandler.LockPlayerInputs(false); //Enable the inputs for the player
         _player.InputHandler.LockMouseInputs(false);
         
+        _player.Animator.SetBool("idle",true);
+
         Time.timeScale = 1; //Set the game speed to normal
 
         _trailRenderer.Clear(); //Re-enable deactivated components 
