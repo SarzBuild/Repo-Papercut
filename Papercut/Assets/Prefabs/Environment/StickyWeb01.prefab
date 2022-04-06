@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6699068102078562250}
   - component: {fileID: 717302578674780679}
   m_Layer: 12
-  m_Name: StickyWeb
+  m_Name: StickyWeb01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
