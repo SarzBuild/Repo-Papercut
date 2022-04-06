@@ -7,7 +7,7 @@ public class Patrol : Node
 {
     private readonly EnemyBase _ai;
     private EnemyData _enemyData;
-    private float _timer;
+    public float _timer;
     private Vector2 _direction;
     private int _side = 1;
     private float _randomness = Random.Range(0f, 2f);

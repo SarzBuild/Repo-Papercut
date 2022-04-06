@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SpiderlingProfileType { Careful, Fearful, Random }
+
+
 [CreateAssetMenu(fileName = "newEnemyData", menuName = "Data/Enemy/EnemyData")]
 public class EnemyData : ScriptableObject
 {
     public enum EnemyType { Spiderling, Guardian, Hunter, Spawner }
-    public enum SpiderlingProfileType { Careful, Aggressive, Fearful, Random }
     public enum RandomizationType { Heavy, Medium, Low }
     
     public bool ShowDebugValues;
@@ -18,7 +20,6 @@ public class EnemyData : ScriptableObject
     
     //Values are hidden since editor script re-write fields.
     [HideInInspector] public RandomizationType RandomizationStrength;
-    [HideInInspector] public SpiderlingProfileType SpiderlingType;
     [HideInInspector] public float IdleTime = 5f;
     [HideInInspector] public float PatrolTime = 5f;
     [HideInInspector] public float ChaseRange = 8f;
@@ -27,12 +28,26 @@ public class EnemyData : ScriptableObject
     [HideInInspector] public float Acceleration = 10f;
     [HideInInspector] public float Deceleration = 15f;
     [HideInInspector] public float CurrentVerticalSpeed, CurrentHorizontalSpeed;
-    [HideInInspector] public float CurrentFallSpeed = 12f;
+    [HideInInspector] public float StartingFallSpeed = 12f;
     [HideInInspector] public float FallClamped = -40f;
     [HideInInspector] public float MoveClamped = 8f;
     [HideInInspector] public float PatrolMoveClamped = 3f;
     [HideInInspector] public int IdlingState = 0;
+    
+    [HideInInspector] public bool IsStunned;
+    [HideInInspector] public bool HasReachedTarget;
+    [HideInInspector] public float StunnedTime;
+    
+    [HideInInspector] public float JumpYVelocity;
+    [HideInInspector] public float JumpXVelocity;
 
-    public Vector3 LastKnowPlayerLocation;
+    [HideInInspector] public Vector3 LastKnowPlayerLocation;
 
+    public bool SearchingForTarget;
+
+    public float AlertRange = 20f;
+
+    public Vector3 PredictedPlayerDirection;
+
+    public float SearchForTargetTime = 5f;
 }

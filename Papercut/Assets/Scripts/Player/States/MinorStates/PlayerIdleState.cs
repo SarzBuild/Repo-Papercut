@@ -18,6 +18,8 @@ public class PlayerIdleState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        Player.MovementClampedAndApex();
+        Player.UpdateVelocity();
         if(IsExitingState) return;
         HandleStateChange();
     }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SpiderlingWeapon_Data
   m_EditorClassIdentifier: 
   description: 
-  FireCooldownSec: 5
+  FireCooldownSec: 0
   FireWaitForAnimationToFinishEvent: 0
   Damage: 5
   UsesAmmo: 0

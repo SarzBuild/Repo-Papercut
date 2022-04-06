@@ -6,10 +6,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class AppliedPhysics : MonoBehaviour
 {
-    [SerializeField] private Transform _groundCheck;
+    [SerializeField] private protected Transform _groundCheck;
     [SerializeField] private protected Transform _leftWallCheck;
     [SerializeField] private protected Transform _rightWallCheck;
-    [SerializeField] private Transform _ceilingCheck;
+    [SerializeField] private protected Transform _ceilingCheck;
     [SerializeField] public LayerMask _groundLayerMask;
     [SerializeField] private protected Rigidbody2D _rigidbody2D;
 

@@ -65,7 +65,7 @@ public class HunterEnemyBrain : EnemyBase
         _tempEnemyData.IdleTime = EnemyData.IdleTime;
         _tempEnemyData.PatrolTime = EnemyData.PatrolTime;
         _tempEnemyData.FallClamped = EnemyData.FallClamped;
-        _tempEnemyData.CurrentFallSpeed = EnemyData.CurrentFallSpeed;
+        _tempEnemyData.StartingFallSpeed = EnemyData.StartingFallSpeed;
         _tempEnemyData.ChaseRange = EnemyData.ChaseRange;
         _tempEnemyData.AttackRange = EnemyData.AttackRange;
         _tempEnemyData.MoveClamped = EnemyData.MoveClamped;
@@ -108,7 +108,7 @@ public class HunterEnemyBrain : EnemyBase
         _topNode = new Selector(new List<Node>(){attackSequence, ResetRotation});
     }
 
-    private void OnDamaged(HealthComponent arg1, float arg2)
+    private void OnDamaged(HealthComponent arg1, float arg2, GameObject arg3)
     {
         BlinkRed();
     }

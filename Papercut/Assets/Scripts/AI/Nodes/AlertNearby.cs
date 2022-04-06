@@ -16,7 +16,7 @@ public class AlertNearby : Node
     public override NodeState Evaluate()
     {
         SetCurrentNode();
-        var hits = Physics2D.OverlapCircleAll(_origin.position, _enemyData.ChaseRange);
+        var hits = Physics2D.OverlapCircleAll(_origin.position, _enemyData.AlertRange);
         if (hits.Length <= 0) return NodeState.FAILURE;
         foreach (var i in hits)
         {
@@ -35,6 +35,7 @@ public class AlertNearby : Node
             if (enemy)
             {
                 enemy.UpdateLastPlayerKnownPosition(_enemyData.LastKnowPlayerLocation);
+                enemy.NewEnemyData.SearchingForTarget = true;
             }
             
         }

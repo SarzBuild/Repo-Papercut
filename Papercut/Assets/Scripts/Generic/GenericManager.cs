@@ -19,6 +19,7 @@ public class GenericManager : MonoBehaviour
     {
         Physics2D.IgnoreLayerCollision(EnemyLayerMask, EnemyLayerMask, true);
         Physics2D.IgnoreLayerCollision(BulletLayerMask, BulletLayerMask, true);
+        Physics2D.IgnoreLayerCollision(PlayerLayerMask,EnemyLayerMask,true);
     }
     
     public static void FadeOut(Image target, float duration, bool ignoreTimeScale)

@@ -7,12 +7,14 @@ public class WaitBeforeAttack : Node
     private Transform _target;
     private EnemyData _enemyData;
 
+    private float _time;
+
     private float _timer;
     
-    public WaitBeforeAttack(Transform target, EnemyData enemyData)
+    public WaitBeforeAttack(EnemyData enemyData,float time)
     {
-        _target = target;
         _enemyData = enemyData;
+        _time = time;
     }
     
     public override NodeState Evaluate()
@@ -20,9 +22,8 @@ public class WaitBeforeAttack : Node
         SetCurrentNode();
         
         _timer += Time.fixedDeltaTime;
-        
-        if (_timer < 0.5f) return NodeState.RUNNING;
-        
+
+        if (!(_timer > _time)) return NodeState.FAILURE;
         _timer = 0;
         return NodeState.SUCCESS;
     }

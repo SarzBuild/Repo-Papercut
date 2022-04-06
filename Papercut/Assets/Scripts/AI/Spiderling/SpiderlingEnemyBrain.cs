@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SpiderlingEnemyBrain : EnemyBase
 {
@@ -11,31 +12,48 @@ public class SpiderlingEnemyBrain : EnemyBase
 
     public EnemyData NewEnemyData { get; private set; }
     public HealthData NewHealthData { get; private set; }
+    
+    public AttackTrigger AttackTrigger { get; private set; }
+    
+    public SpiderlingProfileType SpiderlingType;
 
     private Animator _animator;
-    
+
     public SkinnedMeshRenderer Renderer { get; private set; }
     private string _color = "_BaseColor";
     private Color _baseColor;
-    
-    
+
+
     private float _lastHitTime;
-    
+
     #region Nodes
 
+    public Range AttackRange { get; private set; }
+    public WaitBeforeAttack WaitBeforeAttack { get; private set; }
+    public Attack Attack { get; private set; }
+    
+    public Range ChaseRange { get; private set; }
+    public CheckVision CheckVision { get; private set; }
+    public AlertNearby AlertNearby { get; private set; }
     public ChasePlayer ChasePlayer { get; private set; }
+    public Flee Flee { get; private set; }
+    
+    
+    public GoToLastKnowPosition GoToLastKnowPosition { get; private set; }
+    public SearchUntilTimerRunOut SearchUntilTimerRunOut { get; private set; }
+    
     public Patrol Patrol { get; private set; }
     public Idle Idle { get; private set; }
     
-    public Range ChaseRange { get; private set; }
     
-    public Attack Attack { get; private set; }
-    
-    public Range AttackRange { get; private set; }
-
     private Node _topNode;
     
     #endregion
+
+    private void Awake()
+    {
+        AttackTrigger = GetComponentInChildren<AttackTrigger>();
+    }
 
     private void Start()
     {
@@ -64,7 +82,7 @@ public class SpiderlingEnemyBrain : EnemyBase
         NewEnemyData.IdleTime = EnemyData.IdleTime;
         NewEnemyData.PatrolTime = EnemyData.PatrolTime;
         NewEnemyData.FallClamped = EnemyData.FallClamped;
-        NewEnemyData.CurrentFallSpeed = EnemyData.CurrentFallSpeed;
+        NewEnemyData.StartingFallSpeed = EnemyData.StartingFallSpeed;
         NewEnemyData.ChaseRange = EnemyData.ChaseRange;
         NewEnemyData.AttackRange = EnemyData.AttackRange;
         NewEnemyData.MoveClamped = EnemyData.MoveClamped;
@@ -91,7 +109,7 @@ public class SpiderlingEnemyBrain : EnemyBase
         }
 
         UpdateHitResults();
-        //Debug.Log(string.Format("{0} is in {1} state", name, _tempEnemyData.CurrentNode));
+        Debug.Log(string.Format("{0} is in {1} state", name, NewEnemyData.CurrentNode));
 
         CheckForCollisions();
 
@@ -107,29 +125,71 @@ public class SpiderlingEnemyBrain : EnemyBase
     protected override void ConstructBehaviorTree()
     {
         //Initialize Child Nodes from left to right
+        AttackRange = new Range(PlayerTransform,this,NewEnemyData.AttackRange);
+        WaitBeforeAttack = new WaitBeforeAttack(NewEnemyData,0.5f);
+        Attack = new Attack(PlayerTransform,this,NewEnemyData,SpiderlingWeapon);
+        
+        ChaseRange = new Range(PlayerTransform, this,NewEnemyData.ChaseRange);
+        CheckVision = new CheckVision(PlayerTransform, _ceilingCheck, NewEnemyData, _groundLayerMask);
+        AlertNearby = new AlertNearby(transform,NewEnemyData);
+        ChasePlayer = new ChasePlayer(PlayerTransform, this,NewEnemyData);
+        Flee = new Flee(PlayerTransform,this,NewEnemyData);
+
+        GoToLastKnowPosition = new GoToLastKnowPosition(this,NewEnemyData);
+        //SearchUntilTimerRunOut = new SearchUntilTimerRunOut(NewEnemyData,10.5f);
+        
         Idle = new Idle(this,NewEnemyData);
         Patrol = new Patrol(this,NewEnemyData);
-
-        ChasePlayer = new ChasePlayer(PlayerTransform, this,NewEnemyData);
-        ChaseRange = new Range(PlayerTransform, this,NewEnemyData.ChaseRange);
-
-        Attack = new Attack(PlayerTransform,this,NewEnemyData,SpiderlingWeapon);
-        AttackRange = new Range(PlayerTransform,this,NewEnemyData.AttackRange);
         
+
         //Initialize Parent Nodes from left to right
+        Sequence attackSequence = new Sequence(new List<Node>() { AttackRange, WaitBeforeAttack, Attack });
+
+
+        Selector routeSelector = DetermineSpiderlingTypeSequence();
+
+        //Selector routeSelector = new Selector(new List<Node>() { ChasePlayer });
+        Sequence chaseSequence = new Sequence(new List<Node>() { ChaseRange, CheckVision, AlertNearby, routeSelector });
+
+        //Sequence searchSequence = new Sequence(new List<Node>() { GoToLastKnowPosition });
+        
         Selector idleSelector = new Selector(new List<Node>() { Idle, Patrol });
-        Sequence chaseSequence = new Sequence(new List<Node>() { ChaseRange, ChasePlayer });
-        Sequence attackSequence = new Sequence(new List<Node>() { AttackRange, Attack });
+        
+        
         
         //Initialize Root Node
-        _topNode = new Selector(new List<Node>(){attackSequence,chaseSequence,idleSelector});
+        _topNode = new Selector(new List<Node>(){attackSequence, chaseSequence, GoToLastKnowPosition, idleSelector});
+    }
+
+    private Selector DetermineSpiderlingTypeSequence()
+    {
+        switch (SpiderlingType)
+        {
+            case SpiderlingProfileType.Random:
+                var random = Random.Range(0, 2);
+                switch (random)
+                {
+                    case 0:
+                        return new Selector(new List<Node>() { ChasePlayer });
+                    case 1:
+                        return new Selector(new List<Node>() { Flee });
+                }
+                break;
+            case SpiderlingProfileType.Careful:
+                return new Selector(new List<Node>() { ChasePlayer });
+            case SpiderlingProfileType.Fearful:
+                return new Selector(new List<Node>() { Flee });
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+        return null;
     }
     
     public void CalculateGravity()
     {
         if(!Grounded)
         {
-            var fallSpeed = NewEnemyData.CurrentFallSpeed;
+            var fallSpeed = NewEnemyData.StartingFallSpeed;
             
             NewEnemyData.CurrentVerticalSpeed -= fallSpeed * Time.fixedDeltaTime;
 
@@ -155,7 +215,7 @@ public class SpiderlingEnemyBrain : EnemyBase
     }
     
 
-    protected void OnDamaged(HealthComponent arg1, float arg2)
+    protected void OnDamaged(HealthComponent arg1, float arg2, GameObject arg3)
     {
         base.OnDamaged();
         Knockback();
@@ -217,5 +277,16 @@ public class SpiderlingEnemyBrain : EnemyBase
     {
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, EnemyData.ChaseRange);
+        Gizmos.color = Color.cyan;
+
+        if (NewEnemyData != null)
+        {
+            Gizmos.DrawLine(NewEnemyData.LastKnowPlayerLocation, NewEnemyData.LastKnowPlayerLocation/20);
+            Gizmos.DrawWireSphere(NewEnemyData.LastKnowPlayerLocation,0.2f);
+            Gizmos.DrawWireSphere((NewEnemyData.PredictedPlayerDirection/20)+NewEnemyData.LastKnowPlayerLocation,0.5f);
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine((NewEnemyData.LastKnowPlayerLocation/20), NewEnemyData.PredictedPlayerDirection+NewEnemyData.LastKnowPlayerLocation);
+        }
+        
     }
 }

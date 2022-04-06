@@ -13,29 +13,6 @@ public class EditorEnemyData : Editor
         base.OnInspectorGUI();
 
         var d = target as EnemyData;
-        
-        using (var debugGroup = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(d.ShowDebugValues)))
-        {
-            if (debugGroup.visible)
-            {
-                EditorGUILayout.PrefixLabel("Debug Values");
-                EditorGUI.indentLevel++;
-
-                if (d.CurrentNode != null)
-                {
-                    node = EditorGUILayout.TextField("Current Node", d.CurrentNode.ToString());
-                }
-
-                d.CurrentHorizontalSpeed = EditorGUILayout.FloatField("Horizontal Speed:",d.CurrentHorizontalSpeed);
-                
-                d.CurrentVerticalSpeed = EditorGUILayout.FloatField("Vertical Speed:",d.CurrentVerticalSpeed);
-                
-                d.CurrentVerticalSpeed = EditorGUILayout.FloatField("Fall Speed:",d.CurrentFallSpeed);
-
-                EditorGUI.indentLevel--;
-            }
-        }
-        
 
         using (var meleeGroup =
                new EditorGUILayout.FadeGroupScope(Convert.ToSingle(d.Type == EnemyData.EnemyType.Spiderling || d.Type == EnemyData.EnemyType.Guardian)))
@@ -49,13 +26,18 @@ public class EditorEnemyData : Editor
                         EditorGUILayout.LabelField("Spiderling Values"); 
                         EditorGUI.indentLevel++;
                         EditorGUILayout.PrefixLabel("Spiderling Type");
-                        d.SpiderlingType = (EnemyData.SpiderlingProfileType)EditorGUILayout.EnumPopup(d.SpiderlingType);
+                        d.JumpXVelocity = EditorGUILayout.FloatField("AttackJumpXVelocity:",d.JumpXVelocity);
+                        d.JumpYVelocity = EditorGUILayout.FloatField("AttackJumpYVelocity:",d.JumpYVelocity);
                         EditorGUI.indentLevel--;
                         break;
                     }
                     case EnemyData.EnemyType.Guardian:
                     {
-                        EditorGUILayout.LabelField("Guard Values"); 
+                        EditorGUILayout.LabelField("Guard Values");
+                        EditorGUI.indentLevel++;
+                        d.IsStunned = EditorGUILayout.Toggle("Currently Stunned:",d.IsStunned);
+                        d.StunnedTime = EditorGUILayout.FloatField("StunnedTime:",d.StunnedTime);
+                        EditorGUI.indentLevel--;
                         break;
                     }
                     
@@ -85,6 +67,8 @@ public class EditorEnemyData : Editor
                 d.FallClamped = EditorGUILayout.FloatField("Fall Clamp:",d.FallClamped);
                 
                 d.PatrolMoveClamped = EditorGUILayout.FloatField("Patrol Move Clamp:",d.PatrolMoveClamped);
+                
+                d.StartingFallSpeed = EditorGUILayout.FloatField("Fall Speed:", d.StartingFallSpeed); 
                 
                 EditorGUI.indentLevel--;
             }

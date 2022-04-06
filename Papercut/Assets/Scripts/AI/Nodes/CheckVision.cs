@@ -1,35 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using UnityEngine;
+using Vector2 = UnityEngine.Vector2;
 
 public class CheckVision : Node
 {
     private Transform _target;
     private Transform _origin;
-    private float _arc;
     private EnemyData _enemyData;
+    private LayerMask _ground;
     
-    public CheckVision(Transform target, Transform origin, EnemyData enemyData)
+    public CheckVision(Transform target, Transform origin, EnemyData enemyData, LayerMask ground)
     {
         _target = target;
         _origin = origin;
         _enemyData = enemyData;
+        _ground = ground;
     }
     
     public override NodeState Evaluate()
     {
-        //Checks if in FOV
-        if (Vector2.Dot(_origin.right, _target.position) > 0 && Vector2.Angle(_origin.right, _target.position) < _arc) //In FOV
-        {
-            //Checks for visibility of target
-            var hits = Physics2D.RaycastAll(_origin.position + new Vector3(0, 0.5f), (_target.position + new Vector3(0, 0.5f)) - _origin.position, _enemyData.ChaseRange); //
-            foreach (var hit in hits)
-            {
-                //Check if player is in array
-                return hit.transform.gameObject.layer != GenericManager.PlayerLayerMask ? NodeState.RUNNING : NodeState.SUCCESS;
-            }
-        }
-        return NodeState.FAILURE;
+        //Checks for visibility of target
+        var distance = Vector2.Distance(_target.position, _origin.position);
+        var hitWall = Physics2D.Raycast(_target.position, _origin.position, distance, _ground);
+        return hitWall ? NodeState.FAILURE : NodeState.SUCCESS;
     }
+    
 }
