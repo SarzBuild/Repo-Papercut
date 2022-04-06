@@ -2296,7 +2296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7039195479839640355, guid: fe82f0396b96040469872e66dfda1064, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 36.2732
+      value: 38.51
       objectReference: {fileID: 0}
     - target: {fileID: 7039195479839640355, guid: fe82f0396b96040469872e66dfda1064, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3616,7 +3616,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh62916
+  m_Name: pb_Mesh124174
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3856,6 +3856,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6819954187927262192, guid: a9ab8693028b0cb4594a957d177eb906, type: 3}
+      propertyPath: m_Size.y
+      value: 1.9295986
+      objectReference: {fileID: 0}
+    - target: {fileID: 6819954187927262192, guid: a9ab8693028b0cb4594a957d177eb906, type: 3}
+      propertyPath: m_Offset.y
+      value: -1.4721786
+      objectReference: {fileID: 0}
     - target: {fileID: 6819954187927262193, guid: a9ab8693028b0cb4594a957d177eb906, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3907,6 +3915,14 @@ PrefabInstance:
     - target: {fileID: 6819954187927262194, guid: a9ab8693028b0cb4594a957d177eb906, type: 3}
       propertyPath: m_Name
       value: DeathZone (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6819954187927262195, guid: a9ab8693028b0cb4594a957d177eb906, type: 3}
+      propertyPath: Settings
+      value: 
+      objectReference: {fileID: 11400000, guid: e4ab815805e946944bca22a8eff6eba3, type: 2}
+    - target: {fileID: 6819954187927262195, guid: a9ab8693028b0cb4594a957d177eb906, type: 3}
+      propertyPath: DamageType
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9ab8693028b0cb4594a957d177eb906, type: 3}
@@ -11262,7 +11278,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 35.744526, y: -11.216947}
+  m_Offset: {x: 35.744526, y: -10.730865}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -11273,7 +11289,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 23.494225, y: 1.119688}
+  m_Size: {x: 23.494225, y: 2.0918522}
   m_EdgeRadius: 0
 --- !u!61 &1821084820
 BoxCollider2D:
@@ -12159,6 +12175,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6819954187927262192, guid: a9ab8693028b0cb4594a957d177eb906, type: 3}
+      propertyPath: m_Size.y
+      value: 2.0458348
+      objectReference: {fileID: 0}
+    - target: {fileID: 6819954187927262192, guid: a9ab8693028b0cb4594a957d177eb906, type: 3}
+      propertyPath: m_Offset.y
+      value: -1.4140605
+      objectReference: {fileID: 0}
     - target: {fileID: 6819954187927262193, guid: a9ab8693028b0cb4594a957d177eb906, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -12207,6 +12231,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: DeathZone
       objectReference: {fileID: 0}
+    - target: {fileID: 6819954187927262195, guid: a9ab8693028b0cb4594a957d177eb906, type: 3}
+      propertyPath: Settings
+      value: 
+      objectReference: {fileID: 11400000, guid: e4ab815805e946944bca22a8eff6eba3, type: 2}
+    - target: {fileID: 6819954187927262195, guid: a9ab8693028b0cb4594a957d177eb906, type: 3}
+      propertyPath: DamageType
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9ab8693028b0cb4594a957d177eb906, type: 3}
 --- !u!4 &7506244024965381153 stripped
@@ -12227,7 +12259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7039195479839640355, guid: fe82f0396b96040469872e66dfda1064, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -36.926804
+      value: -32.07
       objectReference: {fileID: 0}
     - target: {fileID: 7039195479839640355, guid: fe82f0396b96040469872e66dfda1064, type: 3}
       propertyPath: m_LocalPosition.y
