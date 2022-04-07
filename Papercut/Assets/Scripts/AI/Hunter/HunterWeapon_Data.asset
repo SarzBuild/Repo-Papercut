@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: HunterWeapon_Data
   m_EditorClassIdentifier: 
   description: 
-  FireCooldownSec: 1
+  FireCooldownSec: 1.5
   FireWaitForAnimationToFinishEvent: 0
-  Damage: 1
+  Damage: 20
   UsesAmmo: 0
   DefaultAmmo: 0
   AmmoPerFire: 1

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: GuardianWeapon_Data
   m_EditorClassIdentifier: 
   description: 
-  FireCooldownSec: 1
+  FireCooldownSec: 2
   FireWaitForAnimationToFinishEvent: 0
-  Damage: 1
+  Damage: 35
   UsesAmmo: 0
   DefaultAmmo: 0
   AmmoPerFire: 1
