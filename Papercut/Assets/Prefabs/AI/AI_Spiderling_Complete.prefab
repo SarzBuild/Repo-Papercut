@@ -87,6 +87,7 @@ Transform:
   - {fileID: 7353590440146472424}
   - {fileID: 6148279320559945976}
   - {fileID: 5477032653479152030}
+  - {fileID: 4092245655939096049}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -386,6 +387,68 @@ MonoBehaviour:
   EnemyBase: {fileID: 0}
   WeaponData: {fileID: 0}
   EnemyData: {fileID: 0}
+--- !u!1001 &1332604662406404150
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2239405870822495448}
+    m_Modifications:
+    - target: {fileID: 3077312453523129799, guid: aad48910cdae48747b56627ea4f1e7d7, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077312453523129799, guid: aad48910cdae48747b56627ea4f1e7d7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077312453523129799, guid: aad48910cdae48747b56627ea4f1e7d7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077312453523129799, guid: aad48910cdae48747b56627ea4f1e7d7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077312453523129799, guid: aad48910cdae48747b56627ea4f1e7d7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077312453523129799, guid: aad48910cdae48747b56627ea4f1e7d7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077312453523129799, guid: aad48910cdae48747b56627ea4f1e7d7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077312453523129799, guid: aad48910cdae48747b56627ea4f1e7d7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077312453523129799, guid: aad48910cdae48747b56627ea4f1e7d7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077312453523129799, guid: aad48910cdae48747b56627ea4f1e7d7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077312453523129799, guid: aad48910cdae48747b56627ea4f1e7d7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802892342046487226, guid: aad48910cdae48747b56627ea4f1e7d7, type: 3}
+      propertyPath: m_Name
+      value: SpiderlingBlood
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aad48910cdae48747b56627ea4f1e7d7, type: 3}
+--- !u!4 &4092245655939096049 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3077312453523129799, guid: aad48910cdae48747b56627ea4f1e7d7, type: 3}
+  m_PrefabInstance: {fileID: 1332604662406404150}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2239405870159576935
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -611,12 +674,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2223639932434330405, guid: 22842aff12898cd4a923d3cb366b5d1f, type: 3}
       propertyPath: m_Animations.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2223639932434330405, guid: 22842aff12898cd4a923d3cb366b5d1f, type: 3}
       propertyPath: m_Animations.Array.data[0]
       value: 
       objectReference: {fileID: 2667949614841947897, guid: 03d3d361d6bd5724894a67c3a3bc74cf, type: 3}
+    - target: {fileID: 2223639932434330405, guid: 22842aff12898cd4a923d3cb366b5d1f, type: 3}
+      propertyPath: m_Animations.Array.data[1]
+      value: 
+      objectReference: {fileID: 1827226128182048838, guid: 22842aff12898cd4a923d3cb366b5d1f, type: 3}
     - target: {fileID: 2339569355994847005, guid: 22842aff12898cd4a923d3cb366b5d1f, type: 3}
       propertyPath: m_Layer
       value: 13
