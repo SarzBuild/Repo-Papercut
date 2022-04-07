@@ -15,7 +15,7 @@ MonoBehaviour:
   description: 
   FireCooldownSec: 0.5
   FireWaitForAnimationToFinishEvent: 1
-  Damage: 50
+  Damage: 10
   UsesAmmo: 0
   DefaultAmmo: 0
   AmmoPerFire: 1
@@ -23,10 +23,10 @@ MonoBehaviour:
   StatesCanFire: 
   StatesCannotFire: 090000000a000000
   EquippedSound: {fileID: 8300000, guid: 27b1809a80e44ba4583b0f92e28d94cc, type: 3}
-  EquippedSoundVolume: 1
+  EquippedSoundVolume: 0.5
   StoredAwaySound: {fileID: 0}
   StoredAwaySoundVolume: 1
   FiredSound: {fileID: 8300000, guid: 8df91ef3d964b9f40b9cd3eaaf357d7a, type: 3}
-  FiredSoundVolume: 1
+  FiredSoundVolume: 0.75
   AddedToInventorySound: {fileID: 0}
   AddedToInventorySoundVolume: 1

@@ -154,7 +154,7 @@ Material:
     - PatternInverse: 0
     - Pos01_Clamp: 100
     - Pos01_Multiply: 0.01
-    - Pos01_Transition: -300
+    - Pos01_Transition: -330
     - Pos02_Clamp: 50
     - Pos02_Multiply: 0.02
     - Pos02_Transition: -600
