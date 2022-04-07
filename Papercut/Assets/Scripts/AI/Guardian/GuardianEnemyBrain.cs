@@ -48,9 +48,8 @@ public class GuardianEnemyBrain : EnemyBase
     
     public Patrol Patrol { get; private set; }
     public Idle Idle { get; private set; }
-    
-    
 
+    
     private Node _topNode;
     
     #endregion
@@ -284,7 +283,6 @@ public class GuardianEnemyBrain : EnemyBase
                 healthComponent.DealDamage(GuardianWeapon.Settings.Damage,gameObject,Vector2.zero);
             } 
         }
-        
     }
     
     private void HandleAnimations()
