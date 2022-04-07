@@ -143,9 +143,6 @@ MonoBehaviour:
   PlayerCollider: {fileID: 0}
   NewEnemyData: {fileID: 0}
   AttackTrigger: {fileID: 8430927145015422839}
-  PlayerLayerMask:
-    serializedVersion: 2
-    m_Bits: 16384
   MiddlePoint: {fileID: 8170968073109455595}
 --- !u!1 &1532048434442775586
 GameObject:
@@ -266,7 +263,7 @@ PolygonCollider2D:
     m_Paths:
     - - {x: 0.5, y: 2}
       - {x: 0, y: 0.5}
-      - {x: 0.5, y: -1}
+      - {x: 0.5, y: -0.75}
 --- !u!114 &8430927145015422839
 MonoBehaviour:
   m_ObjectHideFlags: 0

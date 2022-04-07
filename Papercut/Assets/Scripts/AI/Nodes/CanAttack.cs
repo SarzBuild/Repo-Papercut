@@ -17,7 +17,7 @@ public class CanAttack : Node
 
     public override NodeState Evaluate()
     {
-        if (_enemyData.CanAttack && !_enemyData.IsCharging)
+        if (_enemyData.CanAttack && !_enemyData.IsCharging &&_enemyData.EnergyFull)
         {
             Physics2D.IgnoreCollision(_ownCollider,_playercollider, true);
             _enemyData.CurrentHorizontalSpeed = 0;

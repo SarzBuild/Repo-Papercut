@@ -370,7 +370,7 @@ PolygonCollider2D:
     m_Paths:
     - - {x: 0.15, y: 0.4}
       - {x: -0.1, y: 0}
-      - {x: 0.15, y: -0.4}
+      - {x: 0.15, y: -0.1}
 --- !u!114 &8762899336699325525
 MonoBehaviour:
   m_ObjectHideFlags: 0

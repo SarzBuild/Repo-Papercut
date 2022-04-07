@@ -48,6 +48,10 @@ public class AttackTrigger : MonoBehaviour
                     gameObject.SetActive(false);
                 } 
             }
+            else if (col.gameObject.layer == GenericManager.GroundLayerMask)
+            {
+                gameObject.SetActive(false);
+            }
         }
     } 
 }

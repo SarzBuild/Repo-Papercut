@@ -61,4 +61,5 @@ public class EnemyData : ScriptableObject
 
     public bool HasTouchedPlayer;
 
+    public bool EnergyFull;
 }

@@ -109,7 +109,7 @@ public class SpiderlingEnemyBrain : EnemyBase
         }
 
         UpdateHitResults();
-        Debug.Log(string.Format("{0} is in {1} state", name, NewEnemyData.CurrentNode));
+        //Debug.Log(string.Format("{0} is in {1} state", name, NewEnemyData.CurrentNode));
 
         CheckForCollisions();
 

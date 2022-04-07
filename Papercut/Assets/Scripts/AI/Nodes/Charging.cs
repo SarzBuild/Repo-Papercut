@@ -32,6 +32,8 @@ public class Charging : Node
                 _enemyData.CanAttack = false;
                 _ai.SetVelocityX(0);
                 _enemyData.IsCharging = false;
+                _enemyData.ExitedCharging = Time.time;
+                _enemyData.EnergyFull = false;
                 return NodeState.SUCCESS;
             }
 

@@ -17,8 +17,6 @@ public class GuardianEnemyBrain : EnemyBase
 
     public AttackTrigger AttackTrigger;
 
-    public LayerMask PlayerLayerMask;
-
     public Transform MiddlePoint;
     
     public SkinnedMeshRenderer Renderer { get; private set; }
@@ -36,14 +34,14 @@ public class GuardianEnemyBrain : EnemyBase
     public WaitBeforeAttack WaitBeforeAttack { get; private set; }
     public Attack Attack { get; private set; }
 
+    public CheckVision CheckVision { get; private set; }
     public Range TooCloseRange { get; private set; }
     public Flee Reposition { get; private set; }
-    public SetAttack SetAttack { get; private set; }
+    
 
     public Range ChaseRange { get; private set; }
-    public ChasePlayer ChasePlayer { get; private set; }
-    
     public FacePlayer FacePlayer { get; private set; }
+    public SetAttack SetAttack { get; private set; }
     
     public Patrol Patrol { get; private set; }
     public Idle Idle { get; private set; }
@@ -116,7 +114,9 @@ public class GuardianEnemyBrain : EnemyBase
         UpdateHitResults();
 
         CheckForCollisions();
-
+        
+        RechargeEnergy();
+        
         ResetColor();
     }
 
@@ -138,11 +138,12 @@ public class GuardianEnemyBrain : EnemyBase
         WaitBeforeAttack = new WaitBeforeAttack(NewEnemyData,2.5f);
         Attack = new Attack(NewEnemyData, GuardianWeapon);
 
-        TooCloseRange = new Range(PlayerTransform, MiddlePoint, 4f);
+        CheckVision = new CheckVision(PlayerTransform, MiddlePoint, NewEnemyData, _groundLayerMask);
+        TooCloseRange = new Range(PlayerTransform, MiddlePoint, NewEnemyData.AttackRange);
         Reposition = new Flee(PlayerTransform, this, NewEnemyData,NewEnemyData.ChaseRange);
-        ChaseRange = new Range(PlayerTransform, MiddlePoint,NewEnemyData.ChaseRange-1f);
+        
+        ChaseRange = new Range(PlayerTransform, MiddlePoint,NewEnemyData.ChaseRange+1f);
         FacePlayer = new FacePlayer(this, PlayerTransform);
-        ChasePlayer = new ChasePlayer(PlayerTransform, this, NewEnemyData);
         SetAttack = new SetAttack(NewEnemyData);
         
         Idle = new Idle(this,NewEnemyData);
@@ -153,13 +154,15 @@ public class GuardianEnemyBrain : EnemyBase
         
         Sequence attackSequence = new Sequence(new List<Node>() { CanAttack,WaitBeforeAttack,Attack });
 
-        Sequence arepositionSequence = new Sequence(new List<Node>() { TooCloseRange, Reposition,ChaseRange,FacePlayer,SetAttack });
+        Sequence repositionSequence = new Sequence(new List<Node>() { CheckVision,TooCloseRange, Reposition });
+        
+        Sequence chaseSquence = new Sequence(new List<Node>() { CheckVision,ChaseRange, FacePlayer, SetAttack });
 
         Selector idleSelector = new Selector(new List<Node>() { Idle, Patrol });
         
         
         //Initialize Root Node
-        _topNode = new Selector(new List<Node>(){StunnedWait,Charging, attackSequence, arepositionSequence, idleSelector});
+        _topNode = new Selector(new List<Node>(){StunnedWait,Charging, attackSequence, repositionSequence,chaseSquence, idleSelector});
     }
 
     protected void OnDamaged(HealthComponent arg1, float arg2, GameObject arg3, Vector2 knockbackMultiplier)
@@ -241,6 +244,15 @@ public class GuardianEnemyBrain : EnemyBase
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireCube(_rightWallCheck.position,EnemyData.boxCastSize);
 
+    }
+
+    private void RechargeEnergy()
+    {
+        var nextFireTime = NewEnemyData.ExitedCharging + 5;
+        if (Time.time - nextFireTime > 0)
+        {
+            NewEnemyData.EnergyFull = true;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D col)

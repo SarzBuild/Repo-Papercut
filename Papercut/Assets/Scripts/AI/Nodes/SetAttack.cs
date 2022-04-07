@@ -13,7 +13,7 @@ public class SetAttack : Node
 
     public override NodeState Evaluate()
     {
-        if (!_enemyData.CanAttack && !_enemyData.IsCharging)
+        if (!_enemyData.CanAttack && !_enemyData.IsCharging && _enemyData.EnergyFull)
         {
             _enemyData.CanAttack = true; 
             return NodeState.SUCCESS;
