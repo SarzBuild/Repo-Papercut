@@ -26268,6 +26268,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2707337864810893137, guid: dcb64a6dd808c324d99e8911e37b5ef1, type: 3}
+      propertyPath: DamageType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2707337864878983540, guid: dcb64a6dd808c324d99e8911e37b5ef1, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -26319,6 +26323,22 @@ PrefabInstance:
     - target: {fileID: 2707337864878983547, guid: dcb64a6dd808c324d99e8911e37b5ef1, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707337865141721118, guid: dcb64a6dd808c324d99e8911e37b5ef1, type: 3}
+      propertyPath: DamageType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707337865337131256, guid: dcb64a6dd808c324d99e8911e37b5ef1, type: 3}
+      propertyPath: DamageType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707337865430018108, guid: dcb64a6dd808c324d99e8911e37b5ef1, type: 3}
+      propertyPath: DamageType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707337866170483672, guid: dcb64a6dd808c324d99e8911e37b5ef1, type: 3}
+      propertyPath: DamageType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2711919123241949301, guid: dcb64a6dd808c324d99e8911e37b5ef1, type: 3}
       propertyPath: m_Mesh
