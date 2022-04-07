@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpiderPro_ContraintCTRL : MonoBehaviour
 {
 
-    Vector3 originalPosition;
+    private Vector3 originalPosition;
     public float movingSpeed = 7f;
     public GameObject theFootcubes;
     public SpiderPro_ContraintCTRL otherLeg;
@@ -57,3 +57,49 @@ public class SpiderPro_ContraintCTRL : MonoBehaviour
         return isMoving;
     }
 }
+
+/*public class SpiderPro_ContraintCTRL1 : MonoBehaviour
+{
+    
+    public GameObject MoveGameObject; 
+    public float LegMoveSpeed = 7f; 
+    public float MoveDistance = 0.7f; 
+    public float MoveStoppingDistance = 0.4f; 
+    public SpiderPro_ContraintCTRL OppositeLegController;
+    private Vector3 _originalPosition; 
+    private bool _isMoving = false; 
+    private bool _moving = false; 
+
+    private void Start()
+    {
+        _originalPosition = transform.position; // to fix the leg to the ground when the game first launches 
+    }
+
+    private void Update()
+    {
+        var distanceToMoveCube = Vector3.Distance(transform.position, MoveGameObject.transform.position);
+        if(distanceToMoveCube >= MoveDistance && !OppositeLegController.isItMoving() || _moving) 
+        {
+            _moving = true; 
+            transform.position = Vector3.Lerp(transform.position, MoveGameObject.transform.position + new Vector3(0f, 0.3f, 0f), Time.deltaTime * LegMoveSpeed); 
+            _originalPosition = transform.position; 
+            _isMoving = true; 
+            
+            if(distanceToMoveCube < MoveStoppingDistance) 
+            {
+                _moving = false; 
+            }
+        }
+        else
+        {
+            transform.position = Vector3.Lerp(transform.position, _originalPosition + new Vector3(0f, -0.3f, 0f), Time.deltaTime * LegMoveSpeed * 3f); 
+            _isMoving = false; 
+        }
+    } 
+
+    public bool IsItMoving() 
+    {
+        return _isMoving;
+    }
+
+}*/

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: HunterHealth_Data
   m_EditorClassIdentifier: 
   description: 
-  MaxHealth: 100
-  DefaultHealth: 100
-  DefaultPipSplits: 3
+  MaxHealth: 15
+  DefaultHealth: 15
+  DefaultPipSplits: 1
   CanDie: 1
   CanTakeDamage: 1
-  Regen: 2
+  Regen: 0
   SecondsToRegen: 5
   SecondsAfterNoDamageToRegen: 5

@@ -72,7 +72,7 @@ public class Player : AppliedPhysics
         
         LineRenderer = GetComponent<LineRenderer>();
         Weapons = GetComponent<WeaponInventory>();
-        Animator = GetComponent<Animator>();
+        Animator = GetComponentInChildren<Animator>();
         InputHandler = GetComponent<PlayerInputState>();
         HealthComponent = GetComponent<HealthComponent>();
         _rigidbody2D = GetComponentInParent<Rigidbody2D>();
@@ -115,7 +115,7 @@ public class Player : AppliedPhysics
     private void InitializeHealth()
     {
         HealthComponent.OnDeath += OnPlayerDeath;
-        //HealthComponent.OnDamageTaken += Knockback;
+        HealthComponent.OnDamageTaken += Knockback;
         HealthComponent.OnDamageTaken += BlinkRed;
         // Other component events exist here too, tag on to trigger animation/sound/FX
     }
@@ -124,6 +124,7 @@ public class Player : AppliedPhysics
     {
         HealthComponent.OnDeath -= OnPlayerDeath;
         HealthComponent.OnDamageTaken -= BlinkRed;
+        HealthComponent.OnDamageTaken -= Knockback;
     }
 
     private void Start()
@@ -145,13 +146,14 @@ public class Player : AppliedPhysics
         CalculateJumpBuffer();
 
         HandleWeapons();
-        
+
         TimerForWallGrabJumps();
 
         ResetColor();
 
         //LogDebug();
     }
+
 
     private void HandleWeapons()
     {
@@ -338,25 +340,30 @@ public class Player : AppliedPhysics
         {
             Debug.Log(string.Format("Player killed by {0}", killer.name));
         }
+        Animator.SetBool(StateMachine.CurrentState.StateName,false);
+        Animator.SetTrigger("dead");
         
         InputHandler.LockMouseInputs(true);
         InputHandler.LockPlayerInputs(true);
+        
+        
         SimplePlayerUI.EnableDeathMenu();
         Time.timeScale = 0;
         Debug.LogWarning("You died!");
         
         //Play Death animation
     }
+    
+    
 
-    private void Knockback(HealthComponent component, float value)
+    private void Knockback(HealthComponent component, float value, GameObject hitter)
     {
-        var direction = (transform.position - component.transform.position);
+        var direction = (transform.position - hitter.transform.position);
         var directionX = Mathf.Sign(direction.x);
-        Debug.Log(transform.position + " " + component.transform.position);
-        SetVelocityX(directionX * PlayerData.KnockbackSpeed);
+        PlayerData.CurrentHorizontalSpeed = directionX * PlayerData.KnockbackSpeed;
     }
 
-    private void BlinkRed(HealthComponent component, float value)
+    private void BlinkRed(HealthComponent component, float value, GameObject arg3)
     {
         Renderer.material.SetColor("_BaseColor", Color.red);
         _lastHitTime = Time.time;

@@ -4,28 +4,41 @@ using UnityEngine;
 
 public class SpiderlingWeapon : WeaponBase
 {
-    public LayerMask PlayerLayerMask;
-    public float range = 1f;
+    public SpiderlingEnemyBrain SpiderlingEnemyBrain;
+    public EnemyData EnemyData;
+    public Transform AttackPoint;
+    public float AttackRange = 1f;
+    private Vector2 AttackBoxSize = new Vector2(0.25f, 0.8f);
+
+    public AttackTrigger AttackTrigger;
+    
     protected override bool FireImplementation()
     {
-        var hit = Physics2D.BoxCast(transform.position,new Vector2(1,1),0f,transform.right,range,PlayerLayerMask);
-        if (hit)
+        SpiderlingEnemyBrain.NewEnemyData.CurrentHorizontalSpeed = EnemyData.JumpXVelocity * SpiderlingEnemyBrain.FacingDirection;
+        SpiderlingEnemyBrain.NewEnemyData.CurrentVerticalSpeed = EnemyData.JumpYVelocity;
+
+        if (AttackTrigger == null)
         {
-            HealthComponent healthComponent = hit.collider.GetComponent<HealthComponent>();
-            if (healthComponent != null)
-            {
-                healthComponent.DealDamage(Settings.Damage);
-            } 
+            AttackTrigger = SpiderlingEnemyBrain.AttackTrigger;
         }
+        
+        if(AttackTrigger.Parent == null) { AttackTrigger.Parent = gameObject; }
+        if(AttackTrigger.EnemyBase == null) { AttackTrigger.EnemyBase = SpiderlingEnemyBrain; }
+        if(AttackTrigger.WeaponData == null) { AttackTrigger.WeaponData = Settings; }
+        
+        AttackTrigger.SetActive();
+        AttackTrigger.UpdateLastAttackTime(Time.time);
+        
+        
 
         // TODO - this is where we do hit testing and additional FX, and deal damage to whatever is potentially hit.
         // It can also be where you initialize the hitbox, but then wait for an event for collision trigger enter. Really depends on how you want it to functionally work.
         return true;
     }
-    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position,range);
+        Gizmos.DrawWireSphere(transform.position,AttackRange);
+        Gizmos.DrawWireCube(AttackPoint.position,AttackBoxSize);
     }
 }

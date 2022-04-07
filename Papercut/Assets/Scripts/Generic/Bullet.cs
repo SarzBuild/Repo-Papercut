@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
                 var healthComponent = col.transform.GetComponent<HealthComponent>();
                 if (healthComponent != null)
                 {
-                    healthComponent.DealDamage(DamageToDeal);
+                    healthComponent.DealDamage(DamageToDeal, gameObject);
                 }
             }
             Destroy(gameObject);

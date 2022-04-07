@@ -18,13 +18,15 @@ public class PlayerIdleState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        Player.MovementClampedAndApex();
+        Player.UpdateVelocity();
         if(IsExitingState) return;
         HandleStateChange();
     }
     
     private void HandleStateChange()
     {
-        if (Player.InputHandler.ListenRMouseInput == 2)
+        if (Player.InputHandler.ListenRMouseInput == 2 && PlayerData.GrapplingAbilityActive)
         {
             StateMachine.ChangeState(Player.GrapplingState);
         }

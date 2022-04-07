@@ -21,12 +21,11 @@ public class Attack : Node
     public override NodeState Evaluate()
     {
         SetCurrentNode();
-        _enemyData.CurrentHorizontalSpeed = 0;
         _weapon.Fire();
         return NodeState.RUNNING;
     }
 
-    public void SetCurrentNode()
+    private void SetCurrentNode()
     {
         _enemyData.CurrentNode = this;
     }

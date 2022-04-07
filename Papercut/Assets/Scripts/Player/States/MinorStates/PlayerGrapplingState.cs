@@ -27,11 +27,9 @@ public class PlayerGrapplingState : PlayerState
 
     public override void EnterState()
     {
-        if (!PlayerData.GrapplingAbilityActive) { StateMachine.ChangeState(StateMachine.LastState); }
         base.EnterState();
         Initialize();
         SetGrapplePoint();
-        //Player.SetVelocityZero();
     }
 
     private void Initialize()

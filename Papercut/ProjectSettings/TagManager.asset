@@ -24,7 +24,7 @@ TagManager:
   - JumpableWall
   - Bullet
   - TriggerZone
-  - 
+  - ATKTrigger
   - 
   - 
   - 

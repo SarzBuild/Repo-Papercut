@@ -28,7 +28,7 @@ public class HealthComponent : MonoBehaviour
     public event Action<HealthComponent, float> OnHealthAdded;
 
     // Event triggers when damage is taken, provides health component and amount of damage taken.
-    public event Action<HealthComponent, float> OnDamageTaken;
+    public event Action<HealthComponent, float, GameObject> OnDamageTaken;
 
     // Event triggers when health falls below zeor, providers health component and OPTIONALLY gameobject "killer" - CAN BE NULL!
     public event Action<HealthComponent, GameObject> OnDeath;
@@ -198,7 +198,7 @@ public class HealthComponent : MonoBehaviour
 
         SetHealth(newHealth);
         m_LastTimeTakenDamageSec = Time.time;
-        OnDamageTaken?.Invoke(this, damageAmmount);
+        OnDamageTaken?.Invoke(this, damageAmmount, damageSource);
 
         if (Settings.CanDie && CurrentHealth <= 0.0f)
         {

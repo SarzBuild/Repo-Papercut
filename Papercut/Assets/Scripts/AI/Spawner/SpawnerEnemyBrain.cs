@@ -59,7 +59,7 @@ public class SpawnerEnemyBrain : EnemyBase
         _tempEnemyData.IdleTime = EnemyData.IdleTime;
         _tempEnemyData.PatrolTime = EnemyData.PatrolTime;
         _tempEnemyData.FallClamped = EnemyData.FallClamped;
-        _tempEnemyData.CurrentFallSpeed = EnemyData.CurrentFallSpeed;
+        _tempEnemyData.StartingFallSpeed = EnemyData.StartingFallSpeed;
         _tempEnemyData.ChaseRange = EnemyData.ChaseRange;
         _tempEnemyData.AttackRange = EnemyData.AttackRange;
         _tempEnemyData.MoveClamped = EnemyData.MoveClamped;
@@ -119,7 +119,7 @@ public class SpawnerEnemyBrain : EnemyBase
         _topNode = new Selector(new List<Node>(){fleeSequence,attackSequence,idleSelector});
     }
 
-    protected void OnDamaged(HealthComponent arg1, float arg2)
+    protected void OnDamaged(HealthComponent arg1, float arg2, GameObject arg3)
     {
         base.OnDamaged();
         Knockback();
@@ -148,7 +148,7 @@ public class SpawnerEnemyBrain : EnemyBase
     {
         if(!Grounded)
         {
-            var fallSpeed = _tempEnemyData.CurrentFallSpeed;
+            var fallSpeed = _tempEnemyData.StartingFallSpeed;
             
             _tempEnemyData.CurrentVerticalSpeed -= fallSpeed * Time.fixedDeltaTime;
 
