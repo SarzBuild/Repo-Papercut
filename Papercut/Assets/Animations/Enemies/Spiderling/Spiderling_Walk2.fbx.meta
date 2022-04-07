@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 03d3d361d6bd5724894a67c3a3bc74cf
+guid: a958b46a963a7e542adc51435ebd5bbd
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable:
   - first:
-      74: 2667949614841947897
-    second: Spiderling_Walk
+      74: 934665161720907391
+    second: Walk2
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -26,21 +26,21 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
-    animationWrapMode: 2
+    animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Spiderling_Walk
-      takeName: Walk
+      name: Walk2
+      takeName: Walk2
       internalID: 0
-      firstFrame: 1
-      lastFrame: 120
-      wrapMode: 2
+      firstFrame: 195
+      lastFrame: 314
+      wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
@@ -62,7 +62,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 1
+      additiveReferencePoseFrame: 195
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -120,7 +120,7 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
