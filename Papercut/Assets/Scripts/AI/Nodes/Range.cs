@@ -8,10 +8,10 @@ public class Range : Node
     private Transform _origin;
     private float _range;
 
-    public Range(Transform player, EnemyBase aI, float range)
+    public Range(Transform player, Transform origin, float range)
     {
         _target = player;
-        _origin = aI.transform;
+        _origin = origin;
         _range = range;
     }
 

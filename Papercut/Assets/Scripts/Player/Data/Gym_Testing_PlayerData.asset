@@ -17,17 +17,17 @@ MonoBehaviour:
 '
   RawInputValue: 0
   Velocity: {x: 0, y: 0}
-  LastPosition: {x: -22.095465, y: 1.3706189}
-  LastTimeJumpKeyWasPressed: 30.501442
+  LastPosition: {x: -18.99, y: 8.6}
+  LastTimeJumpKeyWasPressed: 5.585196
   CurrentHorizontalSpeed: 0
-  CurrentVerticalSpeed: 0
+  CurrentVerticalSpeed: -2.3999
   PlayerLandedThisFrame: 0
-  CollisionDown: 1
-  TimePlayerStoppedGrounded: -3.4028235e+38
+  CollisionDown: 0
+  TimePlayerStoppedGrounded: 0
   PlayerLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  KnockbackSpeed: 5
+  KnockbackSpeed: 9.14
   WalkingSpeed: 8
   RunningSpeed: 15
   CurrentSpeed: 8
@@ -37,7 +37,7 @@ MonoBehaviour:
   FallClamped: -40
   MinimumFallSpeed: 80
   MaximumFallSpeed: 120
-  CurrentFallSpeed: 80
+  CurrentFallSpeed: 120
   MaximumJumpCount: 2
   CurrentJumpCount: 2
   TimeBetweenDoubleJump: 0.01
@@ -47,7 +47,7 @@ MonoBehaviour:
   JumpBuffer: 0.1
   EndedJumpEarly: 0
   EndedJumpEarlyGravityModifier: 3
-  ApexPoint: 0
+  ApexPoint: 1
   JumpApexSpeedBonus: 2
   JumpApexThreshold: 10
   DashAbilityActive: 0

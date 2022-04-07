@@ -125,15 +125,15 @@ public class SpiderlingEnemyBrain : EnemyBase
     protected override void ConstructBehaviorTree()
     {
         //Initialize Child Nodes from left to right
-        AttackRange = new Range(PlayerTransform,this,NewEnemyData.AttackRange);
+        AttackRange = new Range(PlayerTransform,transform,NewEnemyData.AttackRange);
         WaitBeforeAttack = new WaitBeforeAttack(NewEnemyData,0.5f);
-        Attack = new Attack(PlayerTransform,this,NewEnemyData,SpiderlingWeapon);
+        Attack = new Attack(NewEnemyData,SpiderlingWeapon);
         
-        ChaseRange = new Range(PlayerTransform, this,NewEnemyData.ChaseRange);
+        ChaseRange = new Range(PlayerTransform, transform,NewEnemyData.ChaseRange);
         CheckVision = new CheckVision(PlayerTransform, _ceilingCheck, NewEnemyData, _groundLayerMask);
         AlertNearby = new AlertNearby(transform,NewEnemyData);
         ChasePlayer = new ChasePlayer(PlayerTransform, this,NewEnemyData);
-        Flee = new Flee(PlayerTransform,this,NewEnemyData);
+        Flee = new Flee(PlayerTransform,this,NewEnemyData, NewEnemyData.ChaseRange);
 
         GoToLastKnowPosition = new GoToLastKnowPosition(this,NewEnemyData);
         //SearchUntilTimerRunOut = new SearchUntilTimerRunOut(NewEnemyData,10.5f);
@@ -215,7 +215,7 @@ public class SpiderlingEnemyBrain : EnemyBase
     }
     
 
-    protected void OnDamaged(HealthComponent arg1, float arg2, GameObject arg3)
+    protected void OnDamaged(HealthComponent arg1, float arg2, GameObject arg3, Vector2 knockbackMultiplier)
     {
         base.OnDamaged();
         Knockback();
@@ -278,7 +278,8 @@ public class SpiderlingEnemyBrain : EnemyBase
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, EnemyData.ChaseRange);
         Gizmos.color = Color.cyan;
-
+        
+        
         if (NewEnemyData != null)
         {
             Gizmos.DrawLine(NewEnemyData.LastKnowPlayerLocation, NewEnemyData.LastKnowPlayerLocation/20);

@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class Attack : Node
 {
-    private readonly Transform _player;
-    private readonly EnemyBase _ai;
     private readonly EnemyData _enemyData;
     private readonly WeaponBase _weapon;
     private Vector2 _direction;
     
-    public Attack(Transform player, EnemyBase aI, EnemyData enemyData, WeaponBase weapon)
+    public Attack(EnemyData enemyData, WeaponBase weapon)
     {
-        _player = player;
-        _ai = aI;
         _enemyData = enemyData;
         _weapon = weapon;
     }

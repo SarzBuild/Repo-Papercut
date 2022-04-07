@@ -56,7 +56,7 @@ public class EditorEnemyData : Editor
                 
                 d.AttackRange = EditorGUILayout.FloatField("Attack Range:",d.AttackRange);
                 
-                d.ChaseRange = EditorGUILayout.FloatField("Knockback Speed:",d.KnockbackSpeed);
+                d.KnockbackSpeed = EditorGUILayout.FloatField("Knockback Speed:",d.KnockbackSpeed);
                 
                 d.Acceleration = EditorGUILayout.FloatField("Acceleration:",d.Acceleration);
                 

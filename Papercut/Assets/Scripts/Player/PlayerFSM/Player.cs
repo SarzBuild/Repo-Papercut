@@ -353,17 +353,26 @@ public class Player : AppliedPhysics
         
         //Play Death animation
     }
-    
-    
 
-    private void Knockback(HealthComponent component, float value, GameObject hitter)
+    private void Knockback(HealthComponent component, float value, GameObject hitter, Vector2 knockbackSpeed)
     {
         var direction = (transform.position - hitter.transform.position);
         var directionX = Mathf.Sign(direction.x);
-        PlayerData.CurrentHorizontalSpeed = directionX * PlayerData.KnockbackSpeed;
+        if (knockbackSpeed.x == 0)
+        {
+            PlayerData.CurrentHorizontalSpeed = directionX * PlayerData.KnockbackSpeed;
+        }
+        else
+        {
+            PlayerData.CurrentHorizontalSpeed = directionX * knockbackSpeed.x;
+        }
+        if (knockbackSpeed.y != 0)
+        {
+            PlayerData.CurrentVerticalSpeed = knockbackSpeed.y;
+        }
     }
 
-    private void BlinkRed(HealthComponent component, float value, GameObject arg3)
+    private void BlinkRed(HealthComponent component, float value, GameObject arg3, Vector2  knockbackSpeed)
     {
         Renderer.material.SetColor("_BaseColor", Color.red);
         _lastHitTime = Time.time;

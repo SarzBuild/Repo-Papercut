@@ -97,7 +97,7 @@ public class HunterEnemyBrain : EnemyBase
         //Initialize Child Nodes from left to right
 
         Attack = new RangedAttack(PlayerTransform, this, _tempEnemyData,HunterWeapon);
-        AttackRange = new Range(PlayerTransform, this, _tempEnemyData.AttackRange);
+        AttackRange = new Range(PlayerTransform, transform, _tempEnemyData.AttackRange);
         ResetRotation = new ResetRotation(this, _tempEnemyData, _baseTransfrom);
         
         //Initialize Parent Nodes from left to right
@@ -108,7 +108,7 @@ public class HunterEnemyBrain : EnemyBase
         _topNode = new Selector(new List<Node>(){attackSequence, ResetRotation});
     }
 
-    private void OnDamaged(HealthComponent arg1, float arg2, GameObject arg3)
+    private void OnDamaged(HealthComponent arg1, float arg2, GameObject arg3, Vector2 knockbackMultiplier)
     {
         BlinkRed();
     }

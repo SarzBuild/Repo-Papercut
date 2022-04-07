@@ -8,21 +8,26 @@ public class AttackTrigger : MonoBehaviour
     public GameObject Parent;
     public EnemyBase EnemyBase;
     public WeaponData WeaponData;
+    public EnemyData EnemyData;
 
     private float _lastAttackTime;
+    private float _cooldown;
+
+    private Vector2 knockbackSpeed;
 
     public void Start() { gameObject.SetActive(false); }
     public void SetActive() { gameObject.SetActive(true); }
-    public void UpdateLastAttackTime(float value) { _lastAttackTime = value; }
+    public void SetKnockbackMultiplier(Vector2 knockbackMultiplier) { knockbackSpeed = knockbackMultiplier; }
+
+    public void UpdateLastAttackTime(float time, float cooldown)
+    {
+        _lastAttackTime = time;
+        _cooldown = cooldown;
+    }
     
     private void Update()
     {
-        /*if (EnemyBase.Grounded)
-        {
-            gameObject.SetActive(false);
-        }*/
-
-        var nextFireTime = _lastAttackTime + 2f;
+        var nextFireTime = _lastAttackTime + _cooldown;
         if (Time.time - nextFireTime > 0)
         {
             gameObject.SetActive(false);
@@ -38,7 +43,8 @@ public class AttackTrigger : MonoBehaviour
                 var healthComponent = col.GetComponent<HealthComponent>();
                 if (healthComponent != null)
                 {
-                    healthComponent.DealDamage(WeaponData.Damage,Parent);
+                    healthComponent.DealDamage(WeaponData.Damage,Parent,knockbackSpeed);
+                    EnemyData.HasTouchedPlayer = true;
                     gameObject.SetActive(false);
                 } 
             }

@@ -7,7 +7,6 @@ public class SpiderlingWeapon : WeaponBase
     public SpiderlingEnemyBrain SpiderlingEnemyBrain;
     public EnemyData EnemyData;
     public Transform AttackPoint;
-    public float AttackRange = 1f;
     private Vector2 AttackBoxSize = new Vector2(0.25f, 0.8f);
 
     public AttackTrigger AttackTrigger;
@@ -25,9 +24,10 @@ public class SpiderlingWeapon : WeaponBase
         if(AttackTrigger.Parent == null) { AttackTrigger.Parent = gameObject; }
         if(AttackTrigger.EnemyBase == null) { AttackTrigger.EnemyBase = SpiderlingEnemyBrain; }
         if(AttackTrigger.WeaponData == null) { AttackTrigger.WeaponData = Settings; }
+        if (AttackTrigger.EnemyData == null) { AttackTrigger.EnemyData = SpiderlingEnemyBrain.NewEnemyData;}
         
         AttackTrigger.SetActive();
-        AttackTrigger.UpdateLastAttackTime(Time.time);
+        AttackTrigger.UpdateLastAttackTime(Time.time,2f);
         
         
 
@@ -38,7 +38,7 @@ public class SpiderlingWeapon : WeaponBase
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position,AttackRange);
+        Gizmos.DrawWireSphere(transform.position,EnemyData.AttackRange);
         Gizmos.DrawWireCube(AttackPoint.position,AttackBoxSize);
     }
 }

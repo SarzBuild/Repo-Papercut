@@ -8,12 +8,14 @@ public class Flee : Node
     private readonly EnemyBase _ai;
     private EnemyData _enemyData;
     private Vector2 _direction;
+    private float _range;
     
-    public Flee(Transform player, EnemyBase aI, EnemyData enemyData)
+    public Flee(Transform player, EnemyBase aI, EnemyData enemyData, float range)
     {
         _player = player;
         _ai = aI;
         _enemyData = enemyData;
+        _range = range;
     }
 
     public override NodeState Evaluate()
@@ -24,7 +26,7 @@ public class Flee : Node
         _ai.CheckFlip(-(int)Mathf.Sign(_direction.x));
 
         var distance = Vector2.Distance(_player.position, _ai.transform.position);
-        if (distance < _enemyData.AttackRange)
+        if (distance < _range)
         {
             _enemyData.CurrentHorizontalSpeed += _direction.x * _enemyData.Acceleration * Time.deltaTime;
             
@@ -33,7 +35,7 @@ public class Flee : Node
             return NodeState.RUNNING;
         }
 
-        _enemyData.CurrentHorizontalSpeed = 0;
+        _enemyData.CurrentHorizontalSpeed = Mathf.MoveTowards(_enemyData.CurrentHorizontalSpeed, 0, _enemyData.Deceleration * Time.fixedDeltaTime);
         return NodeState.SUCCESS;
     }
 

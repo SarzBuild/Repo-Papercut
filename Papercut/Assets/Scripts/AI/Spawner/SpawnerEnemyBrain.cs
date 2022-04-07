@@ -104,11 +104,11 @@ public class SpawnerEnemyBrain : EnemyBase
         Idle = new Idle(this,_tempEnemyData);
         Patrol = new Patrol(this,_tempEnemyData);
         
-        Attack = new Attack(PlayerTransform,this,_tempEnemyData,SpawnerWeapon);
-        AttackRange = new Range(PlayerTransform,this,_tempEnemyData.AttackRange);
+        Attack = new Attack(_tempEnemyData,SpawnerWeapon);
+        AttackRange = new Range(PlayerTransform,transform,_tempEnemyData.AttackRange);
 
-        FleeRange = new Range(PlayerTransform,this,_tempEnemyData.ChaseRange);
-        Flee = new Flee(PlayerTransform, this, _tempEnemyData);
+        FleeRange = new Range(PlayerTransform,transform,_tempEnemyData.ChaseRange);
+        Flee = new Flee(PlayerTransform, this, _tempEnemyData, _tempEnemyData.AttackRange);
 
         //Initialize Parent Nodes from left to right
         Selector idleSelector = new Selector(new List<Node>() { Idle, Patrol });
@@ -119,7 +119,7 @@ public class SpawnerEnemyBrain : EnemyBase
         _topNode = new Selector(new List<Node>(){fleeSequence,attackSequence,idleSelector});
     }
 
-    protected void OnDamaged(HealthComponent arg1, float arg2, GameObject arg3)
+    protected void OnDamaged(HealthComponent arg1, float arg2, GameObject arg3, Vector2 knockbackMultiplier)
     {
         base.OnDamaged();
         Knockback();

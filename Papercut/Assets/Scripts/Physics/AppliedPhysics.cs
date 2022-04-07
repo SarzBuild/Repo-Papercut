@@ -104,6 +104,6 @@ public class AppliedPhysics : MonoBehaviour
 
     public bool WallBackHit { get { return WallBackHitResult.Length > 0; } }
     public RaycastHit2D[] WallBackHitResult { get; private set; }
-    public void UpdateWallBackHit() { WallBackHitResult = Physics2D.RaycastAll(_rightWallCheck.position, Vector2.right * -_facingDirection, _wallCheckDistance); }
+    public void UpdateWallBackHit() { WallBackHitResult = Physics2D.RaycastAll(_rightWallCheck.position, Vector2.right * -_facingDirection, _wallCheckDistance, _groundLayerMask); }
     
 }

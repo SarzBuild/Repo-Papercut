@@ -28,7 +28,7 @@ public class HealthComponent : MonoBehaviour
     public event Action<HealthComponent, float> OnHealthAdded;
 
     // Event triggers when damage is taken, provides health component and amount of damage taken.
-    public event Action<HealthComponent, float, GameObject> OnDamageTaken;
+    public event Action<HealthComponent, float, GameObject, Vector2> OnDamageTaken;
 
     // Event triggers when health falls below zeor, providers health component and OPTIONALLY gameobject "killer" - CAN BE NULL!
     public event Action<HealthComponent, GameObject> OnDeath;
@@ -182,7 +182,7 @@ public class HealthComponent : MonoBehaviour
     /// </summary>
     /// <param name="damageAmmount"></param>
     /// <param name="damageSource">Who provides the damage, can be null.</param>
-    public void DealDamage(float damageAmmount, GameObject damageSource = null)
+    public void DealDamage(float damageAmmount, GameObject damageSource = null, Vector2 knockbackMultiplier = default)
     {
         if (IsDead || damageAmmount <= 0.0f || CurrentHealth == 0.0f || !Settings.CanTakeDamage)
         {
@@ -198,7 +198,7 @@ public class HealthComponent : MonoBehaviour
 
         SetHealth(newHealth);
         m_LastTimeTakenDamageSec = Time.time;
-        OnDamageTaken?.Invoke(this, damageAmmount, damageSource);
+        OnDamageTaken?.Invoke(this, damageAmmount, damageSource, knockbackMultiplier);
 
         if (Settings.CanDie && CurrentHealth <= 0.0f)
         {

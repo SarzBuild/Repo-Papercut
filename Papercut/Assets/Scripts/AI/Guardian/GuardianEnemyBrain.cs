@@ -9,32 +9,61 @@ public class GuardianEnemyBrain : EnemyBase
     public GuardianWeapon GuardianWeapon;
     public HealthComponent HealthComponent;
 
-    private EnemyData _tempEnemyData;
+    public Collider2D OwnCollider;
+    public Collider2D PlayerCollider;
+    
+    public EnemyData NewEnemyData;
     private HealthData _tempHealthData;
+
+    public AttackTrigger AttackTrigger;
+
+    public LayerMask PlayerLayerMask;
+
+    public Transform MiddlePoint;
     
     public SkinnedMeshRenderer Renderer { get; private set; }
     private Color _baseColor;
 
     private float _lastHitTime;
+
     #region Nodes
 
+    public StunnedWait StunnedWait { get; private set; }
+    
+    public Charging Charging { get; private set; }
+    
+    public CanAttack CanAttack { get; private set; }
+    public WaitBeforeAttack WaitBeforeAttack { get; private set; }
+    public Attack Attack { get; private set; }
+
+    public Range TooCloseRange { get; private set; }
+    public Flee Reposition { get; private set; }
+    public SetAttack SetAttack { get; private set; }
+
+    public Range ChaseRange { get; private set; }
     public ChasePlayer ChasePlayer { get; private set; }
+    
+    public FacePlayer FacePlayer { get; private set; }
+    
     public Patrol Patrol { get; private set; }
     public Idle Idle { get; private set; }
     
-    public Range ChaseRange { get; private set; }
     
-    public Attack Attack { get; private set; }
-    
-    public Range AttackRange { get; private set; }
 
     private Node _topNode;
     
     #endregion
 
+    private void Awake()
+    {
+        AttackTrigger = GetComponentInChildren<AttackTrigger>();
+        OwnCollider = GetComponent<Collider2D>();
+    }
+
     private void Start()
     {
         PlayerTransform = Player.Instance.transform;
+        PlayerCollider = Player.Instance.transform.GetComponent<Collider2D>();
         
         InitializeData();
 
@@ -49,24 +78,24 @@ public class GuardianEnemyBrain : EnemyBase
 
     private void InitializeData()
     {
-        _tempEnemyData = ScriptableObject.CreateInstance<EnemyData>();
+        NewEnemyData = ScriptableObject.CreateInstance<EnemyData>();
         _tempHealthData = ScriptableObject.CreateInstance<HealthData>();
         GuardianWeapon.Settings = ScriptableObject.CreateInstance<WeaponData>();
         
         
         //CTOR for variables
-        _tempEnemyData.IdleTime = EnemyData.IdleTime;
-        _tempEnemyData.PatrolTime = EnemyData.PatrolTime;
-        _tempEnemyData.FallClamped = EnemyData.FallClamped;
-        _tempEnemyData.StartingFallSpeed = EnemyData.StartingFallSpeed;
-        _tempEnemyData.ChaseRange = EnemyData.ChaseRange;
-        _tempEnemyData.AttackRange = EnemyData.AttackRange;
-        _tempEnemyData.MoveClamped = EnemyData.MoveClamped;
-        _tempEnemyData.Deceleration = EnemyData.Deceleration;
-        _tempEnemyData.Acceleration = EnemyData.Acceleration;
-        _tempEnemyData.PatrolMoveClamped = EnemyData.PatrolMoveClamped;
-        _tempEnemyData.IdlingState = EnemyData.IdlingState;
-        _tempEnemyData.KnockbackSpeed = EnemyData.KnockbackSpeed;
+        NewEnemyData.IdleTime = EnemyData.IdleTime;
+        NewEnemyData.PatrolTime = EnemyData.PatrolTime;
+        NewEnemyData.FallClamped = EnemyData.FallClamped;
+        NewEnemyData.StartingFallSpeed = EnemyData.StartingFallSpeed;
+        NewEnemyData.ChaseRange = EnemyData.ChaseRange;
+        NewEnemyData.AttackRange = EnemyData.AttackRange;
+        NewEnemyData.MoveClamped = EnemyData.MoveClamped;
+        NewEnemyData.Deceleration = EnemyData.Deceleration;
+        NewEnemyData.Acceleration = EnemyData.Acceleration;
+        NewEnemyData.PatrolMoveClamped = EnemyData.PatrolMoveClamped;
+        NewEnemyData.IdlingState = EnemyData.IdlingState;
+        NewEnemyData.KnockbackSpeed = EnemyData.KnockbackSpeed;
     }
 
     private void OnDisable()
@@ -87,7 +116,7 @@ public class GuardianEnemyBrain : EnemyBase
         UpdateHitResults();
 
         CheckForCollisions();
-        
+
         ResetColor();
     }
 
@@ -101,25 +130,39 @@ public class GuardianEnemyBrain : EnemyBase
     protected override void ConstructBehaviorTree()
     {
         //Initialize Child Nodes from left to right
-        Idle = new Idle(this,_tempEnemyData);
-        Patrol = new Patrol(this,_tempEnemyData);
+        StunnedWait = new StunnedWait(NewEnemyData);
 
-        ChasePlayer = new ChasePlayer(PlayerTransform, this,_tempEnemyData);
-        ChaseRange = new Range(PlayerTransform, this,_tempEnemyData.ChaseRange);
+        Charging = new Charging(NewEnemyData, this, OwnCollider, PlayerCollider);
+        
+        CanAttack = new CanAttack(NewEnemyData,OwnCollider,PlayerCollider);
+        WaitBeforeAttack = new WaitBeforeAttack(NewEnemyData,2.5f);
+        Attack = new Attack(NewEnemyData, GuardianWeapon);
 
-        Attack = new Attack(PlayerTransform,this,_tempEnemyData,GuardianWeapon);
-        AttackRange = new Range(PlayerTransform,this,_tempEnemyData.AttackRange);
+        TooCloseRange = new Range(PlayerTransform, MiddlePoint, 4f);
+        Reposition = new Flee(PlayerTransform, this, NewEnemyData,NewEnemyData.ChaseRange);
+        ChaseRange = new Range(PlayerTransform, MiddlePoint,NewEnemyData.ChaseRange-1f);
+        FacePlayer = new FacePlayer(this, PlayerTransform);
+        ChasePlayer = new ChasePlayer(PlayerTransform, this, NewEnemyData);
+        SetAttack = new SetAttack(NewEnemyData);
+        
+        Idle = new Idle(this,NewEnemyData);
+        Patrol = new Patrol(this,NewEnemyData);
+
         
         //Initialize Parent Nodes from left to right
+        
+        Sequence attackSequence = new Sequence(new List<Node>() { CanAttack,WaitBeforeAttack,Attack });
+
+        Sequence arepositionSequence = new Sequence(new List<Node>() { TooCloseRange, Reposition,ChaseRange,FacePlayer,SetAttack });
+
         Selector idleSelector = new Selector(new List<Node>() { Idle, Patrol });
-        Sequence chaseSequence = new Sequence(new List<Node>() { ChaseRange, ChasePlayer });
-        Sequence attackSequence = new Sequence(new List<Node>() { AttackRange, Attack });
+        
         
         //Initialize Root Node
-        _topNode = new Selector(new List<Node>(){attackSequence,chaseSequence,idleSelector});
+        _topNode = new Selector(new List<Node>(){StunnedWait,Charging, attackSequence, arepositionSequence, idleSelector});
     }
 
-    protected void OnDamaged(HealthComponent arg1, float arg2, GameObject arg3)
+    protected void OnDamaged(HealthComponent arg1, float arg2, GameObject arg3, Vector2 knockbackMultiplier)
     {
         base.OnDamaged();
         Knockback();
@@ -130,7 +173,7 @@ public class GuardianEnemyBrain : EnemyBase
     {
         var direction = (PlayerTransform.position - transform.position);
         var directionX = Mathf.Sign(direction.x);
-        _tempEnemyData.CurrentHorizontalSpeed = directionX * _tempEnemyData.KnockbackSpeed;
+        NewEnemyData.CurrentHorizontalSpeed = directionX * NewEnemyData.KnockbackSpeed;
     }
 
     protected void OnDeath(HealthComponent arg1, GameObject killer)
@@ -148,11 +191,11 @@ public class GuardianEnemyBrain : EnemyBase
     {
         if(!Grounded)
         {
-            var fallSpeed = _tempEnemyData.StartingFallSpeed;
+            var fallSpeed = NewEnemyData.StartingFallSpeed;
             
-            _tempEnemyData.CurrentVerticalSpeed -= fallSpeed * Time.fixedDeltaTime;
+            NewEnemyData.CurrentVerticalSpeed -= fallSpeed * Time.fixedDeltaTime;
 
-            if (_tempEnemyData.CurrentVerticalSpeed < _tempEnemyData.FallClamped) _tempEnemyData.CurrentVerticalSpeed = _tempEnemyData.FallClamped;
+            if (NewEnemyData.CurrentVerticalSpeed < NewEnemyData.FallClamped) NewEnemyData.CurrentVerticalSpeed = NewEnemyData.FallClamped;
         } 
     }
 
@@ -160,19 +203,22 @@ public class GuardianEnemyBrain : EnemyBase
     {
         if (Grounded)
         {
-            if (_tempEnemyData.CurrentVerticalSpeed < 0)
+            if (NewEnemyData.CurrentVerticalSpeed < 0)
             {
-                _tempEnemyData.CurrentVerticalSpeed = 0;
+                NewEnemyData.CurrentVerticalSpeed = 0;
             }
         }
     }
 
     private void SetVelocities()
     {
-        SetVelocityX(_tempEnemyData.CurrentHorizontalSpeed);
-        SetVelocityY(_tempEnemyData.CurrentVerticalSpeed);
+        if (!NewEnemyData.IsCharging)
+        {
+            SetVelocityX(NewEnemyData.CurrentHorizontalSpeed); 
+        }
+        SetVelocityY(NewEnemyData.CurrentVerticalSpeed);
     }
-    
+
     private void BlinkRed()
     {
         Renderer.material.SetColor("_BaseColor", Color.red);
@@ -186,6 +232,28 @@ public class GuardianEnemyBrain : EnemyBase
         {
             Renderer.material.SetColor("_BaseColor", _baseColor);
         }
+    }
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(MiddlePoint.position, EnemyData.ChaseRange);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireCube(_rightWallCheck.position,EnemyData.boxCastSize);
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.layer == GenericManager.PlayerLayerMask)
+        {
+            var healthComponent = col.transform.GetComponent<HealthComponent>();
+            if (healthComponent != null)
+            {
+                healthComponent.DealDamage(GuardianWeapon.Settings.Damage,gameObject,Vector2.zero);
+            } 
+        }
+        
     }
 }
 

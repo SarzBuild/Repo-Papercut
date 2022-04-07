@@ -50,4 +50,15 @@ public class EnemyData : ScriptableObject
     public Vector3 PredictedPlayerDirection;
 
     public float SearchForTargetTime = 5f;
+
+    public bool CanAttack;
+
+    public bool IsCharging;
+
+    public Vector2 boxCastSize;
+
+    public float ExitedCharging;
+
+    public bool HasTouchedPlayer;
+
 }

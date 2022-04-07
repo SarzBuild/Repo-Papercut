@@ -39,3 +39,7 @@ MonoBehaviour:
   AlertRange: 20
   PredictedPlayerDirection: {x: 0, y: 0, z: 0}
   SearchForTargetTime: 5
+  CanAttack: 0
+  IsCharging: 0
+  boxCastSize: {x: 0, y: 0}
+  ExitedCharging: 0
