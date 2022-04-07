@@ -13,16 +13,19 @@ public class GuardianEnemyBrain : EnemyBase
     public Collider2D PlayerCollider;
     
     public EnemyData NewEnemyData;
-    private HealthData _tempHealthData;
+    public HealthData NewHealthData;
 
     public AttackTrigger AttackTrigger;
 
     public Transform MiddlePoint;
     
     public SkinnedMeshRenderer Renderer { get; private set; }
+    private string _color = "_BaseColor";
     private Color _baseColor;
 
     private float _lastHitTime;
+
+    private Animator _animator;
 
     #region Nodes
 
@@ -60,6 +63,7 @@ public class GuardianEnemyBrain : EnemyBase
 
     private void Start()
     {
+        _animator = GetComponentInChildren<Animator>();
         PlayerTransform = Player.Instance.transform;
         PlayerCollider = Player.Instance.transform.GetComponent<Collider2D>();
         
@@ -71,13 +75,14 @@ public class GuardianEnemyBrain : EnemyBase
         ConstructBehaviorTree();
         
         Renderer = GetComponentInChildren<SkinnedMeshRenderer>();
-        _baseColor = Renderer.material.GetColor("_BaseColor");
+        Renderer.material.SetColor(_color, Color.white);
+        _baseColor = Renderer.material.GetColor(_color);
     }
 
     private void InitializeData()
     {
         NewEnemyData = ScriptableObject.CreateInstance<EnemyData>();
-        _tempHealthData = ScriptableObject.CreateInstance<HealthData>();
+        NewHealthData = ScriptableObject.CreateInstance<HealthData>();
         GuardianWeapon.Settings = ScriptableObject.CreateInstance<WeaponData>();
         
         
@@ -103,8 +108,8 @@ public class GuardianEnemyBrain : EnemyBase
     }
 
     private void Update()
-    
     {
+        HandleAnimations();
         _topNode.Evaluate();
         if (_topNode.NodeState == NodeState.FAILURE)
         {
@@ -118,6 +123,8 @@ public class GuardianEnemyBrain : EnemyBase
         RechargeEnergy();
         
         ResetColor();
+        
+        DestroyAfterAnimationEnd();
     }
 
     private void FixedUpdate()
@@ -170,6 +177,7 @@ public class GuardianEnemyBrain : EnemyBase
         base.OnDamaged();
         Knockback();
         BlinkRed();
+        _animator.SetTrigger("damaged");
     }
 
     protected override void Knockback()
@@ -187,7 +195,18 @@ public class GuardianEnemyBrain : EnemyBase
             Debug.Log(string.Format("{0} killed by {1}", name, killer.name));
         }
         
-        Destroy(gameObject); 
+        _animator.SetBool("dead", true);
+    }
+    
+    private void DestroyAfterAnimationEnd()
+    {
+        if (_animator.GetBool("dead"))
+        {
+            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
+            {
+                Destroy(gameObject); 
+            }
+        }
     }
 
     public void CalculateGravity()
@@ -224,7 +243,7 @@ public class GuardianEnemyBrain : EnemyBase
 
     private void BlinkRed()
     {
-        Renderer.material.SetColor("_BaseColor", Color.red);
+        Renderer.material.SetColor(_color, Color.red);
         _lastHitTime = Time.time;
     }
 
@@ -233,7 +252,7 @@ public class GuardianEnemyBrain : EnemyBase
         var nextFireTime = _lastHitTime + 0.1f;
         if (Time.time - nextFireTime > 0)
         {
-            Renderer.material.SetColor("_BaseColor", _baseColor);
+            Renderer.material.SetColor(_color, _baseColor);
         }
     }
     
@@ -267,6 +286,39 @@ public class GuardianEnemyBrain : EnemyBase
         }
         
     }
+    
+    private void HandleAnimations()
+    {
+        if (NewEnemyData.CurrentNode == Patrol || NewEnemyData.CurrentNode == Reposition)
+        {
+            _animator.SetBool("walk", true);
+            _animator.SetBool("idle",false);
+            _animator.SetBool("attack",false);
+            _animator.SetBool("charging",false);
+        }
+        else if (NewEnemyData.CurrentNode == Attack)
+        {
+            _animator.SetBool("attack",true);
+            _animator.SetBool("walk",false);
+            _animator.SetBool("idle",false);
+            _animator.SetBool("charging",false);
+        }
+        else if(NewEnemyData.CurrentNode == Charging)
+        {
+            _animator.SetBool("walk", false);
+            _animator.SetBool("idle",false);
+            _animator.SetBool("attack",false);
+            _animator.SetBool("charging",true);
+        }
+        else
+        {
+            _animator.SetBool("walk",false);
+            _animator.SetBool("idle",true);
+            _animator.SetBool("attack",false);
+            _animator.SetBool("charging",false);
+        }
+    }
+    
 }
 
 

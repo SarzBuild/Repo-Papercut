@@ -8,7 +8,7 @@ public class SpawnerEnemyBrain : EnemyBase
     public SpawnerWeapon SpawnerWeapon;
     public HealthComponent HealthComponent;
 
-    private EnemyData _tempEnemyData;
+    private EnemyData NewEnemyData;
     private HealthData _tempHealthData;
     
     public SkinnedMeshRenderer Renderer { get; private set; }
@@ -50,24 +50,24 @@ public class SpawnerEnemyBrain : EnemyBase
 
     private void InitializeData()
     {
-        _tempEnemyData = ScriptableObject.CreateInstance<EnemyData>();
+        NewEnemyData = ScriptableObject.CreateInstance<EnemyData>();
         _tempHealthData = ScriptableObject.CreateInstance<HealthData>();
         SpawnerWeapon.Settings = ScriptableObject.CreateInstance<WeaponData>();
         
         
         //CTOR for variables
-        _tempEnemyData.IdleTime = EnemyData.IdleTime;
-        _tempEnemyData.PatrolTime = EnemyData.PatrolTime;
-        _tempEnemyData.FallClamped = EnemyData.FallClamped;
-        _tempEnemyData.StartingFallSpeed = EnemyData.StartingFallSpeed;
-        _tempEnemyData.ChaseRange = EnemyData.ChaseRange;
-        _tempEnemyData.AttackRange = EnemyData.AttackRange;
-        _tempEnemyData.MoveClamped = EnemyData.MoveClamped;
-        _tempEnemyData.Deceleration = EnemyData.Deceleration;
-        _tempEnemyData.Acceleration = EnemyData.Acceleration;
-        _tempEnemyData.PatrolMoveClamped = EnemyData.PatrolMoveClamped;
-        _tempEnemyData.IdlingState = EnemyData.IdlingState;
-        _tempEnemyData.KnockbackSpeed = EnemyData.KnockbackSpeed;
+        NewEnemyData.IdleTime = EnemyData.IdleTime;
+        NewEnemyData.PatrolTime = EnemyData.PatrolTime;
+        NewEnemyData.FallClamped = EnemyData.FallClamped;
+        NewEnemyData.StartingFallSpeed = EnemyData.StartingFallSpeed;
+        NewEnemyData.ChaseRange = EnemyData.ChaseRange;
+        NewEnemyData.AttackRange = EnemyData.AttackRange;
+        NewEnemyData.MoveClamped = EnemyData.MoveClamped;
+        NewEnemyData.Deceleration = EnemyData.Deceleration;
+        NewEnemyData.Acceleration = EnemyData.Acceleration;
+        NewEnemyData.PatrolMoveClamped = EnemyData.PatrolMoveClamped;
+        NewEnemyData.IdlingState = EnemyData.IdlingState;
+        NewEnemyData.KnockbackSpeed = EnemyData.KnockbackSpeed;
     }
 
     private void OnDisable()
@@ -101,14 +101,14 @@ public class SpawnerEnemyBrain : EnemyBase
     protected override void ConstructBehaviorTree()
     {
         //Initialize Child Nodes from left to right
-        Idle = new Idle(this,_tempEnemyData);
-        Patrol = new Patrol(this,_tempEnemyData);
+        Idle = new Idle(this,NewEnemyData);
+        Patrol = new Patrol(this,NewEnemyData);
         
-        Attack = new Attack(_tempEnemyData,SpawnerWeapon);
-        AttackRange = new Range(PlayerTransform,transform,_tempEnemyData.AttackRange);
+        Attack = new Attack(NewEnemyData,SpawnerWeapon);
+        AttackRange = new Range(PlayerTransform,transform,NewEnemyData.AttackRange);
 
-        FleeRange = new Range(PlayerTransform,transform,_tempEnemyData.ChaseRange);
-        Flee = new Flee(PlayerTransform, this, _tempEnemyData, _tempEnemyData.AttackRange);
+        FleeRange = new Range(PlayerTransform,transform,NewEnemyData.ChaseRange);
+        Flee = new Flee(PlayerTransform, this, NewEnemyData, NewEnemyData.AttackRange);
 
         //Initialize Parent Nodes from left to right
         Selector idleSelector = new Selector(new List<Node>() { Idle, Patrol });
@@ -130,7 +130,7 @@ public class SpawnerEnemyBrain : EnemyBase
     {
         var direction = (PlayerTransform.position - transform.position);
         var directionX = Mathf.Sign(direction.x);
-        _tempEnemyData.CurrentHorizontalSpeed = directionX * _tempEnemyData.KnockbackSpeed;
+        NewEnemyData.CurrentHorizontalSpeed = directionX * NewEnemyData.KnockbackSpeed;
     }
 
     protected void OnDeath(HealthComponent arg1, GameObject killer)
@@ -148,11 +148,11 @@ public class SpawnerEnemyBrain : EnemyBase
     {
         if(!Grounded)
         {
-            var fallSpeed = _tempEnemyData.StartingFallSpeed;
+            var fallSpeed = NewEnemyData.StartingFallSpeed;
             
-            _tempEnemyData.CurrentVerticalSpeed -= fallSpeed * Time.fixedDeltaTime;
+            NewEnemyData.CurrentVerticalSpeed -= fallSpeed * Time.fixedDeltaTime;
 
-            if (_tempEnemyData.CurrentVerticalSpeed < _tempEnemyData.FallClamped) _tempEnemyData.CurrentVerticalSpeed = _tempEnemyData.FallClamped;
+            if (NewEnemyData.CurrentVerticalSpeed < NewEnemyData.FallClamped) NewEnemyData.CurrentVerticalSpeed = NewEnemyData.FallClamped;
         } 
     }
 
@@ -160,17 +160,17 @@ public class SpawnerEnemyBrain : EnemyBase
     {
         if (Grounded)
         {
-            if (_tempEnemyData.CurrentVerticalSpeed < 0)
+            if (NewEnemyData.CurrentVerticalSpeed < 0)
             {
-                _tempEnemyData.CurrentVerticalSpeed = 0;
+                NewEnemyData.CurrentVerticalSpeed = 0;
             }
         }
     }
 
     private void SetVelocities()
     {
-        SetVelocityX(_tempEnemyData.CurrentHorizontalSpeed);
-        SetVelocityY(_tempEnemyData.CurrentVerticalSpeed);
+        SetVelocityX(NewEnemyData.CurrentHorizontalSpeed);
+        SetVelocityY(NewEnemyData.CurrentVerticalSpeed);
     }
     
     private void BlinkRed()

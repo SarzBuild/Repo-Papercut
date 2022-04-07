@@ -68,6 +68,7 @@ public class SpiderlingEnemyBrain : EnemyBase
         ConstructBehaviorTree();
 
         Renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        Renderer.material.SetColor(_color, Color.white);
         _baseColor = Renderer.material.GetColor(_color);
     }
 
@@ -114,6 +115,8 @@ public class SpiderlingEnemyBrain : EnemyBase
         CheckForCollisions();
 
         ResetColor();
+
+        DestroyAfterAnimationEnd();
     }
 
     private void FixedUpdate()
@@ -220,6 +223,7 @@ public class SpiderlingEnemyBrain : EnemyBase
         base.OnDamaged();
         Knockback();
         BlinkRed();
+        _animator.SetTrigger("damaged");
     }
 
     protected override void Knockback()
@@ -242,9 +246,20 @@ public class SpiderlingEnemyBrain : EnemyBase
         {
             Debug.Log(string.Format("{0} killed by {1}", name, killer.name));
         }
-        
-        Destroy(gameObject); 
+        _animator.SetBool("dead", true);
     }
+
+    private void DestroyAfterAnimationEnd()
+    {
+        if (_animator.GetBool("dead"))
+        {
+            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
+            {
+                Destroy(gameObject); 
+            }
+        }
+    }
+    
 
     public void UpdateLastPlayerKnownPosition(Vector2 value)
     {
@@ -266,10 +281,20 @@ public class SpiderlingEnemyBrain : EnemyBase
         if (NewEnemyData.CurrentNode == Patrol || NewEnemyData.CurrentNode == ChasePlayer)
         {
             _animator.SetBool("walk", true);
+            _animator.SetBool("idle",false);
+            _animator.SetBool("attack",false);
+        }
+        else if (NewEnemyData.CurrentNode == Attack)
+        {
+            _animator.SetBool("attack",true);
+            _animator.SetBool("walk",false);
+            _animator.SetBool("idle",false);
         }
         else
         {
             _animator.SetBool("walk",false);
+            _animator.SetBool("idle",true);
+            _animator.SetBool("attack",false);
         }
     }
 

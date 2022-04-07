@@ -9,8 +9,8 @@ public class HunterEnemyBrain : EnemyBase
     public HunterWeapon HunterWeapon;
     public HealthComponent HealthComponent;
 
-    private EnemyData _tempEnemyData;
-    private HealthData _tempHealthData;
+    public EnemyData NewEnemyData;
+    public HealthData NewHealthData;
     
     public SkinnedMeshRenderer Renderer { get; private set; }    
     private Color _baseColor;
@@ -18,6 +18,8 @@ public class HunterEnemyBrain : EnemyBase
     private float _lastHitTime;
     
     private Transform _baseTransfrom;
+
+    private Animator _animator;
     
     #region Nodes
 
@@ -39,6 +41,7 @@ public class HunterEnemyBrain : EnemyBase
 
     private void Start()
     {
+        _animator = GetComponentInChildren<Animator>();
         PlayerTransform = Player.Instance.transform;
         
         InitializeData();
@@ -56,30 +59,31 @@ public class HunterEnemyBrain : EnemyBase
     
     private void InitializeData()
     {
-        _tempEnemyData = ScriptableObject.CreateInstance<EnemyData>();
-        _tempHealthData = ScriptableObject.CreateInstance<HealthData>();
+        NewEnemyData = ScriptableObject.CreateInstance<EnemyData>();
+        NewHealthData = ScriptableObject.CreateInstance<HealthData>();
         HunterWeapon.Settings = ScriptableObject.CreateInstance<WeaponData>();
         
         
         //CTOR for variables
-        _tempEnemyData.IdleTime = EnemyData.IdleTime;
-        _tempEnemyData.PatrolTime = EnemyData.PatrolTime;
-        _tempEnemyData.FallClamped = EnemyData.FallClamped;
-        _tempEnemyData.StartingFallSpeed = EnemyData.StartingFallSpeed;
-        _tempEnemyData.ChaseRange = EnemyData.ChaseRange;
-        _tempEnemyData.AttackRange = EnemyData.AttackRange;
-        _tempEnemyData.MoveClamped = EnemyData.MoveClamped;
-        _tempEnemyData.Deceleration = EnemyData.Deceleration;
-        _tempEnemyData.Acceleration = EnemyData.Acceleration;
-        _tempEnemyData.PatrolMoveClamped = EnemyData.PatrolMoveClamped;
-        _tempEnemyData.IdlingState = EnemyData.IdlingState;
-        _tempEnemyData.KnockbackSpeed = EnemyData.KnockbackSpeed;
+        NewEnemyData.IdleTime = EnemyData.IdleTime;
+        NewEnemyData.PatrolTime = EnemyData.PatrolTime;
+        NewEnemyData.FallClamped = EnemyData.FallClamped;
+        NewEnemyData.StartingFallSpeed = EnemyData.StartingFallSpeed;
+        NewEnemyData.ChaseRange = EnemyData.ChaseRange;
+        NewEnemyData.AttackRange = EnemyData.AttackRange;
+        NewEnemyData.MoveClamped = EnemyData.MoveClamped;
+        NewEnemyData.Deceleration = EnemyData.Deceleration;
+        NewEnemyData.Acceleration = EnemyData.Acceleration;
+        NewEnemyData.PatrolMoveClamped = EnemyData.PatrolMoveClamped;
+        NewEnemyData.IdlingState = EnemyData.IdlingState;
+        NewEnemyData.KnockbackSpeed = EnemyData.KnockbackSpeed;
     }
     
     
     
     private void Update()
     {
+        HandleAnimations();
         _topNode.Evaluate();
         if (_topNode.NodeState == NodeState.FAILURE)
         {
@@ -89,6 +93,8 @@ public class HunterEnemyBrain : EnemyBase
         UpdateHitResults();
         
         ResetColor();
+        
+        DestroyAfterAnimationEnd();
     }
 
 
@@ -96,9 +102,9 @@ public class HunterEnemyBrain : EnemyBase
     {
         //Initialize Child Nodes from left to right
 
-        Attack = new RangedAttack(PlayerTransform, this, _tempEnemyData,HunterWeapon);
-        AttackRange = new Range(PlayerTransform, transform, _tempEnemyData.AttackRange);
-        ResetRotation = new ResetRotation(this, _tempEnemyData, _baseTransfrom);
+        Attack = new RangedAttack(PlayerTransform, this, NewEnemyData,HunterWeapon);
+        AttackRange = new Range(PlayerTransform, transform, NewEnemyData.AttackRange);
+        ResetRotation = new ResetRotation(this, NewEnemyData, _baseTransfrom);
         
         //Initialize Parent Nodes from left to right
         
@@ -111,6 +117,7 @@ public class HunterEnemyBrain : EnemyBase
     private void OnDamaged(HealthComponent arg1, float arg2, GameObject arg3, Vector2 knockbackMultiplier)
     {
         BlinkRed();
+        _animator.SetTrigger("damaged");
     }
     
     private void OnDeath(HealthComponent arg1, GameObject killer)
@@ -120,7 +127,18 @@ public class HunterEnemyBrain : EnemyBase
             Debug.Log(string.Format("{0} killed by {1}", name, killer.name));
         }
         
-        Destroy(gameObject); 
+        _animator.SetBool("dead",true);
+    }
+    
+    private void DestroyAfterAnimationEnd()
+    {
+        if (_animator.GetBool("dead"))
+        {
+            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
+            {
+                Destroy(gameObject); 
+            }
+        }
     }
 
 
@@ -141,6 +159,20 @@ public class HunterEnemyBrain : EnemyBase
         if (Time.time - nextFireTime > 0)
         {
             Renderer.material.SetColor("_BaseColor", _baseColor);
+        }
+    }
+    
+    private void HandleAnimations()
+    {
+        if (NewEnemyData.CurrentNode == Attack)
+        {
+            _animator.SetBool("attack",true);
+            _animator.SetBool("idle",false);
+        }
+        else
+        {
+            _animator.SetBool("idle",true);
+            _animator.SetBool("attack",false);
         }
     }
 }
