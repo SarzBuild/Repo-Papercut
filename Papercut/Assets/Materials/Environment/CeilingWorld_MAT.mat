@@ -150,7 +150,7 @@ Material:
     m_Floats:
     - Coat: 0
     - EmissionIntensity: 0.03
-    - NormalStrength: 1
+    - NormalStrength: 0
     - PatternInverse: 0
     - Pos01_Clamp: 100
     - Pos01_Multiply: 0.01
