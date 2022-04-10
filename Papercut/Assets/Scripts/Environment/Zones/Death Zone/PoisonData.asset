@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 609d2468e7e118a4a83801b780101922, type: 3}
-  m_Name: SpikesData
+  m_Name: PoisonData
   m_EditorClassIdentifier: 
   description: 
   FireCooldownSec: 1

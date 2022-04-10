@@ -2151,6 +2151,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 399428447, guid: fd018425d2e6cb64681890150e6d0568, type: 3}
+      propertyPath: m_Name
+      value: PlayerBlood_VFX
+      objectReference: {fileID: 0}
     - target: {fileID: 1651818500472766122, guid: fd018425d2e6cb64681890150e6d0568, type: 3}
       propertyPath: _mainCamera
       value: 
