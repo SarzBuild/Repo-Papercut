@@ -19,10 +19,11 @@ public class DeathZone : WeaponBase
         HealthComponent healthComponent = player.GetComponent<HealthComponent>();
         if (healthComponent != null)
         {
-            if (DamageType == DamageType.UsingCurrentPlayerHealth) { healthComponent.DealDamage(healthComponent.CurrentHealth); }
-            if (DamageType == DamageType.UsingDamageFromScriptableObject) { healthComponent.DealDamage(Settings.Damage); }
+            if (DamageType == DamageType.UsingCurrentPlayerHealth) { healthComponent.DealDamage(healthComponent.CurrentHealth,gameObject); }
+            if (DamageType == DamageType.UsingDamageFromScriptableObject) { healthComponent.DealDamage(Settings.Damage,gameObject); }
+            return true;
         }
-        return true;
+        return false;
     }
 
     private void OnTriggerStay2D(Collider2D col)
