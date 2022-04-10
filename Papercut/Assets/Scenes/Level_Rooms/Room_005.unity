@@ -7512,6 +7512,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI_Hunter_Complete
       objectReference: {fileID: 0}
+    - target: {fileID: 2813466936440903517, guid: 9dae93d61e3c2d04a99f7d129d3e232d, type: 3}
+      propertyPath: m_Name
+      value: HunterBlood_VFX
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dae93d61e3c2d04a99f7d129d3e232d, type: 3}
 --- !u!4 &1245198019 stripped
@@ -7855,7 +7859,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh37680
+  m_Name: pb_Mesh31692
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
