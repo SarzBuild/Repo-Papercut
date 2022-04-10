@@ -316,7 +316,6 @@ public class GuardianEnemyBrain : EnemyBase
             _animator.SetBool("charging",false);
         }
     }
-    
 }
 
 
