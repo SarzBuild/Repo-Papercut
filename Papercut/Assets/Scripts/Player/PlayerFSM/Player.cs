@@ -65,6 +65,8 @@ public class Player : AppliedPhysics
     private float _lastHitTime;
     private Color _baseColor;
 
+    public GameObject BloodObject;
+
     private void Awake()
     {
         if (_instance != null && _instance != this) Destroy(gameObject);
@@ -117,6 +119,7 @@ public class Player : AppliedPhysics
         HealthComponent.OnDeath += OnPlayerDeath;
         HealthComponent.OnDamageTaken += Knockback;
         HealthComponent.OnDamageTaken += BlinkRed;
+        HealthComponent.OnDamageTaken += BloodEffects;
         // Other component events exist here too, tag on to trigger animation/sound/FX
     }
     
@@ -125,6 +128,7 @@ public class Player : AppliedPhysics
         HealthComponent.OnDeath -= OnPlayerDeath;
         HealthComponent.OnDamageTaken -= BlinkRed;
         HealthComponent.OnDamageTaken -= Knockback;
+        HealthComponent.OnDamageTaken -= BloodEffects;
     }
 
     private void Start()
@@ -150,6 +154,8 @@ public class Player : AppliedPhysics
         TimerForWallGrabJumps();
 
         ResetColor();
+
+        ShowMenuAfterAnimationEnd();
 
         //LogDebug();
     }
@@ -289,7 +295,7 @@ public class Player : AppliedPhysics
         }
     }
     
-    public bool CheckForLayerWall()
+    /*public bool CheckForLayerWall()
     {
         if (WallBackHit)
         {
@@ -308,7 +314,7 @@ public class Player : AppliedPhysics
             }
         }
         return false;
-    }
+    }*/
 
     public void UpdateStickyWallCollisions()
     {
@@ -346,8 +352,6 @@ public class Player : AppliedPhysics
         InputHandler.LockMouseInputs(true);
         InputHandler.LockPlayerInputs(true);
         
-        
-        SimplePlayerUI.EnableDeathMenu();
         Time.timeScale = 0;
         Debug.LogWarning("You died!");
         
@@ -378,6 +382,11 @@ public class Player : AppliedPhysics
         _lastHitTime = Time.time;
     }
 
+    private void BloodEffects(HealthComponent component, float value, GameObject gameObject, Vector2 knockbackSpeed)
+    {
+        Instantiate(BloodObject, transform.position, Quaternion.Inverse(transform.rotation));
+    }
+
     private void ResetColor()
     {
         var nextFireTime = _lastHitTime + 0.1f;
@@ -386,4 +395,19 @@ public class Player : AppliedPhysics
             Renderer.material.SetColor("_BaseColor", _baseColor);
         }
     }
+
+    private void ShowMenuAfterAnimationEnd()
+    {
+        if (Animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
+        {
+            if (Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f && Animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+            {
+                if (!SimplePlayerUI.RestartUI.activeSelf)
+                {
+                    SimplePlayerUI.EnableDeathMenu();
+                }
+            }
+        }
+    }
+
 }
