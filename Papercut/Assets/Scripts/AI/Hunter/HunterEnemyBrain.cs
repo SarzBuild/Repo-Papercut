@@ -20,6 +20,9 @@ public class HunterEnemyBrain : EnemyBase
     private Transform _baseTransfrom;
 
     private Animator _animator;
+
+
+    public GameObject BloodObject;
     
     #region Nodes
 
@@ -117,6 +120,7 @@ public class HunterEnemyBrain : EnemyBase
     private void OnDamaged(HealthComponent arg1, float arg2, GameObject arg3, Vector2 knockbackMultiplier)
     {
         BlinkRed();
+        Instantiate(BloodObject, transform.position, Quaternion.Inverse(transform.rotation));
         _animator.SetTrigger("damaged");
     }
     
@@ -136,7 +140,10 @@ public class HunterEnemyBrain : EnemyBase
         {
             if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
             {
-                Destroy(gameObject); 
+                if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+                {
+                    Destroy(gameObject); 
+                }
             }
         }
     }

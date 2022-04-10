@@ -25,6 +25,9 @@ public class SpiderlingEnemyBrain : EnemyBase
 
 
     private float _lastHitTime;
+    
+    
+    public GameObject BloodObject;
 
     #region Nodes
 
@@ -103,7 +106,10 @@ public class SpiderlingEnemyBrain : EnemyBase
     private void Update()
     {
         HandleAnimations();
-        _topNode.Evaluate();
+        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
+        {
+            _topNode.Evaluate();
+        }
         if (_topNode.NodeState == NodeState.FAILURE)
         {
             Debug.Log("Problems");
@@ -223,6 +229,7 @@ public class SpiderlingEnemyBrain : EnemyBase
         base.OnDamaged();
         Knockback();
         BlinkRed();
+        Instantiate(BloodObject, transform.position, Quaternion.Inverse(transform.rotation));
         _animator.SetTrigger("damaged");
     }
 
@@ -246,15 +253,18 @@ public class SpiderlingEnemyBrain : EnemyBase
         {
             Debug.Log(string.Format("{0} killed by {1}", name, killer.name));
         }
-        _animator.SetBool("dead", true);
+        _animator.SetTrigger("dead");
+        NewEnemyData.CurrentHorizontalSpeed = 0f;
     }
 
     private void DestroyAfterAnimationEnd()
     {
-        if (_animator.GetBool("dead"))
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
         {
-            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
             {
+                Instantiate(BloodObject,transform.position,Quaternion.Inverse(transform.rotation));
+                Instantiate(BloodObject,transform.position,transform.rotation);
                 Destroy(gameObject); 
             }
         }

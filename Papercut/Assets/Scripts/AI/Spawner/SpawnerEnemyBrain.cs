@@ -15,6 +15,8 @@ public class SpawnerEnemyBrain : EnemyBase
     private Color _baseColor;
     
     private float _lastHitTime;
+    
+    public GameObject BloodObject;
     #region Nodes
 
     //public ChasePlayer ChasePlayer { get; private set; }

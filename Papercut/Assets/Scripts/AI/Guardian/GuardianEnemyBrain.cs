@@ -27,6 +27,8 @@ public class GuardianEnemyBrain : EnemyBase
 
     private Animator _animator;
 
+    public GameObject BloodObject;
+
     #region Nodes
 
     public StunnedWait StunnedWait { get; private set; }
@@ -109,7 +111,11 @@ public class GuardianEnemyBrain : EnemyBase
     private void Update()
     {
         HandleAnimations();
-        _topNode.Evaluate();
+
+        if (!_animator.GetBool("dead"))
+        {
+            _topNode.Evaluate();
+        }
         if (_topNode.NodeState == NodeState.FAILURE)
         {
             Debug.Log("Problems");
@@ -162,13 +168,13 @@ public class GuardianEnemyBrain : EnemyBase
 
         Sequence repositionSequence = new Sequence(new List<Node>() { CheckVision,TooCloseRange, Reposition });
         
-        Sequence chaseSquence = new Sequence(new List<Node>() { CheckVision,ChaseRange, FacePlayer, SetAttack });
+        Sequence chaseSequence = new Sequence(new List<Node>() { CheckVision,ChaseRange, FacePlayer, SetAttack });
 
         Selector idleSelector = new Selector(new List<Node>() { Idle, Patrol });
         
         
         //Initialize Root Node
-        _topNode = new Selector(new List<Node>(){StunnedWait,Charging, attackSequence, repositionSequence,chaseSquence, idleSelector});
+        _topNode = new Selector(new List<Node>(){StunnedWait,Charging, attackSequence, repositionSequence,chaseSequence, idleSelector});
     }
 
     protected void OnDamaged(HealthComponent arg1, float arg2, GameObject arg3, Vector2 knockbackMultiplier)
@@ -176,6 +182,7 @@ public class GuardianEnemyBrain : EnemyBase
         base.OnDamaged();
         Knockback();
         BlinkRed();
+        Instantiate(BloodObject, transform.position, transform.rotation);
         _animator.SetTrigger("damaged");
     }
 
@@ -203,7 +210,10 @@ public class GuardianEnemyBrain : EnemyBase
         {
             if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
             {
-                Destroy(gameObject); 
+                if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+                {
+                    Destroy(gameObject); 
+                }
             }
         }
     }

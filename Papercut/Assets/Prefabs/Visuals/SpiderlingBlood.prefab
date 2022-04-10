@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3077312453523129799}
   - component: {fileID: 7541403567543273545}
   - component: {fileID: 2860411633889271975}
+  - component: {fileID: -902636392350182791}
   m_Layer: 13
   m_Name: SpiderlingBlood
   m_TagString: Untagged
@@ -4806,3 +4807,16 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-902636392350182791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8802892342046487226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d060db31a5b3d0e4dae0a58ec96726c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Seconds: 1
