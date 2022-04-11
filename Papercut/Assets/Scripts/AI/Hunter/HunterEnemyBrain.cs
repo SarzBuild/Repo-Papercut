@@ -11,25 +11,27 @@ public class HunterEnemyBrain : EnemyBase
 
     public EnemyData NewEnemyData;
     public HealthData NewHealthData;
-    
-    public SkinnedMeshRenderer Renderer { get; private set; }    
+
+    public SkinnedMeshRenderer Renderer { get; private set; }
     private Color _baseColor;
-    
+
     private float _lastHitTime;
-    
+
     private Transform _baseTransfrom;
 
     private Animator _animator;
 
 
     public GameObject BloodObject;
-    
+
     #region Nodes
 
     public RangedAttack Attack { get; private set; }
-    
+
     public Range AttackRange { get; private set; }
-    
+
+    public CheckVision CheckVision { get; private set; }
+
     public ResetRotation ResetRotation { get; private set; }
 
     private Node _topNode;
@@ -108,10 +110,11 @@ public class HunterEnemyBrain : EnemyBase
         Attack = new RangedAttack(PlayerTransform, this, NewEnemyData,HunterWeapon);
         AttackRange = new Range(PlayerTransform, transform, NewEnemyData.AttackRange);
         ResetRotation = new ResetRotation(this, NewEnemyData, _baseTransfrom);
+        CheckVision = new CheckVision(PlayerTransform, transform, NewEnemyData, _groundLayerMask);
         
         //Initialize Parent Nodes from left to right
         
-        Sequence attackSequence = new Sequence(new List<Node>() { AttackRange, Attack });
+        Sequence attackSequence = new Sequence(new List<Node>() { AttackRange, CheckVision, Attack });
         
         //Initialize Root Node
         _topNode = new Selector(new List<Node>(){attackSequence, ResetRotation});
@@ -172,13 +175,20 @@ public class HunterEnemyBrain : EnemyBase
     {
         if (NewEnemyData.CurrentNode == Attack)
         {
-            _animator.SetBool("attack",true);
-            _animator.SetBool("idle",false);
+            SetAnimations("attack",new List<string>(){"idle"});
         }
         else
         {
-            _animator.SetBool("idle",true);
-            _animator.SetBool("attack",false);
+            SetAnimations("idle",new List<string>(){"attack"});
+        }
+    }
+    
+    private void SetAnimations(string active, List<string> inactive)
+    {
+        _animator.SetBool(active,true);
+        foreach (var i in inactive)
+        {
+            _animator.SetBool(i,false);    
         }
     }
 }

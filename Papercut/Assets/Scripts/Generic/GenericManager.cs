@@ -14,6 +14,7 @@ public class GenericManager : MonoBehaviour
     public static int WallGrabLayerMask { get { return LayerMask.NameToLayer("JumpableWall"); } }
     public static int BulletLayerMask { get { return LayerMask.NameToLayer("Bullet"); } }
     public static int TriggerLayerMask { get { return LayerMask.NameToLayer("TriggerZone"); } }
+    public static int BreakableLayerMask { get { return LayerMask.NameToLayer("Breakable"); } }
 
     private void Awake()
     {

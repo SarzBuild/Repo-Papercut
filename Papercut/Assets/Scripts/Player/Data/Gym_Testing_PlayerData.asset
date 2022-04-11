@@ -17,17 +17,18 @@ MonoBehaviour:
 '
   RawInputValue: 0
   Velocity: {x: 0, y: 0}
-  LastPosition: {x: -44.599365, y: 16.579615}
-  LastTimeJumpKeyWasPressed: 110.746605
+  LastPosition: {x: -51.68798, y: 16.579618}
+  LastTimeJumpKeyWasPressed: 4.0959034
   CurrentHorizontalSpeed: 0
   CurrentVerticalSpeed: 0
   PlayerLandedThisFrame: 0
   CollisionDown: 1
-  TimePlayerStoppedGrounded: 112.1031
+  TimePlayerStoppedGrounded: -3.4028235e+38
   PlayerLayerMask:
     serializedVersion: 2
     m_Bits: 0
   KnockbackSpeed: 9.14
+  CanBreakWalls: 1
   WalkingSpeed: 8
   RunningSpeed: 15
   CurrentSpeed: 8
@@ -98,7 +99,7 @@ MonoBehaviour:
   SlippingVelocity: 5
   EndWallSlipYVelocity: 0
   EndWallSlipXVelocity: 3
-  GrapplingAbilityActive: 1
+  GrapplingAbilityActive: 0
   GrappleTargetableLayer:
     serializedVersion: 2
     m_Bits: 1024

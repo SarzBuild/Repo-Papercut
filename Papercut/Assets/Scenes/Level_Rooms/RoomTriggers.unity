@@ -1077,21 +1077,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ability Pickups
       objectReference: {fileID: 0}
-    - target: {fileID: 2458100909681740485, guid: fd16c84dfb928624f9647a8011e483c4, type: 3}
+    - target: {fileID: 3599969342550908214, guid: fd16c84dfb928624f9647a8011e483c4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 394.9
+      value: 321.9
       objectReference: {fileID: 0}
-    - target: {fileID: 2458100909681740485, guid: fd16c84dfb928624f9647a8011e483c4, type: 3}
+    - target: {fileID: 3599969342550908214, guid: fd16c84dfb928624f9647a8011e483c4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -104.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6370640011370042625, guid: fd16c84dfb928624f9647a8011e483c4, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6370640011882180761, guid: fd16c84dfb928624f9647a8011e483c4, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
+      value: -30.77
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd16c84dfb928624f9647a8011e483c4, type: 3}
@@ -1109,6 +1101,17 @@ MonoBehaviour:
 --- !u!114 &658048603 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 210982427330414001, guid: fd16c84dfb928624f9647a8011e483c4, type: 3}
+  m_PrefabInstance: {fileID: 658048601}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1925eaab2b032f48a695a216ef4dcfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &658048604 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9050998603131479636, guid: fd16c84dfb928624f9647a8011e483c4, type: 3}
   m_PrefabInstance: {fileID: 658048601}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -2846,6 +2849,10 @@ PrefabInstance:
       propertyPath: Abilities.Array.data[1]
       value: 
       objectReference: {fileID: 658048603}
+    - target: {fileID: 563350370, guid: 590f90d490c0c3b44b40bd641ea0449c, type: 3}
+      propertyPath: Abilities.Array.data[2]
+      value: 
+      objectReference: {fileID: 658048604}
     - target: {fileID: 563350373, guid: 590f90d490c0c3b44b40bd641ea0449c, type: 3}
       propertyPath: RestartUI
       value: 
@@ -2862,10 +2869,6 @@ PrefabInstance:
       propertyPath: BackgroundImage
       value: 
       objectReference: {fileID: 51878922}
-    - target: {fileID: 563350375, guid: 590f90d490c0c3b44b40bd641ea0449c, type: 3}
-      propertyPath: Checkpoints.Array.size
-      value: 23
-      objectReference: {fileID: 0}
     - target: {fileID: 563350375, guid: 590f90d490c0c3b44b40bd641ea0449c, type: 3}
       propertyPath: Checkpoints.Array.data[0]
       value: 

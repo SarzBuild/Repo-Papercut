@@ -147,7 +147,7 @@ public class GuardianEnemyBrain : EnemyBase
         Charging = new Charging(NewEnemyData, this, OwnCollider, PlayerCollider);
         
         CanAttack = new CanAttack(NewEnemyData,OwnCollider,PlayerCollider);
-        WaitBeforeAttack = new WaitBeforeAttack(NewEnemyData,2.5f);
+        WaitBeforeAttack = new WaitBeforeAttack(NewEnemyData,GuardianWeapon.Settings.FireCooldownSec);
         Attack = new Attack(NewEnemyData, GuardianWeapon);
 
         CheckVision = new CheckVision(PlayerTransform, MiddlePoint, NewEnemyData, _groundLayerMask);
@@ -273,7 +273,7 @@ public class GuardianEnemyBrain : EnemyBase
 
     private void RechargeEnergy()
     {
-        var nextFireTime = NewEnemyData.ExitedCharging + 5;
+        var nextFireTime = NewEnemyData.ExitedCharging + GuardianWeapon.Settings.FireCooldownSec;
         if (Time.time - nextFireTime > 0)
         {
             NewEnemyData.EnergyFull = true;
@@ -296,31 +296,36 @@ public class GuardianEnemyBrain : EnemyBase
     {
         if (NewEnemyData.CurrentNode == Patrol || NewEnemyData.CurrentNode == Reposition)
         {
-            _animator.SetBool("walk", true);
-            _animator.SetBool("idle",false);
-            _animator.SetBool("attack",false);
-            _animator.SetBool("charging",false);
+            SetAnimations("walk",new List<string>(){"idle","attack","charging","stunned","chargingUp"});
         }
         else if (NewEnemyData.CurrentNode == Attack)
         {
-            _animator.SetBool("attack",true);
-            _animator.SetBool("walk",false);
-            _animator.SetBool("idle",false);
-            _animator.SetBool("charging",false);
+            SetAnimations("attack",new List<string>(){"walk","idle","charging","stunned","chargingUp"});
         }
         else if(NewEnemyData.CurrentNode == Charging)
         {
-            _animator.SetBool("walk", false);
-            _animator.SetBool("idle",false);
-            _animator.SetBool("attack",false);
-            _animator.SetBool("charging",true);
+            SetAnimations("charging",new List<string>(){"walk","attack","idle","stunned","chargingUp"});
+        }
+        else if (NewEnemyData.CurrentNode == StunnedWait)
+        {
+            SetAnimations("stunned",new List<string>(){"walk","attack","charging","idle","chargingUp"});
+        }
+        else if (NewEnemyData.CurrentNode == WaitBeforeAttack)
+        {
+            SetAnimations("chargingUp",new List<string>(){"walk","attack","charging","stunned","idle"});
         }
         else
         {
-            _animator.SetBool("walk",false);
-            _animator.SetBool("idle",true);
-            _animator.SetBool("attack",false);
-            _animator.SetBool("charging",false);
+            SetAnimations("idle",new List<string>(){"walk","attack","charging","stunned","chargingUp"});
+        }
+    }
+
+    private void SetAnimations(string active, List<string> inactive)
+    {
+        _animator.SetBool(active,true);
+        foreach (var i in inactive)
+        {
+            _animator.SetBool(i,false);    
         }
     }
 }

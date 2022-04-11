@@ -6,7 +6,8 @@ using UnityEngine;
 public enum AbilityType
 {
     GrapplingHook,
-    WallJump
+    WallJump,
+    WallSmash
 }
 
 public class AbilityListManager : MonoBehaviour
@@ -72,6 +73,9 @@ public class AbilityListManager : MonoBehaviour
                 break;
             case AbilityType.WallJump:
                 _player.PlayerData.WallJumpAbilityActive = trigger;
+                break;
+            case AbilityType.WallSmash:
+                _player.PlayerData.CanBreakWalls = trigger;
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
