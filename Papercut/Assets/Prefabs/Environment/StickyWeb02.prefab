@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1800448570178428687}
   - component: {fileID: 3245956453284973253}
   - component: {fileID: 3541006774657298410}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: StickyWeb02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1115465716722925345}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 32.85, y: -36.18, z: 0.6}
-  m_LocalScale: {x: 0.75097847, y: 0.3718732, z: 0.25409186}
+  m_LocalScale: {x: 0.75097847, y: 0.37187323, z: 0.16716194}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
