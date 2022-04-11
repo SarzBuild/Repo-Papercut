@@ -30,7 +30,7 @@ public class DoorEventListener : MonoBehaviour
 
     private void MoveToNextPos()
     {
-        transform.position = Vector2.Lerp(transform.position, _positionList[_nextPos], Time.deltaTime*2);
+        transform.position = Vector2.Lerp(transform.position, _positionList[_nextPos], Time.deltaTime*10);
     }
     
     public void InitialPos()

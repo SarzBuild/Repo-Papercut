@@ -89,7 +89,11 @@ public class HunterEnemyBrain : EnemyBase
     private void Update()
     {
         HandleAnimations();
-        _topNode.Evaluate();
+        if (!_animator.GetBool("dead"))
+        {
+            _topNode.Evaluate();
+        }
+        
         if (_topNode.NodeState == NodeState.FAILURE)
         {
             Debug.Log("Problems");
@@ -134,13 +138,14 @@ public class HunterEnemyBrain : EnemyBase
             Debug.Log(string.Format("{0} killed by {1}", name, killer.name));
         }
         
-        _animator.SetBool("dead",true);
+        SetAnimations("dead",new List<string>(){"attack","idle"});
     }
     
     private void DestroyAfterAnimationEnd()
     {
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
         {
+            SetAnimations("dead",new List<string>(){"attack","idle"});
             if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
             {
                 Instantiate(BloodObject,transform.position,Quaternion.Inverse(transform.rotation));
@@ -173,6 +178,7 @@ public class HunterEnemyBrain : EnemyBase
     
     private void HandleAnimations()
     {
+        if(_animator.GetBool("dead")) return;
         if (NewEnemyData.CurrentNode == Attack)
         {
             SetAnimations("attack",new List<string>(){"idle"});
