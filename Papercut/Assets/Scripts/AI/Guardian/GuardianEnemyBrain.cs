@@ -201,13 +201,14 @@ public class GuardianEnemyBrain : EnemyBase
             Debug.Log(string.Format("{0} killed by {1}", name, killer.name));
         }
         
-        _animator.SetBool("dead", true);
+        SetAnimations("dead",new List<string>(){"idle","attack","charging","stunned","chargingUp","walk"});
     }
     
     private void DestroyAfterAnimationEnd()
     {
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
         {
+            SetAnimations("dead",new List<string>(){"idle","attack","charging","stunned","chargingUp","walk"});
             if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
             {
                 Destroy(gameObject); 
@@ -294,6 +295,7 @@ public class GuardianEnemyBrain : EnemyBase
     
     private void HandleAnimations()
     {
+        if(_animator.GetBool("dead")) return;
         if (NewEnemyData.CurrentNode == Patrol || NewEnemyData.CurrentNode == Reposition)
         {
             SetAnimations("walk",new List<string>(){"idle","attack","charging","stunned","chargingUp"});

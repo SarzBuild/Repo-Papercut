@@ -106,7 +106,7 @@ public class SpiderlingEnemyBrain : EnemyBase
     private void Update()
     {
         HandleAnimations();
-        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
+        if (!_animator.GetBool("dead"))
         {
             _topNode.Evaluate();
         }
@@ -253,7 +253,7 @@ public class SpiderlingEnemyBrain : EnemyBase
         {
             Debug.Log(string.Format("{0} killed by {1}", name, killer.name));
         }
-        _animator.SetTrigger("dead");
+        SetAnimations("dead",new List<string>(){"idle","attack","walk"});
         NewEnemyData.CurrentHorizontalSpeed = 0f;
     }
 
@@ -261,6 +261,7 @@ public class SpiderlingEnemyBrain : EnemyBase
     {
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
         {
+            SetAnimations("dead",new List<string>(){"idle","attack","walk"});
             if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
             {
                 Instantiate(BloodObject,transform.position,Quaternion.Inverse(transform.rotation));
@@ -288,6 +289,7 @@ public class SpiderlingEnemyBrain : EnemyBase
 
     private void HandleAnimations()
     {
+        if(_animator.GetBool("dead")) return;
         if (NewEnemyData.CurrentNode == Patrol || NewEnemyData.CurrentNode == ChasePlayer)
         {
             SetAnimations("walk",new List<string>(){"idle","attack"});
