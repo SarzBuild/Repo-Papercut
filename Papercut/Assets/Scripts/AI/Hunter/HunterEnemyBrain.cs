@@ -136,14 +136,13 @@ public class HunterEnemyBrain : EnemyBase
     
     private void DestroyAfterAnimationEnd()
     {
-        if (_animator.GetBool("dead"))
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
         {
-            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
             {
-                if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
-                {
-                    Destroy(gameObject); 
-                }
+                Instantiate(BloodObject,transform.position,Quaternion.Inverse(transform.rotation));
+                Instantiate(BloodObject,transform.position,transform.rotation);
+                Destroy(gameObject); 
             }
         }
     }

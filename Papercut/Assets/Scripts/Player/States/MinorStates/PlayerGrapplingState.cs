@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class PlayerGrapplingState : PlayerState
 {
@@ -30,6 +28,7 @@ public class PlayerGrapplingState : PlayerState
         base.EnterState();
         Initialize();
         SetGrapplePoint();
+        Player.Hook.SetActive(true);
     }
 
     private void Initialize()
@@ -56,6 +55,7 @@ public class PlayerGrapplingState : PlayerState
         _activeVelocity = false;
         _velocityX = 0f;
         _velocityY = 0f;
+        Player.Hook.SetActive(false);
     }
 
     public override void LogicUpdate()
@@ -228,6 +228,11 @@ public class PlayerGrapplingState : PlayerState
             Vector2 currentPosition = Vector2.Lerp(_startPoint, targetPosition, PlayerData.RopeProgressionCurve.Evaluate(_moveTime) * PlayerData.RopeProgressionSpeed);
     
             Player.LineRenderer.SetPosition(i, currentPosition);
+            Player.Hook.transform.position = currentPosition;
+
+            var direction = _ray.normalized;
+            var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            Player.Hook.transform.eulerAngles = new Vector3(0, 0, angle - 90);
         }
     }
 

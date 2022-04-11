@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.33063793, g: 0.2868297, b: 0.29494047, a: 1}
+  m_IndirectSpecularColor: {r: 0.33063936, g: 0.28680658, b: 0.2948537, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -527,6 +527,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4074a946231985428cdb61105874ecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &617037013 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8029172341380597236, guid: e9b9e1e198bf5204ba7d64992a503c91, type: 3}
+  m_PrefabInstance: {fileID: 1977803268}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &984795186
 GameObject:
   m_ObjectHideFlags: 0
@@ -981,6 +986,63 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1977803268
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7216606192751189838, guid: e9b9e1e198bf5204ba7d64992a503c91, type: 3}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216606192751189838, guid: e9b9e1e198bf5204ba7d64992a503c91, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216606192751189838, guid: e9b9e1e198bf5204ba7d64992a503c91, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216606192751189838, guid: e9b9e1e198bf5204ba7d64992a503c91, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216606192751189838, guid: e9b9e1e198bf5204ba7d64992a503c91, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216606192751189838, guid: e9b9e1e198bf5204ba7d64992a503c91, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216606192751189838, guid: e9b9e1e198bf5204ba7d64992a503c91, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216606192751189838, guid: e9b9e1e198bf5204ba7d64992a503c91, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216606192751189838, guid: e9b9e1e198bf5204ba7d64992a503c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216606192751189838, guid: e9b9e1e198bf5204ba7d64992a503c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216606192751189838, guid: e9b9e1e198bf5204ba7d64992a503c91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8029172341380597236, guid: e9b9e1e198bf5204ba7d64992a503c91, type: 3}
+      propertyPath: m_Name
+      value: GrapplingHook_GEO Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e9b9e1e198bf5204ba7d64992a503c91, type: 3}
 --- !u!1 &2128884550
 GameObject:
   m_ObjectHideFlags: 0
@@ -1518,6 +1580,14 @@ PrefabInstance:
       propertyPath: _mainCamera
       value: 
       objectReference: {fileID: 46488707}
+    - target: {fileID: 2089010118677328359, guid: fd018425d2e6cb64681890150e6d0568, type: 3}
+      propertyPath: Hook
+      value: 
+      objectReference: {fileID: 617037013}
+    - target: {fileID: 2089010118677328359, guid: fd018425d2e6cb64681890150e6d0568, type: 3}
+      propertyPath: BloodObject
+      value: 
+      objectReference: {fileID: 509175087635852225, guid: f7ad9d5314072084c84b691e443806f5, type: 3}
     - target: {fileID: 2089010118677328359, guid: fd018425d2e6cb64681890150e6d0568, type: 3}
       propertyPath: SimplePlayerUI
       value: 

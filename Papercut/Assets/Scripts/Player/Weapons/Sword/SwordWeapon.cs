@@ -15,15 +15,7 @@ public class SwordWeapon : WeaponBase
         {
             foreach (var hit in hits)
             {
-                if (hit.transform.gameObject.layer != GenericManager.PlayerLayerMask)
-                {
-                    var healthComponent = hit.GetComponent<HealthComponent>();
-                    if (healthComponent != null)
-                    {
-                        healthComponent.DealDamage(Settings.Damage);
-                    } 
-                }
-                else if (hit.transform.gameObject.layer != GenericManager.GroundLayerMask)
+                if (hit.transform.gameObject.layer != GenericManager.GroundLayerMask && hit.transform.gameObject.layer != GenericManager.PlayerLayerMask)
                 {
                     var healthComponent = hit.GetComponent<HealthComponent>();
                     if (healthComponent != null)

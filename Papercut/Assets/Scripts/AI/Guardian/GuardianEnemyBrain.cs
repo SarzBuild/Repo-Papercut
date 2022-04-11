@@ -206,14 +206,11 @@ public class GuardianEnemyBrain : EnemyBase
     
     private void DestroyAfterAnimationEnd()
     {
-        if (_animator.GetBool("dead"))
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
         {
-            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
             {
-                if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
-                {
-                    Destroy(gameObject); 
-                }
+                Destroy(gameObject); 
             }
         }
     }

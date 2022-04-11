@@ -66,6 +66,7 @@ public class Player : AppliedPhysics
     private Color _baseColor;
 
     public GameObject BloodObject;
+    public GameObject Hook;
 
     private void Awake()
     {
@@ -294,27 +295,6 @@ public class Player : AppliedPhysics
             timer = 0;
         }
     }
-    
-    /*public bool CheckForLayerWall()
-    {
-        if (WallBackHit)
-        {
-            for (int i = 0; i < WallBackHitResult.Length; i++)
-            {
-                if ((PlayerData.WallLayerMask.value & (1 << WallBackHitResult[i].collider.gameObject.layer)) > 0)
-                    return true;
-            }
-        }
-        if (WallFrontHit)
-        {
-            for (int i = 0; i < WallFrontHitResult.Length; i++)
-            {
-                if ((PlayerData.WallLayerMask.value & (1 << WallFrontHitResult[i].collider.gameObject.layer)) > 0)
-                    return true;
-            }
-        }
-        return false;
-    }*/
 
     public void UpdateStickyWallCollisions()
     {
@@ -354,7 +334,9 @@ public class Player : AppliedPhysics
         
         Time.timeScale = 0;
         Debug.LogWarning("You died!");
-        
+
+        SimplePlayerUI.Active = true;
+
         //Play Death animation
     }
 
@@ -400,9 +382,9 @@ public class Player : AppliedPhysics
     {
         if (Animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
         {
-            if (Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f && Animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+            if (Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
             {
-                if (!SimplePlayerUI.RestartUI.activeSelf)
+                if (SimplePlayerUI.Active && !SimplePlayerUI.RestartUI.activeSelf)
                 {
                     SimplePlayerUI.EnableDeathMenu();
                 }
