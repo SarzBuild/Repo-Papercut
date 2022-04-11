@@ -327,7 +327,7 @@ public class Player : AppliedPhysics
             Debug.Log(string.Format("Player killed by {0}", killer.name));
         }
         Animator.SetBool(StateMachine.CurrentState.StateName,false);
-        Animator.SetTrigger("dead");
+        Animator.SetBool("dead",true);
         
         InputHandler.LockMouseInputs(true);
         InputHandler.LockPlayerInputs(true);
@@ -366,6 +366,7 @@ public class Player : AppliedPhysics
 
     private void BloodEffects(HealthComponent component, float value, GameObject gameObject, Vector2 knockbackSpeed)
     {
+        Animator.SetTrigger("hit");
         Instantiate(BloodObject, transform.position, Quaternion.Inverse(transform.rotation));
     }
 
