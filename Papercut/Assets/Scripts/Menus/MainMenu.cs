@@ -36,7 +36,7 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SceneManager.LoadSceneAsync("Settings");
+        SceneManager.LoadSceneAsync("Settings",LoadSceneMode.Additive);
         Time.timeScale = 1;
         OptionsButton.transform.position = new Vector3(560f, 2000f, 0);
         StartButton.transform.position = new Vector3(960f, 2000f, 0);
@@ -59,7 +59,7 @@ public class MainMenu : MonoBehaviour
         if(CurrentMenuState == MenuState.MainState)
         {
             SceneManager.LoadScene("RoomTriggers");
-            SceneManager.LoadSceneAsync("Settings");
+            SceneManager.LoadSceneAsync("Settings",LoadSceneMode.Additive);
         }
         else if(CurrentMenuState == MenuState.OptionsState)
         {
