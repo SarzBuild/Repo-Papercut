@@ -65,6 +65,9 @@ public class Player : AppliedPhysics
     private float _lastHitTime;
     private Color _baseColor;
 
+    public GameObject BloodObject;
+    public GameObject Hook;
+
     private void Awake()
     {
         if (_instance != null && _instance != this) Destroy(gameObject);
@@ -117,6 +120,7 @@ public class Player : AppliedPhysics
         HealthComponent.OnDeath += OnPlayerDeath;
         HealthComponent.OnDamageTaken += Knockback;
         HealthComponent.OnDamageTaken += BlinkRed;
+        HealthComponent.OnDamageTaken += BloodEffects;
         // Other component events exist here too, tag on to trigger animation/sound/FX
     }
     
@@ -125,6 +129,7 @@ public class Player : AppliedPhysics
         HealthComponent.OnDeath -= OnPlayerDeath;
         HealthComponent.OnDamageTaken -= BlinkRed;
         HealthComponent.OnDamageTaken -= Knockback;
+        HealthComponent.OnDamageTaken -= BloodEffects;
     }
 
     private void Start()
@@ -150,6 +155,8 @@ public class Player : AppliedPhysics
         TimerForWallGrabJumps();
 
         ResetColor();
+
+        ShowMenuAfterAnimationEnd();
 
         //LogDebug();
     }
@@ -288,27 +295,6 @@ public class Player : AppliedPhysics
             timer = 0;
         }
     }
-    
-    public bool CheckForLayerWall()
-    {
-        if (WallBackHit)
-        {
-            for (int i = 0; i < WallBackHitResult.Length; i++)
-            {
-                if ((PlayerData.WallLayerMask.value & (1 << WallBackHitResult[i].collider.gameObject.layer)) > 0)
-                    return true;
-            }
-        }
-        if (WallFrontHit)
-        {
-            for (int i = 0; i < WallFrontHitResult.Length; i++)
-            {
-                if ((PlayerData.WallLayerMask.value & (1 << WallFrontHitResult[i].collider.gameObject.layer)) > 0)
-                    return true;
-            }
-        }
-        return false;
-    }
 
     public void UpdateStickyWallCollisions()
     {
@@ -341,16 +327,16 @@ public class Player : AppliedPhysics
             Debug.Log(string.Format("Player killed by {0}", killer.name));
         }
         Animator.SetBool(StateMachine.CurrentState.StateName,false);
-        Animator.SetTrigger("dead");
+        Animator.SetBool("dead",true);
         
         InputHandler.LockMouseInputs(true);
         InputHandler.LockPlayerInputs(true);
         
-        
-        SimplePlayerUI.EnableDeathMenu();
         Time.timeScale = 0;
         Debug.LogWarning("You died!");
-        
+
+        SimplePlayerUI.Active = true;
+
         //Play Death animation
     }
 
@@ -378,6 +364,12 @@ public class Player : AppliedPhysics
         _lastHitTime = Time.time;
     }
 
+    private void BloodEffects(HealthComponent component, float value, GameObject gameObject, Vector2 knockbackSpeed)
+    {
+        Animator.SetTrigger("hit");
+        Instantiate(BloodObject, transform.position, Quaternion.Inverse(transform.rotation));
+    }
+
     private void ResetColor()
     {
         var nextFireTime = _lastHitTime + 0.1f;
@@ -386,4 +378,19 @@ public class Player : AppliedPhysics
             Renderer.material.SetColor("_BaseColor", _baseColor);
         }
     }
+
+    private void ShowMenuAfterAnimationEnd()
+    {
+        if (Animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
+        {
+            if (Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+            {
+                if (SimplePlayerUI.Active && !SimplePlayerUI.RestartUI.activeSelf)
+                {
+                    SimplePlayerUI.EnableDeathMenu();
+                }
+            }
+        }
+    }
+
 }

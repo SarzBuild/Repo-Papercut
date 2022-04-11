@@ -27,6 +27,8 @@ public class GuardianEnemyBrain : EnemyBase
 
     private Animator _animator;
 
+    public GameObject BloodObject;
+
     #region Nodes
 
     public StunnedWait StunnedWait { get; private set; }
@@ -109,7 +111,11 @@ public class GuardianEnemyBrain : EnemyBase
     private void Update()
     {
         HandleAnimations();
-        _topNode.Evaluate();
+
+        if (!_animator.GetBool("dead"))
+        {
+            _topNode.Evaluate();
+        }
         if (_topNode.NodeState == NodeState.FAILURE)
         {
             Debug.Log("Problems");
@@ -141,7 +147,7 @@ public class GuardianEnemyBrain : EnemyBase
         Charging = new Charging(NewEnemyData, this, OwnCollider, PlayerCollider);
         
         CanAttack = new CanAttack(NewEnemyData,OwnCollider,PlayerCollider);
-        WaitBeforeAttack = new WaitBeforeAttack(NewEnemyData,2.5f);
+        WaitBeforeAttack = new WaitBeforeAttack(NewEnemyData,GuardianWeapon.Settings.FireCooldownSec);
         Attack = new Attack(NewEnemyData, GuardianWeapon);
 
         CheckVision = new CheckVision(PlayerTransform, MiddlePoint, NewEnemyData, _groundLayerMask);
@@ -162,13 +168,13 @@ public class GuardianEnemyBrain : EnemyBase
 
         Sequence repositionSequence = new Sequence(new List<Node>() { CheckVision,TooCloseRange, Reposition });
         
-        Sequence chaseSquence = new Sequence(new List<Node>() { CheckVision,ChaseRange, FacePlayer, SetAttack });
+        Sequence chaseSequence = new Sequence(new List<Node>() { CheckVision,ChaseRange, FacePlayer, SetAttack });
 
         Selector idleSelector = new Selector(new List<Node>() { Idle, Patrol });
         
         
         //Initialize Root Node
-        _topNode = new Selector(new List<Node>(){StunnedWait,Charging, attackSequence, repositionSequence,chaseSquence, idleSelector});
+        _topNode = new Selector(new List<Node>(){StunnedWait,Charging, attackSequence, repositionSequence,chaseSequence, idleSelector});
     }
 
     protected void OnDamaged(HealthComponent arg1, float arg2, GameObject arg3, Vector2 knockbackMultiplier)
@@ -176,6 +182,7 @@ public class GuardianEnemyBrain : EnemyBase
         base.OnDamaged();
         Knockback();
         BlinkRed();
+        Instantiate(BloodObject, transform.position, transform.rotation);
         _animator.SetTrigger("damaged");
     }
 
@@ -199,9 +206,9 @@ public class GuardianEnemyBrain : EnemyBase
     
     private void DestroyAfterAnimationEnd()
     {
-        if (_animator.GetBool("dead"))
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
         {
-            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
             {
                 Destroy(gameObject); 
             }
@@ -266,7 +273,7 @@ public class GuardianEnemyBrain : EnemyBase
 
     private void RechargeEnergy()
     {
-        var nextFireTime = NewEnemyData.ExitedCharging + 5;
+        var nextFireTime = NewEnemyData.ExitedCharging + GuardianWeapon.Settings.FireCooldownSec;
         if (Time.time - nextFireTime > 0)
         {
             NewEnemyData.EnergyFull = true;
@@ -289,31 +296,36 @@ public class GuardianEnemyBrain : EnemyBase
     {
         if (NewEnemyData.CurrentNode == Patrol || NewEnemyData.CurrentNode == Reposition)
         {
-            _animator.SetBool("walk", true);
-            _animator.SetBool("idle",false);
-            _animator.SetBool("attack",false);
-            _animator.SetBool("charging",false);
+            SetAnimations("walk",new List<string>(){"idle","attack","charging","stunned","chargingUp"});
         }
         else if (NewEnemyData.CurrentNode == Attack)
         {
-            _animator.SetBool("attack",true);
-            _animator.SetBool("walk",false);
-            _animator.SetBool("idle",false);
-            _animator.SetBool("charging",false);
+            SetAnimations("attack",new List<string>(){"walk","idle","charging","stunned","chargingUp"});
         }
         else if(NewEnemyData.CurrentNode == Charging)
         {
-            _animator.SetBool("walk", false);
-            _animator.SetBool("idle",false);
-            _animator.SetBool("attack",false);
-            _animator.SetBool("charging",true);
+            SetAnimations("charging",new List<string>(){"walk","attack","idle","stunned","chargingUp"});
+        }
+        else if (NewEnemyData.CurrentNode == StunnedWait)
+        {
+            SetAnimations("stunned",new List<string>(){"walk","attack","charging","idle","chargingUp"});
+        }
+        else if (NewEnemyData.CurrentNode == WaitBeforeAttack)
+        {
+            SetAnimations("chargingUp",new List<string>(){"walk","attack","charging","stunned","idle"});
         }
         else
         {
-            _animator.SetBool("walk",false);
-            _animator.SetBool("idle",true);
-            _animator.SetBool("attack",false);
-            _animator.SetBool("charging",false);
+            SetAnimations("idle",new List<string>(){"walk","attack","charging","stunned","chargingUp"});
+        }
+    }
+
+    private void SetAnimations(string active, List<string> inactive)
+    {
+        _animator.SetBool(active,true);
+        foreach (var i in inactive)
+        {
+            _animator.SetBool(i,false);    
         }
     }
 }

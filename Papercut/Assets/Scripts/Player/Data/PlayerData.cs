@@ -24,6 +24,8 @@ public class PlayerData : ScriptableObject
     public LayerMask PlayerLayerMask;
 
     public float KnockbackSpeed;
+
+    public bool CanBreakWalls;
     
     [Header("On Ground")] 
     

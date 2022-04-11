@@ -25,6 +25,9 @@ public class SpiderlingEnemyBrain : EnemyBase
 
 
     private float _lastHitTime;
+    
+    
+    public GameObject BloodObject;
 
     #region Nodes
 
@@ -103,7 +106,10 @@ public class SpiderlingEnemyBrain : EnemyBase
     private void Update()
     {
         HandleAnimations();
-        _topNode.Evaluate();
+        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
+        {
+            _topNode.Evaluate();
+        }
         if (_topNode.NodeState == NodeState.FAILURE)
         {
             Debug.Log("Problems");
@@ -129,7 +135,7 @@ public class SpiderlingEnemyBrain : EnemyBase
     {
         //Initialize Child Nodes from left to right
         AttackRange = new Range(PlayerTransform,transform,NewEnemyData.AttackRange);
-        WaitBeforeAttack = new WaitBeforeAttack(NewEnemyData,0.5f);
+        WaitBeforeAttack = new WaitBeforeAttack(NewEnemyData,SpiderlingWeapon.Settings.FireCooldownSec);
         Attack = new Attack(NewEnemyData,SpiderlingWeapon);
         
         ChaseRange = new Range(PlayerTransform, transform,NewEnemyData.ChaseRange);
@@ -223,6 +229,7 @@ public class SpiderlingEnemyBrain : EnemyBase
         base.OnDamaged();
         Knockback();
         BlinkRed();
+        Instantiate(BloodObject, transform.position, Quaternion.Inverse(transform.rotation));
         _animator.SetTrigger("damaged");
     }
 
@@ -246,15 +253,18 @@ public class SpiderlingEnemyBrain : EnemyBase
         {
             Debug.Log(string.Format("{0} killed by {1}", name, killer.name));
         }
-        _animator.SetBool("dead", true);
+        _animator.SetTrigger("dead");
+        NewEnemyData.CurrentHorizontalSpeed = 0f;
     }
 
     private void DestroyAfterAnimationEnd()
     {
-        if (_animator.GetBool("dead"))
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
         {
-            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
             {
+                Instantiate(BloodObject,transform.position,Quaternion.Inverse(transform.rotation));
+                Instantiate(BloodObject,transform.position,transform.rotation);
                 Destroy(gameObject); 
             }
         }
@@ -280,21 +290,24 @@ public class SpiderlingEnemyBrain : EnemyBase
     {
         if (NewEnemyData.CurrentNode == Patrol || NewEnemyData.CurrentNode == ChasePlayer)
         {
-            _animator.SetBool("walk", true);
-            _animator.SetBool("idle",false);
-            _animator.SetBool("attack",false);
+            SetAnimations("walk",new List<string>(){"idle","attack"});
         }
         else if (NewEnemyData.CurrentNode == Attack)
         {
-            _animator.SetBool("attack",true);
-            _animator.SetBool("walk",false);
-            _animator.SetBool("idle",false);
+            SetAnimations("attack", new List<string>(){"walk","idle"});
         }
         else
         {
-            _animator.SetBool("walk",false);
-            _animator.SetBool("idle",true);
-            _animator.SetBool("attack",false);
+            SetAnimations("idle",new List<string>(){"walk","attack"});
+        }
+    }
+    
+    private void SetAnimations(string active, List<string> inactive)
+    {
+        _animator.SetBool(active,true);
+        foreach (var i in inactive)
+        {
+            _animator.SetBool(i,false);    
         }
     }
 

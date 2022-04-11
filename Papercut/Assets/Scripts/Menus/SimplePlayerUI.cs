@@ -16,6 +16,8 @@ public class SimplePlayerUI : MonoBehaviour
     public GameObject RestartUI;
 
     private bool _coroutineRunning;
+
+    public bool Active;
     
     private void Awake()
     {

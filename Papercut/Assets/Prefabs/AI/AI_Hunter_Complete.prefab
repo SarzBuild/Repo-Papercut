@@ -114,7 +114,6 @@ Transform:
   - {fileID: 1752772718274230309}
   - {fileID: 1293692523}
   - {fileID: 350711335}
-  - {fileID: 3334043264097663805}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -187,6 +186,7 @@ MonoBehaviour:
   HealthComponent: {fileID: 171319958}
   NewEnemyData: {fileID: 0}
   NewHealthData: {fileID: 0}
+  BloodObject: {fileID: 3813507622891528954, guid: 9024e9f26bc780445b93c4c71306c1f9, type: 3}
 --- !u!114 &171319957
 MonoBehaviour:
   m_ObjectHideFlags: 0

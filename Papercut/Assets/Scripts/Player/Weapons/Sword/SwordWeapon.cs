@@ -15,13 +15,18 @@ public class SwordWeapon : WeaponBase
         {
             foreach (var hit in hits)
             {
+                if (hit.transform.gameObject.layer == GenericManager.BreakableLayerMask)
+                {
+                    if (Player.Instance.PlayerData.CanBreakWalls)
+                    {
+                        DealDamage(hit);
+                    }
+                    break;
+                }
                 if (hit.transform.gameObject.layer != GenericManager.GroundLayerMask && hit.transform.gameObject.layer != GenericManager.PlayerLayerMask)
                 {
-                    var healthComponent = hit.GetComponent<HealthComponent>();
-                    if (healthComponent != null)
-                    {
-                        healthComponent.DealDamage(Settings.Damage);
-                    } 
+                    DealDamage(hit);
+                    break;
                 }
             }
         }
@@ -29,6 +34,15 @@ public class SwordWeapon : WeaponBase
         // TODO - this is where we do hit testing and additional FX, and deal damage to whatever is potentially hit.
         // It can also be where you initialize the hitbox, but then wait for an event for collision trigger enter. Really depends on how you want it to functionally work.
         return true;
+    }
+
+    private void DealDamage(Collider2D hit)
+    {
+        var healthComponent = hit.GetComponent<HealthComponent>();
+        if (healthComponent != null)
+        {
+            healthComponent.DealDamage(Settings.Damage);
+        } 
     }
     
     private void HandleAttackAnims()

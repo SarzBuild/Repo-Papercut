@@ -198,6 +198,7 @@ MonoBehaviour:
   Abilities:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   AbilityGainedBeforeNextCheckpoint: []
 --- !u!114 &563350372
 MonoBehaviour:
@@ -227,6 +228,7 @@ MonoBehaviour:
   HealthImage: {fileID: 0}
   BackgroundImage: {fileID: 0}
   RestartUI: {fileID: 0}
+  Active: 0
 --- !u!114 &563350374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,6 +259,10 @@ MonoBehaviour:
   LastCheckpointReached: {x: 0, y: 2}
   AbilityListManager: {fileID: 563350370}
   Checkpoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
