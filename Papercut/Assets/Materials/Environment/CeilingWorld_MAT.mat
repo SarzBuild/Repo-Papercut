@@ -152,11 +152,11 @@ Material:
     - EmissionIntensity: 0.03
     - NormalStrength: 0
     - PatternInverse: 0
-    - Pos01_Clamp: 100
-    - Pos01_Multiply: 0.01
+    - Pos01_Clamp: 20
+    - Pos01_Multiply: 0.05
     - Pos01_Transition: -330
-    - Pos02_Clamp: 20
-    - Pos02_Multiply: 0.05
+    - Pos02_Clamp: 50
+    - Pos02_Multiply: 0.02
     - Pos02_Transition: -600
     - Roughness: 0.36
     - _AORemapMax: 1
@@ -274,7 +274,7 @@ Material:
     m_Colors:
     - BG_Tint01: {r: 0.3722855, g: 0.59934336, b: 0.8867924, a: 0}
     - BG_Tint02: {r: 1, g: 0.53729796, b: 0.5235849, a: 0}
-    - BG_Tint03: {r: 0.7830189, g: 0.47822487, b: 0.30655926, a: 0}
+    - BG_Tint03: {r: 0.7169812, g: 0.41196254, b: 0.24012107, a: 0}
     - P_Tint01: {r: 0.63076377, g: 1, b: 0.495283, a: 0}
     - P_Tint02: {r: 1, g: 0.7887979, b: 0.504717, a: 0}
     - P_Tint03: {r: 1, g: 0.8554051, b: 0.3803922, a: 0}
