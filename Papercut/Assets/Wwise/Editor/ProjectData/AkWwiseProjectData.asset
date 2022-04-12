@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65bf9853168c71f4b846dc0b5aba7112, type: 3}
+  m_Name: AkWwiseProjectData
+  m_EditorClassIdentifier: 
+  AcousticTextureWwu:
+  - PhysicalPath: Virtual Acoustics\Default Work Unit.wwu
+    ParentPhysicalPath: 
+    guid: 918582783b87934888a229b8711b8ca9
+    GuidInternal: 
+    m_lastTime: -8585518843533070945
+    List: []
+  AuxBusWwu:
+  - PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
+    ParentPhysicalPath: 
+    guid: 1720625ca497fa4184033d2d76c43d2d
+    GuidInternal: 
+    m_lastTime: -8585518843532038590
+    List: []
+  BankWwu:
+  - PhysicalPath: SoundBanks\Default Work Unit.wwu
+    ParentPhysicalPath: 
+    guid: 6af1eaa3228ba547838cc7279f3821a7
+    GuidInternal: 
+    m_lastTime: -8585518832569424849
+    List:
+    - name: Soundbank
+      guid: 297623c6ac947f44ade7678059bb25bf
+      id: 1661994096
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Soundbank
+        ObjectType: 7
+      Path: Default Work Unit\Soundbank
+  EventWwu:
+  - PhysicalPath: Events\Default Work Unit.wwu
+    ParentPhysicalPath: 
+    guid: ba5d15ac3dff1e4f88812f59c2362295
+    GuidInternal: 
+    m_lastTime: -8585518832569237663
+    List:
+    - name: Cosmonaute
+      guid: 7e02d4d2eeb6534788e11cde0882fea6
+      id: 3095250579
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Cosmonaute
+        ObjectType: 3
+      Path: Default Work Unit\Cosmonaute
+      maxAttenuation: 0
+      maxDuration: 11.5
+      minDuration: 11.5
+  RtpcWwu:
+  - PhysicalPath: Game Parameters\Default Work Unit.wwu
+    ParentPhysicalPath: 
+    guid: 355b7a51d15d8e428a977b3ff69095ea
+    GuidInternal: 
+    m_lastTime: -8585518843531968766
+    List: []
+  StateWwu:
+  - PhysicalPath: States\Default Work Unit.wwu
+    ParentPhysicalPath: 
+    guid: f316bbf49b270e4f98494b4bfcfe21c7
+    GuidInternal: 
+    m_lastTime: -8585518843532642083
+    List: []
+  SwitchWwu:
+  - PhysicalPath: Switches\Default Work Unit.wwu
+    ParentPhysicalPath: 
+    guid: 81794d86018ba346900abfad2d40cdd6
+    GuidInternal: 
+    m_lastTime: -8585518843532512445
+    List: []
+  TriggerWwu:
+  - PhysicalPath: Triggers\Default Work Unit.wwu
+    ParentPhysicalPath: 
+    guid: f34e18974c97ba4e8a4f3a0ab273715d
+    GuidInternal: 
+    m_lastTime: -8585518843533011102
+    List: []
+  ExpandedItems:
+  - /Papercut
+  - /Papercut/Events
+  - /Papercut/Events/Default Work Unit
+  - /Papercut/SoundBanks
+  - /Papercut/SoundBanks/Default Work Unit
+  autoPopulateEnabled: 1
+  CurrentPluginConfig: 
