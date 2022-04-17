@@ -7,7 +7,8 @@ public enum AbilityType
 {
     GrapplingHook,
     WallJump,
-    WallSmash
+    WallSmash,
+    Weapon
 }
 
 public class AbilityListManager : MonoBehaviour
@@ -76,6 +77,9 @@ public class AbilityListManager : MonoBehaviour
                 break;
             case AbilityType.WallSmash:
                 _player.PlayerData.CanBreakWalls = trigger;
+                break;
+            case AbilityType.Weapon:
+                _player.Weapons.RemoveWeapon(_player.Weapons.EquippedWeapon);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

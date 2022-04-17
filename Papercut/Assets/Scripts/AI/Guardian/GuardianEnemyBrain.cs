@@ -182,7 +182,7 @@ public class GuardianEnemyBrain : EnemyBase
         base.OnDamaged();
         Knockback();
         BlinkRed();
-        Instantiate(BloodObject, transform.position, transform.rotation);
+        Instantiate(BloodObject, MiddlePoint.transform.position, transform.rotation);
         _animator.SetTrigger("damaged");
     }
 

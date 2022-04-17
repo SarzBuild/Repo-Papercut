@@ -40,7 +40,7 @@ public class PlayerInAirState : PlayerState
         {
             StateMachine.ChangeState(Player.GrapplingState);
         }
-        else if (Player.WallStickyFrontHit || Player.WallStickyBackHit && !PlayerData.CurrentlyWallJumping)
+        else if (Player.WallStickyFrontHit /*|| Player.WallStickyBackHit*/ && !PlayerData.CurrentlyWallJumping)
         {
             StateMachine.ChangeState(Player.WallGrabState);
         }
