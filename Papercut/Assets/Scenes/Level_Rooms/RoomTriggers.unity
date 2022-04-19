@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.048259523, g: 0.07507084, b: 0.20960349, a: 1}
+  m_IndirectSpecularColor: {r: 0.04831226, g: 0.075138435, b: 0.20985258, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1570,31 +1570,31 @@ PolygonCollider2D:
       - {x: 782.7307, y: -331.74188}
       - {x: 839.9698, y: -331.44727}
       - {x: 937.2167, y: -330.78674}
-      - {x: 938.07965, y: -307.28812}
-      - {x: 840.9733, y: -306.9141}
+      - {x: 936.434, y: -276.8436}
+      - {x: 845.0874, y: -275.64676}
       - {x: 840.38226, y: -240.15924}
       - {x: 820.1905, y: -221.97034}
       - {x: 764.73346, y: -221.6744}
       - {x: 763.2705, y: -188.13364}
       - {x: 776.0752, y: -187.79688}
       - {x: 775.5643, y: -153.18083}
-      - {x: 705.98395, y: -153.59691}
+      - {x: 712.9412, y: -140.84192}
       - {x: 705.55914, y: -140.17468}
       - {x: 696.6785, y: -119.3054}
       - {x: 678.886, y: -111.5865}
-      - {x: 634.34094, y: -111.786125}
-      - {x: 599.2564, y: -111.33633}
+      - {x: 635.5005, y: -101.15696}
+      - {x: 600.6092, y: -100.32065}
       - {x: 590.53516, y: -101.63297}
       - {x: 573.3972, y: -95.6901}
       - {x: 556.54706, y: -96.19572}
       - {x: 540.36646, y: -100.978546}
-      - {x: 533.0731, y: -111.01656}
-      - {x: 524.04083, y: -111.16659}
+      - {x: 533.45966, y: -102.31998}
+      - {x: 527.5195, y: -101.117195}
       - {x: 523.9536, y: -91.806335}
-      - {x: 502.8827, y: -89.40645}
-      - {x: 503.13715, y: -70.36751}
-      - {x: 478.32526, y: -43.40317}
-      - {x: 413.90204, y: -43.800407}
+      - {x: 512.73883, y: -83.80198}
+      - {x: 510.48096, y: -68.62819}
+      - {x: 478.7118, y: -36.445904}
+      - {x: 413.51556, y: -36.456623}
       - {x: 413.6186, y: -23.176214}
       - {x: 362.00415, y: -23.110798}
       - {x: 362.09903, y: 7.6905766}
@@ -3311,6 +3311,14 @@ PrefabInstance:
       propertyPath: m_BoundingShape2D
       value: 
       objectReference: {fileID: 990568062}
+    - target: {fileID: 8305043158398469816, guid: c607e4b3c1da50a409e52fd3289af8fa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -112.17764
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305043158398469816, guid: c607e4b3c1da50a409e52fd3289af8fa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.11973
+      objectReference: {fileID: 0}
     - target: {fileID: 8305043159366102501, guid: c607e4b3c1da50a409e52fd3289af8fa, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -3363,6 +3371,14 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 1639378859}
+    - target: {fileID: 8305043159774626493, guid: c607e4b3c1da50a409e52fd3289af8fa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -112.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8305043159774626493, guid: c607e4b3c1da50a409e52fd3289af8fa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.97
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c607e4b3c1da50a409e52fd3289af8fa, type: 3}
 --- !u!20 &2139699821 stripped
