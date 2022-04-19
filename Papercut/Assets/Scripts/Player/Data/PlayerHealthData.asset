@@ -18,6 +18,6 @@ MonoBehaviour:
   DefaultPipSplits: 4
   CanDie: 1
   CanTakeDamage: 1
-  Regen: 0
+  Regen: 2
   SecondsToRegen: 5
   SecondsAfterNoDamageToRegen: 5
