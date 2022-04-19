@@ -13,5 +13,4 @@ public class DialogueLineData : ScriptableObject
     
     [Header("Character Image")]
     [SerializeField] public Sprite CharacterSprite;
-    [SerializeField] public SpriteRenderer ImageHolder;
 }
