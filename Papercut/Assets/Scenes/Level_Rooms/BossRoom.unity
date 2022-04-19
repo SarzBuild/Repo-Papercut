@@ -1073,13 +1073,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 652788177}
-  m_LocalRotation: {x: 0.25974455, y: -0.6576723, z: 0.25974455, w: 0.6576723}
+  m_LocalRotation: {x: 0.23745357, y: -0.6660449, z: 0.23745357, w: 0.6660449}
   m_LocalPosition: {x: 65.45, y: -300.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2021885782}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 43.103, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 39.244, y: -90, z: 0}
 --- !u!114 &652788179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1092,13 +1092,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Intensity: 3000
+  m_Intensity: 5000
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
-  m_InnerSpotPercent: 0
+  m_InnerSpotPercent: 40
   m_SpotIESCutoffPercent: 100
   m_LightDimmer: 1
-  m_VolumetricDimmer: 1
+  m_VolumetricDimmer: 3
   m_LightUnit: 0
   m_FadeDistance: 10000
   m_VolumetricFadeDistance: 10000
@@ -1215,7 +1215,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 6272.487
+  m_Intensity: 10454.145
   m_Range: 50
   m_SpotAngle: 45
   m_InnerSpotAngle: 4
@@ -4440,51 +4440,51 @@ Transform:
   - {fileID: 67635823}
   - {fileID: 746029662}
   - {fileID: 24229170}
+  - {fileID: 77542970}
   - {fileID: 356179742}
   - {fileID: 364611526}
   - {fileID: 1658552551}
   - {fileID: 1289036764}
   - {fileID: 2069685858}
   - {fileID: 1156980851}
+  - {fileID: 666706935}
   - {fileID: 660478166}
   - {fileID: 1346028378}
   - {fileID: 67383391}
   - {fileID: 912924552}
-  - {fileID: 666706935}
-  - {fileID: 77542970}
-  - {fileID: 1252845845}
-  - {fileID: 725610274}
-  - {fileID: 1258893206}
-  - {fileID: 885471625}
-  - {fileID: 1511975402}
-  - {fileID: 776148968}
   - {fileID: 736100909}
-  - {fileID: 1800909520}
-  - {fileID: 257402275}
+  - {fileID: 1258893206}
+  - {fileID: 1252845845}
+  - {fileID: 885471625}
+  - {fileID: 725610274}
+  - {fileID: 776148968}
   - {fileID: 608462720}
+  - {fileID: 1800909520}
+  - {fileID: 1511975402}
+  - {fileID: 257402275}
   - {fileID: 2028666260}
-  - {fileID: 1753899958}
-  - {fileID: 1924904793}
-  - {fileID: 887080293}
   - {fileID: 637752856}
-  - {fileID: 601142633}
-  - {fileID: 732091165}
+  - {fileID: 887080293}
   - {fileID: 242461779}
+  - {fileID: 1753899958}
   - {fileID: 1495578078}
   - {fileID: 695912514}
   - {fileID: 2076967941}
+  - {fileID: 1924904793}
   - {fileID: 1152575539}
+  - {fileID: 601142633}
+  - {fileID: 732091165}
+  - {fileID: 999450006}
   - {fileID: 1223980709}
   - {fileID: 935261259}
+  - {fileID: 1912852315}
   - {fileID: 754647011}
+  - {fileID: 1215825687}
+  - {fileID: 126166309}
   - {fileID: 2079444427}
   - {fileID: 1110243402}
-  - {fileID: 999450006}
-  - {fileID: 855616367}
-  - {fileID: 1912852315}
-  - {fileID: 126166309}
-  - {fileID: 1215825687}
   - {fileID: 1049232776}
+  - {fileID: 855616367}
   - {fileID: 878551087}
   - {fileID: 1692660163}
   m_Father: {fileID: 0}
