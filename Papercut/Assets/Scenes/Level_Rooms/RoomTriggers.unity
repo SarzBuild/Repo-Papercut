@@ -3621,7 +3621,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9092411458243094632, guid: b0d802fedf4f2de4c8defd0828ed2a0c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 310.3
+      value: 317.9
       objectReference: {fileID: 0}
     - target: {fileID: 9092411458243094635, guid: b0d802fedf4f2de4c8defd0828ed2a0c, type: 3}
       propertyPath: player
@@ -3629,7 +3629,7 @@ PrefabInstance:
       objectReference: {fileID: 1639378859}
     - target: {fileID: 9092411458243094635, guid: b0d802fedf4f2de4c8defd0828ed2a0c, type: 3}
       propertyPath: loadRange
-      value: 55
+      value: 70.7
       objectReference: {fileID: 0}
     - target: {fileID: 9092411458294961850, guid: b0d802fedf4f2de4c8defd0828ed2a0c, type: 3}
       propertyPath: m_LocalPosition.x
