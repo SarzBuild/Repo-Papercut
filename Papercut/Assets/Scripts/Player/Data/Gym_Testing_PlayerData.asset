@@ -17,8 +17,8 @@ MonoBehaviour:
 '
   RawInputValue: 0
   Velocity: {x: 0, y: 0}
-  LastPosition: {x: -51.68798, y: 16.579618}
-  LastTimeJumpKeyWasPressed: 4.0959034
+  LastPosition: {x: -104.025604, y: 1.8528543}
+  LastTimeJumpKeyWasPressed: 4.7342772
   CurrentHorizontalSpeed: 0
   CurrentVerticalSpeed: 0
   PlayerLandedThisFrame: 0
@@ -36,17 +36,17 @@ MonoBehaviour:
   MoveClamped: 8
   Deceleration: 60
   FallClamped: -40
-  MinimumFallSpeed: 80
-  MaximumFallSpeed: 120
-  CurrentFallSpeed: 80
+  MinimumFallSpeed: 60
+  MaximumFallSpeed: 100
+  CurrentFallSpeed: 60
   MaximumJumpCount: 2
   CurrentJumpCount: 2
   TimeBetweenDoubleJump: 0.01
   JumpHeight: 19
   CoyoteUsable: 1
-  CoyoteTimeThreshold: 0.1
+  CoyoteTimeThreshold: 0.55
   JumpBuffer: 0.1
-  EndedJumpEarly: 1
+  EndedJumpEarly: 0
   EndedJumpEarlyGravityModifier: 3
   ApexPoint: 0
   JumpApexSpeedBonus: 2
@@ -61,7 +61,7 @@ MonoBehaviour:
   ResetNumberOfJumpOnWallGrab: 2
   CurrentlyOnStickyWall: 0
   CurrentlyWallJumping: 0
-  WallJumpingSpeed: 22.5
+  WallJumpingSpeed: 12
   WallLayerMask:
     serializedVersion: 2
     m_Bits: 65536
@@ -71,30 +71,39 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1
-      outSlope: 1
+      inSlope: 1.451234
+      outSlope: 1.451234
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.55062354
+      value: 0.7990836
+      inSlope: 0.9491672
+      outSlope: 0.9491672
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1
-      outSlope: 1
+      inSlope: 0.44710043
+      outSlope: 0.44710043
       tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   MaxCurvaturePercent: 0.351
   MinCurvaturePercent: 0.058
-  WallJumpCurrentAngle: 16.348013
+  WallJumpCurrentAngle: 41.52812
   DelayOfWallJump: 0.2
-  EndWallJumpYVelocity: 3
-  EndWallJumpXVelocity: 20.5
+  EndWallJumpYVelocity: 5
+  EndWallJumpXVelocity: 14.5
   TimeBeforeSlippingStart: 1.5
   SlippingVelocity: 5
   EndWallSlipYVelocity: 0
