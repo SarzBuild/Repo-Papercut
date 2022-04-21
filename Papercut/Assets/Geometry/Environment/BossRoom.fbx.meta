@@ -3,7 +3,42 @@ guid: b47e2c51981e8af43af62db73024228f
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Floor
+    second: {fileID: 2100000, guid: a3fd9c47f93aac644afd4a6045609e04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Golden
+    second: {fileID: 2100000, guid: 76ba8c4fa8e53954bae049861c3a9227, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Light
+    second: {fileID: 2100000, guid: 754be358a35f0594a9a09c54b5f139a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Paper
+    second: {fileID: 2100000, guid: ce2c704beff9c874ca6adce65965d5b4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_TatamiCarpet
+    second: {fileID: 2100000, guid: 33a470287e2517d4db75313b41a1b58e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_TexuredWalls
+    second: {fileID: 2100000, guid: 90dd1857f06e8124394dc92621d9f9db, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Wood
+    second: {fileID: 2100000, guid: ef5c77cbb3eb99e468fbec1c9c70129a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
