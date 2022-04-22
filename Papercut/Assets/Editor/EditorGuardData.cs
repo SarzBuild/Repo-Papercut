@@ -36,6 +36,12 @@ public class EditorGuardData : Editor
                     EditorGUILayout.Toggle("Is Stunned:", d.NewEnemyData.IsStunned);
                     
                     EditorGUILayout.Toggle("Can Attack:", d.NewEnemyData.CanAttack);
+                    
+                    EditorGUILayout.FloatField("Last Time Exited Charging:", d.NewEnemyData.ExitedCharging);
+                    
+                    EditorGUILayout.Toggle("Touched Player:", d.NewEnemyData.HasTouchedPlayer);
+                    
+                    EditorGUILayout.Toggle("Energy Full:", d.NewEnemyData.EnergyFull);
                 }
 
                 EditorGUI.indentLevel--;

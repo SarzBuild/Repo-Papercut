@@ -5,24 +5,49 @@ using UnityEngine;
 
 public class AttackTrigger : MonoBehaviour
 {
-    public GameObject Parent;
-    public EnemyBase EnemyBase;
-    public WeaponData WeaponData;
-    public EnemyData EnemyData;
+    private GameObject _parent;
+    private WeaponData _weaponData;
+    
+    private EnemyData _enemyData;
+    private PlayerData _playerData;
 
     private float _lastAttackTime;
     private float _cooldown;
 
-    private Vector2 knockbackSpeed;
+    private Vector2 _knockbackSpeed;
 
-    public void Start() { gameObject.SetActive(false); }
-    public void SetActive() { gameObject.SetActive(true); }
-    public void SetKnockbackMultiplier(Vector2 knockbackMultiplier) { knockbackSpeed = knockbackMultiplier; }
-
-    public void UpdateLastAttackTime(float time, float cooldown)
+    public void InitializeProperties(GameObject parent, WeaponData weaponData, EnemyData enemyData, Vector2 knockbackMultiplier)
     {
-        _lastAttackTime = time;
-        _cooldown = cooldown;
+        _parent = parent;
+        _weaponData = weaponData;
+        _enemyData = enemyData;
+        _cooldown = weaponData.FireCooldownSec;
+        _knockbackSpeed = knockbackMultiplier;
+    }
+
+    public void InitializeProperties(GameObject parent, WeaponData weaponData, PlayerData playerData, Vector2 knockbackMultiplier)
+    {
+        _parent = parent;
+        _weaponData = weaponData;
+        _playerData = playerData;
+        _cooldown = weaponData.FireCooldownSec;
+        _knockbackSpeed = knockbackMultiplier;
+    }
+
+    public void Start()
+    {
+       Toggle(false);
+    }
+
+    public void SetActive()
+    {
+        Toggle(true);
+        _lastAttackTime = Time.time;
+    }
+
+    public void Toggle(bool toggle)
+    {
+        gameObject.SetActive(toggle);
     }
     
     private void Update()
@@ -36,22 +61,50 @@ public class AttackTrigger : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col)
+        if (!col) return;
+        
+        var targetLayer = col.gameObject.layer;
+            
+        if (_playerData != null)
         {
-            if (col.gameObject.layer == GenericManager.PlayerLayerMask)
+            if (CheckMatchingLayers(targetLayer, GenericManager.EnemyLayerMask))
             {
-                var healthComponent = col.GetComponent<HealthComponent>();
-                if (healthComponent != null)
-                {
-                    healthComponent.DealDamage(WeaponData.Damage,Parent,knockbackSpeed);
-                    EnemyData.HasTouchedPlayer = true;
-                    gameObject.SetActive(false);
-                } 
+                ApplyDamage(col);
             }
-            else if (col.gameObject.layer == GenericManager.GroundLayerMask)
+            else if(CheckMatchingLayers(targetLayer,GenericManager.ShieldLayerMask))
             {
-                gameObject.SetActive(false);
+                Toggle(false);
             }
         }
-    } 
+
+        if (_enemyData != null)
+        {
+            if (CheckMatchingLayers(targetLayer, GenericManager.PlayerLayerMask))
+            {
+                ApplyDamage(col);
+                _enemyData.HasTouchedPlayer = true;
+            }
+            else if (CheckMatchingLayers(targetLayer, GenericManager.GroundLayerMask))
+            {
+                Toggle(false);
+            }
+        }
+
+    }
+
+    private void ApplyDamage(Collider2D col)
+    {
+        var healthComponent = col.GetComponent<HealthComponent>();
+        if (healthComponent != null)
+        {
+            print(_weaponData.Damage);
+            healthComponent.DealDamage(_weaponData.Damage, _parent, _knockbackSpeed);
+            Toggle(false);
+        }
+    }
+
+    private bool CheckMatchingLayers(int layer1, int layer2)
+    {
+        return layer1 == layer2;
+    }
 }

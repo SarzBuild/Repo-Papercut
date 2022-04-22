@@ -15,12 +15,15 @@ public class GenericManager : MonoBehaviour
     public static int BulletLayerMask { get { return LayerMask.NameToLayer("Bullet"); } }
     public static int TriggerLayerMask { get { return LayerMask.NameToLayer("TriggerZone"); } }
     public static int BreakableLayerMask { get { return LayerMask.NameToLayer("Breakable"); } }
+    public static int ShieldLayerMask { get { return LayerMask.NameToLayer("Shield"); } }
+    public static int GuardEnemyLayerMask { get { return LayerMask.NameToLayer("GuardEnemy"); } }
 
     private void Awake()
     {
         Physics2D.IgnoreLayerCollision(EnemyLayerMask, EnemyLayerMask, true);
         Physics2D.IgnoreLayerCollision(BulletLayerMask, BulletLayerMask, true);
         Physics2D.IgnoreLayerCollision(PlayerLayerMask,EnemyLayerMask,true);
+        Physics2D.IgnoreLayerCollision(GuardEnemyLayerMask,ShieldLayerMask,true);
     }
     
     public static void FadeOut(Image target, float duration, bool ignoreTimeScale)

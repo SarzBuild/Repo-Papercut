@@ -33,7 +33,11 @@ public class EditorSpiderlingData : Editor
 
                     EditorGUILayout.Vector3Field("Last Know Player Location:", d.NewEnemyData.LastKnowPlayerLocation);
 
+                    EditorGUILayout.Vector3Field("Predicted Player Location:", d.NewEnemyData.PredictedPlayerDirection);
+                    
                     EditorGUILayout.Toggle("Is Looking For Player:", d.NewEnemyData.SearchingForTarget);
+                    
+                    
                 }
 
                 EditorGUI.indentLevel--;

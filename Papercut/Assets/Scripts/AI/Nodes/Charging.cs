@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class Charging : Node
 {
-    private EnemyData _enemyData;
-    private EnemyBase _ai;
-    //private Vector2 _size = new Vector2(1f, 1f);
-    private Collider2D _ownCollider;
-    private Collider2D _playerCollider;
+    private readonly EnemyData _enemyData;
+    private readonly EnemyBase _ai;
+    private readonly Collider2D _ownCollider;
+    private readonly Collider2D _playerCollider;
+    private readonly Collider2D _shieldCollider;
     
-    public Charging(EnemyData enemyData, EnemyBase ai, Collider2D ownCollider, Collider2D playerCollider)
+    public Charging(EnemyData enemyData, EnemyBase ai, Collider2D ownCollider, Collider2D playerCollider, Collider2D shieldCollider)
     {
         _enemyData = enemyData;
         _ai = ai;
         _ownCollider = ownCollider;
         _playerCollider = playerCollider;
+        _shieldCollider = shieldCollider;
     }
 
     public override NodeState Evaluate()
@@ -24,6 +25,7 @@ public class Charging : Node
         {
             SetCurrentNode();
             _enemyData.CanAttack = false;
+            Physics2D.IgnoreCollision(_ownCollider,_playerCollider, false);
             Physics2D.IgnoreCollision(_ownCollider,_playerCollider, false);
             //Check if hit wall or player
             if (_ai.WallFrontHit || _ai.WallBackHit || _enemyData.HasTouchedPlayer)

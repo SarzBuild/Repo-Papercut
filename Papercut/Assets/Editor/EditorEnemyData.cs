@@ -28,6 +28,8 @@ public class EditorEnemyData : Editor
                         EditorGUILayout.PrefixLabel("Spiderling Type");
                         d.JumpXVelocity = EditorGUILayout.FloatField("AttackJumpXVelocity:",d.JumpXVelocity);
                         d.JumpYVelocity = EditorGUILayout.FloatField("AttackJumpYVelocity:",d.JumpYVelocity);
+                        d.AlertRange = EditorGUILayout.FloatField("Alert Range:",d.AlertRange);
+                        d.SearchForTargetTime = EditorGUILayout.FloatField("Search For Target Time:", d.SearchForTargetTime);
                         EditorGUI.indentLevel--;
                         break;
                     }
@@ -68,7 +70,11 @@ public class EditorEnemyData : Editor
                 
                 d.PatrolMoveClamped = EditorGUILayout.FloatField("Patrol Move Clamp:",d.PatrolMoveClamped);
                 
-                d.StartingFallSpeed = EditorGUILayout.FloatField("Fall Speed:", d.StartingFallSpeed); 
+                d.StartingFallSpeed = EditorGUILayout.FloatField("Fall Speed:", d.StartingFallSpeed);
+
+                d.AttackKnockbackForce = EditorGUILayout.Vector2Field("Attack Knockback Force:", d.AttackKnockbackForce);
+                
+                d.boxCastSize = EditorGUILayout.Vector2Field("BoxCast Size (Gizmos):", d.boxCastSize);
                 
                 EditorGUI.indentLevel--;
             }

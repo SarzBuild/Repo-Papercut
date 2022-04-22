@@ -29,6 +29,8 @@ public class GuardianEnemyBrain : EnemyBase
 
     public GameObject BloodObject;
 
+    private Collider2D ShieldCollider;
+
     #region Nodes
 
     public StunnedWait StunnedWait { get; private set; }
@@ -60,6 +62,7 @@ public class GuardianEnemyBrain : EnemyBase
     {
         AttackTrigger = GetComponentInChildren<AttackTrigger>();
         OwnCollider = GetComponent<Collider2D>();
+        ShieldCollider = GetComponentInChildren<Collider2D>();
     }
 
     private void Start()
@@ -84,7 +87,7 @@ public class GuardianEnemyBrain : EnemyBase
     {
         NewEnemyData = ScriptableObject.CreateInstance<EnemyData>();
         NewHealthData = ScriptableObject.CreateInstance<HealthData>();
-        GuardianWeapon.Settings = ScriptableObject.CreateInstance<WeaponData>();
+        //GuardianWeapon.Settings = ScriptableObject.CreateInstance<WeaponData>();
         
         
         //CTOR for variables
@@ -144,9 +147,9 @@ public class GuardianEnemyBrain : EnemyBase
         //Initialize Child Nodes from left to right
         StunnedWait = new StunnedWait(NewEnemyData);
 
-        Charging = new Charging(NewEnemyData, this, OwnCollider, PlayerCollider);
+        Charging = new Charging(NewEnemyData, this, OwnCollider, PlayerCollider, ShieldCollider);
         
-        CanAttack = new CanAttack(NewEnemyData,OwnCollider,PlayerCollider);
+        CanAttack = new CanAttack(NewEnemyData,OwnCollider,PlayerCollider,ShieldCollider);
         WaitBeforeAttack = new WaitBeforeAttack(NewEnemyData,GuardianWeapon.Settings.FireCooldownSec);
         Attack = new Attack(NewEnemyData, GuardianWeapon);
 

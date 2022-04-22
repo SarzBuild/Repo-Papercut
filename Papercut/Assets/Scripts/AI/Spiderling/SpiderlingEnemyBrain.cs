@@ -79,9 +79,8 @@ public class SpiderlingEnemyBrain : EnemyBase
     {
         NewEnemyData = ScriptableObject.CreateInstance<EnemyData>();
         NewHealthData = ScriptableObject.CreateInstance<HealthData>();
-        SpiderlingWeapon.Settings = ScriptableObject.CreateInstance<WeaponData>();
-        
-        
+
+
         //CTOR for variables
         NewEnemyData.IdleTime = EnemyData.IdleTime;
         NewEnemyData.PatrolTime = EnemyData.PatrolTime;

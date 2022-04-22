@@ -10,6 +10,7 @@ public class DialogueLineData : ScriptableObject
 
     [Header("Time Parameters")]
     [SerializeField] public float Delay;
+    [SerializeField] public float DelayBeforeNextLine;
     
     [Header("Character Image")]
     [SerializeField] public Sprite CharacterSprite;

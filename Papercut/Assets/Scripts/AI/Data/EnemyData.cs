@@ -19,6 +19,7 @@ public class EnemyData : ScriptableObject
     
     
     //Values are hidden since editor script re-write fields.
+    //Shared Data
     [HideInInspector] public RandomizationType RandomizationStrength;
     [HideInInspector] public float IdleTime = 5f;
     [HideInInspector] public float PatrolTime = 5f;
@@ -34,32 +35,27 @@ public class EnemyData : ScriptableObject
     [HideInInspector] public float PatrolMoveClamped = 3f;
     [HideInInspector] public int IdlingState = 0;
     
+    [HideInInspector] public Vector2 AttackKnockbackForce;
+    [HideInInspector] public Vector2 boxCastSize;
+    
+    //Spiderling ONLY Data
+    [HideInInspector] public float JumpYVelocity;
+    [HideInInspector] public float JumpXVelocity;
+    [HideInInspector] public Vector3 LastKnowPlayerLocation;
+    [HideInInspector] public bool SearchingForTarget;
+    [HideInInspector] public float AlertRange = 20f;
+    [HideInInspector] public Vector3 PredictedPlayerDirection;
+    
+    [HideInInspector] public float SearchForTargetTime = 5f;
+    
+    //Guard ONLY Data
     [HideInInspector] public bool IsStunned;
     [HideInInspector] public bool HasReachedTarget;
     [HideInInspector] public float StunnedTime;
+    [HideInInspector] public bool CanAttack;
+    [HideInInspector] public bool IsCharging;
+    [HideInInspector] public float ExitedCharging;
+    [HideInInspector] public bool HasTouchedPlayer;
+    [HideInInspector] public bool EnergyFull;
     
-    [HideInInspector] public float JumpYVelocity;
-    [HideInInspector] public float JumpXVelocity;
-
-    [HideInInspector] public Vector3 LastKnowPlayerLocation;
-
-    public bool SearchingForTarget;
-
-    public float AlertRange = 20f;
-
-    public Vector3 PredictedPlayerDirection;
-
-    public float SearchForTargetTime = 5f;
-
-    public bool CanAttack;
-
-    public bool IsCharging;
-
-    public Vector2 boxCastSize;
-
-    public float ExitedCharging;
-
-    public bool HasTouchedPlayer;
-
-    public bool EnergyFull;
 }
