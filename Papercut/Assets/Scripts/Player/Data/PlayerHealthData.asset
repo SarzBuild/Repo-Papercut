@@ -15,9 +15,9 @@ MonoBehaviour:
   description: 
   MaxHealth: 100
   DefaultHealth: 100
-  DefaultPipSplits: 4
+  DefaultPipSplits: 10
   CanDie: 1
   CanTakeDamage: 1
-  Regen: 0
+  Regen: 2
   SecondsToRegen: 5
   SecondsAfterNoDamageToRegen: 5

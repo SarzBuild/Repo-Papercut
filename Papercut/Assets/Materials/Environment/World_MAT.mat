@@ -69,7 +69,7 @@ Material:
     m_Ints: []
     m_Floats:
     - Coat: 0
-    - EmissionIntensity: 0.1
+    - EmissionIntensity: 0
     - NormalStrength: 0
     - PatternInverse: 0
     - Pos01_Clamp: 20
@@ -89,6 +89,7 @@ Material:
     - _CullMode: 2
     - _CullModeForward: 2
     - _DepthOffsetEnable: 0
+    - _DiffusionProfileHash: 0
     - _DoubleSidedEnable: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 0
@@ -130,12 +131,13 @@ Material:
     - BG_Tint01: {r: 1, g: 1, b: 1, a: 0}
     - BG_Tint02: {r: 1, g: 1, b: 1, a: 0}
     - BG_Tint03: {r: 1, g: 1, b: 1, a: 0}
-    - P_Tint01: {r: 0.40503737, g: 0.666449, b: 0.7735849, a: 0}
-    - P_Tint02: {r: 1, g: 0.5411765, b: 0.7335492, a: 0}
-    - P_Tint03: {r: 0.65086114, g: 0.4774831, b: 0.6981132, a: 0}
+    - P_Tint01: {r: 0.37824848, g: 0.48601958, b: 0.6415094, a: 0}
+    - P_Tint02: {r: 1, g: 0.51237476, b: 0.504717, a: 0}
+    - P_Tint03: {r: 0.735849, g: 0.45469916, b: 0.49613178, a: 0}
     - Scale_Pattern: {r: 1, g: 1, b: 1, a: 0}
     - Scale_WA: {r: 1, g: 1, b: 1, a: 0}
     - Scale_WN: {r: 1, g: 1, b: 1, a: 0}
+    - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
