@@ -3375,8 +3375,8 @@ Transform:
   m_Father: {fileID: 537021473}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &819010035
-BoxCollider2D:
+--- !u!60 &819010035
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3388,7 +3388,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.11630249, y: 0.22289276}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -3398,9 +3398,13 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.767395, y: 3.3743286}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0, y: 2.5177155}
+      - {x: -0.14600283, y: -0.020916194}
+      - {x: -0.17866653, y: -0.9541892}
+      - {x: 0.23146212, y: -1.4952886}
+      - {x: 0.25156307, y: 1.7739449}
 --- !u!1001 &820383967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3558,8 +3562,8 @@ Transform:
   m_Father: {fileID: 537021473}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &829195237
-BoxCollider2D:
+--- !u!60 &829195237
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3571,7 +3575,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.07598877, y: 0.18012619}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -3581,9 +3585,13 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.27929688, y: 2.8113785}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.29034424, y: 2.1877747}
+      - {x: -0.21198183, y: 1.3120306}
+      - {x: -0.19188064, y: -1.2049445}
+      - {x: 0.37660372, y: -1.3765066}
+      - {x: 0.26477718, y: 0.124248445}
 --- !u!1001 &830990509
 PrefabInstance:
   m_ObjectHideFlags: 0
