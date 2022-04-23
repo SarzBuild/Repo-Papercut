@@ -3430,7 +3430,7 @@ GameObject:
   m_Component:
   - component: {fileID: 452593033}
   m_Layer: 12
-  m_Name: Poison Patches (1)
+  m_Name: Poison Patches
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5415,8 +5415,8 @@ CompositeCollider2D:
         Y: -168678384
       - X: 346211456
         Y: -5226211
-      - X: 479870144
-        Y: 20350988
+      - X: 383153216
+        Y: 20865438
   - m_Collider: {fileID: 817573903}
     m_ColliderPaths:
     - - X: 369512416
@@ -5483,8 +5483,8 @@ CompositeCollider2D:
       - {x: 37.288544, y: -15.509972}
       - {x: 37.288517, y: -14.377386}
       - {x: 33.206863, y: -14.377356}
-      - {x: 34.621166, y: -0.5226172}
-      - {x: 47.98653, y: 2.0350988}
+      - {x: 34.621155, y: -0.522614}
+      - {x: 38.3152, y: 2.0865433}
       - {x: 23.399506, y: 2.0297055}
       - {x: 23.409945, y: 6.4335675}
       - {x: 22.436409, y: 6.444745}
@@ -5823,7 +5823,7 @@ PolygonCollider2D:
       - {x: -3.811676, y: -12.341686}
       - {x: -1.8373642, y: -14.627838}
       - {x: -0.16885376, y: 1.7173789}
-      - {x: 13.197014, y: 4.275099}
+      - {x: 3.525322, y: 4.326544}
 --- !u!60 &817573903
 PolygonCollider2D:
   m_ObjectHideFlags: 0
