@@ -135,6 +135,7 @@ Material:
     m_Ints: []
     m_Floats:
     - Coat: 0
+    - EmissionIntensity: 0
     - NormalStrength: 1
     - PatternInverse: 0
     - Pos01_Clamp: 1
