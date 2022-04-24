@@ -16,14 +16,14 @@ MonoBehaviour:
 
 '
   RawInputValue: 0
-  Velocity: {x: 0, y: 0}
-  LastPosition: {x: -104.025604, y: 1.8528543}
-  LastTimeJumpKeyWasPressed: 4.7342772
-  CurrentHorizontalSpeed: 0
-  CurrentVerticalSpeed: 0
+  Velocity: {x: 0, y: -40.000153}
+  LastPosition: {x: 554.0842, y: -176.52184}
+  LastTimeJumpKeyWasPressed: 939.49817
+  CurrentHorizontalSpeed: 9.14
+  CurrentVerticalSpeed: -40
   PlayerLandedThisFrame: 0
-  CollisionDown: 1
-  TimePlayerStoppedGrounded: -3.4028235e+38
+  CollisionDown: 0
+  TimePlayerStoppedGrounded: 982.745
   PlayerLayerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   CoyoteUsable: 1
   CoyoteTimeThreshold: 0.55
   JumpBuffer: 0.1
-  EndedJumpEarly: 0
+  EndedJumpEarly: 1
   EndedJumpEarlyGravityModifier: 3
   ApexPoint: 0
   JumpApexSpeedBonus: 2
@@ -55,9 +55,9 @@ MonoBehaviour:
   DashingAcceleration: 10
   DashingTime: 0.08
   MaximumDashCount: 1
-  DashCooldownTime: 0.5
+  DashCooldownTime: 1.5
   CanFireWeapon: 1
-  WallJumpAbilityActive: 0
+  WallJumpAbilityActive: 1
   ResetNumberOfJumpOnWallGrab: 2
   CurrentlyOnStickyWall: 0
   CurrentlyWallJumping: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   MaxCurvaturePercent: 0.351
   MinCurvaturePercent: 0.058
-  WallJumpCurrentAngle: 41.52812
+  WallJumpCurrentAngle: 46.090057
   DelayOfWallJump: 0.2
   EndWallJumpYVelocity: 5
   EndWallJumpXVelocity: 14.5
@@ -108,7 +108,7 @@ MonoBehaviour:
   SlippingVelocity: 5
   EndWallSlipYVelocity: 0
   EndWallSlipXVelocity: 3
-  GrapplingAbilityActive: 0
+  GrapplingAbilityActive: 1
   GrappleTargetableLayer:
     serializedVersion: 2
     m_Bits: 1024
