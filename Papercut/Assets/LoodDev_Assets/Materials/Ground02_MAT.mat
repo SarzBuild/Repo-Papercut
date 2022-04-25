@@ -233,6 +233,7 @@ Material:
     m_Ints: []
     m_Floats:
     - Coat: 0
+    - EmissionIntensity: 0
     - Metallic: 0
     - NormalStrength: 1
     - PatternInverse: 1
