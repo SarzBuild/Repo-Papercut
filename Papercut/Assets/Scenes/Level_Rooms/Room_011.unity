@@ -5055,7 +5055,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8482364850906574880, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 5
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 8482364850906574880, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: InitialModule.startSpeed.minScalar
@@ -5991,7 +5991,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2650238812137750105, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: m_Size.y
-      value: 2.3770294
+      value: 4.157257
       objectReference: {fileID: 0}
     - target: {fileID: 2650238812137750105, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: m_Offset.x
@@ -5999,7 +5999,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2650238812137750105, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: m_Offset.y
-      value: 5.317131
+      value: 6.207245
       objectReference: {fileID: 0}
     - target: {fileID: 8482364849644684954, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: m_Name
@@ -6063,7 +6063,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8482364850906574880, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 2.8
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 8482364850906574880, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: InitialModule.startSpeed.minScalar
@@ -15925,7 +15925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2650238812137750105, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: m_Size.y
-      value: 2.2891998
+      value: 4.213791
       objectReference: {fileID: 0}
     - target: {fileID: 2650238812137750105, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: m_Offset.x
@@ -15933,7 +15933,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2650238812137750105, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: m_Offset.y
-      value: 5.3889084
+      value: 6.351204
       objectReference: {fileID: 0}
     - target: {fileID: 8482364849644684954, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: m_Name
@@ -16634,19 +16634,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2650238812137750105, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: m_Size.x
-      value: 4.142517
+      value: 4.2387695
       objectReference: {fileID: 0}
     - target: {fileID: 2650238812137750105, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: m_Size.y
-      value: 3.0223083
+      value: 3.7440338
       objectReference: {fileID: 0}
     - target: {fileID: 2650238812137750105, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: m_Offset.x
-      value: 1.4936218
+      value: 1.4454956
       objectReference: {fileID: 0}
     - target: {fileID: 2650238812137750105, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: m_Offset.y
-      value: 4.625763
+      value: 4.9866257
       objectReference: {fileID: 0}
     - target: {fileID: 8482364849644684954, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: m_Name
@@ -16710,7 +16710,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8482364850906574880, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 2.4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8482364850906574880, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: InitialModule.startSpeed.minScalar
@@ -17903,7 +17903,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2650238812137750105, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: m_Size.y
-      value: 3.804596
+      value: 6.3343506
       objectReference: {fileID: 0}
     - target: {fileID: 2650238812137750105, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: m_Offset.x
@@ -17911,7 +17911,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2650238812137750105, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: m_Offset.y
-      value: 6.0309143
+      value: 7.2957916
       objectReference: {fileID: 0}
     - target: {fileID: 8482364849644684954, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: m_Name
@@ -17975,7 +17975,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8482364850906574880, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8482364850906574880, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
       propertyPath: InitialModule.startSpeed.minScalar

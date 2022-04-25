@@ -4576,7 +4576,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2650238812137750105, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a2fdadfe12b1abd48b243ed0ad119428, type: 3}
 --- !u!4 &641858291 stripped
 Transform:
@@ -4598,7 +4599,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -4613,12 +4614,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 3.0343628, y: 25.110886}
-      - {x: -0.42260742, y: 30.477142}
+    - - {x: 4.4177856, y: 25.848724}
+      - {x: 1.4219971, y: 31.399437}
       - {x: -5.969611, y: 28.6768}
       - {x: -0.5877852, y: -0.80901706}
       - {x: 1.3802048, y: -14.808025}
-      - {x: 9.350471, y: -14.376728}
+      - {x: 11.287299, y: -13.362202}
 --- !u!1001 &641910992
 PrefabInstance:
   m_ObjectHideFlags: 0
