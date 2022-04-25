@@ -48,6 +48,7 @@ public class Player : AppliedPhysics
     public Animator Animator { get; private set; }
     public PlayerInputState InputHandler { get; private set; }
     public WeaponInventory Weapons { get; private set; }
+    public WeaponBase WeaponBase;
     public LineRenderer LineRenderer { get; private set; }
     public HealthComponent HealthComponent { get; private set; }
     public SkinnedMeshRenderer Renderer { get; private set; }

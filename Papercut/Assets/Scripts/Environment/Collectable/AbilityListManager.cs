@@ -79,7 +79,16 @@ public class AbilityListManager : MonoBehaviour
                 _player.PlayerData.CanBreakWalls = trigger;
                 break;
             case AbilityType.Weapon:
+                if (trigger)
+                {
+                    if (_player.Weapons.AddWeapon(_player.WeaponBase))
+                    {
+                        _player.Weapons.EquipWeapon(_player.WeaponBase);
+                    }
+                    break;
+                }
                 _player.Weapons.RemoveWeapon(_player.Weapons.EquippedWeapon);
+                Destroy(_player.transform.GetComponentInChildren<SwordWeapon>().gameObject);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

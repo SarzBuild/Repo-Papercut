@@ -68,6 +68,7 @@ public class GuardianEnemyBrain : EnemyBase
     private void Start()
     {
         _animator = GetComponentInChildren<Animator>();
+        
         PlayerTransform = Player.Instance.transform;
         PlayerCollider = Player.Instance.transform.GetComponent<Collider2D>();
         
@@ -87,9 +88,7 @@ public class GuardianEnemyBrain : EnemyBase
     {
         NewEnemyData = ScriptableObject.CreateInstance<EnemyData>();
         NewHealthData = ScriptableObject.CreateInstance<HealthData>();
-        //GuardianWeapon.Settings = ScriptableObject.CreateInstance<WeaponData>();
-        
-        
+
         //CTOR for variables
         NewEnemyData.IdleTime = EnemyData.IdleTime;
         NewEnemyData.PatrolTime = EnemyData.PatrolTime;
@@ -103,14 +102,47 @@ public class GuardianEnemyBrain : EnemyBase
         NewEnemyData.PatrolMoveClamped = EnemyData.PatrolMoveClamped;
         NewEnemyData.IdlingState = EnemyData.IdlingState;
         NewEnemyData.KnockbackSpeed = EnemyData.KnockbackSpeed;
+        NewEnemyData.MaxChargeTime = EnemyData.MaxChargeTime;
     }
-
-    private void OnDisable()
+    
+    protected override void ConstructBehaviorTree()
     {
-        HealthComponent.OnDamageTaken -= OnDamaged;
-        HealthComponent.OnDeath -= OnDeath;
-    }
+        //Initialize Child Nodes from left to right
+        StunnedWait = new StunnedWait(NewEnemyData);
 
+        Charging = new Charging(NewEnemyData, this, OwnCollider, PlayerCollider, ShieldCollider);
+        
+        CanAttack = new CanAttack(NewEnemyData,OwnCollider,PlayerCollider,ShieldCollider);
+        WaitBeforeAttack = new WaitBeforeAttack(NewEnemyData,GuardianWeapon.Settings.FireCooldownSec);
+        Attack = new Attack(NewEnemyData, GuardianWeapon);
+
+        CheckVision = new CheckVision(PlayerTransform, MiddlePoint, NewEnemyData, _groundLayerMask);
+        TooCloseRange = new Range(PlayerTransform, MiddlePoint, NewEnemyData.AttackRange);
+        Reposition = new Flee(PlayerTransform, this, NewEnemyData, NewEnemyData.ChaseRange);
+        
+        ChaseRange = new Range(PlayerTransform, MiddlePoint,NewEnemyData.ChaseRange+1f);
+        FacePlayer = new FacePlayer(this, PlayerTransform);
+        SetAttack = new SetAttack(NewEnemyData);
+        
+        Idle = new Idle(this,NewEnemyData);
+        Patrol = new Patrol(this,NewEnemyData);
+
+        
+        //Initialize Parent Nodes from left to right
+        
+        Sequence attackSequence = new Sequence(new List<Node>() { CanAttack, WaitBeforeAttack, Attack });
+
+        Sequence repositionSequence = new Sequence(new List<Node>() { CheckVision, TooCloseRange, Reposition });
+        
+        Sequence chaseSequence = new Sequence(new List<Node>() { CheckVision, ChaseRange, FacePlayer, SetAttack });
+
+        Selector idleSelector = new Selector(new List<Node>() { Idle, Patrol });
+        
+        
+        //Initialize Root Node
+        _topNode = new Selector(new List<Node>(){StunnedWait,Charging, attackSequence, repositionSequence, chaseSequence, idleSelector});
+    }
+    
     private void Update()
     {
         HandleAnimations();
@@ -142,42 +174,10 @@ public class GuardianEnemyBrain : EnemyBase
     }
 
 
-    protected override void ConstructBehaviorTree()
+    private void OnDisable()
     {
-        //Initialize Child Nodes from left to right
-        StunnedWait = new StunnedWait(NewEnemyData);
-
-        Charging = new Charging(NewEnemyData, this, OwnCollider, PlayerCollider, ShieldCollider);
-        
-        CanAttack = new CanAttack(NewEnemyData,OwnCollider,PlayerCollider,ShieldCollider);
-        WaitBeforeAttack = new WaitBeforeAttack(NewEnemyData,GuardianWeapon.Settings.FireCooldownSec);
-        Attack = new Attack(NewEnemyData, GuardianWeapon);
-
-        CheckVision = new CheckVision(PlayerTransform, MiddlePoint, NewEnemyData, _groundLayerMask);
-        TooCloseRange = new Range(PlayerTransform, MiddlePoint, NewEnemyData.AttackRange);
-        Reposition = new Flee(PlayerTransform, this, NewEnemyData,NewEnemyData.ChaseRange);
-        
-        ChaseRange = new Range(PlayerTransform, MiddlePoint,NewEnemyData.ChaseRange+1f);
-        FacePlayer = new FacePlayer(this, PlayerTransform);
-        SetAttack = new SetAttack(NewEnemyData);
-        
-        Idle = new Idle(this,NewEnemyData);
-        Patrol = new Patrol(this,NewEnemyData);
-
-        
-        //Initialize Parent Nodes from left to right
-        
-        Sequence attackSequence = new Sequence(new List<Node>() { CanAttack,WaitBeforeAttack,Attack });
-
-        Sequence repositionSequence = new Sequence(new List<Node>() { CheckVision,TooCloseRange, Reposition });
-        
-        Sequence chaseSequence = new Sequence(new List<Node>() { CheckVision,ChaseRange, FacePlayer, SetAttack });
-
-        Selector idleSelector = new Selector(new List<Node>() { Idle, Patrol });
-        
-        
-        //Initialize Root Node
-        _topNode = new Selector(new List<Node>(){StunnedWait,Charging, attackSequence, repositionSequence,chaseSequence, idleSelector});
+        HealthComponent.OnDamageTaken -= OnDamaged;
+        HealthComponent.OnDeath -= OnDeath;
     }
 
     protected void OnDamaged(HealthComponent arg1, float arg2, GameObject arg3, Vector2 knockbackMultiplier)
@@ -194,6 +194,21 @@ public class GuardianEnemyBrain : EnemyBase
         var direction = (PlayerTransform.position - transform.position);
         var directionX = Mathf.Sign(direction.x);
         NewEnemyData.CurrentHorizontalSpeed = directionX * NewEnemyData.KnockbackSpeed;
+    }
+    
+    private void BlinkRed()
+    {
+        Renderer.material.SetColor(_color, Color.red);
+        _lastHitTime = Time.time;
+    }
+
+    private void ResetColor()
+    {
+        var nextFireTime = _lastHitTime + 0.1f;
+        if (Time.time - nextFireTime > 0)
+        {
+            Renderer.material.SetColor(_color, _baseColor);
+        }
     }
 
     protected void OnDeath(HealthComponent arg1, GameObject killer)
@@ -251,20 +266,7 @@ public class GuardianEnemyBrain : EnemyBase
         SetVelocityY(NewEnemyData.CurrentVerticalSpeed);
     }
 
-    private void BlinkRed()
-    {
-        Renderer.material.SetColor(_color, Color.red);
-        _lastHitTime = Time.time;
-    }
-
-    private void ResetColor()
-    {
-        var nextFireTime = _lastHitTime + 0.1f;
-        if (Time.time - nextFireTime > 0)
-        {
-            Renderer.material.SetColor(_color, _baseColor);
-        }
-    }
+    
     
     private void OnDrawGizmos()
     {
@@ -284,14 +286,14 @@ public class GuardianEnemyBrain : EnemyBase
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnCollisionEnter2D(Collision2D col) //On Collisions Damage
     {
         if (col.gameObject.layer == GenericManager.PlayerLayerMask)
         {
             var healthComponent = col.transform.GetComponent<HealthComponent>();
             if (healthComponent != null)
             {
-                healthComponent.DealDamage(GuardianWeapon.Settings.Damage,gameObject,Vector2.zero);
+                healthComponent.DealDamage(EnemyData.CollisionDamage,gameObject,Vector2.zero);
             } 
         }
     }

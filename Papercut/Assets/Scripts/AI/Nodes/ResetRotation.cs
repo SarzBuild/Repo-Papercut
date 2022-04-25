@@ -18,7 +18,7 @@ public class ResetRotation : Node
     public override NodeState Evaluate()
     {
         var angle = Mathf.Atan2(_transformToGoTo.position.y, _transformToGoTo.position.x) * Mathf.Rad2Deg;
-        _ai.transform.eulerAngles = new Vector3(0,0, angle);
+        _ai.transform.eulerAngles = Vector3.Lerp(_ai.transform.eulerAngles, new Vector3(0,0, angle), Time.fixedDeltaTime);
         SetCurrentNode();
         return NodeState.RUNNING;
     }

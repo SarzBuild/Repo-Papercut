@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Testline
   m_EditorClassIdentifier: 
   Input: 'As with the world, the player is made of a paper like material. '
-  Delay: 0.02
-  DelayBeforeNextLine: 0
+  Delay: 0.5
+  DelayBeforeNextLine: 5
   CharacterSprite: {fileID: 21300000, guid: 454a18428ba8fab4297bc015dda483e6, type: 3}

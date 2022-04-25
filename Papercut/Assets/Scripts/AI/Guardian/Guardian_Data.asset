@@ -29,9 +29,8 @@ MonoBehaviour:
   MoveClamped: 8
   PatrolMoveClamped: 3
   IdlingState: 0
-  IsStunned: 0
-  HasReachedTarget: 0
-  StunnedTime: 2
+  AttackKnockbackForce: {x: 50, y: 10}
+  boxCastSize: {x: 1.1, y: 3.15}
   JumpYVelocity: 0
   JumpXVelocity: 0
   LastKnowPlayerLocation: {x: 0, y: 0, z: 0}
@@ -39,8 +38,11 @@ MonoBehaviour:
   AlertRange: 20
   PredictedPlayerDirection: {x: 0, y: 0, z: 0}
   SearchForTargetTime: 5
+  IsStunned: 0
+  HasReachedTarget: 0
+  StunnedTime: 2
   CanAttack: 0
   IsCharging: 1
-  boxCastSize: {x: 1.1, y: 3.15}
   ExitedCharging: 0
   HasTouchedPlayer: 0
+  EnergyFull: 0

@@ -57,5 +57,7 @@ public class EnemyData : ScriptableObject
     [HideInInspector] public float ExitedCharging;
     [HideInInspector] public bool HasTouchedPlayer;
     [HideInInspector] public bool EnergyFull;
-    
+    public float MaxChargeTime = 5f;
+    public float CollisionDamage = 10f;
+
 }

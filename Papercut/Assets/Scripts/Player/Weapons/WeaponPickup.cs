@@ -36,8 +36,7 @@ public class WeaponPickup : MonoBehaviour
                 {
                     player.Weapons.EquipWeapon(Weapon);
                 }
-                else if (EquipOnPickupSetting == WeaponPickup_PickupEquipOptions.EquipIfNoOtherEquippedWeapons &&
-                    player.Weapons.EquippedWeapon == null)
+                else if (EquipOnPickupSetting == WeaponPickup_PickupEquipOptions.EquipIfNoOtherEquippedWeapons && player.Weapons.EquippedWeapon == null)
                 {
                     player.Weapons.EquipWeapon(Weapon);
                 }
