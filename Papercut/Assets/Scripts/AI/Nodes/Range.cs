@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Range : Node
 {
-    private Transform _target;
-    private Transform _origin;
-    private float _range;
+    private readonly Transform _target;
+    private readonly Transform _origin;
+    private readonly float _range;
 
     public Range(Transform player, Transform origin, float range)
     {

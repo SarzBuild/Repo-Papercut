@@ -5,13 +5,10 @@ using UnityEngine;
 public class GoToLastKnowPosition : Node
 {
     private readonly EnemyBase _ai;
-    private EnemyData _enemyData;
+    private readonly EnemyData _enemyData;
     private Vector2 _direction;
-    private bool _trigger;
-    private Vector2 _predictedPlayerDirection;
-    private float _timer;
-    private float _time;
-    
+    //private float _timer;
+
     public GoToLastKnowPosition(EnemyBase aI, EnemyData enemyData)
     {
         _ai = aI;
@@ -23,8 +20,6 @@ public class GoToLastKnowPosition : Node
         {
             SetCurrentNode();
 
-            //CheckDirection();
-            
             var distX = Mathf.Abs(_enemyData.LastKnowPlayerLocation.x - _ai.transform.position.x);
             var distY = Mathf.Abs(_enemyData.LastKnowPlayerLocation.y - _ai.transform.position.y);
 
@@ -46,19 +41,19 @@ public class GoToLastKnowPosition : Node
 
                 if (_enemyData.CurrentHorizontalSpeed == 0)
                 {
-                    _timer = 0f;
+                    _enemyData.SearchTimer = 0f;
                     _enemyData.HasReachedTarget = true;
                 }
             }
             else if(_enemyData.HasReachedTarget)
             {
-                _timer += Time.fixedDeltaTime;
+                _enemyData.SearchTimer += Time.fixedDeltaTime;
 
-                if (_timer > _enemyData.SearchForTargetTime)
+                if (_enemyData.SearchTimer > _enemyData.SearchForTargetTime)
                 {
                     _enemyData.SearchingForTarget = false;
                     _enemyData.HasReachedTarget = false;
-                    _timer = 0;   
+                    _enemyData.SearchTimer = 0;   
                 }
                  
                 //Try to mimic player's direction
@@ -66,7 +61,7 @@ public class GoToLastKnowPosition : Node
 
                 _enemyData.CurrentHorizontalSpeed = Mathf.Clamp(_enemyData.CurrentHorizontalSpeed, -_enemyData.MoveClamped/2, _enemyData.MoveClamped/2);
                 
-                CheckDirection(_enemyData.LastKnowPlayerLocation + _enemyData.PredictedPlayerDirection);
+                CheckDirection(_enemyData.LastKnowPlayerLocation + _enemyData.PredictedPlayerDirection*20);
                 
                 
             }

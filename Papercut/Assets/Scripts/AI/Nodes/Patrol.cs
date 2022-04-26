@@ -6,7 +6,7 @@ using UnityEngine.Animations;
 public class Patrol : Node
 {
     private readonly EnemyBase _ai;
-    private EnemyData _enemyData;
+    private readonly EnemyData _enemyData;
     public float _timer;
     private Vector2 _direction;
     private int _side = 1;
@@ -26,9 +26,7 @@ public class Patrol : Node
 
             if (_timer >= _enemyData.PatrolTime + _randomness)
             {
-                _timer = 0;
-                _side = -_side;
-                _enemyData.IdlingState = 0;
+                StopPatrol();
                 return NodeState.SUCCESS;
             }
 
@@ -46,5 +44,11 @@ public class Patrol : Node
     {
         _enemyData.CurrentNode = this;
     }
-    
+
+    public void StopPatrol()
+    {
+        _timer = 0;
+        _side = -_side;
+        _enemyData.IdlingState = 0;
+    }
 }

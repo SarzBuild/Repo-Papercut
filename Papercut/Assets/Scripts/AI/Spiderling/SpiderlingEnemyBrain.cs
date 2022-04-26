@@ -12,9 +12,9 @@ public class SpiderlingEnemyBrain : EnemyBase
 
     public EnemyData NewEnemyData { get; private set; }
     public HealthData NewHealthData { get; private set; }
-    
+
     public AttackTrigger AttackTrigger { get; private set; }
-    
+
     public SpiderlingProfileType SpiderlingType;
 
     private Animator _animator;
@@ -25,8 +25,8 @@ public class SpiderlingEnemyBrain : EnemyBase
 
 
     private float _lastHitTime;
-    
-    
+
+
     public GameObject BloodObject;
 
     #region Nodes
@@ -34,14 +34,15 @@ public class SpiderlingEnemyBrain : EnemyBase
     public Range AttackRange { get; private set; }
     public WaitBeforeAttack WaitBeforeAttack { get; private set; }
     public Attack Attack { get; private set; }
-    
+
     public Range ChaseRange { get; private set; }
     public CheckVision CheckVision { get; private set; }
     public AlertNearby AlertNearby { get; private set; }
     public ChasePlayer ChasePlayer { get; private set; }
     public Flee Flee { get; private set; }
-    
-    
+    public NotNearEdge NotNearEdge { get; private set; }
+
+
     public GoToLastKnowPosition GoToLastKnowPosition { get; private set; }
     public SearchUntilTimerRunOut SearchUntilTimerRunOut { get; private set; }
     
@@ -115,6 +116,7 @@ public class SpiderlingEnemyBrain : EnemyBase
         }
 
         UpdateHitResults();
+        UpdateCheckLedge();
         //Debug.Log(string.Format("{0} is in {1} state", name, NewEnemyData.CurrentNode));
 
         CheckForCollisions();
@@ -138,14 +140,14 @@ public class SpiderlingEnemyBrain : EnemyBase
         Attack = new Attack(NewEnemyData,SpiderlingWeapon);
         
         ChaseRange = new Range(PlayerTransform, transform,NewEnemyData.ChaseRange);
-        CheckVision = new CheckVision(PlayerTransform, _ceilingCheck, NewEnemyData, _groundLayerMask);
+        CheckVision = new CheckVision(PlayerTransform, _ceilingCheck, _groundLayerMask);
         AlertNearby = new AlertNearby(transform,NewEnemyData);
         ChasePlayer = new ChasePlayer(PlayerTransform, this,NewEnemyData);
         Flee = new Flee(PlayerTransform,this,NewEnemyData, NewEnemyData.ChaseRange);
+        NotNearEdge = new NotNearEdge(this,NewEnemyData);
 
         GoToLastKnowPosition = new GoToLastKnowPosition(this,NewEnemyData);
-        //SearchUntilTimerRunOut = new SearchUntilTimerRunOut(NewEnemyData,10.5f);
-        
+
         Idle = new Idle(this,NewEnemyData);
         Patrol = new Patrol(this,NewEnemyData);
         
@@ -162,11 +164,12 @@ public class SpiderlingEnemyBrain : EnemyBase
         //Sequence searchSequence = new Sequence(new List<Node>() { GoToLastKnowPosition });
         
         Selector idleSelector = new Selector(new List<Node>() { Idle, Patrol });
-        
+
+        Sequence knowSequence = new Sequence(new List<Node>() { NotNearEdge, GoToLastKnowPosition });
         
         
         //Initialize Root Node
-        _topNode = new Selector(new List<Node>(){attackSequence, chaseSequence, GoToLastKnowPosition, idleSelector});
+        _topNode = new Selector(new List<Node>(){attackSequence, chaseSequence, knowSequence, idleSelector});
     }
 
     private Selector DetermineSpiderlingTypeSequence()
@@ -181,12 +184,16 @@ public class SpiderlingEnemyBrain : EnemyBase
                         return new Selector(new List<Node>() { ChasePlayer });
                     case 1:
                         return new Selector(new List<Node>() { Flee });
+                    case 2:
+                        return new Selector(new List<Node>(){ new Sequence(new List<Node>() { NotNearEdge, ChasePlayer })});
                 }
                 break;
             case SpiderlingProfileType.Careful:
-                return new Selector(new List<Node>() { ChasePlayer });
+                return new Selector(new List<Node>(){ new Sequence(new List<Node>() { NotNearEdge, ChasePlayer })});
             case SpiderlingProfileType.Fearful:
                 return new Selector(new List<Node>() { Flee });
+            case SpiderlingProfileType.Aggresive:
+                return new Selector(new List<Node>() { ChasePlayer });
             default:
                 throw new ArgumentOutOfRangeException();
         }
@@ -213,6 +220,11 @@ public class SpiderlingEnemyBrain : EnemyBase
             {
                 NewEnemyData.CurrentVerticalSpeed = 0;
             }
+        }
+
+        if ((!CheckLedge || WallBackHit) && NewEnemyData.CurrentNode == Patrol)
+        {
+            Patrol.StopPatrol();
         }
     }
 

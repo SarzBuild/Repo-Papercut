@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class WaitBeforeAttack : Node
 {
-    private Transform _target;
-    private EnemyData _enemyData;
-
-    private float _time;
-
+    private readonly EnemyData _enemyData;
+    private readonly float _time;
+    
     private float _timer;
     
     public WaitBeforeAttack(EnemyData enemyData,float time)

@@ -81,4 +81,5 @@ public class Charging : Node
         _enemyData.EnergyFull = false;
         timer = 0;
     }
+    
 }

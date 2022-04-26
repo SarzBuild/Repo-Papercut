@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SpiderlingProfileType { Careful, Fearful, Random }
+public enum SpiderlingProfileType { Careful, Fearful, Aggresive, Random }
 
 
 [CreateAssetMenu(fileName = "newEnemyData", menuName = "Data/Enemy/EnemyData")]
@@ -47,6 +47,8 @@ public class EnemyData : ScriptableObject
     [HideInInspector] public Vector3 PredictedPlayerDirection;
     
     [HideInInspector] public float SearchForTargetTime = 5f;
+
+    public float SearchTimer;
     
     //Guard ONLY Data
     [HideInInspector] public bool IsStunned;

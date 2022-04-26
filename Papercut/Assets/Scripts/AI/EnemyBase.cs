@@ -29,4 +29,9 @@ public abstract class EnemyBase : AppliedPhysics
     {
         
     }
+
+    public bool CheckLedge { get { return CheckLedgeResult; } }
+    public RaycastHit2D CheckLedgeResult { get; private set; }
+    public void UpdateCheckLedge() { CheckLedgeResult = Physics2D.Raycast(_rightWallCheck.position, Vector2.down,5f, _groundLayerMask);
+    }
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AlertNearby : Node
 {
-    private Transform _origin;
-    private EnemyData _enemyData;
+    private readonly Transform _origin;
+    private readonly EnemyData _enemyData;
     
     public AlertNearby(Transform origin, EnemyData enemyData)
     {
@@ -17,7 +17,7 @@ public class AlertNearby : Node
     {
         SetCurrentNode();
         var hits = Physics2D.OverlapCircleAll(_origin.position, _enemyData.AlertRange);
-        if (hits.Length <= 0) return NodeState.FAILURE;
+        if (hits.Length <= 0) return NodeState.SUCCESS;
         foreach (var i in hits)
         {
             if (i.transform.gameObject.layer != GenericManager.EnemyLayerMask)

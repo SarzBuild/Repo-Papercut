@@ -7,16 +7,14 @@ using Vector2 = UnityEngine.Vector2;
 
 public class CheckVision : Node
 {
-    private Transform _target;
-    private Transform _origin;
-    private EnemyData _enemyData;
-    private LayerMask _ground;
+    private readonly Transform _target;
+    private readonly Transform _origin;
+    private readonly LayerMask _ground;
     
-    public CheckVision(Transform target, Transform origin, EnemyData enemyData, LayerMask ground)
+    public CheckVision(Transform target, Transform origin, LayerMask ground)
     {
         _target = target;
         _origin = origin;
-        _enemyData = enemyData;
         _ground = ground;
     }
     

@@ -25,4 +25,5 @@ public class Attack : Node
     {
         _enemyData.CurrentNode = this;
     }
+    
 }

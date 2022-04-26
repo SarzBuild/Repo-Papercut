@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class StunnedWait : Node
 {
-    
-    private Transform _target;
+    private readonly Transform _target;
     private readonly EnemyData _enemyData;
-    
     private float _timer;
 
     public StunnedWait(EnemyData enemyData)

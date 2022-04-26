@@ -6,7 +6,7 @@ public class ResetRotation : Node
 {
     private readonly EnemyBase _ai;
     private readonly Transform _transformToGoTo;
-    private EnemyData _enemyData;
+    private readonly EnemyData _enemyData;
     
     public ResetRotation(EnemyBase ai, EnemyData enemyData, Transform transform)
     {

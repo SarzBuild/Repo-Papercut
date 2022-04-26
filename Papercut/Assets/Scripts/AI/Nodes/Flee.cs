@@ -6,7 +6,7 @@ public class Flee : Node
 {
     private readonly Transform _player;
     private readonly EnemyBase _ai;
-    private EnemyData _enemyData;
+    private readonly EnemyData _enemyData;
     private Vector2 _direction;
     private float _range;
     

@@ -28,5 +28,4 @@ public class CanAttack : Node
         }
         return NodeState.FAILURE;
     }
-
 }

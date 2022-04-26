@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class SearchUntilTimerRunOut : Node
 {
-    private Transform _target;
-    private EnemyData _enemyData;
-
+    private readonly Transform _target;
+    private readonly EnemyData _enemyData;
     private float _time;
-
     private float _timer;
     
     public SearchUntilTimerRunOut(EnemyData enemyData,float time)

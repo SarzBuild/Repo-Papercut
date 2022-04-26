@@ -6,13 +6,9 @@ public class ChasePlayer : Node
 {
     private readonly Transform _player;
     private readonly EnemyBase _ai;
-    private EnemyData _enemyData;
+    private readonly EnemyData _enemyData;
     private Vector2 _direction;
-    
-    private bool _trigger;
-    private Vector2 _predictedPlayerDirection;
-    private Vector2 _lastPosition;
-    
+
     public ChasePlayer(Transform player, EnemyBase aI, EnemyData enemyData)
     {
         _player = player;

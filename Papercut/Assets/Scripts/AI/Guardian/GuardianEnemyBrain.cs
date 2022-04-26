@@ -29,7 +29,7 @@ public class GuardianEnemyBrain : EnemyBase
 
     public GameObject BloodObject;
 
-    private Collider2D ShieldCollider;
+    public Collider2D ShieldCollider;
 
     #region Nodes
 
@@ -116,7 +116,7 @@ public class GuardianEnemyBrain : EnemyBase
         WaitBeforeAttack = new WaitBeforeAttack(NewEnemyData,GuardianWeapon.Settings.FireCooldownSec);
         Attack = new Attack(NewEnemyData, GuardianWeapon);
 
-        CheckVision = new CheckVision(PlayerTransform, MiddlePoint, NewEnemyData, _groundLayerMask);
+        CheckVision = new CheckVision(PlayerTransform, MiddlePoint, _groundLayerMask);
         TooCloseRange = new Range(PlayerTransform, MiddlePoint, NewEnemyData.AttackRange);
         Reposition = new Flee(PlayerTransform, this, NewEnemyData, NewEnemyData.ChaseRange);
         
@@ -157,6 +157,7 @@ public class GuardianEnemyBrain : EnemyBase
         }
 
         UpdateHitResults();
+        UpdateCheckLedge();
 
         CheckForCollisions();
         
@@ -255,6 +256,11 @@ public class GuardianEnemyBrain : EnemyBase
                 NewEnemyData.CurrentVerticalSpeed = 0;
             }
         }
+
+        if ((!CheckLedge || WallBackHit) && NewEnemyData.CurrentNode == Patrol)
+        {
+            Patrol.StopPatrol();
+        }
     }
 
     private void SetVelocities()
@@ -264,17 +270,6 @@ public class GuardianEnemyBrain : EnemyBase
             SetVelocityX(NewEnemyData.CurrentHorizontalSpeed); 
         }
         SetVelocityY(NewEnemyData.CurrentVerticalSpeed);
-    }
-
-    
-    
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(MiddlePoint.position, EnemyData.ChaseRange);
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireCube(_rightWallCheck.position,EnemyData.boxCastSize);
-
     }
 
     private void RechargeEnergy()
@@ -334,6 +329,15 @@ public class GuardianEnemyBrain : EnemyBase
         {
             _animator.SetBool(i,false);    
         }
+    }
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(MiddlePoint.position, EnemyData.ChaseRange);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireCube(_rightWallCheck.position,EnemyData.boxCastSize);
+
     }
 }
 

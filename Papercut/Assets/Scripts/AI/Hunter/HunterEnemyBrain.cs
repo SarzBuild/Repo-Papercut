@@ -114,7 +114,7 @@ public class HunterEnemyBrain : EnemyBase
         Attack = new RangedAttack(PlayerTransform, this, NewEnemyData,HunterWeapon);
         AttackRange = new Range(PlayerTransform, transform, NewEnemyData.AttackRange);
         ResetRotation = new ResetRotation(this, NewEnemyData, _baseTransfrom);
-        CheckVision = new CheckVision(PlayerTransform, transform, NewEnemyData, _groundLayerMask);
+        CheckVision = new CheckVision(PlayerTransform, transform, _groundLayerMask);
         
         //Initialize Parent Nodes from left to right
         

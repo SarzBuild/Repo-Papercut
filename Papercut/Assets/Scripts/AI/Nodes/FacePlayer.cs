@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FacePlayer : Node
 {
-    private EnemyBase _ai;
-    private Transform _player;
+    private readonly EnemyBase _ai;
+    private readonly Transform _player;
     private Vector2 _direction;
     
     public FacePlayer(EnemyBase ai, Transform playerTransform)

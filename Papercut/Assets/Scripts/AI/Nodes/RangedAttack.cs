@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class RangedAttack : Node
 {
-    private Transform _target;
-    private EnemyBase _ai;
-    private EnemyData _enemyData;
-    private WeaponBase _weapon;
+    private readonly Transform _target;
+    private readonly EnemyBase _ai;
+    private readonly EnemyData _enemyData;
+    private readonly WeaponBase _weapon;
     
     public RangedAttack(Transform target, EnemyBase ai, EnemyData enemyData, WeaponBase weapon)
     {

@@ -20,5 +20,4 @@ public class SetAttack : Node
         }
         return NodeState.FAILURE;
     }
-
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Idle : Node
 {
     private readonly EnemyBase _ai;
-    private EnemyData _enemyData;
+    private readonly EnemyData _enemyData;
     private float _timer;
     private float _randomness = Random.Range(0f, 2f);
     
@@ -34,7 +34,6 @@ public class Idle : Node
         }
 
         return NodeState.FAILURE;
-
     }
 
     public void SetCurrentNode()
