@@ -3,7 +3,7 @@
 
 public class PlayerAttackState : PlayerState
 {
-    public PlayerAttackState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, PlayerStateId id) : base(player, stateMachine, playerData, id)
+    public PlayerAttackState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData, PlayerStateId.Attack)
     {
     }
 
@@ -11,6 +11,8 @@ public class PlayerAttackState : PlayerState
     public override void EnterState()
     {
         base.EnterState();
+        
+        
     }
 
     public override void ExitState()

@@ -46,6 +46,4 @@ public class PlayerIdleState : PlayerState
             StateMachine.ChangeState(Player.InAirState);
         }
     }
-    
-    
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.ProBuilder.MeshOperations;
 using Vector2 = UnityEngine.Vector2;
 
 public class Player : AppliedPhysics
@@ -40,6 +41,9 @@ public class Player : AppliedPhysics
     public PlayerWallGrabState WallGrabState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; }
     public PlayerGrapplingState GrapplingState { get; private set; }
+    public PlayerDeathState DeathState { get; private set; }
+    public PlayerAttackState AttackScene { get; private set; }
+    public PlayerDamagedState DamagedState { get; private set; }
 
     #endregion
 
@@ -57,13 +61,16 @@ public class Player : AppliedPhysics
     
     #endregion
     
-
     private StringBuilder _debugMessage = new StringBuilder(600);
 
     public int CurrentDashCount;
+    public float LastDashTime;
+
+    public float LastWallJumpTime;    
+    
     private float _dashTimerCooldown;
     private bool _collisionDown;
-    private float _lastHitTime;
+    public float LastHitTime;
     private Color _baseColor;
 
     public GameObject BloodObject;
@@ -71,30 +78,35 @@ public class Player : AppliedPhysics
 
     private void Awake()
     {
+        CheckForSingleton();
+        SetMissingComponents();
+        SetBaseValues();
+        InitializeStateMachine();
+    }
+
+    private void CheckForSingleton()
+    {
         if (_instance != null && _instance != this) Destroy(gameObject);
         else _instance = this;
-        
-        LineRenderer = GetComponent<LineRenderer>();
-        Weapons = GetComponent<WeaponInventory>();
-        Animator = GetComponentInChildren<Animator>();
-        InputHandler = GetComponent<PlayerInputState>();
-        HealthComponent = GetComponent<HealthComponent>();
-        _rigidbody2D = GetComponentInParent<Rigidbody2D>();
-        Renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+    }
+
+    private void SetMissingComponents()
+    {
+        if (LineRenderer == null) LineRenderer = GetComponent<LineRenderer>();
+        if (Weapons == null)  Weapons = GetComponent<WeaponInventory>();
+        if (Animator == null) Animator = GetComponentInChildren<Animator>();
+        if (InputHandler == null) InputHandler = GetComponent<PlayerInputState>();
+        if (HealthComponent == null) HealthComponent = GetComponent<HealthComponent>();
+        if (_rigidbody2D == null) _rigidbody2D = GetComponentInParent<Rigidbody2D>();
+        if (Renderer == null) Renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+    }
+
+    private void SetBaseValues()
+    {
         _baseColor = Renderer.material.GetColor("_BaseColor");
         _facingDirection = 1;
         _canSetVelocity = true;
         HealthComponent.IsDead = false;
-        InitializeStateMachine();
-    }
-
-    private void InitializeProperties()
-    {
-        CurrentDashCount = PlayerData.MaximumDashCount;
-        _dashTimerCooldown = PlayerData.DashCooldownTime;
-        PlayerData.CurrentJumpCount = PlayerData.MaximumJumpCount;
-        PlayerData.GrapplingAbilityActive = false;
-        PlayerData.WallJumpAbilityActive = false;
     }
 
     private void InitializeStateMachine()
@@ -114,38 +126,51 @@ public class Player : AppliedPhysics
         WallGrabState = new PlayerWallGrabState(this, StateMachine, PlayerData);
         WallJumpState = new PlayerWallJumpState(this, StateMachine, PlayerData);
         GrapplingState = new PlayerGrapplingState(this, StateMachine, PlayerData);
-    }
-
-    private void InitializeHealth()
-    {
-        HealthComponent.OnDeath += OnPlayerDeath;
-        HealthComponent.OnDamageTaken += Knockback;
-        HealthComponent.OnDamageTaken += BlinkRed;
-        HealthComponent.OnDamageTaken += BloodEffects;
-        // Other component events exist here too, tag on to trigger animation/sound/FX
+        DeathState = new PlayerDeathState(this, StateMachine, PlayerData);
+        AttackScene = new PlayerAttackState(this, StateMachine, PlayerData);
+        DamagedState = new PlayerDamagedState(this, StateMachine, PlayerData);
     }
     
-    private void OnDisable()
-    {
-        HealthComponent.OnDeath -= OnPlayerDeath;
-        HealthComponent.OnDamageTaken -= BlinkRed;
-        HealthComponent.OnDamageTaken -= Knockback;
-        HealthComponent.OnDamageTaken -= BloodEffects;
-    }
-
     private void Start()
     {
         InitializeProperties();
         InitializeHealth();
         StateMachine.Initialize(IdleState);
     }
+    
+    private void InitializeProperties()
+    {
+        CurrentDashCount = PlayerData.MaximumDashCount;
+        PlayerData.CurrentJumpCount = PlayerData.MaximumJumpCount;
+        PlayerData.GrapplingAbilityActive = false;
+        PlayerData.WallJumpAbilityActive = false;
+        PlayerData.CanBreakWalls = false;
+        
+        _dashTimerCooldown = PlayerData.DashCooldownTime;
+    }
 
+    private void InitializeHealth()
+    {
+        HealthComponent.OnDeath += DeathState.OnPlayerDeath;
+        HealthComponent.OnDamageTaken += DamagedState.Knockback;
+        HealthComponent.OnDamageTaken += DamagedState.BlinkRed;
+        HealthComponent.OnDamageTaken += DamagedState.BloodEffects;
+        // Other component events exist here too, tag on to trigger animation/sound/FX
+    }
+    
+    private void OnDisable()
+    {
+        HealthComponent.OnDeath -= DeathState.OnPlayerDeath;
+        HealthComponent.OnDamageTaken -= DamagedState.BlinkRed;
+        HealthComponent.OnDamageTaken -= DamagedState.Knockback;
+        HealthComponent.OnDamageTaken -= DamagedState.BloodEffects;
+    }
+    
     private void Update()
     {
-        LastJumpPressed();
         StateMachine.CurrentState.LogicUpdate();
+        if (StateMachine.CurrentState == DeathState) return;
         UpdateHitResults();
-        UpdateStickyWallCollisions();
         SpeedResetOnCollisions();
         
         TimedIncreaseDashCount();
@@ -155,9 +180,7 @@ public class Player : AppliedPhysics
 
         TimerForWallGrabJumps();
 
-        ResetColor();
-
-        ShowMenuAfterAnimationEnd();
+        ResetMaterialColor();
 
         //LogDebug();
     }
@@ -165,11 +188,8 @@ public class Player : AppliedPhysics
 
     private void HandleWeapons()
     {
-        if (Weapons == null)
-        {
-            return;
-        }
-
+        if (Weapons == null) return;
+        
         if (Weapons.EquippedWeapon != null && InputHandler.ListenLMouseInput > 0)
         {
             if (PlayerData == null || PlayerData.CanFireWeapon)
@@ -184,6 +204,8 @@ public class Player : AppliedPhysics
 
     private void FixedUpdate()
     {
+        if (StateMachine.CurrentState == DeathState) return;
+        
         PlayerData.Velocity = ((Vector2)transform.position - PlayerData.LastPosition) / Time.deltaTime;
         PlayerData.LastPosition = transform.position; // Calculates the true velocity (distance/time)
         
@@ -191,26 +213,17 @@ public class Player : AppliedPhysics
         CalculateGravity();
     }
 
-    private void LastJumpPressed() //Updates last time space key was triggered.
-    {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
-            PlayerData.LastTimeJumpKeyWasPressed = Time.time;
-        }
-    }
-
     private void TimedIncreaseDashCount() //Dash reset cooldown, only active when the player is not dashing and has their dash count lower than the maximum amount.
     {
         if (CurrentDashCount < 0) return;
         if (CurrentDashCount >= PlayerData.MaximumDashCount) return;
-
+        
         _dashTimerCooldown -= Time.deltaTime;
         if (_dashTimerCooldown < 0)
         {
             CurrentDashCount++;
             _dashTimerCooldown = PlayerData.DashCooldownTime;
         }
-
     }
 
     private void CalculateJumpBuffer() //Checks to see if the last frame is coherent with the current information and updates the collision of last frame 
@@ -231,10 +244,10 @@ public class Player : AppliedPhysics
     {
         if (StateMachine.CurrentState != WallGrabState)
         {
-            if(!PlayerData.CollisionDown)
+            if (!PlayerData.CollisionDown)
             {
                 var fallSpeed = PlayerData.EndedJumpEarly && PlayerData.CurrentVerticalSpeed > 0 ? PlayerData.CurrentFallSpeed * PlayerData.EndedJumpEarlyGravityModifier : PlayerData.CurrentFallSpeed;
-            
+
                 PlayerData.CurrentVerticalSpeed -= fallSpeed * Time.fixedDeltaTime;
             
                 if (PlayerData.CurrentVerticalSpeed < PlayerData.FallClamped) PlayerData.CurrentVerticalSpeed = PlayerData.FallClamped;
@@ -272,13 +285,10 @@ public class Player : AppliedPhysics
             PlayerData.CurrentHorizontalSpeed = 0;
         }
         
-        if (PlayerData.CollisionDown)
+        if (PlayerData.CollisionDown && PlayerData.CurrentVerticalSpeed < 0)
         {
-            if (PlayerData.CurrentVerticalSpeed < 0)
-            {
-                PlayerData.CurrentVerticalSpeed = 0;
-                PlayerData.CurrentJumpCount = PlayerData.MaximumJumpCount;
-            }
+            PlayerData.CurrentVerticalSpeed = 0;
+            PlayerData.CurrentJumpCount = PlayerData.MaximumJumpCount;
         }
     }
     
@@ -297,12 +307,6 @@ public class Player : AppliedPhysics
         }
     }
 
-    public void UpdateStickyWallCollisions()
-    {
-        UpdateStickyWallBackHit();
-        UpdateStickyWallFrontHit();
-    }
-    
     public bool WallStickyFrontHit { get { return WallStickyFrontHitResult; } }
     public RaycastHit2D WallStickyFrontHitResult { get; private set; }
     public void UpdateStickyWallFrontHit() { WallStickyFrontHitResult = Physics2D.Raycast(_rightWallCheck.position, Vector2.right * -_facingDirection, _wallCheckDistance, PlayerData.WallLayerMask); }
@@ -321,77 +325,12 @@ public class Player : AppliedPhysics
         Debug.Log(_debugMessage.ToString());
     }
 
-    private void OnPlayerDeath(HealthComponent component, GameObject killer)
+    private void ResetMaterialColor()
     {
-        if (killer != null)
-        {
-            Debug.Log(string.Format("Player killed by {0}", killer.name));
-        }
-        Animator.SetBool(StateMachine.CurrentState.StateName,false);
-        Animator.SetBool("dead",true);
-        
-        InputHandler.LockMouseInputs(true);
-        InputHandler.LockPlayerInputs(true);
-        
-        Time.timeScale = 0;
-        Debug.LogWarning("You died!");
-
-        SimplePlayerUI.Active = true;
-
-        //Play Death animation
-    }
-
-    private void Knockback(HealthComponent component, float value, GameObject hitter, Vector2 knockbackSpeed)
-    {
-        var direction = (transform.position - hitter.transform.position);
-        var directionX = Mathf.Sign(direction.x);
-        if (knockbackSpeed.x == 0)
-        {
-            PlayerData.CurrentHorizontalSpeed = directionX * PlayerData.KnockbackSpeed;
-        }
-        else
-        {
-            PlayerData.CurrentHorizontalSpeed = directionX * knockbackSpeed.x;
-        }
-        if (knockbackSpeed.y != 0)
-        {
-            PlayerData.CurrentVerticalSpeed = knockbackSpeed.y;
-        }
-    }
-
-    private void BlinkRed(HealthComponent component, float value, GameObject arg3, Vector2  knockbackSpeed)
-    {
-        Renderer.material.SetColor("_BaseColor", Color.red);
-        _lastHitTime = Time.time;
-    }
-
-    private void BloodEffects(HealthComponent component, float value, GameObject gameObject, Vector2 knockbackSpeed)
-    {
-        Animator.SetTrigger("hit");
-        Instantiate(BloodObject, transform.position, Quaternion.Inverse(transform.rotation));
-    }
-
-    private void ResetColor()
-    {
-        var nextFireTime = _lastHitTime + 0.1f;
+        var nextFireTime = LastHitTime + 0.1f;
         if (Time.time - nextFireTime > 0)
         {
             Renderer.material.SetColor("_BaseColor", _baseColor);
         }
     }
-
-    private void ShowMenuAfterAnimationEnd()
-    {
-        if (Animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
-        {
-            if (Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
-            {
-                if (SimplePlayerUI.Active && !SimplePlayerUI.RestartUI.activeSelf)
-                {
-                    SimplePlayerUI.EnableDeathMenu();
-                }
-            }
-        }
-    }
-
 }

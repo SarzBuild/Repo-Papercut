@@ -46,4 +46,5 @@ public class PlayerRunningState : PlayerState
         Player.MovementClampedAndApex();
         Player.UpdateVelocity();
     }
+    
 }

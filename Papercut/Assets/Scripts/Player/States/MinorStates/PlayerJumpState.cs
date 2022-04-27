@@ -14,6 +14,7 @@ public class PlayerJumpState : PlayerState
     public override void EnterState()
     {
         base.EnterState();
+        PlayerData.LastTimeJumpKeyWasPressed = Time.time;
         CalculateJump();
         StateMachine.ChangeState(Player.InAirState);
     }

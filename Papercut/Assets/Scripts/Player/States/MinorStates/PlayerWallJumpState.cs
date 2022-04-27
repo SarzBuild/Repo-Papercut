@@ -6,30 +6,35 @@ using UnityEngine.SocialPlatforms;
 
 public class PlayerWallJumpState : PlayerState
 {
-    public PlayerWallJumpState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData, PlayerStateId.WallJump)
-    {
-    }
-    
-    private float _lastTimeEnterState;
-    private Vector2 _angle;
+    public PlayerWallJumpState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData, PlayerStateId.WallJump) { }
+    private Vector2 _wallJumpAngle;
     private float _percentTimeCurve;
     
     public override void EnterState()
     {
         base.EnterState();
+        
         _percentTimeCurve = 1;
-        _lastTimeEnterState = Time.time;
+        Player.LastWallJumpTime = Time.time;
         PlayerData.CurrentJumpCount--;
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        
         CalculateJumpCurve();
         CalculateJump();
         TimeBeforeJumpEnd();
     }
-    
+
+    public override void DoChecks()
+    {
+        base.DoChecks();
+        
+        Player.UpdateHitResults();
+    }
+
     private void CalculateJumpCurve()
     {
         const int maxY = 1;
@@ -43,21 +48,21 @@ public class PlayerWallJumpState : PlayerState
 
         PlayerData.WallJumpCurrentAngle = PlayerData.CurveSpeedModifier.Evaluate(percentage)*100;
         
-        _angle = new Vector2((float)Mathf.Cos(PlayerData.WallJumpCurrentAngle * Mathf.PI / 180), (float)Mathf.Sin(PlayerData.WallJumpCurrentAngle * Mathf.PI / 180));
+        _wallJumpAngle = new Vector2((float)Mathf.Cos(PlayerData.WallJumpCurrentAngle * Mathf.PI / 180), (float)Mathf.Sin(PlayerData.WallJumpCurrentAngle * Mathf.PI / 180));
         
     }
     
     private void CalculateJump()
     {
-        if(Player.FacingDirection == 1) Player.SetVelocityX(PlayerData.WallJumpingSpeed * _angle.x); 
-        if(Player.FacingDirection == -1) Player.SetVelocityX(-PlayerData.WallJumpingSpeed *  _angle.x);
-        Player.SetVelocityY(PlayerData.WallJumpingSpeed * _angle.y);
+        if(Player.FacingDirection == 1) Player.SetVelocityX(PlayerData.WallJumpingSpeed * _wallJumpAngle.x); 
+        if(Player.FacingDirection == -1) Player.SetVelocityX(-PlayerData.WallJumpingSpeed *  _wallJumpAngle.x);
+        Player.SetVelocityY(PlayerData.WallJumpingSpeed * _wallJumpAngle.y);
         Player.ApplyVelocity();
     }
 
     private void TimeBeforeJumpEnd()
     {
-        var cooldownTime = _lastTimeEnterState + PlayerData.DelayOfWallJump;
+        var cooldownTime = Player.LastWallJumpTime + PlayerData.DelayOfWallJump;
         if (Time.time - cooldownTime > 0)
         {
             if(Player.FacingDirection == 1) PlayerData.CurrentHorizontalSpeed = PlayerData.EndWallJumpXVelocity;

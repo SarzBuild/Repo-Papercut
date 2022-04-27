@@ -17,7 +17,9 @@ public enum PlayerStateId
     [StateName("wallGrab")] WallGrab,
     [StateName("wallJump")] WallJump,
     [StateName("grappling")] Grappling,
-    [StateName("dead")] Death
+    [StateName("dead")] Death,
+    [StateName("attacks")] Attack,
+    [StateName("damaged")] Damaged
 }
 
 public class PlayerState

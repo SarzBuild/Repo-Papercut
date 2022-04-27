@@ -34,7 +34,7 @@ public class RestartManager : MonoBehaviour
         _player.InputHandler.LockPlayerInputs(false); //Enable the inputs for the player
         _player.InputHandler.LockMouseInputs(false);
         
-        _player.Animator.SetBool("idle",true);
+        _player.StateMachine.ChangeState(_player.IdleState);
 
         Time.timeScale = 1; //Set the game speed to normal
 

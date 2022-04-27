@@ -3,14 +3,14 @@
 
 public class PlayerDeathState : PlayerState
 {
-    public PlayerDeathState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, PlayerStateId id) : base(player, stateMachine, playerData, id)
+    public PlayerDeathState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData, PlayerStateId.Death)
     {
     }
-
 
     public override void EnterState()
     {
         base.EnterState();
+        
     }
 
     public override void ExitState()
@@ -21,15 +21,41 @@ public class PlayerDeathState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        ShowMenuAfterAnimationEnd();
     }
 
-    public override void PhysicsUpdate()
+    public void OnPlayerDeath(HealthComponent component, GameObject killer)
     {
-        base.PhysicsUpdate();
+        if (killer != null)
+        {
+            Debug.Log(string.Format("Player killed by {0}", killer.name));
+        }
+        
+        Player.Animator.SetBool(StateMachine.CurrentState.StateName,false);
+        Player.Animator.SetBool("dead",true);
+        
+        Player.InputHandler.LockMouseInputs(true);
+        Player.InputHandler.LockPlayerInputs(true);
+        
+        Time.timeScale = 0;
+
+        Player.SimplePlayerUI.Active = true;
+        
+        StateMachine.ChangeState(this);
+        
     }
 
-    public override void DoChecks()
+    private void ShowMenuAfterAnimationEnd()
     {
-        base.DoChecks();
+        if (Player.Animator.GetCurrentAnimatorStateInfo(0).IsName("Death"))
+        {
+            if (Player.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+            {
+                if (Player.SimplePlayerUI.Active && !Player.SimplePlayerUI.RestartUI.activeSelf)
+                {
+                    Player.SimplePlayerUI.EnableDeathMenu();
+                }
+            }
+        }
     }
 }

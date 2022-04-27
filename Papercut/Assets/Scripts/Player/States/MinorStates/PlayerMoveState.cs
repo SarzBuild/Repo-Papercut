@@ -65,5 +65,6 @@ public class PlayerMoveState : PlayerState
     public override void DoChecks()
     {
         base.DoChecks();
+        Player.UpdateHitResults();
     }
 }

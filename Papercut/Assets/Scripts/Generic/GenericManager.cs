@@ -56,4 +56,9 @@ public class GenericManager : MonoBehaviour
     {
         Application.Quit();
     }
+    
+    public static bool Timer( float timeWhenEventOccured, float cooldown)
+    {
+        return Time.time - (timeWhenEventOccured + cooldown) < 0;
+    }
 }

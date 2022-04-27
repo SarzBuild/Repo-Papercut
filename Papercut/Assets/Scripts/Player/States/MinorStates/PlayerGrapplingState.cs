@@ -235,5 +235,4 @@ public class PlayerGrapplingState : PlayerState
             Player.Hook.transform.eulerAngles = new Vector3(0, 0, angle - 90);
         }
     }
-
 }

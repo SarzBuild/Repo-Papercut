@@ -4,18 +4,14 @@ using UnityEngine;
 
 public class PlayerDashState : PlayerState
 {
-    public PlayerDashState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData, PlayerStateId.Dash)
-    {
-    }
+    public PlayerDashState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData, PlayerStateId.Dash) { }
 
     private float _tempDashDirection;
-    private int _dashCount;
-    private float _dashingTime;
 
     public override void EnterState()
     {
         base.EnterState();
-        _dashingTime = Time.time + PlayerData.DashingTime;
+        Player.LastDashTime = Time.time + PlayerData.DashingTime;
         Player.CurrentDashCount--;
         _tempDashDirection = PlayerData.RawInputValue * PlayerData.DashingAcceleration * PlayerData.WalkingSpeed;
         
@@ -33,6 +29,7 @@ public class PlayerDashState : PlayerState
         UpdateDashCondition();
         
         if(IsExitingState) return;
+        if (!DashCondition) return;
         HandleStateChange();
     }
 
@@ -45,7 +42,6 @@ public class PlayerDashState : PlayerState
 
     private void HandleStateChange()
     {
-        if (!DashCondition) return;
         if (Player.Grounded)
         {
             if (PlayerData.RawInputValue != 0)
@@ -69,7 +65,7 @@ public class PlayerDashState : PlayerState
     
     public bool DashCondition { get { return DashingTimeResult; } }
     public bool DashingTimeResult { get; private set; }
-    public void UpdateDashCondition() { DashingTimeResult = _dashingTime < Time.time; }
+    public void UpdateDashCondition() { DashingTimeResult = Player.LastDashTime < Time.time; }
 
 
     private void HandleDashing()

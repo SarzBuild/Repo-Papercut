@@ -52,10 +52,16 @@ public class PlayerWallGrabState : PlayerState
         TimeBeforeFalling();
     }
 
+    public override void DoChecks()
+    {
+        base.DoChecks();
+        Player.UpdateHitResults();
+        Player.UpdateStickyWallBackHit();
+        Player.UpdateStickyWallFrontHit();
+    }
+
     private bool CheckForNotOnStickyWall()
     {
-        Player.UpdateHitResults();
-        Player.UpdateStickyWallCollisions();
         if (Player.WallStickyBackHit)
         {
             return true;

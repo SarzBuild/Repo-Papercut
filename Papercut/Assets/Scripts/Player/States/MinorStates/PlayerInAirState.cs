@@ -30,6 +30,14 @@ public class PlayerInAirState : PlayerState
         base.ExitState();
     }
 
+    public override void DoChecks()
+    {
+        base.DoChecks();
+        Player.UpdateHitResults();
+        Player.UpdateStickyWallBackHit();
+        Player.UpdateStickyWallFrontHit();
+    }
+
     private void HandleStateChange()
     {
         if (Input.GetKeyDown(KeyCode.Space))
