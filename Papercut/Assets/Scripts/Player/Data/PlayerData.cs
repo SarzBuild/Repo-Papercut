@@ -26,6 +26,8 @@ public class PlayerData : ScriptableObject
     public float KnockbackSpeed;
 
     public bool CanBreakWalls;
+
+    public float HitCooldown = 0.3f;
     
     [Header("On Ground")] 
     

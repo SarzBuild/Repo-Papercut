@@ -272,10 +272,7 @@ public abstract class WeaponBase : MonoBehaviour
     {
         m_Animator?.SetBool(m_EquippedAnimBool, true);
     }
-
-
-    protected static string _sword_anim_1 = "sword1";
-    protected static string _sword_anim_2 = "sword2";
+    
     protected static string m_FireAnimTrigger = "Fire";
     protected virtual void PlayFireAnimation()
     {

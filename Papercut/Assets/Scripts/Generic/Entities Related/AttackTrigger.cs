@@ -16,20 +16,22 @@ public class AttackTrigger : MonoBehaviour
 
     private Vector2 _knockbackSpeed;
 
-    public void InitializeProperties(GameObject parent, WeaponData weaponData, EnemyData enemyData, Vector2 knockbackMultiplier)
+    public void InitializeEnemyProperties(GameObject parent, WeaponData weaponData, EnemyData enemyData, Vector2 knockbackMultiplier)
     {
-        _parent = parent;
-        _weaponData = weaponData;
         _enemyData = enemyData;
-        _cooldown = weaponData.FireCooldownSec;
-        _knockbackSpeed = knockbackMultiplier;
+        InitializeProperties(parent,weaponData,knockbackMultiplier);
     }
 
-    public void InitializeProperties(GameObject parent, WeaponData weaponData, PlayerData playerData, Vector2 knockbackMultiplier)
+    public void InitializePlayerProperties(GameObject parent, WeaponData weaponData, PlayerData playerData, Vector2 knockbackMultiplier)
+    {
+        _playerData = playerData;
+        InitializeProperties(parent,weaponData,knockbackMultiplier);
+    }
+
+    private void InitializeProperties(GameObject parent, WeaponData weaponData, Vector2 knockbackMultiplier)
     {
         _parent = parent;
         _weaponData = weaponData;
-        _playerData = playerData;
         _cooldown = weaponData.FireCooldownSec;
         _knockbackSpeed = knockbackMultiplier;
     }
@@ -75,6 +77,10 @@ public class AttackTrigger : MonoBehaviour
             {
                 Toggle(false);
             }
+            else if (CheckMatchingLayers(targetLayer, GenericManager.GroundLayerMask))
+            {
+                ApplyDamage(col);
+            }
         }
 
         if (_enemyData != null)
@@ -97,10 +103,9 @@ public class AttackTrigger : MonoBehaviour
         var healthComponent = col.GetComponent<HealthComponent>();
         if (healthComponent != null)
         {
-            print(_weaponData.Damage);
             healthComponent.DealDamage(_weaponData.Damage, _parent, _knockbackSpeed);
-            Toggle(false);
         }
+        Toggle(false);
     }
 
     private bool CheckMatchingLayers(int layer1, int layer2)

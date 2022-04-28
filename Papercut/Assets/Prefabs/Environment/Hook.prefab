@@ -40,6 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2210338417404742395}
   - component: {fileID: 4870940263456696906}
+  - component: {fileID: 1129194547722785417}
   m_Layer: 10
   m_Name: Hook
   m_TagString: Untagged
@@ -78,7 +79,20 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.5
+--- !u!114 &1129194547722785417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6075274570453764101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f776ea91a86924585e82cc4201037d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GrapplePoint: {fileID: 6872096282640719667}
 --- !u!1001 &3901976073327023511
 PrefabInstance:
   m_ObjectHideFlags: 0

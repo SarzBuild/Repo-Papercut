@@ -22,7 +22,7 @@ public class GuardianWeapon : WeaponBase
             AttackTrigger = GuardianEnemyBrain.AttackTrigger;
         }
         
-        AttackTrigger.InitializeProperties(gameObject, Settings, GuardianEnemyBrain.NewEnemyData, GuardianEnemyBrain.EnemyData.AttackKnockbackForce);
+        AttackTrigger.InitializeEnemyProperties(gameObject, Settings, GuardianEnemyBrain.NewEnemyData, GuardianEnemyBrain.EnemyData.AttackKnockbackForce);
         AttackTrigger.SetActive();
         
         

@@ -49,7 +49,7 @@ public class PlayerState
     public virtual void EnterState()
     {
         DoChecks();
-        Player.Animator.SetBool(_stateName, true);
+        if(StateMachine.CurrentState != Player.AttackState) Player.Animator.SetBool(_stateName, true);
         StartTime = Time.time;
         IsAnimationFinished = false;
         IsExitingState = false;
@@ -57,7 +57,7 @@ public class PlayerState
 
     public virtual void ExitState()
     {
-        Player.Animator.SetBool(_stateName, false);
+        if(StateMachine.CurrentState != Player.AttackState) Player.Animator.SetBool(_stateName, false);
         IsExitingState = true;
     }
 

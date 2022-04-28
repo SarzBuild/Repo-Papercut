@@ -42,7 +42,7 @@ public class Player : AppliedPhysics
     public PlayerWallJumpState WallJumpState { get; private set; }
     public PlayerGrapplingState GrapplingState { get; private set; }
     public PlayerDeathState DeathState { get; private set; }
-    public PlayerAttackState AttackScene { get; private set; }
+    public PlayerAttackState AttackState { get; private set; }
     public PlayerDamagedState DamagedState { get; private set; }
 
     #endregion
@@ -75,6 +75,11 @@ public class Player : AppliedPhysics
 
     public GameObject BloodObject;
     public GameObject Hook;
+
+    public AttackTrigger AttackTrigger;
+    public int AttackCounterMax = 2;
+    [Range(0,2)]public int AttackCounter;
+    public float LastAttackTime;
 
     private void Awake()
     {
@@ -127,7 +132,7 @@ public class Player : AppliedPhysics
         WallJumpState = new PlayerWallJumpState(this, StateMachine, PlayerData);
         GrapplingState = new PlayerGrapplingState(this, StateMachine, PlayerData);
         DeathState = new PlayerDeathState(this, StateMachine, PlayerData);
-        AttackScene = new PlayerAttackState(this, StateMachine, PlayerData);
+        AttackState = new PlayerAttackState(this, StateMachine, PlayerData);
         DamagedState = new PlayerDamagedState(this, StateMachine, PlayerData);
     }
     
@@ -152,18 +157,22 @@ public class Player : AppliedPhysics
     private void InitializeHealth()
     {
         HealthComponent.OnDeath += DeathState.OnPlayerDeath;
+        HealthComponent.OnDeath += DeathState.StateChange;
         HealthComponent.OnDamageTaken += DamagedState.Knockback;
         HealthComponent.OnDamageTaken += DamagedState.BlinkRed;
         HealthComponent.OnDamageTaken += DamagedState.BloodEffects;
+        HealthComponent.OnDamageTaken += DamagedState.StateChange;
         // Other component events exist here too, tag on to trigger animation/sound/FX
     }
     
     private void OnDisable()
     {
         HealthComponent.OnDeath -= DeathState.OnPlayerDeath;
+        HealthComponent.OnDeath -= DeathState.StateChange;
         HealthComponent.OnDamageTaken -= DamagedState.BlinkRed;
         HealthComponent.OnDamageTaken -= DamagedState.Knockback;
         HealthComponent.OnDamageTaken -= DamagedState.BloodEffects;
+        HealthComponent.OnDamageTaken -= DamagedState.StateChange;
     }
     
     private void Update()
@@ -179,6 +188,7 @@ public class Player : AppliedPhysics
         HandleWeapons();
 
         TimerForWallGrabJumps();
+        TimerForAttackCounterDecrease();
 
         ResetMaterialColor();
 
@@ -305,6 +315,23 @@ public class Player : AppliedPhysics
             PlayerData.CurrentlyWallJumping = false;
             timer = 0;
         }
+    }
+    
+    private void TimerForAttackCounterDecrease()
+    {
+        if(Weapons.Inventory.Count <= 0) return;
+        if (LastAttackTime + ((float)AttackCounterMax/AttackCounter)/2 < Time.time)
+        {
+            AttackCounter = 0;
+        }
+    }
+
+    public int IncreaseAttackCounter()
+    {
+        AttackCounter++;
+        if (AttackCounter > AttackCounterMax) AttackCounter = AttackCounterMax;
+        return AttackCounter;
+
     }
 
     public bool WallStickyFrontHit { get { return WallStickyFrontHitResult; } }

@@ -23,6 +23,11 @@ public class PlayerDeathState : PlayerState
         base.LogicUpdate();
         ShowMenuAfterAnimationEnd();
     }
+    
+    public void StateChange(HealthComponent component, GameObject killer)
+    {
+        StateMachine.ChangeState(this);
+    }
 
     public void OnPlayerDeath(HealthComponent component, GameObject killer)
     {
@@ -40,9 +45,6 @@ public class PlayerDeathState : PlayerState
         Time.timeScale = 0;
 
         Player.SimplePlayerUI.Active = true;
-        
-        StateMachine.ChangeState(this);
-        
     }
 
     private void ShowMenuAfterAnimationEnd()

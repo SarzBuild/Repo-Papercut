@@ -80,7 +80,6 @@ public class PlayerGrapplingState : PlayerState
             _moveTime += Time.fixedDeltaTime;
             CalculateVelocity();
         }
-        
     }
 
     public override void PhysicsUpdate()
@@ -93,7 +92,7 @@ public class PlayerGrapplingState : PlayerState
             Player.CheckFlip((int)PlayerData.RawInputValue);
         }
     }
-
+    
     private void ApplyVelocityWhenExitingState() //Sets the velocity of the normal states 
     {
         if (!_activeVelocity) {return;}
@@ -206,7 +205,20 @@ public class PlayerGrapplingState : PlayerState
             else {_ropeFallVelocity = -0.1f;}
 
             _ropeFallAcceleration += Time.fixedDeltaTime;
+            if (_ropeFallAcceleration >= 10f) _ropeFallAcceleration = 10f;
             _grapplePoint = new Vector2(_grapplePoint.x + _ropeFallVelocity, _grapplePoint.y - _ropeFallAcceleration);
+        }
+
+        if (hitGrappleTarget != null)
+        {
+            var anchor = hitGrappleTarget.GetComponent<GrapplingAnchorPoint>().GrapplePoint;
+            if (anchor)
+            {
+                _grapplePoint = anchor.position;
+                _activeVelocity = true;
+                _canGrapple = true;
+            }
+            
         }
     }
     
@@ -223,16 +235,21 @@ public class PlayerGrapplingState : PlayerState
         for (int i = 0; i < PlayerData.RopePrecision; i++)
         {
             float delta = (float)i / ((float)PlayerData.RopePrecision - 1f);
-            Vector2 offset = Vector2.Perpendicular(_grappleDistanceVector).normalized * PlayerData.RopeAnimationCurve.Evaluate(delta) * _waveSize;
+            Vector2 offset = Vector2.Perpendicular(_grappleDistanceVector).normalized * (PlayerData.RopeAnimationCurve.Evaluate(delta) * _waveSize);
             Vector2 targetPosition = Vector2.Lerp(_startPoint, _grapplePoint, delta) + offset;
             Vector2 currentPosition = Vector2.Lerp(_startPoint, targetPosition, PlayerData.RopeProgressionCurve.Evaluate(_moveTime) * PlayerData.RopeProgressionSpeed);
     
             Player.LineRenderer.SetPosition(i, currentPosition);
             Player.Hook.transform.position = currentPosition;
 
-            var direction = _ray.normalized;
-            var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            Player.Hook.transform.eulerAngles = new Vector3(0, 0, angle - 90);
+            UpdateHookPosition(_ray);
         }
+    }
+
+    private void UpdateHookPosition(Vector2 dir)
+    {
+        var direction = dir.normalized;
+        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Player.Hook.transform.eulerAngles = new Vector3(0, 0, angle - 90);
     }
 }

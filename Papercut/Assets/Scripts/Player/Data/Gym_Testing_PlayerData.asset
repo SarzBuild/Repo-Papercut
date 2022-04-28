@@ -17,18 +17,19 @@ MonoBehaviour:
 '
   RawInputValue: 0
   Velocity: {x: 0, y: 0}
-  LastPosition: {x: -34.182655, y: 16.608437}
-  LastTimeJumpKeyWasPressed: 33.711086
+  LastPosition: {x: 1.8943211, y: 1.8406308}
+  LastTimeJumpKeyWasPressed: 27.521523
   CurrentHorizontalSpeed: 0
   CurrentVerticalSpeed: 0
   PlayerLandedThisFrame: 0
   CollisionDown: 1
-  TimePlayerStoppedGrounded: -3.4028235e+38
+  TimePlayerStoppedGrounded: 28.275452
   PlayerLayerMask:
     serializedVersion: 2
     m_Bits: 0
   KnockbackSpeed: 9.14
   CanBreakWalls: 0
+  HitCooldown: 0
   WalkingSpeed: 8
   RunningSpeed: 15
   CurrentSpeed: 8
@@ -46,7 +47,7 @@ MonoBehaviour:
   CoyoteUsable: 1
   CoyoteTimeThreshold: 0.55
   JumpBuffer: 0.1
-  EndedJumpEarly: 1
+  EndedJumpEarly: 0
   EndedJumpEarlyGravityModifier: 3
   ApexPoint: 0
   JumpApexSpeedBonus: 2
