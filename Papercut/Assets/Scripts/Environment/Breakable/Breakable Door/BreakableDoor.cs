@@ -6,9 +6,13 @@ using UnityEngine;
 public class BreakableDoor : MonoBehaviour
 {
     public HealthComponent HealthComponent;
-
+    public Animator Animator;
+    public Collider2D Collider2D;
+    
     private void OnEnable()
     {
+        if(Animator == null) Animator = GetComponent<Animator>();
+        if (Collider2D == null) Collider2D = GetComponent<Collider2D>();
         HealthComponent.OnDeath += OnDeath;
     }
 
@@ -19,11 +23,7 @@ public class BreakableDoor : MonoBehaviour
 
     private void OnDeath(HealthComponent args, GameObject killer)
     {
-        if (killer != null)
-        {
-            Debug.Log(string.Format("{0} killed by {1}", name, killer.name));
-        }
-        
-        Destroy(gameObject);   
+        Animator.SetBool("broken", true);
+        Collider2D.enabled = false;
     }
 }

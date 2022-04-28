@@ -13,7 +13,6 @@ public class EventTriggerZone : MonoBehaviour
             if (col.gameObject.layer == GenericManager.PlayerLayerMask)
             {
                 EventTriggered.Raise();
-                AkSoundEngine.PostEvent("Cosmonaute", gameObject);
                 gameObject.SetActive(false);
             }
         }

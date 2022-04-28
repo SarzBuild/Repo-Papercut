@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6338783349111466724}
   - component: {fileID: 4356020635838774275}
-  - component: {fileID: 7654074228821140322}
   - component: {fileID: 602013516197245275}
   - component: {fileID: 1058555092973210727}
   - component: {fileID: 3162803959295789055}
+  - component: {fileID: 128796437}
   m_Layer: 12
   m_Name: BreakableWall
   m_TagString: Untagged
@@ -83,28 +83,13 @@ SkinnedMeshRenderer:
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: -6330777925850950115, guid: 4da11b7d8ad54a842a35c8cf1778cbcc, type: 3}
   m_Bones: []
-  m_BlendShapeWeights: []
+  m_BlendShapeWeights:
+  - 0
   m_RootBone: {fileID: 0}
   m_AABB:
     m_Center: {x: 0, y: 4, z: 0}
     m_Extent: {x: 0.2, y: 4, z: 0}
   m_DirtyAABB: 0
---- !u!111 &7654074228821140322
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6682270320277287006}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 1827226128182048838, guid: 4da11b7d8ad54a842a35c8cf1778cbcc, type: 3}
-  m_Animations:
-  - {fileID: 1827226128182048838, guid: 4da11b7d8ad54a842a35c8cf1778cbcc, type: 3}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &602013516197245275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,6 +116,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthComponent: {fileID: 602013516197245275}
+  Animator: {fileID: 128796437}
+  Collider2D: {fileID: 3162803959295789055}
 --- !u!61 &3162803959295789055
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -157,3 +144,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.289415, y: 8.077332}
   m_EdgeRadius: 0
+--- !u!95 &128796437
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6682270320277287006}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d7f3bf752f973334a9f6c293ef751cf8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
