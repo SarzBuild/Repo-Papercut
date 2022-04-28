@@ -4,8 +4,8 @@ using UnityEngine;
 public class PlayerInputState : MonoBehaviour
 {
     //Player locking things, can't move when its activated, I'll add some functions to swap them
-    [SerializeField] public bool LockPlayer { get; private set; }
-    [SerializeField] public bool LockMouse { get; private set; }
+    [SerializeField] public bool LockPlayer;
+    [SerializeField] public bool LockMouse;
     public Camera _mainCamera;
     
     //Value state, just to keep things straight, we return them with the proper functions.
@@ -70,4 +70,9 @@ public class PlayerInputState : MonoBehaviour
         LockMouse = value;
     }
 
+    public void TogglePlayerInputs()
+    {
+        LockPlayer = !LockPlayer;
+    }
+    
 }

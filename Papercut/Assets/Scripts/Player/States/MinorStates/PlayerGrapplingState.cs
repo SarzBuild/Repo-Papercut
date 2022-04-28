@@ -209,10 +209,7 @@ public class PlayerGrapplingState : PlayerState
             
             _ropeFallAcceleration += Time.fixedDeltaTime;
             if (_ropeFallAcceleration >= 0.25f) _ropeFallAcceleration = 0.25f;
-            var _lastGrapplePoint = _grapplePoint;
             _grapplePoint = new Vector2(_grapplePoint.x + _ropeFallVelocity, _grapplePoint.y - _ropeFallAcceleration);
-            
-            UpdateHookPosition(_lastGrapplePoint - _grapplePoint);
         }
 
         if (hitGrappleTarget != null)
