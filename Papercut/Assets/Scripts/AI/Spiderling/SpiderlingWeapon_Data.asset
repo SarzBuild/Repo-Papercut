@@ -15,7 +15,7 @@ MonoBehaviour:
   description: 
   FireCooldownSec: 1
   FireWaitForAnimationToFinishEvent: 0
-  Damage: 5
+  Damage: 10
   UsesAmmo: 0
   DefaultAmmo: 0
   AmmoPerFire: 1
