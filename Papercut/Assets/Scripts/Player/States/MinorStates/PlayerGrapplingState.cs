@@ -201,12 +201,18 @@ public class PlayerGrapplingState : PlayerState
         Collider2D hitGrappleTarget = Physics2D.OverlapCircle(_grapplePoint, 0.1f, PlayerData.GrappleTargetableLayer);
         if (hitGround == null && hitGrappleTarget == null)
         {
-            if (_ray.x > 0) {_ropeFallVelocity = 0.1f;}
-            else {_ropeFallVelocity = -0.1f;}
-
+            if (_ray.x > 0) {_ropeFallVelocity = 0.02f;}
+            else {_ropeFallVelocity = -0.02f;}
+            
+            _activeVelocity = false;
+            _canGrapple = false;
+            
             _ropeFallAcceleration += Time.fixedDeltaTime;
-            if (_ropeFallAcceleration >= 10f) _ropeFallAcceleration = 10f;
+            if (_ropeFallAcceleration >= 0.25f) _ropeFallAcceleration = 0.25f;
+            var _lastGrapplePoint = _grapplePoint;
             _grapplePoint = new Vector2(_grapplePoint.x + _ropeFallVelocity, _grapplePoint.y - _ropeFallAcceleration);
+            
+            UpdateHookPosition(_lastGrapplePoint - _grapplePoint);
         }
 
         if (hitGrappleTarget != null)
@@ -215,10 +221,12 @@ public class PlayerGrapplingState : PlayerState
             if (anchor)
             {
                 _grapplePoint = anchor.position;
-                _activeVelocity = true;
-                _canGrapple = true;
+                if (_grapplePoint == (Vector2)anchor.position)
+                {
+                    _activeVelocity = true;
+                    _canGrapple = true;
+                }
             }
-            
         }
     }
     
