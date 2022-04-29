@@ -7266,6 +7266,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 334959257260887491, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749850628216642740, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.35
+      objectReference: {fileID: 0}
     - target: {fileID: 2288407628216534906, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -7330,5 +7338,41 @@ PrefabInstance:
       propertyPath: Enemies.Array.data[3]
       value: 
       objectReference: {fileID: 1027177670}
+    - target: {fileID: 6102495595697937092, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 25.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622709959581538952, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622709959581538952, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622709959581538952, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622709959581538952, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 6622709959581538952, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 7604963145613691534, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7604963145613691534, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8856786415539742190, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
