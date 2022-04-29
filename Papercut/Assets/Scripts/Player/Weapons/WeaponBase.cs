@@ -70,6 +70,7 @@ public abstract class WeaponBase : MonoBehaviour
         {
             transform.SetParent(Owner.WeaponHoldPosition);
             transform.localPosition = Vector3.zero; // Resets the position of the object to 0 for consistency 
+            transform.localScale = new Vector3(1, 1, 1); // Resets the scale of the object to 1,1,1 for consistency
         }
 
         if (m_AudioSource == null)
@@ -78,7 +79,7 @@ public abstract class WeaponBase : MonoBehaviour
         }
     }
 
-    // Returns true if ammo was given.
+    // Returns true if ammo was given..
     public virtual bool GiveAmmo(float ammount)
     {
         if (!Settings.UsesAmmo || CurrentAmmo == Settings.MaxAmmo)

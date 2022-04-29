@@ -16,6 +16,7 @@ public class DoorEventListener : MonoBehaviour
         MakeVector3List();
         if (Animator == null) Animator = GetComponentInParent<Animator>();
         if (Collider2D == null) Collider2D = GetComponent<Collider2D>();
+        Animator.SetBool("closed",true);
     }
 
     private void MakeVector3List()
@@ -46,6 +47,5 @@ public class DoorEventListener : MonoBehaviour
     public void ActivatedPos()
     {
         _nextPos = 1;
-        Animator.SetBool("closed",true);
     }
 }
