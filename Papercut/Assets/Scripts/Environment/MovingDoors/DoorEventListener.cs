@@ -7,6 +7,7 @@ public class DoorEventListener : MonoBehaviour
     public List<Transform> Transforms = new List<Transform>();
     private List<Vector3> _positionList;
     public Animator Animator;
+    public Collider2D Collider2D;
     
     private int _nextPos;
 
@@ -14,6 +15,8 @@ public class DoorEventListener : MonoBehaviour
     {
         MakeVector3List();
         if (Animator == null) Animator = GetComponentInParent<Animator>();
+        if (Collider2D == null) Collider2D = GetComponent<Collider2D>();
+        Animator.SetBool("closed",true);
     }
 
     private void MakeVector3List()
@@ -32,18 +35,17 @@ public class DoorEventListener : MonoBehaviour
 
     private void MoveToNextPos()
     {
-        transform.position = Vector2.Lerp(transform.position, _positionList[_nextPos], Time.deltaTime*10);
+        transform.parent.transform.position = Vector2.Lerp(transform.parent.transform.position, _positionList[_nextPos], Time.deltaTime*10);
     }
     
     public void InitialPos()
     {
-        _nextPos = 0;
         Animator.SetBool("closed",false);
+        Collider2D.enabled = false;
     }
 
     public void ActivatedPos()
     {
         _nextPos = 1;
-        Animator.SetBool("closed",true);
     }
 }

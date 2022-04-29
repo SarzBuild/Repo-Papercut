@@ -27428,6 +27428,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 615611056547007952, guid: 4887d11c90724d0499f2cf855f00f391, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -16.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 615611057935433729, guid: 4887d11c90724d0499f2cf855f00f391, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 215.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 615611057935433729, guid: 4887d11c90724d0499f2cf855f00f391, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -23.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 1436397354805710235, guid: 4887d11c90724d0499f2cf855f00f391, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.431
+      objectReference: {fileID: 0}
+    - target: {fileID: 1436397356202557514, guid: 4887d11c90724d0499f2cf855f00f391, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.485
+      objectReference: {fileID: 0}
     - target: {fileID: 3009873621564756544, guid: 4887d11c90724d0499f2cf855f00f391, type: 3}
       propertyPath: m_Name
       value: Events Parent 4
