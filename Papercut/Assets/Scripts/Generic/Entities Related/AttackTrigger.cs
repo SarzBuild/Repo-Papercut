@@ -104,8 +104,8 @@ public class AttackTrigger : MonoBehaviour
         if (healthComponent != null)
         {
             healthComponent.DealDamage(_weaponData.Damage, _parent, _knockbackSpeed);
+            Toggle(false);
         }
-        Toggle(false);
     }
 
     private bool CheckMatchingLayers(int layer1, int layer2)
