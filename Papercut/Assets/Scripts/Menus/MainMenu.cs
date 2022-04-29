@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using Sequence = DG.Tweening;
 
 public class MainMenu : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class MainMenu : MonoBehaviour
     public Image VolumeFillImage;
     public Image VolumeHandleImage;
 
+    public Image ControlsImage;
+    private bool ControlImageIsFaded = false;
+
     public Text ControlsText;
     Color ControlsTextStartColour;
     public Text BackText;
@@ -30,8 +34,6 @@ public class MainMenu : MonoBehaviour
     public Text StartText;
     public Text QuitText;
     public Text OptionsText;
-
-    //bool Isflipped = false;
 
     // Start is called before the first frame update
     void Start()
@@ -84,9 +86,15 @@ public class MainMenu : MonoBehaviour
         else if(CurrentMenuState == MenuState.ControlsState)
         {
             CurrentMenuState = MenuState.OptionsState;
+            //Debug.Log("FadeToSpeeder");
+            //var MySequence = DOTween.Sequence();
+            //MySequence.Append(ControlsImage.DOFade(0f, 0.5f));
+            ControlsImage.DOKill();
+            ControlsImage.DOFade(0f, 0.5f).OnComplete(MoveSpidersBack);
+            /*GenericManager.FadeOut(ControlsImage, 1f, true);
             OptionsButton.transform.DOMoveX(560f, 0.5f);
             StartButton.transform.DOMoveX(960f, 0.5f);
-            QuitButton.transform.DOMoveX(1360f, 0.5f);
+            QuitButton.transform.DOMoveX(1360f, 0.5f);*/
         }
     }
 
@@ -106,7 +114,7 @@ public class MainMenu : MonoBehaviour
         CurrentMenuState = MenuState.ControlsState;
         OptionsButton.transform.DOMoveX(100f, 0.5f);
         StartButton.transform.DOMoveX(300f, 0.5f);
-        QuitButton.transform.DOMoveX(500f, 0.5f);
+        QuitButton.transform.DOMoveX(500f, 0.5f).OnComplete(ControlImageOn);
     }
 
     private void ImageFlip()
@@ -144,4 +152,24 @@ public class MainMenu : MonoBehaviour
             OptionsText.DOFade(1f, 0.2f);
         }
     }
+
+    private void ControlImageOn()
+    {
+        if(CurrentMenuState == MenuState.ControlsState)
+        {
+            //Debug.Log("FadeToDonke");
+            ControlsImage.DOKill();
+            ControlsImage.DOFade(1f, 1f);
+            //ControlImageIsFaded = false;
+            //GenericManager.FadeIn(ControlsImage, 1f, true);
+        }
+    }
+
+    private void MoveSpidersBack()
+    {
+        OptionsButton.transform.DOMoveX(560f, 0.5f);
+        StartButton.transform.DOMoveX(960f, 0.5f);
+        QuitButton.transform.DOMoveX(1360f, 0.5f);
+    }
+
 }
