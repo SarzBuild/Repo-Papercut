@@ -58,7 +58,9 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 0.25, y: 0.75}
+      - {x: 0.07837677, y: 0.5397272}
       - {x: 0, y: 0}
+      - {x: 0, y: -0.9}
       - {x: 0.25, y: -0.9}
 --- !u!114 &530917558
 MonoBehaviour:
@@ -422,6 +424,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc02f1e8e7ca4b4a8131fd6b9ac64e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LockPlayer: 0
+  LockMouse: 0
   _mainCamera: {fileID: 0}
   _rightInputState: 0
   _leftInputState: 0

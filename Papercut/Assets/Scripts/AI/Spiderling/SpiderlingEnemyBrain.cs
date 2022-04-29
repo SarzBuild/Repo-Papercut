@@ -260,10 +260,6 @@ public class SpiderlingEnemyBrain : EnemyBase
     protected void OnDeath(HealthComponent arg1, GameObject killer)
     {
         base.OnDeath();
-        if (killer != null)
-        {
-            Debug.Log(string.Format("{0} killed by {1}", name, killer.name));
-        }
         SetAnimations("dead",new List<string>(){"idle","attack","walk"});
         NewEnemyData.CurrentHorizontalSpeed = 0f;
     }
