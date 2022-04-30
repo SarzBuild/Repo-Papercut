@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8156294158693182474
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 11
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -20,15 +7,16 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GroundWorld_MAT
-  m_Shader: {fileID: -6465566751694194690, guid: c3b4ac2663386484f800e4dbad8ef3ad, type: 3}
-  m_ShaderKeywords: _DISABLE_SSR_TRANSPARENT
+  m_Name: CaveFog_MAT
+  m_Shader: {fileID: -6465566751694194690, guid: 0db2ae6dd38164247a376b83af5548c6, type: 3}
+  m_ShaderKeywords: _DISABLE_SSR_TRANSPARENT _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2225
+  m_CustomRenderQueue: 3000
   stringTagMap:
     MotionVector: User
+    RenderType: Transparent
   disabledShaderPasses:
   - TransparentDepthPrepass
   - TransparentDepthPostpass
@@ -38,20 +26,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Albedo_Background:
-        m_Texture: {fileID: 2800000, guid: 19207fa9493e28c4492b93a32fad522f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Albedo_Pattern:
-        m_Texture: {fileID: 2800000, guid: 29300d5860a545f409ccbb0d761d287e, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - MapNormal:
-        m_Texture: {fileID: 2800000, guid: 7ebd4a3eb3c3e254e9e8aeba70eaae32, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - NeutralNormal:
-        m_Texture: {fileID: 2800000, guid: fc0195696d087274c983fa2765b11613, type: 3}
+    - Albedo:
+        m_Texture: {fileID: 2800000, guid: f2a843e9f66718e45975e90ca5fd74ac, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
@@ -148,17 +124,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Coat: 0
-    - EmissionIntensity: 0
-    - NormalStrength: 0
-    - PatternInverse: 0
-    - Pos01_Clamp: 20
-    - Pos01_Multiply: 0.05
-    - Pos01_Transition: -330
-    - Pos02_Clamp: 50
-    - Pos02_Multiply: 0.02
-    - Pos02_Transition: -600
-    - Roughness: 0.36
+    - NoiseScale: 0.9
+    - NoiseSpeed: -5
+    - ScrollSpeed: 0.02
+    - Smoothness: 0
+    - X_Size: 0.04
+    - Y_Size: 0.06
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
@@ -169,7 +140,7 @@ Material:
     - _AlphaCutoffPostpass: 0.5
     - _AlphaCutoffPrepass: 0.5
     - _AlphaCutoffShadow: 0.5
-    - _AlphaDstBlend: 0
+    - _AlphaDstBlend: 10
     - _AlphaSrcBlend: 1
     - _AlphaToMask: 0
     - _AlphaToMaskInspectorValue: 0
@@ -190,7 +161,7 @@ Material:
     - _DisplacementMode: 0
     - _DoubleSidedEnable: 0
     - _DoubleSidedNormalMode: 1
-    - _DstBlend: 0
+    - _DstBlend: 10
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
     - _EmissiveIntensity: 1
@@ -229,7 +200,7 @@ Material:
     - _ReceivesSSR: 1
     - _ReceivesSSRTransparent: 0
     - _RefractionModel: 0
-    - _RenderQueueType: 1
+    - _RenderQueueType: 4
     - _RequireSplitLighting: 0
     - _Smoothness: 0.5
     - _SmoothnessRemapMax: 1
@@ -239,10 +210,10 @@ Material:
     - _SpecularOcclusionMode: 1
     - _SrcBlend: 1
     - _StencilRef: 0
-    - _StencilRefDepth: 8
+    - _StencilRefDepth: 0
     - _StencilRefDistortionVec: 4
-    - _StencilRefGBuffer: 10
-    - _StencilRefMV: 40
+    - _StencilRefGBuffer: 2
+    - _StencilRefMV: 32
     - _StencilWriteMask: 6
     - _StencilWriteMaskDepth: 8
     - _StencilWriteMaskDistortionVec: 4
@@ -250,7 +221,7 @@ Material:
     - _StencilWriteMaskMV: 40
     - _SubsurfaceMask: 1
     - _SupportDecals: 1
-    - _SurfaceType: 0
+    - _SurfaceType: 1
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1
@@ -267,20 +238,12 @@ Material:
     - _UVEmissive: 0
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
-    - _ZTestDepthEqualForOpaque: 3
+    - _ZTestDepthEqualForOpaque: 4
     - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
-    - _ZWrite: 1
+    - _ZWrite: 0
     m_Colors:
-    - BG_Tint01: {r: 0.48406908, g: 0.6131251, b: 0.6981132, a: 0}
-    - BG_Tint02: {r: 0.9811321, g: 0.50445, b: 0.6142439, a: 0}
-    - BG_Tint03: {r: 0.5188679, g: 0.45003223, b: 0.40873086, a: 0}
-    - P_Tint01: {r: 0.58753115, g: 0.764151, b: 0.7472148, a: 0}
-    - P_Tint02: {r: 1, g: 0.85490197, b: 0.90183866, a: 0}
-    - P_Tint03: {r: 0.735849, g: 0.6174922, b: 0.36445352, a: 0}
-    - Scale_Pattern: {r: 0.2, g: 0.2, b: 0.2, a: 0}
-    - Scale_WA: {r: 1, g: 1, b: 1, a: 0}
-    - Scale_WN: {r: 1, g: 1, b: 1, a: 0}
+    - Tint: {r: 0.75, g: 0.8954849, b: 1, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
@@ -298,3 +261,16 @@ Material:
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
+--- !u!114 &2419721896622062913
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 11
