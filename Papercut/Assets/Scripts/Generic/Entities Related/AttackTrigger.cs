@@ -95,7 +95,6 @@ public class AttackTrigger : MonoBehaviour
                 Toggle(false);
             }
         }
-
     }
 
     private void ApplyDamage(Collider2D col)

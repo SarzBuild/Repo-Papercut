@@ -19,7 +19,7 @@ public enum PlayerStateId
     [StateName("grappling")] Grappling,
     [StateName("dead")] Death,
     [StateName("attacks")] Attack,
-    [StateName("damaged")] Damaged
+    [StateName("hit")] Damaged
 }
 
 public class PlayerState

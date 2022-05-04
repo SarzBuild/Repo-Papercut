@@ -7,8 +7,6 @@ using UnityEngine;
 [CustomEditor(typeof(SpiderlingEnemyBrain), editorForChildClasses: true)]
 public class EditorSpiderlingData : Editor
 {
-    private string node;
-
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();

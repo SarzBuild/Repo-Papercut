@@ -7,8 +7,6 @@ using UnityEngine;
 [CustomEditor(typeof(GuardianEnemyBrain), editorForChildClasses: true)]
 public class EditorGuardData : Editor
 {
-    private string node;
-
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();

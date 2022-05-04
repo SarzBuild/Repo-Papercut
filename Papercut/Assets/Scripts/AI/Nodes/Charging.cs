@@ -29,8 +29,7 @@ public class Charging : Node
             timer += Time.fixedDeltaTime;
             _enemyData.CanAttack = false;
             ReinitiateCollisions(new List<Collider2D>(){_ownCollider,_shieldCollider});
-            Debug.Log(timer);
-            
+
             if (_ai.WallFrontHit || _ai.WallBackHit) //Check if hit wall 
             {
                 _enemyData.IsStunned = true;

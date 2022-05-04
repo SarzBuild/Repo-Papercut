@@ -7,6 +7,7 @@ public class AbilityPickup : MonoBehaviour
 {
     public AbilityListManager AbilityListManager;
     public AbilityType AbilityType;
+    [HideInInspector] public WeaponBase Weapon;
 
     public void OnRestart()
     {
@@ -17,6 +18,10 @@ public class AbilityPickup : MonoBehaviour
     {
         if (col.transform.gameObject.layer == GenericManager.PlayerLayerMask)
         {
+            if (Weapon != null)
+            {
+                AbilityListManager.Weapon = Weapon;
+            }
             AbilityListManager.RegisterToList(this);
             gameObject.SetActive(false);
         }

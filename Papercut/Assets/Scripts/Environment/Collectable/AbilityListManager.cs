@@ -16,6 +16,7 @@ public class AbilityListManager : MonoBehaviour
     public List<AbilityPickup> Abilities = new List<AbilityPickup>();
     public List<AbilityPickup> AbilityGainedBeforeNextCheckpoint = new List<AbilityPickup>();
     private Player _player;
+    [HideInInspector] public WeaponBase Weapon;
 
     private void Start()
     {
@@ -81,9 +82,9 @@ public class AbilityListManager : MonoBehaviour
             case AbilityType.Weapon:
                 if (trigger)
                 {
-                    if (_player.Weapons.AddWeapon(_player.WeaponBase))
+                    if (_player.Weapons.AddWeapon(Weapon))
                     {
-                        _player.Weapons.EquipWeapon(_player.WeaponBase);
+                        _player.Weapons.EquipWeapon(Weapon);
                     }
                     break;
                 }

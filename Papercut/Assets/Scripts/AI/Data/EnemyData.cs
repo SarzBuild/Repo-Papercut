@@ -48,7 +48,7 @@ public class EnemyData : ScriptableObject
     
     [HideInInspector] public float SearchForTargetTime = 5f;
 
-    public float SearchTimer;
+    [HideInInspector] public float SearchTimerCountdown;
     
     //Guard ONLY Data
     [HideInInspector] public bool IsStunned;
@@ -59,7 +59,7 @@ public class EnemyData : ScriptableObject
     [HideInInspector] public float ExitedCharging;
     [HideInInspector] public bool HasTouchedPlayer;
     [HideInInspector] public bool EnergyFull;
-    public float MaxChargeTime = 5f;
-    public float CollisionDamage = 10f;
+    [HideInInspector] public float MaxChargeTime = 5f;
+    //public float CollisionDamage = 10f;
 
 }

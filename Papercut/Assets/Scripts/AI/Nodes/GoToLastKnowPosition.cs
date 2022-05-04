@@ -41,19 +41,19 @@ public class GoToLastKnowPosition : Node
 
                 if (_enemyData.CurrentHorizontalSpeed == 0)
                 {
-                    _enemyData.SearchTimer = 0f;
+                    _enemyData.SearchTimerCountdown = 0f;
                     _enemyData.HasReachedTarget = true;
                 }
             }
             else if(_enemyData.HasReachedTarget)
             {
-                _enemyData.SearchTimer += Time.fixedDeltaTime;
+                _enemyData.SearchTimerCountdown += Time.fixedDeltaTime;
 
-                if (_enemyData.SearchTimer > _enemyData.SearchForTargetTime)
+                if (_enemyData.SearchTimerCountdown > _enemyData.SearchForTargetTime)
                 {
                     _enemyData.SearchingForTarget = false;
                     _enemyData.HasReachedTarget = false;
-                    _enemyData.SearchTimer = 0;   
+                    _enemyData.SearchTimerCountdown = 0;   
                 }
                  
                 //Try to mimic player's direction

@@ -57,9 +57,11 @@ public class GuardianEnemyBrain : EnemyBase
     private Node _topNode;
     
     #endregion
-
+    
+    
     private void Awake()
     {
+        
         AttackTrigger = GetComponentInChildren<AttackTrigger>();
         OwnCollider = GetComponent<Collider2D>();
         ShieldCollider = GetComponentInChildren<Collider2D>();
@@ -70,7 +72,7 @@ public class GuardianEnemyBrain : EnemyBase
         _animator = GetComponentInChildren<Animator>();
         
         PlayerTransform = Player.Instance.transform;
-        PlayerCollider = Player.Instance.transform.GetComponent<Collider2D>();
+        PlayerCollider = PlayerTransform.GetComponent<Collider2D>();
         
         InitializeData();
 
@@ -88,7 +90,8 @@ public class GuardianEnemyBrain : EnemyBase
     {
         NewEnemyData = ScriptableObject.CreateInstance<EnemyData>();
         NewHealthData = ScriptableObject.CreateInstance<HealthData>();
-
+        
+        
         //CTOR for variables
         NewEnemyData.IdleTime = EnemyData.IdleTime;
         NewEnemyData.PatrolTime = EnemyData.PatrolTime;
@@ -281,17 +284,18 @@ public class GuardianEnemyBrain : EnemyBase
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D col) //On Collisions Damage
+    /*private void OnCollisionEnter2D(Collision2D col) //On Collisions Damage
     {
         if (col.gameObject.layer == GenericManager.PlayerLayerMask)
         {
             var healthComponent = col.transform.GetComponent<HealthComponent>();
             if (healthComponent != null)
             {
+                print("PLAYER HIT ON COLLISIONS" + col.otherCollider.name);
                 healthComponent.DealDamage(EnemyData.CollisionDamage,gameObject,Vector2.zero);
             } 
         }
-    }
+    }*/
     
     private void HandleAnimations()
     {
