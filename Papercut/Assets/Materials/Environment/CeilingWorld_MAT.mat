@@ -43,7 +43,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Albedo_Pattern:
-        m_Texture: {fileID: 2800000, guid: f2a843e9f66718e45975e90ca5fd74ac, type: 3}
+        m_Texture: {fileID: 2800000, guid: ac6e34ad9fbbb9f4abb51494c3130486, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - MapNormal:
@@ -273,11 +273,11 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - BG_Tint01: {r: 0.4745906, g: 0.59443915, b: 0.745283, a: 0}
-    - BG_Tint02: {r: 1, g: 0.43507943, b: 0.4198113, a: 0}
-    - BG_Tint03: {r: 0.5471698, g: 0.4039249, b: 0.2761659, a: 0}
+    - BG_Tint02: {r: 0.9056604, g: 0.4941645, b: 0.48273405, a: 0}
+    - BG_Tint03: {r: 0.5188679, g: 0.4166677, b: 0.3255162, a: 0}
     - P_Tint01: {r: 0.3931559, g: 0.8962264, b: 0.75282836, a: 0}
     - P_Tint02: {r: 1, g: 0.83756655, b: 0.6273585, a: 0}
-    - P_Tint03: {r: 0.7830189, g: 0.6936121, b: 0.40997687, a: 0}
+    - P_Tint03: {r: 0.9056604, g: 0.7991306, b: 0.46564615, a: 0}
     - Scale_Pattern: {r: 0.2, g: 0.2, b: 0.2, a: 0}
     - Scale_WA: {r: 1, g: 1, b: 1, a: 0}
     - Scale_WN: {r: 1, g: 1, b: 1, a: 0}
