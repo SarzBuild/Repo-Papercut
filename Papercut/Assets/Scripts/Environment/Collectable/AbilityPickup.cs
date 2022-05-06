@@ -11,6 +11,12 @@ public class AbilityPickup : MonoBehaviour
 
     public void OnRestart()
     {
+        if(AbilityType == AbilityType.Weapon) return;
+        gameObject.SetActive(true);
+    }
+    
+    public void SetActive()
+    {
         gameObject.SetActive(true);
     }
 

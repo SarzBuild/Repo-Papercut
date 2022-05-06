@@ -80,14 +80,7 @@ public class AbilityListManager : MonoBehaviour
                 _player.PlayerData.CanBreakWalls = trigger;
                 break;
             case AbilityType.Weapon:
-                if (trigger)
-                {
-                    if (_player.Weapons.AddWeapon(Weapon))
-                    {
-                        _player.Weapons.EquipWeapon(Weapon);
-                    }
-                    break;
-                }
+                if (trigger) return;
                 _player.Weapons.RemoveWeapon(_player.Weapons.EquippedWeapon);
                 Destroy(_player.transform.GetComponentInChildren<SwordWeapon>().gameObject);
                 break;

@@ -9649,14 +9649,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 334959257260887491, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.35
+    - target: {fileID: 371450731267785083, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
+      propertyPath: m_InitialState
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1749850628216642740, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.35
-      objectReference: {fileID: 0}
+    - target: {fileID: 371450731267785083, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
+      propertyPath: m_SceneBindings.Array.data[0].value
+      value: 
+      objectReference: {fileID: 935098338}
+    - target: {fileID: 371450731267785083, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
+      propertyPath: m_SceneBindings.Array.data[1].value
+      value: 
+      objectReference: {fileID: 2008483051}
+    - target: {fileID: 371450731267785083, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
+      propertyPath: m_SceneBindings.Array.data[2].value
+      value: 
+      objectReference: {fileID: 983465273}
+    - target: {fileID: 371450731267785083, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
+      propertyPath: m_SceneBindings.Array.data[3].value
+      value: 
+      objectReference: {fileID: 1027177670}
     - target: {fileID: 2288407628216534906, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -9706,6 +9718,10 @@ PrefabInstance:
       value: Event Objects
       objectReference: {fileID: 0}
     - target: {fileID: 2288407628230286934, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
+      propertyPath: Enemies.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2288407628230286934, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
       propertyPath: Enemies.Array.data[0]
       value: 
       objectReference: {fileID: 935098338}
@@ -9721,38 +9737,10 @@ PrefabInstance:
       propertyPath: Enemies.Array.data[3]
       value: 
       objectReference: {fileID: 1027177670}
-    - target: {fileID: 6102495595697937092, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 25.14
-      objectReference: {fileID: 0}
-    - target: {fileID: 6622709959581538952, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6622709959581538952, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6622709959581538952, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6622709959581538952, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.57
-      objectReference: {fileID: 0}
-    - target: {fileID: 6622709959581538952, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.71
-      objectReference: {fileID: 0}
-    - target: {fileID: 7604963145613691534, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7604963145613691534, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 3264334427229760977, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
+      propertyPath: EventTriggered
+      value: 
+      objectReference: {fileID: 11400000, guid: 9d7b06cc5ea1038439e4d383f449e8a0, type: 2}
     - target: {fileID: 8856786415539742190, guid: 5ec2b978e3ce02b469475c2e463a83d8, type: 3}
       propertyPath: m_IsActive
       value: 0

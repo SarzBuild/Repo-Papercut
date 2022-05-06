@@ -12,17 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15be026286bbafa40b609a19eb3a2b88, type: 3}
   m_Name: Hunter_Data
   m_EditorClassIdentifier: 
+  ShowDebugValues: 0
+  Type: 2
+  RandomizationStrength: 0
   IdleTime: 5
   PatrolTime: 5
-  CurrentVerticalSpeed: 0
-  CurrentHorizontalSpeed: 0
-  FallClamped: -40
-  CurrentFallSpeed: 12
   ChaseRange: 8
   AttackRange: 24.48
-  MoveClamped: 8
-  Deceleration: 15
+  KnockbackSpeed: 2
   Acceleration: 10
+  Deceleration: 15
+  CurrentVerticalSpeed: 0
+  CurrentHorizontalSpeed: 0
+  StartingFallSpeed: 12
+  FallClamped: -40
+  MoveClamped: 8
   PatrolMoveClamped: 3
   IdlingState: 0
-  KnockbackSpeed: 2
+  AttackKnockbackForce: {x: 0, y: 0}
+  boxCastSize: {x: 0, y: 0}
+  JumpYVelocity: 0
+  JumpXVelocity: 0
+  LastKnowPlayerLocation: {x: 0, y: 0, z: 0}
+  SearchingForTarget: 0
+  AlertRange: 20
+  PredictedPlayerDirection: {x: 0, y: 0, z: 0}
+  SearchForTargetTime: 5
+  SearchTimerCountdown: 0
+  IsStunned: 0
+  HasReachedTarget: 0
+  StunnedTime: 0
+  CanAttack: 0
+  IsCharging: 0
+  ExitedCharging: 0
+  HasTouchedPlayer: 0
+  EnergyFull: 0
+  MaxChargeTime: 5

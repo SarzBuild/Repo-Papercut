@@ -17,7 +17,7 @@ public class EditorWeaponPickup : Editor
             {
                 if (d.AbilityType == AbilityType.Weapon)
                 {
-                    d.Weapon = (WeaponBase)EditorGUILayout.ObjectField("Weapon Base:", d.Weapon, GetType(), false);
+                    d.Weapon = (WeaponBase)EditorGUILayout.ObjectField("Weapon Base:", d.Weapon, typeof(WeaponBase), true);
                 }
             }
         }
