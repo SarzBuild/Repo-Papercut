@@ -16,7 +16,12 @@ public class AppliedPhysics : MonoBehaviour
     [SerializeField] private protected float _groundCheckRadius;
     [SerializeField] private protected float _wallCheckDistance;
     [SerializeField] private protected int _facingDirection;
-    public int FacingDirection { get { return _facingDirection; } }
+
+    public int FacingDirection
+    {
+        get { return _facingDirection; }
+    }
+
     [SerializeField] private protected bool _canSetVelocity;
     [SerializeField] public Vector2 _appliedVelocity;
     [SerializeField] private Vector2 _currentVelocity;
@@ -25,7 +30,7 @@ public class AppliedPhysics : MonoBehaviour
 
     public void SetVelocityZero()
     {
-        _appliedVelocity = Vector2.zero;        
+        _appliedVelocity = Vector2.zero;
         SetFinalVelocity();
     }
 
@@ -65,6 +70,11 @@ public class AppliedPhysics : MonoBehaviour
         if (!_canSetVelocity) return;
         _rigidbody2D.velocity = _appliedVelocity;
         _currentVelocity = _appliedVelocity;
+    }
+
+    public void ToggleVelocity()
+    {
+        _canSetVelocity = !_canSetVelocity;
     }
 
     public void CheckFlip(int xInput)

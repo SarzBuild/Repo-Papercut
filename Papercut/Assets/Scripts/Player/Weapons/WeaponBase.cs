@@ -23,6 +23,8 @@ public abstract class WeaponBase : MonoBehaviour
     public Player Owner { get; private set; }
 
     public bool IsFiring { get; private set; }
+    
+    public Transform StartParent { get; private set; }
 
     // The audio source may be on the weapon itself, else it will automatically look for it in the Player gameobject when equipped.
     private AudioSource m_AudioSource;
@@ -50,7 +52,8 @@ public abstract class WeaponBase : MonoBehaviour
         }
 
         m_AudioSource = GetComponent<AudioSource>();
-        m_Animator = GetComponent<Animator>();
+        m_Animator = GetComponent<Animator>(); 
+        StartParent = transform.parent;
     }
 
     // Setting the Owner is important for weapons because it informs them of the player information
@@ -68,15 +71,22 @@ public abstract class WeaponBase : MonoBehaviour
     {
         if (Owner?.WeaponHoldPosition != null)
         {
-            transform.SetParent(Owner.WeaponHoldPosition);
-            transform.localPosition = Vector3.zero; // Resets the position of the object to 0 for consistency 
-            transform.localScale = new Vector3(1, 1, 1); // Resets the scale of the object to 1,1,1 for consistency
+            SetToParent(Owner.WeaponHoldPosition);
         }
 
         if (m_AudioSource == null)
         {
             m_AudioSource = Owner.GetComponent<AudioSource>();
         }
+    }
+
+    // Sets the parent and clears its transform values
+    public virtual void SetToParent(Transform parent)
+    {
+        transform.SetParent(parent); 
+        transform.localPosition = Vector3.zero; 
+        transform.localRotation = Quaternion.identity; 
+        transform.localScale = new Vector3(1, 1, 1);
     }
 
     // Returns true if ammo was given..

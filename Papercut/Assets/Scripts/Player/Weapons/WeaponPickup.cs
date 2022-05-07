@@ -40,8 +40,6 @@ public class WeaponPickup : MonoBehaviour
                 {
                     player.Weapons.EquipWeapon(Weapon);
                 }
-
-                //Destroy(gameObject);
             }
         }
     }

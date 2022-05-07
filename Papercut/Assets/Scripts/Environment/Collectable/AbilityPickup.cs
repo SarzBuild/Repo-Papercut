@@ -24,10 +24,6 @@ public class AbilityPickup : MonoBehaviour
     {
         if (col.transform.gameObject.layer == GenericManager.PlayerLayerMask)
         {
-            if (Weapon != null)
-            {
-                AbilityListManager.Weapon = Weapon;
-            }
             AbilityListManager.RegisterToList(this);
             gameObject.SetActive(false);
         }

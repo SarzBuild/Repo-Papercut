@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Abilities to set on Abilities Pickup
 public enum AbilityType
 {
     GrapplingHook,
@@ -11,12 +12,20 @@ public enum AbilityType
     Weapon
 }
 
+/// <summary>
+/// This class works closely with <see cref="AbilityPickup"/>, <see cref="Checkpoint"/> and <see cref="CheckpointManager"/>.
+/// The goal of this class is to toggle player's abilities and keep track of abilities gained before a new checkpoint has been reached.
+/// <see cref="Abilities"/> contains all the abilities in game and whenever the game starts we pass along this class to each index in it.
+/// <see cref="AbilityGainedBeforeNextCheckpoint"/> is whenever a new ability is obtained by the player. If the player doesn't reach a new checkpoint before they die,
+/// we resets every ability in its former state. Whenever a player reaches a new checkpoint, we clear the list of its objects as we don't need to remove them anymore.
+/// 
+/// </summary>
+
 public class AbilityListManager : MonoBehaviour
 {
     public List<AbilityPickup> Abilities = new List<AbilityPickup>();
     public List<AbilityPickup> AbilityGainedBeforeNextCheckpoint = new List<AbilityPickup>();
     private Player _player;
-    [HideInInspector] public WeaponBase Weapon;
 
     private void Start()
     {
@@ -65,7 +74,9 @@ public class AbilityListManager : MonoBehaviour
             UnregisterToList(AbilityGainedBeforeNextCheckpoint[i]);
         }
     }
-
+    
+    //Toggles the player's abilities in its Data,
+    //Direct
     private void UpdateAbilityState(AbilityPickup ability, bool trigger)
     {
         switch (ability.AbilityType)
@@ -81,8 +92,8 @@ public class AbilityListManager : MonoBehaviour
                 break;
             case AbilityType.Weapon:
                 if (trigger) return;
+                _player.Weapons.EquippedWeapon.SetToParent(_player.Weapons.EquippedWeapon.StartParent); // Returns the weapon to its starting socket
                 _player.Weapons.RemoveWeapon(_player.Weapons.EquippedWeapon);
-                Destroy(_player.transform.GetComponentInChildren<SwordWeapon>().gameObject);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
