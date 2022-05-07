@@ -79,7 +79,10 @@ public class AttackTrigger : MonoBehaviour
             }
             else if (CheckMatchingLayers(targetLayer, GenericManager.GroundLayerMask))
             {
-                ApplyDamage(col);
+                if (_playerData.CanBreakWalls)
+                {
+                    ApplyDamage(col);
+                }
             }
         }
 

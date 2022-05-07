@@ -20,6 +20,10 @@ public class RestartManager : MonoBehaviour
     public void RestartLoop()
     {
         _player.Animator.SetBool("dead",false);
+        
+        _player.PlayerData.CurrentHorizontalSpeed = 0;
+        _player.PlayerData.CurrentVerticalSpeed = 0;
+        
         SimplePlayerUI.Active = false;
         SimplePlayerUI.DisableDeathMenu(); //Visual effect that return the player in game
         
