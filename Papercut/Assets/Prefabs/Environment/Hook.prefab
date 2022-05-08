@@ -147,7 +147,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: c984a17127570724b84f9be7d44a4eaf, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 7f47fe00775309e43ad0a94318e23e1f, type: 2}
+      objectReference: {fileID: 2100000, guid: 1187208a6d7900f428a1f5e38e231f51, type: 2}
     - target: {fileID: 919132149155446097, guid: c984a17127570724b84f9be7d44a4eaf, type: 3}
       propertyPath: m_Name
       value: Hook_GEO
