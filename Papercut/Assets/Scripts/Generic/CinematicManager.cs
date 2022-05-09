@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
+[RequireComponent(typeof(PlayableDirector))]
+[RequireComponent(typeof(GameEventListener))]
 public class CinematicManager : MonoBehaviour
 {
     private PlayableDirector _director;

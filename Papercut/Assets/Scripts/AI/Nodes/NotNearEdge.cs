@@ -12,10 +12,14 @@ public class NotNearEdge : Node
         _ai = ai;
         _enemyData = enemyData;
     }
-    
+
     public override NodeState Evaluate()
     {
+        if (_ai.CheckLedge)
+        {
+            return NodeState.SUCCESS;
+        }
         if (_enemyData.SearchingForTarget) _enemyData.SearchingForTarget = false;
-        return _ai.CheckLedge ? NodeState.SUCCESS : NodeState.FAILURE;
+        return NodeState.FAILURE;
     }
 }

@@ -19,7 +19,7 @@ public class Patrol : Node
     
     public override NodeState Evaluate()
     {
-        if (_enemyData.IdlingState == 1)
+        if (_enemyData.StartingState == 1)
         {
             SetCurrentNode();
             _timer += Time.fixedDeltaTime;
@@ -49,6 +49,6 @@ public class Patrol : Node
     {
         _timer = 0;
         _side = -_side;
-        _enemyData.IdlingState = 0;
+        _enemyData.StartingState = 0;
     }
 }

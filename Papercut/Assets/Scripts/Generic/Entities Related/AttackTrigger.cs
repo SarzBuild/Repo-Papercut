@@ -73,6 +73,10 @@ public class AttackTrigger : MonoBehaviour
             {
                 ApplyDamage(col);
             }
+            else if (CheckMatchingLayers(targetLayer, GenericManager.GuardEnemyLayerMask))
+            {
+                ApplyDamage(col);
+            }
             else if(CheckMatchingLayers(targetLayer,GenericManager.ShieldLayerMask))
             {
                 Toggle(false);

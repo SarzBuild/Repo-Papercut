@@ -14,6 +14,7 @@ public class SimplePlayerUI : MonoBehaviour
     public GameObject BackgroundImage;
     private Image _backgroundImage;
     public GameObject RestartUI;
+    public GameObject ReturnButton;
 
     private bool _coroutineRunning;
 
@@ -49,13 +50,21 @@ public class SimplePlayerUI : MonoBehaviour
     {
         RestartUI.SetActive(true);
         GenericManager.FadeIn(_backgroundImage,0.25f,true);
+        ToggleButton(ReturnButton,true);
         Time.timeScale = 0f;
     }
 
     public void DisableDeathMenu()
     {
         GenericManager.FadeOut(_backgroundImage,0.25f,true);
+        ToggleButton(ReturnButton,false);
         RestartUI.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+    private void ToggleButton(GameObject button, bool toggle)
+    {
+        if(PlayerHealth.IsDead) return; 
+        button.SetActive(toggle);
     }
 }

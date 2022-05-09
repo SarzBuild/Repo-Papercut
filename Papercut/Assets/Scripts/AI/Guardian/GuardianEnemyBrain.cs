@@ -90,22 +90,9 @@ public class GuardianEnemyBrain : EnemyBase
     {
         NewEnemyData = ScriptableObject.CreateInstance<EnemyData>();
         NewHealthData = ScriptableObject.CreateInstance<HealthData>();
+
+        GenericManager.CreateNewProfile(NewEnemyData,EnemyData,EnemyData.EnemyType.Guardian);
         
-        
-        //CTOR for variables
-        NewEnemyData.IdleTime = EnemyData.IdleTime;
-        NewEnemyData.PatrolTime = EnemyData.PatrolTime;
-        NewEnemyData.FallClamped = EnemyData.FallClamped;
-        NewEnemyData.StartingFallSpeed = EnemyData.StartingFallSpeed;
-        NewEnemyData.ChaseRange = EnemyData.ChaseRange;
-        NewEnemyData.AttackRange = EnemyData.AttackRange;
-        NewEnemyData.MoveClamped = EnemyData.MoveClamped;
-        NewEnemyData.Deceleration = EnemyData.Deceleration;
-        NewEnemyData.Acceleration = EnemyData.Acceleration;
-        NewEnemyData.PatrolMoveClamped = EnemyData.PatrolMoveClamped;
-        NewEnemyData.IdlingState = EnemyData.IdlingState;
-        NewEnemyData.KnockbackSpeed = EnemyData.KnockbackSpeed;
-        NewEnemyData.MaxChargeTime = EnemyData.MaxChargeTime;
     }
     
     protected override void ConstructBehaviorTree()
@@ -120,10 +107,10 @@ public class GuardianEnemyBrain : EnemyBase
         Attack = new Attack(NewEnemyData, GuardianWeapon);
 
         CheckVision = new CheckVision(PlayerTransform, MiddlePoint, _groundLayerMask);
-        TooCloseRange = new Range(PlayerTransform, MiddlePoint, NewEnemyData.AttackRange);
-        Reposition = new Flee(PlayerTransform, this, NewEnemyData, NewEnemyData.ChaseRange);
+        TooCloseRange = new Range(PlayerTransform, MiddlePoint, NewEnemyData.TooCloseRange); //8
+        Reposition = new Flee(PlayerTransform, this, NewEnemyData, NewEnemyData.TooCloseRange+1); //9
         
-        ChaseRange = new Range(PlayerTransform, MiddlePoint,NewEnemyData.ChaseRange+1f);
+        ChaseRange = new Range(PlayerTransform, MiddlePoint,NewEnemyData.ChaseRange); //10
         FacePlayer = new FacePlayer(this, PlayerTransform);
         SetAttack = new SetAttack(NewEnemyData);
         

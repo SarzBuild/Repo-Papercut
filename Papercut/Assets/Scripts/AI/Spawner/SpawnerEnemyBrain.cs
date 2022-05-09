@@ -68,7 +68,7 @@ public class SpawnerEnemyBrain : EnemyBase
         NewEnemyData.Deceleration = EnemyData.Deceleration;
         NewEnemyData.Acceleration = EnemyData.Acceleration;
         NewEnemyData.PatrolMoveClamped = EnemyData.PatrolMoveClamped;
-        NewEnemyData.IdlingState = EnemyData.IdlingState;
+        NewEnemyData.StartingState = EnemyData.StartingState;
         NewEnemyData.KnockbackSpeed = EnemyData.KnockbackSpeed;
     }
 

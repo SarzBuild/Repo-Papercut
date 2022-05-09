@@ -27,7 +27,7 @@ public class EditorEnemyData : Editor
                         d.JumpYVelocity = EditorGUILayout.FloatField("AttackJumpYVelocity:",d.JumpYVelocity);
                         d.AlertRange = EditorGUILayout.FloatField("Alert Range:",d.AlertRange);
                         d.SearchForTargetTime = EditorGUILayout.FloatField("Search For Target Time:", d.SearchForTargetTime);
-                        SharedLayout(d, "Chase Range:");
+                        SharedLayout(d);
                         
                         break;
                     }
@@ -37,7 +37,8 @@ public class EditorEnemyData : Editor
                         Prefix("Guard Properties");
                         d.StunnedTime = EditorGUILayout.FloatField("Stunned Time:", d.StunnedTime);
                         d.MaxChargeTime = EditorGUILayout.FloatField("Max Charge Time:", d.MaxChargeTime);
-                        SharedLayout(d, "Seeing Range:");
+                        d.TooCloseRange = EditorGUILayout.FloatField("Too Close Range:", d.TooCloseRange);
+                        SharedLayout(d);
 
                         break;
                     }
@@ -64,13 +65,13 @@ public class EditorEnemyData : Editor
         EditorGUI.indentLevel++;
     }
 
-    private void SharedLayout(EnemyData d, string rangeType)
+    private void SharedLayout(EnemyData d)
     {
         Prefix("Base Properties");
         d.RandomizationStrength = (EnemyData.RandomizationType)EditorGUILayout.EnumPopup("Randomization Strength:",d.RandomizationStrength);
         d.IdleTime = EditorGUILayout.FloatField("Idle Time:",d.IdleTime);
         d.PatrolTime = EditorGUILayout.FloatField("Patrol Time:",d.PatrolTime);
-        d.ChaseRange = EditorGUILayout.FloatField(rangeType,d.ChaseRange);
+        d.ChaseRange = EditorGUILayout.FloatField("Chase Range",d.ChaseRange);
         d.AttackRange = EditorGUILayout.FloatField("Attack Range:",d.AttackRange);
         d.KnockbackSpeed = EditorGUILayout.FloatField("Knockback Speed:",d.KnockbackSpeed);
         d.Acceleration = EditorGUILayout.FloatField("Acceleration:",d.Acceleration);

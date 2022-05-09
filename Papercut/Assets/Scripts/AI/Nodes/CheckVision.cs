@@ -23,6 +23,7 @@ public class CheckVision : Node
         //Checks for visibility of target
         var distance = Vector2.Distance(_target.position, _origin.position);
         var hitWall = Physics2D.Raycast(_target.position, _origin.position, distance, _ground);
+        if(hitWall) Debug.Log(hitWall.collider.name);
         return hitWall ? NodeState.FAILURE : NodeState.SUCCESS;
     }
     

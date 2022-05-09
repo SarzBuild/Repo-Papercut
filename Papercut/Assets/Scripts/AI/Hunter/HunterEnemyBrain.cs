@@ -66,9 +66,8 @@ public class HunterEnemyBrain : EnemyBase
     {
         NewEnemyData = ScriptableObject.CreateInstance<EnemyData>();
         NewHealthData = ScriptableObject.CreateInstance<HealthData>();
-        HunterWeapon.Settings = ScriptableObject.CreateInstance<WeaponData>();
-        
-        
+
+
         //CTOR for variables
         NewEnemyData.IdleTime = EnemyData.IdleTime;
         NewEnemyData.PatrolTime = EnemyData.PatrolTime;
@@ -80,7 +79,7 @@ public class HunterEnemyBrain : EnemyBase
         NewEnemyData.Deceleration = EnemyData.Deceleration;
         NewEnemyData.Acceleration = EnemyData.Acceleration;
         NewEnemyData.PatrolMoveClamped = EnemyData.PatrolMoveClamped;
-        NewEnemyData.IdlingState = EnemyData.IdlingState;
+        NewEnemyData.StartingState = EnemyData.StartingState;
         NewEnemyData.KnockbackSpeed = EnemyData.KnockbackSpeed;
     }
     

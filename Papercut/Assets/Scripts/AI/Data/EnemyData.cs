@@ -33,7 +33,7 @@ public class EnemyData : ScriptableObject
     [HideInInspector] public float FallClamped = -40f;
     [HideInInspector] public float MoveClamped = 8f;
     [HideInInspector] public float PatrolMoveClamped = 3f;
-    [HideInInspector] public int IdlingState = 0;
+    [HideInInspector] public int StartingState = 0;
     
     [HideInInspector] public Vector2 AttackKnockbackForce;
     [HideInInspector] public Vector2 boxCastSize;
@@ -49,17 +49,19 @@ public class EnemyData : ScriptableObject
     [HideInInspector] public float SearchForTargetTime = 5f;
 
     [HideInInspector] public float SearchTimerCountdown;
+    [HideInInspector] public bool HasReachedTarget;
+    
     
     //Guard ONLY Data
     [HideInInspector] public bool IsStunned;
-    [HideInInspector] public bool HasReachedTarget;
-    [HideInInspector] public float StunnedTime;
+    [HideInInspector] public float StunnedTime = 2;
     [HideInInspector] public bool CanAttack;
     [HideInInspector] public bool IsCharging;
     [HideInInspector] public float ExitedCharging;
     [HideInInspector] public bool HasTouchedPlayer;
     [HideInInspector] public bool EnergyFull;
     [HideInInspector] public float MaxChargeTime = 5f;
+    [HideInInspector] public float TooCloseRange;
     //public float CollisionDamage = 10f;
 
 }

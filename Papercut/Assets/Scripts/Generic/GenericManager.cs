@@ -61,4 +61,41 @@ public class GenericManager : MonoBehaviour
     {
         return Time.time - (timeWhenEventOccured + cooldown) < 0;
     }
+
+    public static void CreateNewProfile(EnemyData newProfile, EnemyData baseProfile, EnemyData.EnemyType type)
+    {
+        newProfile.IdleTime = baseProfile.IdleTime;
+        newProfile.PatrolTime = baseProfile.PatrolTime;
+        newProfile.ChaseRange = baseProfile.ChaseRange;
+        newProfile.AttackRange = baseProfile.AttackRange;
+        newProfile.KnockbackSpeed = baseProfile.KnockbackSpeed;
+        newProfile.Acceleration = baseProfile.Acceleration;
+        newProfile.Deceleration = baseProfile.Deceleration;
+        newProfile.StartingFallSpeed = baseProfile.StartingFallSpeed;
+        newProfile.FallClamped = baseProfile.FallClamped;
+        newProfile.MoveClamped = baseProfile.MoveClamped;
+        newProfile.PatrolMoveClamped = baseProfile.PatrolMoveClamped;
+        newProfile.StartingState = baseProfile.StartingState;
+        newProfile.AttackKnockbackForce = baseProfile.AttackKnockbackForce;
+        newProfile.boxCastSize = baseProfile.boxCastSize;
+
+        switch (type)
+        {
+            case EnemyData.EnemyType.Guardian:
+            {
+                newProfile.StunnedTime = baseProfile.StunnedTime;
+                newProfile.MaxChargeTime = baseProfile.MaxChargeTime;
+                newProfile.TooCloseRange = baseProfile.TooCloseRange;
+                break;
+            }
+            case EnemyData.EnemyType.Spiderling:
+            {
+                newProfile.AlertRange = baseProfile.AlertRange;
+                newProfile.SearchForTargetTime = baseProfile.SearchForTargetTime;
+                break;
+            }
+            default:
+                throw new ArgumentOutOfRangeException(nameof(type), type, null);
+        }
+    }
 }

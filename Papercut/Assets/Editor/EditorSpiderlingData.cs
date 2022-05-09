@@ -35,7 +35,7 @@ public class EditorSpiderlingData : Editor
                     
                     EditorGUILayout.Toggle("Is Looking For Player:", d.NewEnemyData.SearchingForTarget);
                     
-                    
+                    EditorGUILayout.Toggle("Reached Last Know Point:", d.NewEnemyData.HasReachedTarget);
                 }
 
                 EditorGUI.indentLevel--;

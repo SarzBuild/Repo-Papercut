@@ -81,20 +81,7 @@ public class SpiderlingEnemyBrain : EnemyBase
         NewEnemyData = ScriptableObject.CreateInstance<EnemyData>();
         NewHealthData = ScriptableObject.CreateInstance<HealthData>();
 
-
-        //CTOR for variables
-        NewEnemyData.IdleTime = EnemyData.IdleTime;
-        NewEnemyData.PatrolTime = EnemyData.PatrolTime;
-        NewEnemyData.FallClamped = EnemyData.FallClamped;
-        NewEnemyData.StartingFallSpeed = EnemyData.StartingFallSpeed;
-        NewEnemyData.ChaseRange = EnemyData.ChaseRange;
-        NewEnemyData.AttackRange = EnemyData.AttackRange;
-        NewEnemyData.MoveClamped = EnemyData.MoveClamped;
-        NewEnemyData.Deceleration = EnemyData.Deceleration;
-        NewEnemyData.Acceleration = EnemyData.Acceleration;
-        NewEnemyData.PatrolMoveClamped = EnemyData.PatrolMoveClamped;
-        NewEnemyData.IdlingState = EnemyData.IdlingState;
-        NewEnemyData.KnockbackSpeed = EnemyData.KnockbackSpeed;
+        GenericManager.CreateNewProfile(NewEnemyData,EnemyData,EnemyData.EnemyType.Spiderling);
     }
 
     private void OnDisable()
@@ -154,14 +141,9 @@ public class SpiderlingEnemyBrain : EnemyBase
 
         //Initialize Parent Nodes from left to right
         Sequence attackSequence = new Sequence(new List<Node>() { AttackRange, WaitBeforeAttack, Attack });
-
-
+        
         Selector routeSelector = DetermineSpiderlingTypeSequence();
-
-        //Selector routeSelector = new Selector(new List<Node>() { ChasePlayer });
         Sequence chaseSequence = new Sequence(new List<Node>() { ChaseRange, CheckVision, AlertNearby, routeSelector });
-
-        //Sequence searchSequence = new Sequence(new List<Node>() { GoToLastKnowPosition });
         
         Selector idleSelector = new Selector(new List<Node>() { Idle, Patrol });
 
@@ -323,18 +305,18 @@ public class SpiderlingEnemyBrain : EnemyBase
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(transform.position, EnemyData.ChaseRange);
-        Gizmos.color = Color.cyan;
-        
-        
+        Gizmos.DrawWireSphere(transform.position, EnemyData.ChaseRange); //Sight Radius
+
         if (NewEnemyData != null)
         {
-            Gizmos.DrawLine(NewEnemyData.LastKnowPlayerLocation, NewEnemyData.LastKnowPlayerLocation/20);
-            Gizmos.DrawWireSphere(NewEnemyData.LastKnowPlayerLocation,0.2f);
-            Gizmos.DrawWireSphere((NewEnemyData.PredictedPlayerDirection/20)+NewEnemyData.LastKnowPlayerLocation,0.5f);
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawLine(NewEnemyData.LastKnowPlayerLocation,  NewEnemyData.PredictedPlayerDirection + NewEnemyData.LastKnowPlayerLocation); //Show line between last player location and predicted location
+            
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(NewEnemyData.LastKnowPlayerLocation,0.2f); //Last know location visualizer
+            
             Gizmos.color = Color.red;
-            Gizmos.DrawLine((NewEnemyData.LastKnowPlayerLocation/20), NewEnemyData.PredictedPlayerDirection+NewEnemyData.LastKnowPlayerLocation);
+            Gizmos.DrawWireSphere(NewEnemyData.PredictedPlayerDirection + NewEnemyData.LastKnowPlayerLocation, 0.5f); //Predicted location visualizer
         }
-        
     }
 }

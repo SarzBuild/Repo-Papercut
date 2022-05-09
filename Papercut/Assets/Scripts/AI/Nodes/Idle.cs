@@ -17,7 +17,7 @@ public class Idle : Node
     
     public override NodeState Evaluate()
     {
-        if (_enemyData.IdlingState == 0)
+        if (_enemyData.StartingState == 0)
         {
             SetCurrentNode();
             _timer += Time.fixedDeltaTime;
@@ -25,7 +25,7 @@ public class Idle : Node
             if (_timer >= _enemyData.IdleTime + _randomness)
             {
                 _timer = 0;
-                _enemyData.IdlingState = 1;
+                _enemyData.StartingState = 1;
                 return NodeState.SUCCESS;
             }
             

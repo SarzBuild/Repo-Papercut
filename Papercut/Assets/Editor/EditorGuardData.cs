@@ -29,11 +29,11 @@ public class EditorGuardData : Editor
 
                     EditorGUILayout.FloatField("Vertical Speed:", d.NewEnemyData.CurrentVerticalSpeed);
 
-                    EditorGUILayout.Toggle("Is Charging:", d.NewEnemyData.IsCharging);
-                    
                     EditorGUILayout.Toggle("Is Stunned:", d.NewEnemyData.IsStunned);
                     
                     EditorGUILayout.Toggle("Can Attack:", d.NewEnemyData.CanAttack);
+                    
+                    EditorGUILayout.Toggle("Is Charging:", d.NewEnemyData.IsCharging);
                     
                     EditorGUILayout.FloatField("Last Time Exited Charging:", d.NewEnemyData.ExitedCharging);
                     
