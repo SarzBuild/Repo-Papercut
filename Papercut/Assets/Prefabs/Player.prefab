@@ -273,7 +273,7 @@ TrailRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6262205277068168276}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -285,7 +285,7 @@ TrailRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6c57371bb1f162e499cfe722e52a7973, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -306,7 +306,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 5
+  m_Time: 0.4
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -315,21 +315,39 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.28260952
-        inSlope: 0
-        outSlope: 0
+        value: 0.8058243
+        inSlope: -3.430468
+        outSlope: -3.430468
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.33333334
+        outWeight: 0.28282723
       - serializedVersion: 3
-        time: 0.45885882
-        value: 0.057967246
-        inSlope: 0
-        outSlope: 0
+        time: 0.19512846
+        value: 0.37048733
+        inSlope: -1.1003436
+        outSlope: -1.1003436
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 1
+        outWeight: 0.27971086
+      - serializedVersion: 3
+        time: 0.5383507
+        value: 0.17447907
+        inSlope: -0.15692963
+        outSlope: -0.15692963
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.35659593
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.96909493
+        value: 0
+        inSlope: -0.62829405
+        outSlope: -0.62829405
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.25111833
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -363,8 +381,8 @@ TrailRenderer:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 0
-    numCapVertices: 0
+    numCornerVertices: 1
+    numCapVertices: 1
     alignment: 0
     textureMode: 0
     shadowBias: 0.5
