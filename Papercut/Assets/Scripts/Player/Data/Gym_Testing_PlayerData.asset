@@ -16,14 +16,14 @@ MonoBehaviour:
 
 '
   RawInputValue: 0
-  Velocity: {x: 0, y: 0}
-  LastPosition: {x: -112.26, y: 1.8528538}
+  Velocity: {x: 0, y: -40.000153}
+  LastPosition: {x: 568.9492, y: -176.86382}
   LastTimeJumpKeyWasPressed: 52.43867
-  CurrentHorizontalSpeed: 0
-  CurrentVerticalSpeed: 0
+  CurrentHorizontalSpeed: 9.14
+  CurrentVerticalSpeed: -40
   PlayerLandedThisFrame: 0
-  CollisionDown: 1
-  TimePlayerStoppedGrounded: 0
+  CollisionDown: 0
+  TimePlayerStoppedGrounded: 33.885845
   PlayerLayerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -39,7 +39,7 @@ MonoBehaviour:
   FallClamped: -40
   MinimumFallSpeed: 60
   MaximumFallSpeed: 100
-  CurrentFallSpeed: 99.979996
+  CurrentFallSpeed: 60
   MaximumJumpCount: 2
   CurrentJumpCount: 2
   TimeBetweenDoubleJump: 0.01
@@ -109,7 +109,7 @@ MonoBehaviour:
   SlippingVelocity: 5
   EndWallSlipYVelocity: 0
   EndWallSlipXVelocity: 3
-  GrapplingAbilityActive: 0
+  GrapplingAbilityActive: 1
   GrappleTargetableLayer:
     serializedVersion: 2
     m_Bits: 1024
