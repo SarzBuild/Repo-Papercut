@@ -98,4 +98,14 @@ public class GenericManager : MonoBehaviour
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
     }
+
+    public static void CallMusicEvent(string call, GameObject target)
+    {
+        AkSoundEngine.PostEvent(call,target);
+    }
+
+    public static void CallStateChange(string parent, string state)
+    {
+        AkSoundEngine.SetState("In_Game", "Low");
+    }
 }

@@ -22,7 +22,6 @@ public class EditorEnemyData : Editor
                     {
                         Prefix("Spiderling Properties");
                         
-                        EditorGUILayout.PrefixLabel("Spiderling Type");
                         d.JumpXVelocity = EditorGUILayout.FloatField("AttackJumpXVelocity:",d.JumpXVelocity);
                         d.JumpYVelocity = EditorGUILayout.FloatField("AttackJumpYVelocity:",d.JumpYVelocity);
                         d.AlertRange = EditorGUILayout.FloatField("Alert Range:",d.AlertRange);
@@ -53,6 +52,7 @@ public class EditorEnemyData : Editor
                 }
             }
         }
+        EditorUtility.SetDirty(target);
     }
 
     private void Prefix(string input)

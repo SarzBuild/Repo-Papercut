@@ -199,6 +199,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   AbilityGainedBeforeNextCheckpoint: []
 --- !u!114 &563350372
 MonoBehaviour:
@@ -224,10 +225,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edb2132c10184d54492a5df1afb01f3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerHealth: {fileID: 0}
   HealthImage: {fileID: 0}
   BackgroundImage: {fileID: 0}
   RestartUI: {fileID: 0}
+  ReturnButton: {fileID: 0}
+  DashFillImage: {fileID: 0}
+  DashFillBackground: {fileID: 0}
+  DashParent: {fileID: 0}
   Active: 0
 --- !u!114 &563350374
 MonoBehaviour:

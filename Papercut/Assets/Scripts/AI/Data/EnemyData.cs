@@ -4,7 +4,6 @@ using UnityEngine;
 
 public enum SpiderlingProfileType { Careful, Fearful, Aggresive, Random }
 
-
 [CreateAssetMenu(fileName = "newEnemyData", menuName = "Data/Enemy/EnemyData")]
 public class EnemyData : ScriptableObject
 {
@@ -17,51 +16,49 @@ public class EnemyData : ScriptableObject
 
     public EnemyType Type;
     
-    
     //Values are hidden since editor script re-write fields.
     //Shared Data
-    [HideInInspector] public RandomizationType RandomizationStrength;
-    [HideInInspector] public float IdleTime = 5f;
-    [HideInInspector] public float PatrolTime = 5f;
-    [HideInInspector] public float ChaseRange = 8f;
-    [HideInInspector] public float AttackRange = 1.3f;
-    [HideInInspector] public float KnockbackSpeed = 2f;
-    [HideInInspector] public float Acceleration = 10f;
-    [HideInInspector] public float Deceleration = 15f;
-    [HideInInspector] public float CurrentVerticalSpeed, CurrentHorizontalSpeed;
-    [HideInInspector] public float StartingFallSpeed = 12f;
-    [HideInInspector] public float FallClamped = -40f;
-    [HideInInspector] public float MoveClamped = 8f;
-    [HideInInspector] public float PatrolMoveClamped = 3f;
-    [HideInInspector] public int StartingState = 0;
+    [HideInInspector] [SerializeField] public RandomizationType RandomizationStrength;
+    [HideInInspector] [SerializeField] public float IdleTime = 5f;
+    [HideInInspector] [SerializeField] public float PatrolTime = 5f;
+    [HideInInspector] [SerializeField] public float ChaseRange = 8f;
+    [HideInInspector] [SerializeField] public float AttackRange = 1.3f;
+    [HideInInspector] [SerializeField] public float KnockbackSpeed = 2f;
+    [HideInInspector] [SerializeField] public float Acceleration = 10f;
+    [HideInInspector] [SerializeField] public float Deceleration = 15f;
+    [HideInInspector] [SerializeField] public float CurrentVerticalSpeed, CurrentHorizontalSpeed;
+    [HideInInspector] [SerializeField] public float StartingFallSpeed = 12f;
+    [HideInInspector] [SerializeField] public float FallClamped = -40f;
+    [HideInInspector] [SerializeField] public float MoveClamped = 8f;
+    [HideInInspector] [SerializeField] public float PatrolMoveClamped = 3f;
+    [HideInInspector] [SerializeField] public int StartingState = 0;
     
-    [HideInInspector] public Vector2 AttackKnockbackForce;
-    [HideInInspector] public Vector2 boxCastSize;
+    [HideInInspector] [SerializeField] public Vector2 AttackKnockbackForce;
+    [HideInInspector] [SerializeField] public Vector2 boxCastSize;
     
     //Spiderling ONLY Data
-    [HideInInspector] public float JumpYVelocity;
-    [HideInInspector] public float JumpXVelocity;
-    [HideInInspector] public Vector3 LastKnowPlayerLocation;
-    [HideInInspector] public bool SearchingForTarget;
-    [HideInInspector] public float AlertRange = 20f;
-    [HideInInspector] public Vector3 PredictedPlayerDirection;
+    [HideInInspector] [SerializeField] public float JumpYVelocity;
+    [HideInInspector] [SerializeField] public float JumpXVelocity;
+    [HideInInspector] [SerializeField] public Vector3 LastKnowPlayerLocation;
+    [HideInInspector] [SerializeField] public bool SearchingForTarget;
+    [HideInInspector] [SerializeField] public float AlertRange = 20f;
+    [HideInInspector] [SerializeField] public Vector3 PredictedPlayerDirection;
     
-    [HideInInspector] public float SearchForTargetTime = 5f;
+    [HideInInspector] [SerializeField] public float SearchForTargetTime = 5f;
 
-    [HideInInspector] public float SearchTimerCountdown;
-    [HideInInspector] public bool HasReachedTarget;
-    
+    [HideInInspector] [SerializeField] public float SearchTimerCountdown;
+    [HideInInspector] [SerializeField] public bool HasReachedTarget;
     
     //Guard ONLY Data
-    [HideInInspector] public bool IsStunned;
-    [HideInInspector] public float StunnedTime = 2;
-    [HideInInspector] public bool CanAttack;
-    [HideInInspector] public bool IsCharging;
-    [HideInInspector] public float ExitedCharging;
-    [HideInInspector] public bool HasTouchedPlayer;
-    [HideInInspector] public bool EnergyFull;
-    [HideInInspector] public float MaxChargeTime = 5f;
-    [HideInInspector] public float TooCloseRange;
+    [HideInInspector] [SerializeField] public bool IsStunned;
+    [HideInInspector] [SerializeField] public float StunnedTime = 2;
+    [HideInInspector] [SerializeField] public bool CanAttack;
+    [HideInInspector] [SerializeField] public bool IsCharging;
+    [HideInInspector] [SerializeField] public float ExitedCharging;
+    [HideInInspector] [SerializeField] public bool HasTouchedPlayer;
+    [HideInInspector] [SerializeField] public bool EnergyFull;
+    [HideInInspector] [SerializeField] public float MaxChargeTime = 5f;
+    [HideInInspector] [SerializeField] public float TooCloseRange;
     //public float CollisionDamage = 10f;
 
 }

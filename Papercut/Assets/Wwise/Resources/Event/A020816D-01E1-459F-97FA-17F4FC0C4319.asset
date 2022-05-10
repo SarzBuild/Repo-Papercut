@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 189cc46cc9cd68d4f89d568c67bbe791, type: 3}
-  m_Name: C6237629-94AC-447F-ADE7-678059BB25BF
+  m_Script: {fileID: 11500000, guid: 698f91bbe250dcd4da7ca446d6eb65b3, type: 3}
+  m_Name: A020816D-01E1-459F-97FA-17F4FC0C4319
   m_EditorClassIdentifier: 
-  objectName: Soundbank
-  id: 1661994096
-  guid: C6237629-94AC-447F-ADE7-678059BB25BF
+  objectName: Change_Zone
+  id: 2459862590
+  guid: A020816D-01E1-459F-97FA-17F4FC0C4319

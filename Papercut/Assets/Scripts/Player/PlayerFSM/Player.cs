@@ -68,7 +68,7 @@ public class Player : AppliedPhysics
 
     public float LastWallJumpTime;    
     
-    private float _dashTimerCooldown;
+    public float DashCooldownTimer;
     private bool _collisionDown;
     public float LastHitTime;
     private Color _baseColor;
@@ -87,6 +87,7 @@ public class Player : AppliedPhysics
         SetMissingComponents();
         SetBaseValues();
         InitializeStateMachine();
+        GenericManager.CallMusicEvent("Change_Zone", gameObject);
     }
 
     private void CheckForSingleton()
@@ -151,7 +152,7 @@ public class Player : AppliedPhysics
         PlayerData.WallJumpAbilityActive = false;
         PlayerData.CanBreakWalls = false;
         
-        _dashTimerCooldown = PlayerData.DashCooldownTime;
+        DashCooldownTimer = PlayerData.DashCooldownTime;
     }
 
     private void InitializeHealth()
@@ -228,11 +229,11 @@ public class Player : AppliedPhysics
         if (CurrentDashCount < 0) return;
         if (CurrentDashCount >= PlayerData.MaximumDashCount) return;
         
-        _dashTimerCooldown -= Time.deltaTime;
-        if (_dashTimerCooldown < 0)
+        DashCooldownTimer -= Time.deltaTime;
+        if (DashCooldownTimer < 0)
         {
             CurrentDashCount++;
-            _dashTimerCooldown = PlayerData.DashCooldownTime;
+            DashCooldownTimer = PlayerData.DashCooldownTime;
         }
     }
 

@@ -14,13 +14,18 @@ public class ResetRotation : Node
         _enemyData = enemyData;
         _transformToGoTo = transform;
     }
-    
+
     public override NodeState Evaluate()
     {
-        var angle = Mathf.Atan2(_transformToGoTo.position.y, _transformToGoTo.position.x) * Mathf.Rad2Deg;
-        _ai.transform.eulerAngles = Vector3.Lerp(_ai.transform.eulerAngles, new Vector3(0,0, angle), Time.fixedDeltaTime);
+        if (_transformToGoTo != _ai.transform)
+        {
+            var angle = Mathf.Atan2(_transformToGoTo.position.y, _transformToGoTo.position.x) * Mathf.Rad2Deg;
+            _ai.transform.eulerAngles = Vector3.Lerp(_ai.transform.eulerAngles, new Vector3(0,0, angle), Time.fixedDeltaTime);
+            return NodeState.RUNNING;
+        }
+        
         SetCurrentNode();
-        return NodeState.RUNNING;
+        return NodeState.SUCCESS;
     }
 
     private void SetCurrentNode()
