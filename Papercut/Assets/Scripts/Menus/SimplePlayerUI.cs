@@ -31,7 +31,6 @@ public class SimplePlayerUI : MonoBehaviour
     private void Awake()
     {
         _backgroundImage = BackgroundImage.GetComponent<Image>();
-        GenericManager.FadeOut(_backgroundImage, 0.25f, true);
     }
 
     private void Start()

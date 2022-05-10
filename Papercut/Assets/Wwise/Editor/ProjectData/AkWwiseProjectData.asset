@@ -15,85 +15,450 @@ MonoBehaviour:
   AcousticTextureWwu:
   - PhysicalPath: Virtual Acoustics\Default Work Unit.wwu
     ParentPhysicalPath: 
-    guid: 918582783b87934888a229b8711b8ca9
+    guid: 3428e9a0d8d9be44aa4f0b4444124762
     GuidInternal: 
-    m_lastTime: -8585518843533070945
+    m_lastTime: -8585495698674775808
     List: []
+  - PhysicalPath: Virtual Acoustics\Factory Reflect Acoustic Textures.wwu
+    ParentPhysicalPath: 
+    guid: 6b663d46a83ca54f8b4a5fef12b883f6
+    GuidInternal: 
+    m_lastTime: -8585903258134775808
+    List:
+    - name: Acoustic_Banner
+      guid: f2532d2fccda8e408b8898b1b52a26d6
+      id: 4168643977
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Acoustic_Banner
+        ObjectType: 15
+      Path: Factory Reflect Acoustic Textures\Textures\Acoustic_Banner
+    - name: Anechoic
+      guid: 32c20a8be202de4ebeacfdd1a900e3ed
+      id: 1873957695
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Anechoic
+        ObjectType: 15
+      Path: Factory Reflect Acoustic Textures\Textures\Anechoic
+    - name: Brick
+      guid: a9a586b004f2534ca838bdb18b18f6d6
+      id: 504532776
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Brick
+        ObjectType: 15
+      Path: Factory Reflect Acoustic Textures\Textures\Brick
+    - name: Carpet
+      guid: 8975223456dc604296c4b9f4b669092b
+      id: 2412606308
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Carpet
+        ObjectType: 15
+      Path: Factory Reflect Acoustic Textures\Textures\Carpet
+    - name: Concrete
+      guid: 001cf85c9628e04aaf7c3080bdaba682
+      id: 841620460
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Concrete
+        ObjectType: 15
+      Path: Factory Reflect Acoustic Textures\Textures\Concrete
+    - name: Cork_Tiles
+      guid: 19c9d2305f92434189063dbb3c4ae5e2
+      id: 3195498748
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Cork_Tiles
+        ObjectType: 15
+      Path: Factory Reflect Acoustic Textures\Textures\Cork_Tiles
+    - name: Curtains
+      guid: 339ee6f8975c6849b508a1535f2d66e8
+      id: 2928161104
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Curtains
+        ObjectType: 15
+      Path: Factory Reflect Acoustic Textures\Textures\Curtains
+    - name: Drywall
+      guid: f4e3a4680b4c8746a8b8a84db93dbc8f
+      id: 3670307564
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Drywall
+        ObjectType: 15
+      Path: Factory Reflect Acoustic Textures\Textures\Drywall
+    - name: Fabric
+      guid: 32d581836edbed4ea7a3bc7b0a0b8ba8
+      id: 1970351858
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Fabric
+        ObjectType: 15
+      Path: Factory Reflect Acoustic Textures\Textures\Fabric
+    - name: Mountain
+      guid: 313793c51a00b44a98dd9b033a8c8eab
+      id: 513139656
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Mountain
+        ObjectType: 15
+      Path: Factory Reflect Acoustic Textures\Textures\Mountain
+    - name: Tile
+      guid: c4da82a82a13b747ba9db9907ba29cc0
+      id: 2637588553
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Tile
+        ObjectType: 15
+      Path: Factory Reflect Acoustic Textures\Textures\Tile
+    - name: Wood
+      guid: 96bcff1fe76f9e48ba6c7c14a71391ae
+      id: 2058049674
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Wood
+        ObjectType: 15
+      Path: Factory Reflect Acoustic Textures\Textures\Wood
+    - name: Wood_Bright
+      guid: e5d1857ba2c1634e9a13cec54b641adc
+      id: 4262522749
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Wood_Bright
+        ObjectType: 15
+      Path: Factory Reflect Acoustic Textures\Textures\Wood_Bright
+    - name: Wood_Deep
+      guid: 8e474652dac50c4ea0dec98d1479529a
+      id: 1755085759
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Wood_Deep
+        ObjectType: 15
+      Path: Factory Reflect Acoustic Textures\Textures\Wood_Deep
   AuxBusWwu:
   - PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
     ParentPhysicalPath: 
-    guid: 1720625ca497fa4184033d2d76c43d2d
+    guid: 8d2434692c40a543ac2419be8d3ea22a
     GuidInternal: 
-    m_lastTime: -8585518843532038590
+    m_lastTime: -8585495698354775808
     List: []
   BankWwu:
   - PhysicalPath: SoundBanks\Default Work Unit.wwu
     ParentPhysicalPath: 
-    guid: 6af1eaa3228ba547838cc7279f3821a7
+    guid: 2008c0170563094db854dfa7bdce44ab
     GuidInternal: 
-    m_lastTime: -8585518832569424849
-    List:
-    - name: Soundbank
-      guid: 297623c6ac947f44ade7678059bb25bf
-      id: 1661994096
-      PathAndIcons:
-      - ElementName: Default Work Unit
-        ObjectType: 12
-      - ElementName: Soundbank
-        ObjectType: 7
-      Path: Default Work Unit\Soundbank
+    m_lastTime: -8585495698674775808
+    List: []
   EventWwu:
+  - PhysicalPath: Events\Audio.wwu
+    ParentPhysicalPath: 
+    guid: 0cd6c2f9e88acd4eaa76e285231b0942
+    GuidInternal: 
+    m_lastTime: -8585494803514775808
+    List:
+    - name: Change_Zone
+      guid: 6d8120a0e1019f4597fa17f4fc0c4319
+      id: 2459862590
+      PathAndIcons:
+      - ElementName: Audio
+        ObjectType: 12
+      - ElementName: Change_Zone
+        ObjectType: 3
+      Path: Audio\Change_Zone
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Clic_Big
+      guid: 646c9f5aa221994197476fba9210ad94
+      id: 2846455371
+      PathAndIcons:
+      - ElementName: Audio
+        ObjectType: 12
+      - ElementName: Menu
+        ObjectType: 4
+      - ElementName: Clic_Big
+        ObjectType: 3
+      Path: Audio\Menu\Clic_Big
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Clic_Small
+      guid: c7edc1c648b36e438bf9706128c1db99
+      id: 1430876236
+      PathAndIcons:
+      - ElementName: Audio
+        ObjectType: 12
+      - ElementName: Menu
+        ObjectType: 4
+      - ElementName: Clic_Small
+        ObjectType: 3
+      Path: Audio\Menu\Clic_Small
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Final_Sequence
+      guid: 68ef3ab897064241a82937381f3c6d5a
+      id: 2014019461
+      PathAndIcons:
+      - ElementName: Audio
+        ObjectType: 12
+      - ElementName: Final_Sequence
+        ObjectType: 3
+      Path: Audio\Final_Sequence
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Jump
+      guid: 63951309301ab74193fe3d663e6f50d5
+      id: 3833651337
+      PathAndIcons:
+      - ElementName: Audio
+        ObjectType: 12
+      - ElementName: Player
+        ObjectType: 4
+      - ElementName: Jump
+        ObjectType: 3
+      Path: Audio\Player\Jump
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Main_Caracter_Death
+      guid: a010555f4a09f2429b3356870db50a6f
+      id: 2539102097
+      PathAndIcons:
+      - ElementName: Audio
+        ObjectType: 12
+      - ElementName: Player
+        ObjectType: 4
+      - ElementName: Main_Caracter_Death
+        ObjectType: 3
+      Path: Audio\Player\Main_Caracter_Death
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Start_Atmosphe
+      guid: 3b1dfedf9fb9bf4eb0cbcdaa614bd7d5
+      id: 2106894257
+      PathAndIcons:
+      - ElementName: Audio
+        ObjectType: 12
+      - ElementName: Atmosphere
+        ObjectType: 4
+      - ElementName: Start_Atmosphe
+        ObjectType: 3
+      Path: Audio\Atmosphere\Start_Atmosphe
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Start_Music_In_Game
+      guid: 1c31011644b236479bea07ade9953c39
+      id: 407869688
+      PathAndIcons:
+      - ElementName: Audio
+        ObjectType: 12
+      - ElementName: Start_Music_In_Game
+        ObjectType: 3
+      Path: Audio\Start_Music_In_Game
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Start_Music_Title
+      guid: 901093e986cb7c4ba96abd3d9055be39
+      id: 1742820664
+      PathAndIcons:
+      - ElementName: Audio
+        ObjectType: 12
+      - ElementName: Start_Music_Title
+        ObjectType: 3
+      Path: Audio\Start_Music_Title
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Stop_All
+      guid: 59ec80ed8bde6845bbfb87f30d5aa6e1
+      id: 452547817
+      PathAndIcons:
+      - ElementName: Audio
+        ObjectType: 12
+      - ElementName: Stop_All
+        ObjectType: 3
+      Path: Audio\Stop_All
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Sword_Hit_Shield
+      guid: 16ba14a299a93f4e936d8da7296f447c
+      id: 3009140878
+      PathAndIcons:
+      - ElementName: Audio
+        ObjectType: 12
+      - ElementName: Sword
+        ObjectType: 4
+      - ElementName: Sword_Hit_Shield
+        ObjectType: 3
+      Path: Audio\Sword\Sword_Hit_Shield
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Sword_Hit_Spider
+      guid: 6cc80c633ea99644bed310e0a7e47e26
+      id: 2753700762
+      PathAndIcons:
+      - ElementName: Audio
+        ObjectType: 12
+      - ElementName: Sword
+        ObjectType: 4
+      - ElementName: Sword_Hit_Spider
+        ObjectType: 3
+      Path: Audio\Sword\Sword_Hit_Spider
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Sword_Swing
+      guid: 5b0c9a56bd9efd4b899bb10a60369972
+      id: 476098351
+      PathAndIcons:
+      - ElementName: Audio
+        ObjectType: 12
+      - ElementName: Sword
+        ObjectType: 4
+      - ElementName: Sword_Swing
+        ObjectType: 3
+      Path: Audio\Sword\Sword_Swing
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
   - PhysicalPath: Events\Default Work Unit.wwu
     ParentPhysicalPath: 
-    guid: ba5d15ac3dff1e4f88812f59c2362295
+    guid: f5e09b1f7c619b44ab24a15514d9cfd7
     GuidInternal: 
-    m_lastTime: -8585518832569237663
-    List:
-    - name: Cosmonaute
-      guid: 7e02d4d2eeb6534788e11cde0882fea6
-      id: 3095250579
-      PathAndIcons:
-      - ElementName: Default Work Unit
-        ObjectType: 12
-      - ElementName: Cosmonaute
-        ObjectType: 3
-      Path: Default Work Unit\Cosmonaute
-      maxAttenuation: 0
-      maxDuration: 11.5
-      minDuration: 11.5
+    m_lastTime: -8585495698674775808
+    List: []
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     ParentPhysicalPath: 
-    guid: 355b7a51d15d8e428a977b3ff69095ea
+    guid: d352f041a2038a46acb14040ef867a77
     GuidInternal: 
-    m_lastTime: -8585518843531968766
+    m_lastTime: -8585495698674775808
     List: []
   StateWwu:
   - PhysicalPath: States\Default Work Unit.wwu
     ParentPhysicalPath: 
-    guid: f316bbf49b270e4f98494b4bfcfe21c7
+    guid: 99893792e8ff2e4aa205be372add1bc0
     GuidInternal: 
-    m_lastTime: -8585518843532642083
+    m_lastTime: -8585495698674775808
     List: []
+  - PhysicalPath: States\Music.wwu
+    ParentPhysicalPath: 
+    guid: 282096214d41e3498ef06672b0b9efe3
+    GuidInternal: 
+    m_lastTime: -8585493944303184930
+    List:
+    - name: In_Game
+      guid: 6548b970de0fb84f8dc9a5c979f52e9d
+      id: 2967546505
+      PathAndIcons:
+      - ElementName: Music
+        ObjectType: 12
+      - ElementName: In_Game
+        ObjectType: 9
+      Path: Music\In_Game
+      values:
+      - name: High
+        guid: c39b1376ac3a134583770baced58f512
+        id: 3550808449
+        PathAndIcons:
+        - ElementName: High
+          ObjectType: 8
+      - name: Low
+        guid: 9a5103d3ef976245a93bbbeeea9e6df4
+        id: 545371365
+        PathAndIcons:
+        - ElementName: Low
+          ObjectType: 8
+      - name: Medium
+        guid: f3c3010f011e82478f9a526a1747ca64
+        id: 2849147824
+        PathAndIcons:
+        - ElementName: Medium
+          ObjectType: 8
+      - name: None
+        guid: 6b226b03dbb18b4d93ad560cb311821b
+        id: 748895195
+        PathAndIcons:
+        - ElementName: None
+          ObjectType: 8
+      ValueGuids: []
+      ValueIcons: []
+      valuesInternal: []
   SwitchWwu:
   - PhysicalPath: Switches\Default Work Unit.wwu
     ParentPhysicalPath: 
-    guid: 81794d86018ba346900abfad2d40cdd6
+    guid: f53758656134a2438229cbbdad969a19
     GuidInternal: 
-    m_lastTime: -8585518843532512445
+    m_lastTime: -8585495698674775808
     List: []
   TriggerWwu:
   - PhysicalPath: Triggers\Default Work Unit.wwu
     ParentPhysicalPath: 
-    guid: f34e18974c97ba4e8a4f3a0ab273715d
+    guid: 3e4f9e8860dcc74aa6acff8901c2718d
     GuidInternal: 
-    m_lastTime: -8585518843533011102
+    m_lastTime: -8585495698674775808
     List: []
   ExpandedItems:
-  - /Papercut
-  - /Papercut/Events
-  - /Papercut/Events/Default Work Unit
-  - /Papercut/SoundBanks
-  - /Papercut/SoundBanks/Default Work Unit
+  - /Paper Cut AUDIO
+  - /Paper Cut AUDIO/Events
+  - /Paper Cut AUDIO/Events/Audio
+  - /Paper Cut AUDIO/Events/Audio/Atmosphere
+  - /Paper Cut AUDIO/Events/Audio/Menu
+  - /Paper Cut AUDIO/Events/Audio/Player
+  - /Paper Cut AUDIO/Events/Audio/Sword
+  - /Paper Cut AUDIO/States
+  - /Paper Cut AUDIO/States/Music
+  - /Paper Cut AUDIO/States/Music/In_Game
   autoPopulateEnabled: 1
   CurrentPluginConfig: 

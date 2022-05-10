@@ -11,6 +11,8 @@ public class MainMenu : MonoBehaviour
     enum MenuState {MainState, OptionsState, ControlsState};
     MenuState CurrentMenuState;
 
+    public bool DevBuild;
+
     public GameObject QuitButton;
     public GameObject StartButton;
     public GameObject OptionsButton;
@@ -35,10 +37,13 @@ public class MainMenu : MonoBehaviour
     public Text QuitText;
     public Text OptionsText;
 
-    // Start is called before the first frame update
-    void Start()
+    private List<AsyncOperation> _scenesToLoad = new List<AsyncOperation>();
+    public GameObject BlackLoadingScreen;
+    public Image LoadingScreenLoadingBar;
+
+    private void Start()
     {
-        SceneManager.LoadSceneAsync("Settings",LoadSceneMode.Additive);
+        if(DevBuild) SceneManager.LoadSceneAsync("Settings",LoadSceneMode.Additive);
         Time.timeScale = 1;
         OptionsButton.transform.position = new Vector3(560f, 2000f, 0);
         StartButton.transform.position = new Vector3(960f, 2000f, 0);
@@ -50,6 +55,7 @@ public class MainMenu : MonoBehaviour
         BackText.color = BackTextStartColour;
         ControlsText.color = ControlsTextStartColour;
         VolumeObject.SetActive(false);
+        BlackLoadingScreen.SetActive(false);
 
         OptionsButton.transform.DOMoveY(640f, 1f);
         StartButton.transform.DOMoveY(540f, 1.5f);
@@ -60,14 +66,32 @@ public class MainMenu : MonoBehaviour
     {
         if(CurrentMenuState == MenuState.MainState)
         {
-            SceneManager.LoadScene("RoomTriggers");
-            SceneManager.LoadSceneAsync("Settings",LoadSceneMode.Additive);
+            _scenesToLoad.Add(SceneManager.LoadSceneAsync("RoomTriggers"));
+            _scenesToLoad.Add(SceneManager.LoadSceneAsync("Room_001",LoadSceneMode.Additive));
+            if(DevBuild) _scenesToLoad.Add(SceneManager.LoadSceneAsync("Settings",LoadSceneMode.Additive));
+            BlackLoadingScreen.SetActive(true);
+            StartCoroutine(LoadingScreen());
         }
         else if(CurrentMenuState == MenuState.OptionsState)
         {
             OnControlsButtons();
         }
     }
+
+    private IEnumerator LoadingScreen()
+    {
+        var progress = 0f;
+        for (int i = 0; i < _scenesToLoad.Count; ++i)
+        {
+            while (!_scenesToLoad[i].isDone)
+            {
+                progress += _scenesToLoad[i].progress;
+                LoadingScreenLoadingBar.fillAmount = progress / _scenesToLoad.Count;
+                yield return null;
+            }
+        }
+    }
+    
     public void OnQuitButton()
     {
         if(CurrentMenuState == MenuState.MainState)

@@ -87,7 +87,6 @@ public class Player : AppliedPhysics
         SetMissingComponents();
         SetBaseValues();
         InitializeStateMachine();
-        GenericManager.CallMusicEvent("Change_Zone", gameObject);
     }
 
     private void CheckForSingleton()
