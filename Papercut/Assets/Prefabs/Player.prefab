@@ -584,7 +584,7 @@ LineRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2853218753171140493, guid: b47e2c51981e8af43af62db73024228f, type: 3}
+  - {fileID: 2100000, guid: 47c02868c725cd14cadd43257bc476dc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -616,13 +616,31 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.80000305
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.72885746
+        value: 0.80267894
+        inSlope: 0.028087514
+        outSlope: 0.028087514
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.4323759
+      - serializedVersion: 3
+        time: 0.9968847
+        value: 1
+        inSlope: 1.5687978
+        outSlope: 1.5687978
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.32193595
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -1003,6 +1021,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 25.680264
       objectReference: {fileID: 0}
+    - target: {fileID: 1474227928750202347, guid: 6b3353938a4eae14a92dd8649f0d5343, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1ad4b69393a9b944aa6d8e3ed0f55691, type: 2}
     - target: {fileID: 2223639932434330405, guid: 6b3353938a4eae14a92dd8649f0d5343, type: 3}
       propertyPath: m_Animation
       value: 
