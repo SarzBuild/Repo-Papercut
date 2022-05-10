@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.048275214, g: 0.07512576, b: 0.20992112, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3422,6 +3422,18 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7216606192751189838, guid: e9b9e1e198bf5204ba7d64992a503c91, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216606192751189838, guid: e9b9e1e198bf5204ba7d64992a503c91, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216606192751189838, guid: e9b9e1e198bf5204ba7d64992a503c91, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216606192751189838, guid: e9b9e1e198bf5204ba7d64992a503c91, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
       objectReference: {fileID: 0}
@@ -3465,6 +3477,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GrapplingHook_GEO
       objectReference: {fileID: 0}
+    - target: {fileID: 8389543944086512673, guid: e9b9e1e198bf5204ba7d64992a503c91, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 026e3201f28ce8042bc366c6e2b93cc0, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9b9e1e198bf5204ba7d64992a503c91, type: 3}
 --- !u!1001 &8513754480151453005
