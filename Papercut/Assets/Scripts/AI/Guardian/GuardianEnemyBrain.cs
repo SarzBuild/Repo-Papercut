@@ -61,7 +61,6 @@ public class GuardianEnemyBrain : EnemyBase
     
     private void Awake()
     {
-        
         AttackTrigger = GetComponentInChildren<AttackTrigger>();
         OwnCollider = GetComponent<Collider2D>();
         ShieldCollider = GetComponentInChildren<Collider2D>();
@@ -108,9 +107,9 @@ public class GuardianEnemyBrain : EnemyBase
 
         CheckVision = new CheckVision(PlayerTransform, MiddlePoint, _groundLayerMask);
         TooCloseRange = new Range(PlayerTransform, MiddlePoint, NewEnemyData.TooCloseRange); //8
-        Reposition = new Flee(PlayerTransform, this, NewEnemyData, NewEnemyData.TooCloseRange+1); //9
+        Reposition = new Flee(PlayerTransform, this, NewEnemyData, NewEnemyData.TooCloseRange); //8
         
-        ChaseRange = new Range(PlayerTransform, MiddlePoint,NewEnemyData.ChaseRange); //10
+        ChaseRange = new Range(PlayerTransform, MiddlePoint,NewEnemyData.AttackRange); //10
         FacePlayer = new FacePlayer(this, PlayerTransform);
         SetAttack = new SetAttack(NewEnemyData);
         
@@ -122,7 +121,7 @@ public class GuardianEnemyBrain : EnemyBase
         
         Sequence attackSequence = new Sequence(new List<Node>() { CanAttack, WaitBeforeAttack, Attack });
 
-        Sequence repositionSequence = new Sequence(new List<Node>() { CheckVision, TooCloseRange, Reposition });
+        Sequence repositionSequence = new Sequence(new List<Node>() { TooCloseRange, CheckVision, Reposition });
         
         Sequence chaseSequence = new Sequence(new List<Node>() { CheckVision, ChaseRange, FacePlayer, SetAttack });
 

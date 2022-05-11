@@ -48,4 +48,4 @@ MonoBehaviour:
   HasTouchedPlayer: 0
   EnergyFull: 0
   MaxChargeTime: 5
-  TooCloseRange: 8
+  TooCloseRange: 5
