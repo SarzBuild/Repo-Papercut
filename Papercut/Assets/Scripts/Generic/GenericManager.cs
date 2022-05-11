@@ -7,6 +7,23 @@ using UnityEngine.UI;
 
 public class GenericManager : MonoBehaviour
 {
+    private static GenericManager _instance;
+    public static GenericManager Instance {
+        get
+        {
+            if (_instance != null) return _instance;
+            
+            var singleton = FindObjectOfType<GenericManager>();
+            if (singleton != null) return _instance;
+            
+            var go = new GameObject();
+            _instance = go.AddComponent<GenericManager>();
+            return _instance;
+        }
+    }
+    
+    public SoundEventData SoundEventData;
+    
     public static int PlayerLayerMask { get { return LayerMask.NameToLayer("Player"); } }
     public static int EnemyLayerMask { get { return LayerMask.NameToLayer("Enemy"); } }
     public static int GroundLayerMask { get { return LayerMask.NameToLayer("Ground"); } }
@@ -20,6 +37,9 @@ public class GenericManager : MonoBehaviour
 
     private void Awake()
     {
+        if (_instance != null && _instance != this) Destroy(gameObject);
+        else _instance = this;
+        
         Physics2D.IgnoreLayerCollision(EnemyLayerMask, EnemyLayerMask, true);
         Physics2D.IgnoreLayerCollision(BulletLayerMask, BulletLayerMask, true);
         Physics2D.IgnoreLayerCollision(PlayerLayerMask,EnemyLayerMask,true);
@@ -103,9 +123,19 @@ public class GenericManager : MonoBehaviour
     {
         AkSoundEngine.PostEvent(call,target);
     }
-
-    public static void CallStateChange(string parent, string state)
+    
+    public static void CallMusicEvent(AK.Wwise.Event call, GameObject target)
     {
-        AkSoundEngine.SetState("In_Game", "Low");
+        AkSoundEngine.PostEvent(call.Id,target);
+    }
+
+    public static void CallStateChange(string group, string state)
+    {
+        AkSoundEngine.SetState(group, state);
+    }
+    
+    public static void CallStateChange(AK.Wwise.State state)
+    {
+        AkSoundEngine.SetState(state.GroupId,state.Id);
     }
 }

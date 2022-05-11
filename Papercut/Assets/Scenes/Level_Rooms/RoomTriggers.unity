@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.04831226, g: 0.075138435, b: 0.20985258, a: 1}
+  m_IndirectSpecularColor: {r: 0.047061022, g: 0.071354985, b: 0.17750262, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3029,6 +3029,10 @@ PrefabInstance:
       propertyPath: Abilities.Array.data[3]
       value: 
       objectReference: {fileID: 658048608}
+    - target: {fileID: 563350372, guid: 590f90d490c0c3b44b40bd641ea0449c, type: 3}
+      propertyPath: SoundEventData
+      value: 
+      objectReference: {fileID: 11400000, guid: 712e9b74589f08c419725a0405ac0a62, type: 2}
     - target: {fileID: 563350373, guid: 590f90d490c0c3b44b40bd641ea0449c, type: 3}
       propertyPath: RestartUI
       value: 

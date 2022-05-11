@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 698f91bbe250dcd4da7ca446d6eb65b3, type: 3}
+  m_Name: C6C1EDC7-B348-436E-8BF9-706128C1DB99
+  m_EditorClassIdentifier: 
+  objectName: Clic_Small
+  id: 1430876236
+  guid: C6C1EDC7-B348-436E-8BF9-706128C1DB99

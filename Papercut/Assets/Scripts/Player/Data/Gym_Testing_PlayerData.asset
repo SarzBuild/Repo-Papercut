@@ -17,7 +17,7 @@ MonoBehaviour:
 '
   RawInputValue: 0
   Velocity: {x: 0, y: 0}
-  LastPosition: {x: -112.26, y: 1.8528538}
+  LastPosition: {x: -112.93, y: 1.8528538}
   LastTimeJumpKeyWasPressed: 52.43867
   CurrentHorizontalSpeed: 0
   CurrentVerticalSpeed: 0
@@ -39,7 +39,7 @@ MonoBehaviour:
   FallClamped: -40
   MinimumFallSpeed: 60
   MaximumFallSpeed: 100
-  CurrentFallSpeed: 99.979996
+  CurrentFallSpeed: 88.907455
   MaximumJumpCount: 2
   CurrentJumpCount: 2
   TimeBetweenDoubleJump: 0.01
@@ -231,3 +231,7 @@ MonoBehaviour:
   PullingSpped: 15
   EndGrappleXVelocity: 2
   EndGrappleYVelocity: 2
+  Footstep:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 7fa95c9bdbf0c6b4597d1c0383134243, type: 2}

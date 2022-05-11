@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a30664aa8b7a46d0abab07166cced0c0, type: 3}
+  m_Name: newSoundData
+  m_EditorClassIdentifier: 
+  ChangeZone:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: fd1758083af25e4428c87a7838cf989d, type: 2}
+  Menu_BigClick:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 124705a392a34b843b9a1ceaf2e1f47e, type: 2}
+  Menu_SmallClick:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 64ce906bc4073c34bb613056cf740258, type: 2}
+  FinalSequence:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: a1f31c972b255234cb7b05dd94e2a887, type: 2}
+  PlayerJump:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 7fa95c9bdbf0c6b4597d1c0383134243, type: 2}
+  PlayerDeath:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 946f3b588c88d374ba20ce92c59a7121, type: 2}
+  StartAtmosphere:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 79060c3b19819cd469f72720c44b46ca, type: 2}
+  StartInGameMusic:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 5a919df9fc15def49a0613b2880aa6cb, type: 2}
+  StartTitleMusic:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 79efce037b671424396c9a9493a3dcd1, type: 2}
+  StopAllMusic:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 9e758851679f49f41a0bf8cd34a1411f, type: 2}
+  SwordHitShield:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 7e404d6e243ad74408dddc8d9e3f7339, type: 2}
+  SwordHitSpider:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: c0cd4ab1f845c224183c66af359e1e71, type: 2}
+  SwordSwing:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 29b1eddd7cd5a8a4dbb38fecfcb57935, type: 2}
+  BaseMusicLow:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: c7882ccbaeed9da42a1ef86356718453, type: 2}
+  BaseMusicMedium:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 1cc2640ef22c86246b23ec8959ffc5f2, type: 2}
+  BaseMusicHigh:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 90c0031dc855f8e47ac35102eb31ce19, type: 2}

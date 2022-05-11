@@ -125,4 +125,9 @@ public class PlayerData : ScriptableObject
 
     [SerializeField]public float EndGrappleXVelocity;
     [SerializeField]public float EndGrappleYVelocity;
+
+
+    [Header("Sounds")] 
+    [SerializeField] public AK.Wwise.Event Footstep;
+
 }
