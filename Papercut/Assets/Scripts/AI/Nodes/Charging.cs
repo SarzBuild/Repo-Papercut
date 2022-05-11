@@ -39,12 +39,14 @@ public class Charging : Node
             }
             if (_enemyData.HasTouchedPlayer) //Check if hit player
             {
+                _enemyData.IsStunned = true;
                 Debug.Log("CHARGE STOPPED FROM HIT PLAYER");
                 SetStateOnChargeEnd();
                 return NodeState.SUCCESS; 
             }
             if (timer > _enemyData.MaxChargeTime) //If they've been charging for a while, they stop
             {
+                _enemyData.IsStunned = true;
                 Debug.Log("CHARGE STOPPED FROM EXCEED TIME");
                 SetStateOnChargeEnd();
                 return NodeState.SUCCESS;
