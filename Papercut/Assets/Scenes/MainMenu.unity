@@ -1895,6 +1895,7 @@ MonoBehaviour:
   OptionsText: {fileID: 138410558}
   BlackLoadingScreen: {fileID: 1226296626}
   LoadingScreenLoadingBar: {fileID: 1351040837}
+  BaseMenu: {fileID: 574728078}
 --- !u!4 &549904944
 Transform:
   m_ObjectHideFlags: 0

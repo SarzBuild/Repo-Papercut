@@ -40,7 +40,8 @@ public class MainMenu : MonoBehaviour
     private List<AsyncOperation> _scenesToLoad = new List<AsyncOperation>();
     public GameObject BlackLoadingScreen;
     public Image LoadingScreenLoadingBar;
-
+    public GameObject BaseMenu;
+    
     private void Start()
     {
         if(DevBuild) SceneManager.LoadSceneAsync("Settings",LoadSceneMode.Additive);
@@ -69,6 +70,7 @@ public class MainMenu : MonoBehaviour
             _scenesToLoad.Add(SceneManager.LoadSceneAsync("RoomTriggers"));
             _scenesToLoad.Add(SceneManager.LoadSceneAsync("Room_001",LoadSceneMode.Additive));
             if(DevBuild) _scenesToLoad.Add(SceneManager.LoadSceneAsync("Settings",LoadSceneMode.Additive));
+            BaseMenu.SetActive(false);
             BlackLoadingScreen.SetActive(true);
             StartCoroutine(LoadingScreen());
         }

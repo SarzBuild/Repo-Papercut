@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Settings.unity
     guid: 64582aa2f1b492f48853802089eb227c
   - enabled: 1
+    path: Assets/Scenes/Level_Rooms/Credits.unity
+    guid: 0def57d1134d5d641974893fc9e5291a
+  - enabled: 1
     path: Assets/Scenes/Level_Rooms/Room_001.unity
     guid: 7b5ffb2c3b695004f9b46caa106e5806
   - enabled: 1
