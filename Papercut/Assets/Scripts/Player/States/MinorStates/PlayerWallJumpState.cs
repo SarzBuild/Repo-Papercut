@@ -55,8 +55,8 @@ public class PlayerWallJumpState : PlayerState
     
     private void CalculateJump()
     {
-        if(Player.FacingDirection == 1) Player.SetVelocityX(-PlayerData.WallJumpingSpeed * _wallJumpAngle.x); 
-        if(Player.FacingDirection == -1) Player.SetVelocityX(PlayerData.WallJumpingSpeed *  _wallJumpAngle.x);
+        if(Player.FacingDirection == 1) Player.SetVelocityX(PlayerData.WallJumpingSpeed * _wallJumpAngle.x); 
+        if(Player.FacingDirection == -1) Player.SetVelocityX(-PlayerData.WallJumpingSpeed *  _wallJumpAngle.x);
         Player.SetVelocityY(PlayerData.WallJumpingSpeed * _wallJumpAngle.y);
         Player.ApplyVelocity();
     }
