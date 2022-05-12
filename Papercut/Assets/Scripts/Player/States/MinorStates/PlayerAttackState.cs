@@ -12,6 +12,7 @@ public class PlayerAttackState : PlayerState
     public override void EnterState()
     {
         base.EnterState();
+        GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.SwordSwing,Player.gameObject);
         Player.LastAttackTime = Time.time + Player.Weapons.EquippedWeapon.Settings.FireCooldownSec;
         HandleAttackAnims(Player.IncreaseAttackCounter());
         PlayerData.CurrentHorizontalSpeed = Player.FacingDirection * 15;

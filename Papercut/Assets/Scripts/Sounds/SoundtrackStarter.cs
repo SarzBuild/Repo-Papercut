@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 public enum SceneType
@@ -15,6 +16,7 @@ public class SoundtrackStarter : MonoBehaviour
         {
             case SceneType.MainMenu:
             {
+                StopAllMusic();
                 GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.StartTitleMusic, gameObject);
                 break;
             }
@@ -27,21 +29,42 @@ public class SoundtrackStarter : MonoBehaviour
             }
             case SceneType.Credits:
             {
+                StopAllMusic();
                 GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.StartTitleMusic, gameObject);
                 break;
             }
         }
     }
 
-    public void StartMidMusic()
+    public void PlayHitSound()
+    {
+        GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.SwordHitSpider, gameObject);
+    }
+
+    public void PlayStinger()
     {
         GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.ChangeZone, gameObject);
+    }
+
+    public void StopAllMusic()
+    {
+        AkSoundEngine.StopAll();
+    }
+
+    public void StartEndSequenceMusic()
+    {
+        GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.FinalSequence,gameObject);
+    }
+
+    public void StartMidMusic()
+    {
+        PlayStinger();
         GenericManager.CallStateChange(GenericManager.Instance.SoundEventData.BaseMusicMedium);
     }
 
     public void StartHighMusic()
     {
-        GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.ChangeZone, gameObject);
+        PlayStinger();
         GenericManager.CallStateChange(GenericManager.Instance.SoundEventData.BaseMusicHigh);
     }
 }

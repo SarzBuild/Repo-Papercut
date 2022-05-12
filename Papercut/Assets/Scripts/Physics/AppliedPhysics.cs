@@ -74,6 +74,7 @@ public class AppliedPhysics : MonoBehaviour
 
     public void ToggleVelocity()
     {
+        _rigidbody2D.velocity = Vector2.zero;
         _canSetVelocity = !_canSetVelocity;
     }
 

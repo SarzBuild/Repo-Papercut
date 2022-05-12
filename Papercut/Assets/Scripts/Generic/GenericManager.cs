@@ -140,4 +140,9 @@ public class GenericManager : MonoBehaviour
     {
         AkSoundEngine.SetState(state.GroupId,state.Id);
     }
+
+    public void TPPLayer()
+    {
+        Player.Instance.transform.position = new Vector3(825.11f,-400.9f,-0.014f);
+    }
 }
