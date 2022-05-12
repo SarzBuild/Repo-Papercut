@@ -121,7 +121,7 @@ public class @PlayerKeyMap : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""a1695889-2910-4cd2-baf3-3f1ce1a5b88a"",
                     ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold(duration=0.05)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MoveDown"",
