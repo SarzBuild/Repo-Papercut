@@ -14,6 +14,7 @@ public class PlayerWallJumpState : PlayerState
     {
         base.EnterState();
         
+        Player.FlipCharacterDirection();
         _percentTimeCurve = 1;
         Player.LastWallJumpTime = Time.time;
         PlayerData.CurrentJumpCount--;
