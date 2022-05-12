@@ -316,6 +316,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: -8158401206778697971, guid: b652172ecbf2a5a4298fe960661010be, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8158401206778697971, guid: b652172ecbf2a5a4298fe960661010be, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -7816884045828715088, guid: b652172ecbf2a5a4298fe960661010be, type: 3}
       propertyPath: m_Layer
       value: 13
@@ -403,6 +411,14 @@ PrefabInstance:
     - target: {fileID: 7697268549043530707, guid: b652172ecbf2a5a4298fe960661010be, type: 3}
       propertyPath: m_Layer
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004200692331940199, guid: b652172ecbf2a5a4298fe960661010be, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004200692331940199, guid: b652172ecbf2a5a4298fe960661010be, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8426472930629540952, guid: b652172ecbf2a5a4298fe960661010be, type: 3}
       propertyPath: m_Layer
