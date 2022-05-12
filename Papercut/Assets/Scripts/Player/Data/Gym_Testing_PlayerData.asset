@@ -17,13 +17,13 @@ MonoBehaviour:
 '
   RawInputValue: 0
   Velocity: {x: 0, y: 0}
-  LastPosition: {x: 168.57295, y: -43.606785}
-  LastTimeJumpKeyWasPressed: 42.930878
-  CurrentHorizontalSpeed: 50
-  CurrentVerticalSpeed: 10
+  LastPosition: {x: 82.869446, y: -9.601351}
+  LastTimeJumpKeyWasPressed: 96.255165
+  CurrentHorizontalSpeed: 0
+  CurrentVerticalSpeed: 0
   PlayerLandedThisFrame: 0
   CollisionDown: 1
-  TimePlayerStoppedGrounded: 43.51601
+  TimePlayerStoppedGrounded: -3.4028235e+38
   PlayerLayerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -58,7 +58,7 @@ MonoBehaviour:
   MaximumDashCount: 1
   DashCooldownTime: 1.5
   CanFireWeapon: 1
-  WallJumpAbilityActive: 1
+  WallJumpAbilityActive: 0
   ResetNumberOfJumpOnWallGrab: 2
   CurrentlyOnStickyWall: 0
   CurrentlyWallJumping: 0
@@ -108,7 +108,7 @@ MonoBehaviour:
   TimeBeforeSlippingStart: 1.5
   SlippingVelocity: 5
   EndWallSlipYVelocity: 0
-  EndWallSlipXVelocity: 3
+  EndWallSlipXVelocity: 8
   GrapplingAbilityActive: 0
   GrappleTargetableLayer:
     serializedVersion: 2

@@ -17,7 +17,7 @@ public class PlayerWallGrabState : PlayerState
         base.EnterState();
         _lastTimeEnterState = Time.time;
         Player.SetVelocityZero();
-        Player.FlipCharacterDirection();
+        //Player.FlipCharacterDirection();
         PlayerData.CurrentJumpCount = PlayerData.ResetNumberOfJumpOnWallGrab;
     }
 
@@ -37,8 +37,8 @@ public class PlayerWallGrabState : PlayerState
         else if (Player.InputHandler.ListenDownInput == 1 || !CheckForNotOnStickyWall())
         {
             SetWallJumpBool();
-            if(Player.FacingDirection == 1) PlayerData.CurrentHorizontalSpeed = PlayerData.EndWallSlipXVelocity;
-            if(Player.FacingDirection == -1) PlayerData.CurrentHorizontalSpeed = -PlayerData.EndWallSlipXVelocity;
+            if(Player.FacingDirection == 1) PlayerData.CurrentHorizontalSpeed = -PlayerData.EndWallSlipXVelocity;
+            if(Player.FacingDirection == -1) PlayerData.CurrentHorizontalSpeed = PlayerData.EndWallSlipXVelocity;
             PlayerData.CurrentVerticalSpeed = PlayerData.EndWallSlipYVelocity;
 
             //TODO Need to move player a bit so that they don't touch the wall no more.
