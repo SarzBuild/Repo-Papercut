@@ -25,6 +25,7 @@ public class MainMenu : MonoBehaviour
     public Image VolumeBackgroundImage;
     public Image VolumeFillImage;
     public Image VolumeHandleImage;
+    public Slider Volume;
 
     public Image ControlsImage;
     private bool ControlImageIsFaded = false;
@@ -41,7 +42,7 @@ public class MainMenu : MonoBehaviour
     public GameObject BlackLoadingScreen;
     public Image LoadingScreenLoadingBar;
     public GameObject BaseMenu;
-    
+
     private void Start()
     {
         if(DevBuild) SceneManager.LoadSceneAsync("Settings",LoadSceneMode.Additive);
@@ -72,10 +73,14 @@ public class MainMenu : MonoBehaviour
             if(DevBuild) _scenesToLoad.Add(SceneManager.LoadSceneAsync("Settings",LoadSceneMode.Additive));
             BaseMenu.SetActive(false);
             BlackLoadingScreen.SetActive(true);
+            //GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.StopAllMusic,gameObject);
+            AkSoundEngine.StopAll();
+            GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.Menu_BigClick,gameObject);
             StartCoroutine(LoadingScreen());
         }
         else if(CurrentMenuState == MenuState.OptionsState)
         {
+            GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.Menu_SmallClick,gameObject);
             OnControlsButtons();
         }
     }
@@ -102,6 +107,7 @@ public class MainMenu : MonoBehaviour
         }
         else if(CurrentMenuState == MenuState.OptionsState)
         {
+            GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.Menu_SmallClick,gameObject);
             CurrentMenuState = MenuState.MainState;
             ControlsText.DOFade(0f, 0.2f);
             VolumeBackgroundImage.DOFade(0f, 0.2f);
@@ -111,6 +117,7 @@ public class MainMenu : MonoBehaviour
         }
         else if(CurrentMenuState == MenuState.ControlsState)
         {
+            GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.Menu_SmallClick,gameObject);
             CurrentMenuState = MenuState.OptionsState;
             //Debug.Log("FadeToSpeeder");
             //var MySequence = DOTween.Sequence();
@@ -128,6 +135,7 @@ public class MainMenu : MonoBehaviour
     {
         if(CurrentMenuState == MenuState.MainState)
         {
+            GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.Menu_SmallClick,gameObject);
             CurrentMenuState = MenuState.OptionsState;
             StartText.DOFade(0f, 0.2f);
             QuitText.DOFade(0f, 0.2f);
@@ -137,6 +145,7 @@ public class MainMenu : MonoBehaviour
 
     private void OnControlsButtons()
     {
+        GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.Menu_SmallClick,gameObject);
         CurrentMenuState = MenuState.ControlsState;
         OptionsButton.transform.DOMoveX(100f, 0.5f);
         StartButton.transform.DOMoveX(300f, 0.5f);
@@ -198,4 +207,8 @@ public class MainMenu : MonoBehaviour
         QuitButton.transform.DOMoveX(1360f, 0.5f);
     }
 
+    public void ChangeMasterVolume()
+    {
+        AkSoundEngine.SetRTPCValue("MasterVolume", Volume.value);
+    }
 }

@@ -36,6 +36,7 @@ public class PlayerJumpState : PlayerState
             PlayerData.CurrentJumpCount--;
             JumpingThisFrame = true;
             TimeSinceLastJump = Time.time;
+            GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.PlayerJump,Player.gameObject);
         }
         else
         {

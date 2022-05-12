@@ -42,6 +42,8 @@ public class PlayerDeathState : PlayerState
         Player.InputHandler.LockMouseInputs(true);
         Player.InputHandler.LockPlayerInputs(true);
         
+        GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.PlayerDeath,Player.gameObject);
+        
         Time.timeScale = 0;
 
         Player.SimplePlayerUI.Active = true;

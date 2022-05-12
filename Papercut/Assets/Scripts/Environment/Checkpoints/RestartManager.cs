@@ -19,6 +19,7 @@ public class RestartManager : MonoBehaviour
 
     public void RestartLoop()
     {
+        GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.Menu_SmallClick,gameObject);
         _player.Animator.SetBool("dead",false);
         
         _player.PlayerData.CurrentHorizontalSpeed = 0;

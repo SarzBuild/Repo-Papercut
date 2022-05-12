@@ -72,14 +72,17 @@ public class AttackTrigger : MonoBehaviour
             if (CheckMatchingLayers(targetLayer, GenericManager.EnemyLayerMask))
             {
                 ApplyDamage(col);
+                GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.SwordHitSpider,_parent);
             }
             else if (CheckMatchingLayers(targetLayer, GenericManager.GuardEnemyLayerMask))
             {
                 ApplyDamage(col);
+                GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.SwordHitSpider,_parent);
             }
             else if(CheckMatchingLayers(targetLayer,GenericManager.ShieldLayerMask))
             {
                 Toggle(false);
+                GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.SwordHitShield,_parent);
             }
             else if (CheckMatchingLayers(targetLayer, GenericManager.GroundLayerMask))
             {

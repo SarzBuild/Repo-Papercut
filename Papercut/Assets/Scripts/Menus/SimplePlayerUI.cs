@@ -104,6 +104,7 @@ public class SimplePlayerUI : MonoBehaviour
         RestartUI.SetActive(true);
         GenericManager.FadeIn(_backgroundImage,0.25f,true);
         ToggleButton(ReturnButton,true);
+        GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.Menu_SmallClick,gameObject);
         Time.timeScale = 0f;
     }
 
@@ -112,11 +113,13 @@ public class SimplePlayerUI : MonoBehaviour
         GenericManager.FadeOut(_backgroundImage,0.25f,true);
         ToggleButton(ReturnButton,false);
         RestartUI.SetActive(false);
+        GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.Menu_SmallClick,gameObject);
         Time.timeScale = 1f;
     }
 
     private void ToggleButton(GameObject button, bool toggle)
     {
+        Debug.Log(_player.HealthComponent.IsDead);
         if(_player.HealthComponent.IsDead) return; 
         button.SetActive(toggle);
     }

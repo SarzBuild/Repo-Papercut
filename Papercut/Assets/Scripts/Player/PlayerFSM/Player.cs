@@ -141,7 +141,6 @@ public class Player : AppliedPhysics
         InitializeProperties();
         InitializeHealth();
         StateMachine.Initialize(IdleState);
-        //GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.ChangeZone,gameObject);
     }
     
     private void InitializeProperties()

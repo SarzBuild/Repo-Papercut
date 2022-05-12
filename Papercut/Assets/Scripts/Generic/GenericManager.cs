@@ -69,6 +69,8 @@ public class GenericManager : MonoBehaviour
 
     public void BackToMenu()
     {
+        AkSoundEngine.StopAll();
+        CallMusicEvent(SoundEventData.Menu_BigClick,gameObject);
         SceneManager.LoadScene("MainMenu");
     }
 

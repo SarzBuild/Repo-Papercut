@@ -191,8 +191,17 @@ MonoBehaviour:
     ParentPhysicalPath: 
     guid: 2008c0170563094db854dfa7bdce44ab
     GuidInternal: 
-    m_lastTime: -8585495698674775808
-    List: []
+    m_lastTime: -8585492723148296201
+    List:
+    - name: SoundBank
+      guid: e7beea1a630b5d43abe8ed0eab4da945
+      id: 1661994096
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: SoundBank
+        ObjectType: 7
+      Path: Default Work Unit\SoundBank
   EventWwu:
   - PhysicalPath: Events\Audio.wwu
     ParentPhysicalPath: 
@@ -210,8 +219,8 @@ MonoBehaviour:
         ObjectType: 3
       Path: Audio\Change_Zone
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 6.428542
+      minDuration: 6.428542
     - name: Clic_Big
       guid: 646c9f5aa221994197476fba9210ad94
       id: 2846455371
@@ -224,8 +233,8 @@ MonoBehaviour:
         ObjectType: 3
       Path: Audio\Menu\Clic_Big
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 2.069667
+      minDuration: 2.069667
     - name: Clic_Small
       guid: c7edc1c648b36e438bf9706128c1db99
       id: 1430876236
@@ -238,8 +247,8 @@ MonoBehaviour:
         ObjectType: 3
       Path: Audio\Menu\Clic_Small
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0.704333
+      minDuration: 0.704333
     - name: Final_Sequence
       guid: 68ef3ab897064241a82937381f3c6d5a
       id: 2014019461
@@ -250,8 +259,8 @@ MonoBehaviour:
         ObjectType: 3
       Path: Audio\Final_Sequence
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 25.5
+      minDuration: 25.5
     - name: Jump
       guid: 63951309301ab74193fe3d663e6f50d5
       id: 3833651337
@@ -264,8 +273,8 @@ MonoBehaviour:
         ObjectType: 3
       Path: Audio\Player\Jump
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0.492432
+      minDuration: 0.319996
     - name: Main_Caracter_Death
       guid: a010555f4a09f2429b3356870db50a6f
       id: 2539102097
@@ -278,8 +287,8 @@ MonoBehaviour:
         ObjectType: 3
       Path: Audio\Player\Main_Caracter_Death
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 1.849887
+      minDuration: 1.108047
     - name: Start_Atmosphe
       guid: 3b1dfedf9fb9bf4eb0cbcdaa614bd7d5
       id: 2106894257
@@ -328,8 +337,8 @@ MonoBehaviour:
         ObjectType: 3
       Path: Audio\Stop_All
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0
+      minDuration: 0
     - name: Sword_Hit_Shield
       guid: 16ba14a299a93f4e936d8da7296f447c
       id: 3009140878
@@ -342,8 +351,8 @@ MonoBehaviour:
         ObjectType: 3
       Path: Audio\Sword\Sword_Hit_Shield
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0.882886
+      minDuration: 0.786562
     - name: Sword_Hit_Spider
       guid: 6cc80c633ea99644bed310e0a7e47e26
       id: 2753700762
@@ -356,8 +365,8 @@ MonoBehaviour:
         ObjectType: 3
       Path: Audio\Sword\Sword_Hit_Spider
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 1.057522
+      minDuration: 0.582769
     - name: Sword_Swing
       guid: 5b0c9a56bd9efd4b899bb10a60369972
       id: 476098351
@@ -370,8 +379,8 @@ MonoBehaviour:
         ObjectType: 3
       Path: Audio\Sword\Sword_Swing
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 0.381802
+      minDuration: 0.188454
   - PhysicalPath: Events\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: f5e09b1f7c619b44ab24a15514d9cfd7
@@ -396,7 +405,7 @@ MonoBehaviour:
     ParentPhysicalPath: 
     guid: 282096214d41e3498ef06672b0b9efe3
     GuidInternal: 
-    m_lastTime: -8585493944303184930
+    m_lastTime: -8585492723148505127
     List:
     - name: In_Game
       guid: 6548b970de0fb84f8dc9a5c979f52e9d
@@ -427,7 +436,7 @@ MonoBehaviour:
         - ElementName: Medium
           ObjectType: 8
       - name: None
-        guid: 6b226b03dbb18b4d93ad560cb311821b
+        guid: 3433934dad54c140a5a80fbfa393acc4
         id: 748895195
         PathAndIcons:
         - ElementName: None
@@ -451,14 +460,5 @@ MonoBehaviour:
     List: []
   ExpandedItems:
   - /Paper Cut AUDIO
-  - /Paper Cut AUDIO/Events
-  - /Paper Cut AUDIO/Events/Audio
-  - /Paper Cut AUDIO/Events/Audio/Atmosphere
-  - /Paper Cut AUDIO/Events/Audio/Menu
-  - /Paper Cut AUDIO/Events/Audio/Player
-  - /Paper Cut AUDIO/Events/Audio/Sword
-  - /Paper Cut AUDIO/States
-  - /Paper Cut AUDIO/States/Music
-  - /Paper Cut AUDIO/States/Music/In_Game
   autoPopulateEnabled: 1
   CurrentPluginConfig: 
