@@ -32,4 +32,16 @@ public class SoundtrackStarter : MonoBehaviour
             }
         }
     }
+
+    public void StartMidMusic()
+    {
+        GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.ChangeZone, gameObject);
+        GenericManager.CallStateChange(GenericManager.Instance.SoundEventData.BaseMusicMedium);
+    }
+
+    public void StartHighMusic()
+    {
+        GenericManager.CallMusicEvent(GenericManager.Instance.SoundEventData.ChangeZone, gameObject);
+        GenericManager.CallStateChange(GenericManager.Instance.SoundEventData.BaseMusicHigh);
+    }
 }
