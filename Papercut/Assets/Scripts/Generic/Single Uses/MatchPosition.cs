@@ -13,7 +13,5 @@ public class MatchPosition : MonoBehaviour
     private void LateUpdate()
     {
         transform.position = Target.position;
-        /*transform.GetChild(0).rotation = Target2.rotation;
-        transform.rotation = Target.rotation;*/
     }
 }

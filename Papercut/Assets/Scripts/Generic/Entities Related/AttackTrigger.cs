@@ -36,7 +36,7 @@ public class AttackTrigger : MonoBehaviour
         _knockbackSpeed = knockbackMultiplier;
     }
 
-    public void Start()
+    private void Start()
     {
        Toggle(false);
     }

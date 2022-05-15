@@ -33,9 +33,4 @@ public class DeathZone : WeaponBase
             Fire();
         }
     }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        //Restart attack cooldown time if possible
-    }
 }

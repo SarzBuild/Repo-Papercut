@@ -24,7 +24,7 @@ public class WeaponPickup : MonoBehaviour
         Collider.isTrigger = true;
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
         Player player = col.GetComponent<Player>();
         if (player != null)

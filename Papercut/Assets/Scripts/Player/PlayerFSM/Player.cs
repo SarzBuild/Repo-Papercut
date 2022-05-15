@@ -33,10 +33,7 @@ public class Player : AppliedPhysics
     public PlayerIdleState IdleState { get; private set; }
     public PlayerInAirState InAirState { get; private set; }
     public PlayerJumpState JumpState { get; private set; }
-    public PlayerLedgeClimbState LedgeClimbState { get; private set; }
     public PlayerMoveState MoveState { get; private set; }
-    public PlayerRunningState RunningState { get; private set; }
-    public PlayerSlideState SlideState { get; private set; }
     public PlayerSoftLandingState SoftLandingState { get; private set; }
     public PlayerWallGrabState WallGrabState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; }
@@ -124,9 +121,6 @@ public class Player : AppliedPhysics
         HardLandingState = new PlayerHardLandingState(this, StateMachine, PlayerData);
         InAirState = new PlayerInAirState(this, StateMachine, PlayerData);
         JumpState = new PlayerJumpState(this, StateMachine, PlayerData);
-        LedgeClimbState = new PlayerLedgeClimbState(this, StateMachine, PlayerData);
-        RunningState = new PlayerRunningState(this, StateMachine, PlayerData);
-        SlideState = new PlayerSlideState(this, StateMachine, PlayerData);
         SoftLandingState = new PlayerSoftLandingState(this, StateMachine, PlayerData);
         WallGrabState = new PlayerWallGrabState(this, StateMachine, PlayerData);
         WallJumpState = new PlayerWallJumpState(this, StateMachine, PlayerData);

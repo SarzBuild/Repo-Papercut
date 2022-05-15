@@ -14,8 +14,6 @@ public class Timer : MonoBehaviour
     private float _minTime = 0f;
     private bool _active;
     
-    
-
     private void Update()
     {
         if (Input.GetKeyDown(StartAndStopKey))

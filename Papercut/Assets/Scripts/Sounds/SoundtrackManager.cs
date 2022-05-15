@@ -6,7 +6,7 @@ public enum SceneType
     MainMenu, Game, Credits
 }
 
-public class SoundtrackStarter : MonoBehaviour
+public class SoundtrackManager : MonoBehaviour
 {
     public SceneType SceneType;
     private void Start()

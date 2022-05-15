@@ -66,6 +66,14 @@ public class GenericManager : MonoBehaviour
         fixedColor.a = 1;
         target.color = fixedColor;
     }
+    
+    public static void ToggleObjects(List<GameObject> objectsToToggle, bool active)
+    {
+        for (int i = 0; i < objectsToToggle.Count; i++)
+        {
+            objectsToToggle[i].SetActive(active);
+        }
+    }
 
     public void BackToMenu()
     {
@@ -74,12 +82,7 @@ public class GenericManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void Quit()
-    {
-        Application.Quit();
-    }
-    
-    public static bool Timer( float timeWhenEventOccured, float cooldown)
+    public static bool Timer(float timeWhenEventOccured, float cooldown)
     {
         return Time.time - (timeWhenEventOccured + cooldown) < 0;
     }

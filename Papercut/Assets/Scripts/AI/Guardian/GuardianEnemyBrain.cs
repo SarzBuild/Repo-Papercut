@@ -270,19 +270,6 @@ public class GuardianEnemyBrain : EnemyBase
         }
     }
 
-    /*private void OnCollisionEnter2D(Collision2D col) //On Collisions Damage
-    {
-        if (col.gameObject.layer == GenericManager.PlayerLayerMask)
-        {
-            var healthComponent = col.transform.GetComponent<HealthComponent>();
-            if (healthComponent != null)
-            {
-                print("PLAYER HIT ON COLLISIONS" + col.otherCollider.name);
-                healthComponent.DealDamage(EnemyData.CollisionDamage,gameObject,Vector2.zero);
-            } 
-        }
-    }*/
-    
     private void HandleAnimations()
     {
         if(_animator.GetBool("dead")) return;

@@ -184,14 +184,14 @@ MonoBehaviour:
     ParentPhysicalPath: 
     guid: 8d2434692c40a543ac2419be8d3ea22a
     GuidInternal: 
-    m_lastTime: -8585495698354775808
+    m_lastTime: -8585492675987186412
     List: []
   BankWwu:
   - PhysicalPath: SoundBanks\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 2008c0170563094db854dfa7bdce44ab
     GuidInternal: 
-    m_lastTime: -8585492723148296201
+    m_lastTime: -8585492677481035520
     List:
     - name: SoundBank
       guid: e7beea1a630b5d43abe8ed0eab4da945
@@ -392,8 +392,17 @@ MonoBehaviour:
     ParentPhysicalPath: 
     guid: d352f041a2038a46acb14040ef867a77
     GuidInternal: 
-    m_lastTime: -8585495698674775808
-    List: []
+    m_lastTime: -8585492677771771188
+    List:
+    - name: MasterVolume
+      guid: 888fcb15a7f2da4ead137171ecf7f483
+      id: 2918011349
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: MasterVolume
+        ObjectType: 13
+      Path: Default Work Unit\MasterVolume
   StateWwu:
   - PhysicalPath: States\Default Work Unit.wwu
     ParentPhysicalPath: 
@@ -460,5 +469,7 @@ MonoBehaviour:
     List: []
   ExpandedItems:
   - /Paper Cut AUDIO
+  - /Paper Cut AUDIO/SoundBanks
+  - /Paper Cut AUDIO/SoundBanks/Default Work Unit
   autoPopulateEnabled: 1
   CurrentPluginConfig: 

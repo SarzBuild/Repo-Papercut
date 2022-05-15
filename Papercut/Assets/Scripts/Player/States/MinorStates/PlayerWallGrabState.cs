@@ -21,11 +21,6 @@ public class PlayerWallGrabState : PlayerState
         PlayerData.CurrentJumpCount = PlayerData.ResetNumberOfJumpOnWallGrab;
     }
 
-    public override void ExitState()
-    {
-        base.ExitState();
-    }
-
     public override void LogicUpdate()
     {
         base.LogicUpdate();
@@ -49,7 +44,7 @@ public class PlayerWallGrabState : PlayerState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        TimeBeforeFalling();
+        TimeBeforeSliding();
     }
 
     public override void DoChecks()
@@ -99,7 +94,7 @@ public class PlayerWallGrabState : PlayerState
     }
     
 
-    private void TimeBeforeFalling()
+    private void TimeBeforeSliding()
     {
         var cooldownTime = _lastTimeEnterState + PlayerData.TimeBeforeSlippingStart;
         if (Time.time - cooldownTime > 0)

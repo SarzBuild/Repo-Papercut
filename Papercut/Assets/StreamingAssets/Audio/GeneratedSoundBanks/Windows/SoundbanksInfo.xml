@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="11" SoundbankVersion="134">
+	<RootPaths>
+		<ProjectRoot>D:\Wwise Projects\Papercut\</ProjectRoot>
+		<SourceFilesRoot>D:\Wwise Projects\Papercut\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>D:\Desktop\Projects\Repo-Papercut\Repo-Papercut\Papercut\Assets\StreamingAssets\Audio\GeneratedSoundBanks\Windows\</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>D:\Wwise Projects\Papercut\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<StreamedFiles/>
+	<MediaFilesNotInAnyBank/>
+	<SoundBanks>
+		<SoundBank Id="1355168291" Language="SFX">
+			<ObjectPath>Init</ObjectPath>
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+		</SoundBank>
+		<SoundBank Id="1661994096" Language="SFX">
+			<ObjectPath>\SoundBanks\Default Work Unit\SoundBank</ObjectPath>
+			<ShortName>SoundBank</ShortName>
+			<Path>SoundBank.bnk</Path>
+			<IncludedEvents>
+				<Event Id="2459862590" Name="Change_Zone" ObjectPath="\Events\Audio\Change_Zone" DurationType="OneShot" DurationMin="6.428542" DurationMax="6.428542"/>
+				<Event Id="2846455371" Name="Clic_Big" ObjectPath="\Events\Audio\Menu\Clic_Big" DurationType="OneShot" DurationMin="2.069667" DurationMax="2.069667"/>
+				<Event Id="1430876236" Name="Clic_Small" ObjectPath="\Events\Audio\Menu\Clic_Small" DurationType="OneShot" DurationMin="0.704333" DurationMax="0.704333"/>
+				<Event Id="2014019461" Name="Final_Sequence" ObjectPath="\Events\Audio\Final_Sequence" DurationType="OneShot" DurationMin="25.500000" DurationMax="25.500000"/>
+				<Event Id="3833651337" Name="Jump" ObjectPath="\Events\Audio\Player\Jump" DurationType="OneShot" DurationMin="0.319996" DurationMax="0.492432"/>
+				<Event Id="2539102097" Name="Main_Caracter_Death" ObjectPath="\Events\Audio\Player\Main_Caracter_Death" DurationType="OneShot" DurationMin="1.108047" DurationMax="1.849887"/>
+				<Event Id="2106894257" Name="Start_Atmosphe" ObjectPath="\Events\Audio\Atmosphere\Start_Atmosphe" DurationType="Infinite"/>
+				<Event Id="407869688" Name="Start_Music_In_Game" ObjectPath="\Events\Audio\Start_Music_In_Game" DurationType="Infinite"/>
+				<Event Id="1742820664" Name="Start_Music_Title" ObjectPath="\Events\Audio\Start_Music_Title" DurationType="Infinite"/>
+				<Event Id="452547817" Name="Stop_All" ObjectPath="\Events\Audio\Stop_All" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="3009140878" Name="Sword_Hit_Shield" ObjectPath="\Events\Audio\Sword\Sword_Hit_Shield" DurationType="OneShot" DurationMin="0.786562" DurationMax="0.882886"/>
+				<Event Id="2753700762" Name="Sword_Hit_Spider" ObjectPath="\Events\Audio\Sword\Sword_Hit_Spider" DurationType="OneShot" DurationMin="0.582769" DurationMax="1.057522"/>
+				<Event Id="476098351" Name="Sword_Swing" ObjectPath="\Events\Audio\Sword\Sword_Swing" DurationType="OneShot" DurationMin="0.188454" DurationMax="0.381802"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="57910717" Language="SFX">
+					<ShortName>Jump 6.wav</ShortName>
+					<Path>SFX\Jump 6_10C4C929.wem</Path>
+				</File>
+				<File Id="71061818" Language="SFX">
+					<ShortName>Final sequence Stigner.wav</ShortName>
+					<Path>SFX\Final sequence Stigner_D79FB2B7.wem</Path>
+				</File>
+				<File Id="105056876" Language="SFX">
+					<ShortName>Sword Swing 1.wav</ShortName>
+					<Path>SFX\Sword Swing 1_10C4C929.wem</Path>
+				</File>
+				<File Id="113650156" Language="SFX">
+					<ShortName>In game\In game_MEDIUM_Loop_70bpm.wav</ShortName>
+					<Path>SFX\In game\In game_MEDIUM_Loop_70bpm_D79FB2B7.wem</Path>
+				</File>
+				<File Id="192057712" Language="SFX">
+					<ShortName>In game\In game_HIGH_Loop_70bpm.wav</ShortName>
+					<Path>SFX\In game\In game_HIGH_Loop_70bpm_D79FB2B7.wem</Path>
+				</File>
+				<File Id="196413552" Language="SFX">
+					<ShortName>Stigner zone change.wav</ShortName>
+					<Path>SFX\Stigner zone change_E0D39F3A.wem</Path>
+				</File>
+				<File Id="281704309" Language="SFX">
+					<ShortName>Title_Loop_6b_70bpm_1.wav</ShortName>
+					<Path>SFX\Title_Loop_6b_70bpm_1_D79FB2B7.wem</Path>
+				</File>
+				<File Id="294926749" Language="SFX">
+					<ShortName>Click Menu Big.wav</ShortName>
+					<Path>SFX\Click Menu Big_10C4C929.wem</Path>
+				</File>
+				<File Id="366308004" Language="SFX">
+					<ShortName>Jump 1.wav</ShortName>
+					<Path>SFX\Jump 1_10C4C929.wem</Path>
+				</File>
+				<File Id="398577229" Language="SFX">
+					<ShortName>Sword Hit Spider 1.wav</ShortName>
+					<Path>SFX\Sword Hit Spider 1_10C4C929.wem</Path>
+				</File>
+				<File Id="401168316" Language="SFX">
+					<ShortName>Title_Intro_70bpm.5.wav</ShortName>
+					<Path>SFX\Title_Intro_70bpm.5_D79FB2B7.wem</Path>
+				</File>
+				<File Id="415169713" Language="SFX">
+					<ShortName>Main C. Death 1.wav</ShortName>
+					<Path>SFX\Main C. Death 1_10C4C929.wem</Path>
+				</File>
+				<File Id="415184972" Language="SFX">
+					<ShortName>Sword Hit Shield.wav</ShortName>
+					<Path>SFX\Sword Hit Shield_10C4C929.wem</Path>
+				</File>
+				<File Id="421529651" Language="SFX">
+					<ShortName>Sword Swing 2.wav</ShortName>
+					<Path>SFX\Sword Swing 2_10C4C929.wem</Path>
+				</File>
+				<File Id="425770836" Language="SFX">
+					<ShortName>Sword Hit Spider 2.wav</ShortName>
+					<Path>SFX\Sword Hit Spider 2_10C4C929.wem</Path>
+				</File>
+				<File Id="463687642" Language="SFX">
+					<ShortName>Main C. Death 2.wav</ShortName>
+					<Path>SFX\Main C. Death 2_10C4C929.wem</Path>
+				</File>
+				<File Id="521479494" Language="SFX">
+					<ShortName>Jump 5.wav</ShortName>
+					<Path>SFX\Jump 5_10C4C929.wem</Path>
+				</File>
+				<File Id="597101953" Language="SFX">
+					<ShortName>Jump 3.wav</ShortName>
+					<Path>SFX\Jump 3_10C4C929.wem</Path>
+				</File>
+				<File Id="731042880" Language="SFX">
+					<ShortName>Sword Swing 3.wav</ShortName>
+					<Path>SFX\Sword Swing 3_10C4C929.wem</Path>
+				</File>
+				<File Id="760641436" Language="SFX">
+					<ShortName>Sword Hit Spider 3.wav</ShortName>
+					<Path>SFX\Sword Hit Spider 3_10C4C929.wem</Path>
+				</File>
+				<File Id="761385077" Language="SFX">
+					<ShortName>Click Menu Small.wav</ShortName>
+					<Path>SFX\Click Menu Small_10C4C929.wem</Path>
+				</File>
+				<File Id="871706554" Language="SFX">
+					<ShortName>In game\In game_LOW_Loop_70bpm.wav</ShortName>
+					<Path>SFX\In game\In game_LOW_Loop_70bpm_D79FB2B7.wem</Path>
+				</File>
+				<File Id="879081670" Language="SFX">
+					<ShortName>Jump 2.wav</ShortName>
+					<Path>SFX\Jump 2_10C4C929.wem</Path>
+				</File>
+				<File Id="897378278" Language="SFX">
+					<ShortName>Jump 4.wav</ShortName>
+					<Path>SFX\Jump 4_10C4C929.wem</Path>
+				</File>
+				<File Id="1006801830" Language="SFX">
+					<ShortName>Cave_Ambiance_Loop.wav</ShortName>
+					<Path>SFX\Cave_Ambiance_Loop_D79FB2B7.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+	</SoundBanks>
+</SoundBanksInfo>

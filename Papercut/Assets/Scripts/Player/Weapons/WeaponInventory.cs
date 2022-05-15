@@ -17,7 +17,7 @@ public class WeaponInventory : MonoBehaviour
     [SerializeField]
     private WeaponBase m_EquippedWeapon;
 
-    void Awake()
+    private void Awake()
     {
         if (gameObject != null)
         {

@@ -49,7 +49,7 @@ public class ChasePlayer : Node
         _ai.CheckFlip(-(int)Mathf.Sign(_direction.x));
     }
 
-    public void SetCurrentNode()
+    private void SetCurrentNode()
     {
         _enemyData.CurrentNode = this;
     }

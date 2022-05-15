@@ -83,8 +83,6 @@ public class HunterEnemyBrain : EnemyBase
         NewEnemyData.KnockbackSpeed = EnemyData.KnockbackSpeed;
     }
     
-    
-    
     private void Update()
     {
         HandleAnimations();
@@ -104,7 +102,6 @@ public class HunterEnemyBrain : EnemyBase
         
         DestroyAfterAnimationEnd();
     }
-
 
     protected override void ConstructBehaviorTree()
     {
@@ -152,12 +149,6 @@ public class HunterEnemyBrain : EnemyBase
                 Destroy(gameObject); 
             }
         }
-    }
-
-
-    protected override void Knockback()
-    {
-        base.Knockback();
     }
 
     private void BlinkRed()

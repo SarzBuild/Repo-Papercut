@@ -40,7 +40,7 @@ public class Patrol : Node
         return NodeState.FAILURE;
     }
 
-    public void SetCurrentNode()
+    private void SetCurrentNode()
     {
         _enemyData.CurrentNode = this;
     }

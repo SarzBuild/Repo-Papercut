@@ -44,10 +44,10 @@ public class PlayerGrapplingState : PlayerState
     public override void ExitState()
     {
         base.ExitState();
-        WhenDisable();
+        WhenDisabled();
     }
 
-    private void WhenDisable()
+    private void WhenDisabled()
     {
         Player.LineRenderer.enabled = false;
         _canGrapple = false;

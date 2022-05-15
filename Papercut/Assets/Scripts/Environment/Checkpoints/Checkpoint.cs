@@ -8,14 +8,6 @@ public class Checkpoint : MonoBehaviour
     public float radius = 2.5f;
     public CheckpointManager CheckpointManager;
 
-    /*private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.transform.gameObject.layer == GenericManager.PlayerLayerMask)
-        {
-            CheckpointManager.UpdateCheckpoint(transform.position);
-        }
-    }*/
-
     private void Start()
     {
         if (CheckpointManager == null)

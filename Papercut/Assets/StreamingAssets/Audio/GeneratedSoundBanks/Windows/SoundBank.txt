@@ -1,0 +1,62 @@
+Event	ID	Name			Wwise Object Path	Notes
+	407869688	Start_Music_In_Game			\Audio\Start_Music_In_Game	
+	452547817	Stop_All			\Audio\Stop_All	
+	476098351	Sword_Swing			\Audio\Sword\Sword_Swing	
+	1430876236	Clic_Small			\Audio\Menu\Clic_Small	
+	1742820664	Start_Music_Title			\Audio\Start_Music_Title	
+	2014019461	Final_Sequence			\Audio\Final_Sequence	
+	2106894257	Start_Atmosphe			\Audio\Atmosphere\Start_Atmosphe	
+	2459862590	Change_Zone			\Audio\Change_Zone	
+	2539102097	Main_Caracter_Death			\Audio\Player\Main_Caracter_Death	
+	2753700762	Sword_Hit_Spider			\Audio\Sword\Sword_Hit_Spider	
+	2846455371	Clic_Big			\Audio\Menu\Clic_Big	
+	3009140878	Sword_Hit_Shield			\Audio\Sword\Sword_Hit_Shield	
+	3833651337	Jump			\Audio\Player\Jump	
+
+State Group	ID	Name			Wwise Object Path	Notes
+	2967546505	In_Game			\Music\In_Game	
+
+State	ID	Name	State Group			Notes
+	0	None	In_Game			
+	545371365	Low	In_Game			
+	2849147824	Medium	In_Game			
+	3550808449	High	In_Game			
+
+Custom State	ID	Name	State Group	Owner		Notes
+	251914806	Low	In_Game	\Interactive Music Hierarchy\Music\In Game Music\In game\In game_MEDIUM_Loop_70bpm		
+	428695889	Low	In_Game	\Interactive Music Hierarchy\Music\In Game Music\In game\In game_HIGH_Loop_70bpm		
+	944520187	Medium	In_Game	\Interactive Music Hierarchy\Music\In Game Music\In game\In game_HIGH_Loop_70bpm		
+
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	2918011349	MasterVolume			\Default Work Unit\MasterVolume	
+
+Audio Bus	ID	Name			Wwise Object Path	Notes
+	3803692087	Master Audio Bus			\Default Work Unit\Master Audio Bus	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	57910717	Jump 6	D:\Wwise Projects\Papercut\.cache\Windows\SFX\Jump 6_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Player\Jump\Jump 6		67144
+	71061818	Final sequence Stigner	D:\Wwise Projects\Papercut\.cache\Windows\SFX\Final sequence Stigner_D79FB2B7.wem		\Interactive Music Hierarchy\Music\Final sequence Stigner\Final sequence Stigner		4896192
+	105056876	Sword Swing 1	D:\Wwise Projects\Papercut\.cache\Windows\SFX\Sword Swing 1_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Sword\Sword_Swing\Sword Swing 1		61680
+	113650156	In game_MEDIUM_Loop_70bpm	D:\Wwise Projects\Papercut\.cache\Windows\SFX\In game\In game_MEDIUM_Loop_70bpm_D79FB2B7.wem		\Interactive Music Hierarchy\Music\In Game Music\In game\In game_MEDIUM_Loop_70bpm		36864496
+	192057712	In game_HIGH_Loop_70bpm	D:\Wwise Projects\Papercut\.cache\Windows\SFX\In game\In game_HIGH_Loop_70bpm_D79FB2B7.wem		\Interactive Music Hierarchy\Music\In Game Music\In game\In game_HIGH_Loop_70bpm		36864496
+	196413552	Stigner zone change	D:\Wwise Projects\Papercut\.cache\Windows\SFX\Stigner zone change_E0D39F3A.wem		\Interactive Music Hierarchy\Music\Stigner zone change\Stigner zone change		1234472
+	281704309	Title_Loop_6b_70bpm_1	D:\Wwise Projects\Papercut\.cache\Windows\SFX\Title_Loop_6b_70bpm_1_D79FB2B7.wem		\Interactive Music Hierarchy\Music\Title\Title_Loop_6b_70bpm_1\Title_Loop_6b_70bpm_1		19090480
+	294926749	Click_Menu_Big	D:\Wwise Projects\Papercut\.cache\Windows\SFX\Click Menu Big_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Menu\Click_Menu_Big		397520
+	366308004	Jump 1	D:\Wwise Projects\Papercut\.cache\Windows\SFX\Jump 1_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Player\Jump\Jump 1		86844
+	398577229	Sword Hit Spider 1	D:\Wwise Projects\Papercut\.cache\Windows\SFX\Sword Hit Spider 1_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Sword\Sword_hit_Spider\Sword Hit Spider 1		168144
+	401168316	Title_Intro_70bpm_5	D:\Wwise Projects\Papercut\.cache\Windows\SFX\Title_Intro_70bpm.5_D79FB2B7.wem		\Interactive Music Hierarchy\Music\Title\Title_Intro_70bpm_5\Title_Intro_70bpm_5		2057336
+	415169713	Main C_ Death 1	D:\Wwise Projects\Papercut\.cache\Windows\SFX\Main C. Death 1_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Player\Main_Caracter_Death\Main C_ Death 1		162994
+	415184972	Sword Hit Shield	D:\Wwise Projects\Papercut\.cache\Windows\SFX\Sword Hit Shield_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Sword\Sword Hit Shield		160144
+	421529651	Sword Swing 2	D:\Wwise Projects\Papercut\.cache\Windows\SFX\Sword Swing 2_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Sword\Sword_Swing\Sword Swing 2		43248
+	425770836	Sword Hit Spider 2	D:\Wwise Projects\Papercut\.cache\Windows\SFX\Sword Hit Spider 2_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Sword\Sword_hit_Spider\Sword Hit Spider 2		135376
+	463687642	Main C_ Death 2	D:\Wwise Projects\Papercut\.cache\Windows\SFX\Main C. Death 2_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Player\Main_Caracter_Death\Main C_ Death 2		116144
+	521479494	Jump 5	D:\Wwise Projects\Papercut\.cache\Windows\SFX\Jump 5_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Player\Jump\Jump 5		72144
+	597101953	Jump 3	D:\Wwise Projects\Papercut\.cache\Windows\SFX\Jump 3_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Player\Jump\Jump 3		71844
+	731042880	Sword Swing 3	D:\Wwise Projects\Papercut\.cache\Windows\SFX\Sword Swing 3_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Sword\Sword_Swing\Sword Swing 3		46320
+	760641436	Sword Hit Spider 3	D:\Wwise Projects\Papercut\.cache\Windows\SFX\Sword Hit Spider 3_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Sword\Sword_hit_Spider\Sword Hit Spider 3		135376
+	761385077	Click_Menu_Small	D:\Wwise Projects\Papercut\.cache\Windows\SFX\Click Menu Small_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Menu\Click_Menu_Small		135376
+	871706554	In game_LOW_Loop_70bpm	D:\Wwise Projects\Papercut\.cache\Windows\SFX\In game\In game_LOW_Loop_70bpm_D79FB2B7.wem		\Interactive Music Hierarchy\Music\In Game Music\In game\In game_LOW_Loop_70bpm		36864496
+	879081670	Jump 2	D:\Wwise Projects\Papercut\.cache\Windows\SFX\Jump 2_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Player\Jump\Jump 2		79844
+	897378278	Jump 4	D:\Wwise Projects\Papercut\.cache\Windows\SFX\Jump 4_10C4C929.wem		\Actor-Mixer Hierarchy\SFX\Player\Jump\Jump 4		71244
+	1006801830	Cave_Ambiance_Loop	D:\Wwise Projects\Papercut\.cache\Windows\SFX\Cave_Ambiance_Loop_D79FB2B7.wem		\Actor-Mixer Hierarchy\SFX\Atmosphere\Cave_Ambiance_Loop		5924828
+

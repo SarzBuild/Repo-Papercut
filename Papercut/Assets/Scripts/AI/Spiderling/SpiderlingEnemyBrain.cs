@@ -44,8 +44,7 @@ public class SpiderlingEnemyBrain : EnemyBase
 
 
     public GoToLastKnowPosition GoToLastKnowPosition { get; private set; }
-    public SearchUntilTimerRunOut SearchUntilTimerRunOut { get; private set; }
-    
+
     public Patrol Patrol { get; private set; }
     public Idle Idle { get; private set; }
     

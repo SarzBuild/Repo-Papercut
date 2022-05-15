@@ -25,11 +25,6 @@ public class PlayerInAirState : PlayerState
         Player.UpdateVelocity();
     }
 
-    public override void ExitState()
-    {
-        base.ExitState();
-    }
-
     public override void DoChecks()
     {
         base.DoChecks();

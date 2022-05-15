@@ -32,14 +32,13 @@ public class HealthComponent : MonoBehaviour
 
     // Event triggers when health falls below zeor, providers health component and OPTIONALLY gameobject "killer" - CAN BE NULL!
     public event Action<HealthComponent, GameObject> OnDeath;
-
-    // Start is called before the first frame update
-    void Start()
+    
+    private void Start()
     {
         Initialize();
     }
 
-    void Update()
+    private void Update()
     {
         UpdateRegenState();
     }
